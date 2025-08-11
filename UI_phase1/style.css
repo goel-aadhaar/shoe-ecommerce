@@ -41,3 +41,17 @@ footer div{
     text-align: center;
   }
 }
+
+#three-line{
+    visibility:hidden;
+}
+
+#header-logo a{
+    font-size: 18px;
+    font-family: sans-serif;
+    font-weight: bold;
+}
+
+#profile-bars{
+    font-size: 18px;
+}
