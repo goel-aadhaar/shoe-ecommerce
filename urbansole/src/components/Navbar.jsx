@@ -11,7 +11,7 @@ const Navbar = ({ onProfileClick }) => {
     const navLinks = ["New Arrival", "Footwear", "Apparel", "Accessories", "Brands", "Blogs"];
 
     return (
-        <header className="absolute top-0 left-0 w-full z-30 bg-black bg-opacity-50">
+        <header className="fixed top-0 left-0 w-full z-30 bg-black bg-opacity-80">
             <div className="container mx-auto px-6 py-4 flex justify-between items-center">
                 <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="md:hidden text-white focus:outline-none" aria-label="Toggle mobile menu">
                     <MenuIcon />

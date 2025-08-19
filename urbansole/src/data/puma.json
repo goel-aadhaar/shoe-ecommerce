@@ -1,0 +1,36 @@
+[
+    {
+        "brand": "Puma",
+        "name": "PALERMO CLUB VEGAS LEATHER",
+        "color": "SILVER-GLACIAL GRAY-ORANGE GLO",
+        "price": "₹9,999",
+        "imgSrc": "https://www.superkicks.in/cdn/shop/files/4_53.png?v=1755174660&width=1946",
+        "imgSrc2": "https://www.superkicks.in/cdn/shop/files/3_52.png?v=1755174660&width=1946",
+        "imgSrc3": "https://www.superkicks.in/cdn/shop/files/5_43.png?v=1755174660&width=1946",
+        "imgSrc4": "https://www.superkicks.in/cdn/shop/files/1_54_65589db6-11f7-45aa-9ecd-8cceb3f9adc2.png?v=1755174660&width=1946",
+        "imgSrc5": "https://www.superkicks.in/cdn/shop/files/2_54.png?v=1755174660&width=1946"
+    },
+    {
+        "brand": "Puma",
+        "name": "MOSTRO PERFORATED",
+        "color": "BLACK/WHITE",
+        "price": "₹9,999",
+        "imgSrc": "https://www.superkicks.in/cdn/shop/files/1_55.png?v=1755174578&width=1946",
+        "imgSrc2": "https://www.superkicks.in/cdn/shop/files/5_44.png?v=1755174676&width=1946",
+        "imgSrc3": "https://www.superkicks.in/cdn/shop/files/6_31.png?v=1755174676&width=1946",
+        "imgSrc4": "https://www.superkicks.in/cdn/shop/files/3_53.png?v=1755174676&width=1946",
+        "imgSrc5": "https://www.superkicks.in/cdn/shop/files/4_54.png?v=1755174676&width=1946"
+    },
+    {
+        "brand": "Nike",
+        "name": "AIR MAX MUSE",
+        "color": "BLACK/METALLIC SILVER",
+        "price": "₹13,995",
+        "imgSrc": "https://www.superkicks.in/cdn/shop/files/3-2025-08-05T170844.176.jpg?v=1754394119&width=1946",
+        "imgSrc2": "https://www.superkicks.in/cdn/shop/files/4_99.jpg?v=1754394119&width=1946",
+        "imgSrc3": "https://www.superkicks.in/cdn/shop/files/5_95.jpg?v=1754394119&width=1946",
+        "imgSrc4": "https://www.superkicks.in/cdn/shop/files/6_77.jpg?v=1754394119&width=1946",
+        "imgSrc5": "https://www.superkicks.in/cdn/shop/files/14-july_f49dd203-3412-4982-8d81-6eb5f79fc652.jpg?v=1754394119&width=1946",
+        "imgSrc6": "https://www.superkicks.in/cdn/shop/files/7_58_e424711e-866e-4728-892c-45011625618d.jpg?v=1754394119&width=1946"
+    }
+]
