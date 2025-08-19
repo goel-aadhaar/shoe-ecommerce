@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import Navbar from './components/Navbar';
 import ImageSlider from './components/ImageSlider';
 import LoginModal from './components/LoginModal';
+import Footer from './components/footer';
+import ShoeList from './components/shoe_list';
 
 function App() {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -12,11 +14,15 @@ function App() {
 
     return (
         // The main container div
-        <div>
-            <Navbar onProfileClick={toggleModal} />
-            <ImageSlider />
-            <LoginModal isOpen={isModalOpen} onClose={toggleModal} />
-        </div>
+        <>
+            <div>
+                <Navbar onProfileClick={toggleModal} />
+                <ImageSlider />
+                <LoginModal isOpen={isModalOpen} onClose={toggleModal} />
+            </div>
+            <ShoeList/>
+            <Footer/>
+        </>
     );
 }
 
