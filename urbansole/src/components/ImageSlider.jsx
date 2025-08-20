@@ -2,8 +2,11 @@ import React, { useState, useEffect, useCallback } from 'react';
 
 const slidesData = [
     { image: "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?q=80&w=2787&auto=format&fit=crop", title: "AIR JORDAN 1", linkText: "Shop Now" },
+    { image: "https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?q=80&w=2787&auto=format&fit=crop", title: "AIR JORDAN 1", linkText: "Shop Now" },
     { image: "https://images.unsplash.com/photo-1516478177764-9fe5bd7e9717?q=80&w=2940&auto=format&fit=crop", title: "YEEZY BOOST", linkText: "Explore" },
-    { image: "https://images.unsplash.com/photo-1612181341173-16ea1571431b?q=80&w=2803&auto=format&fit=crop", title: "NIKE BLAZER", linkText: "Discover" }
+    { image: "https://images.unsplash.com/photo-1612181341173-16ea1571431b?q=80&w=2803&auto=format&fit=crop", title: "NIKE BLAZER", linkText: "Discover" },
+    { image: "https://www.superkicks.in/cdn/shop/files/DESKTOP_4.png?v=1754650556", title: "", linkText: "" },
+    { image: "https://images.pexels.com/photos/1598505/pexels-photo-1598505.jpeg", title: "Nike", linkText: "Shop Here" }
 ];
 
 const ImageSlider = () => {
@@ -22,7 +25,7 @@ const ImageSlider = () => {
     }, [nextSlide]);
 
     return (
-        <main className="relative w-full h-[85vh] overflow-hidden">
+        <main className="relative w-full h-[100vh] overflow-hidden">
             <div className="relative w-full h-full">
                 {slidesData.map((slide, index) => (
                     <div key={index} className="absolute w-full h-full transition-opacity duration-700 ease-in-out" style={{ opacity: index === currentSlide ? 1 : 0 }}>

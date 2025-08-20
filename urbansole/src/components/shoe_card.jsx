@@ -34,10 +34,10 @@ const Shoe_Card = ({ brand = 'Nike', name, color, price, imgSrc, imgSrc2 }) => {
                     </button>
                 </div>
 
-                <h4 className=" text-black text-left">{name}</h4>
-                <p className="text-slate-500 text-sm text-left mt-1 mb-1">{color}</p>
+                <h4 className=" text-black text-left overflow-hidden h-7">{name}</h4>
+                <p className="text-slate-500 text-sm text-left mt-1 mb-1 h-5 overflow-hidden">{color}</p>
                 
-                <p className="mt-1 text-left font-medium">{price}/-</p>
+                <p className="mt-1 mb-2 text-black text-left font-medium">{price}/-</p>
             </div>
         </div>
         <Shoe_Modal 
