@@ -40,10 +40,9 @@ export default function BrandCarousel() {
   ];
 
   return (
-    <div className="absolute w-full px-20 py-12 bg-white">
+    <div className="absolute w-full px-20 pt-10 bg-white">
       <Swiper
         modules={[Navigation]}
-        
         navigation={{
           nextEl: ".custom-next",
           prevEl: ".custom-prev",

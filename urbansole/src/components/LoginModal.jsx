@@ -6,7 +6,7 @@ const LoginModal = ({ isOpen, onClose }) => {
     if (!isOpen) return null;
 
     return (
-        <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 p-4" onClick={onClose}>
+        <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 p-4 mt-2" onClick={onClose}>
             <div className="relative bg-black rounded-lg w-full max-w-4xl flex flex-col md:flex-row overflow-hidden" onClick={e => e.stopPropagation()}>
                 <button onClick={onClose} className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors z-10" aria-label="Close login modal"><CloseIcon /></button>
                 <div className="w-full md:w-1/2 p-8 sm:p-12 flex flex-col justify-center text-center">
