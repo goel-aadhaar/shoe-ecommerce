@@ -8,7 +8,12 @@
         "imgSrc2": "https://www.superkicks.in/cdn/shop/files/3_52.png?v=1755174660&width=1946",
         "imgSrc3": "https://www.superkicks.in/cdn/shop/files/5_43.png?v=1755174660&width=1946",
         "imgSrc4": "https://www.superkicks.in/cdn/shop/files/1_54_65589db6-11f7-45aa-9ecd-8cceb3f9adc2.png?v=1755174660&width=1946",
-        "imgSrc5": "https://www.superkicks.in/cdn/shop/files/2_54.png?v=1755174660&width=1946"
+        "imgSrc5": "https://www.superkicks.in/cdn/shop/files/2_54.png?v=1755174660&width=1946",
+        "for": "male",
+        "review": {
+            "rating": 4.4,
+            "rated_by": 4860
+        }
     },
     {
         "brand": "Puma",
@@ -19,7 +24,12 @@
         "imgSrc2": "https://www.superkicks.in/cdn/shop/files/5_44.png?v=1755174676&width=1946",
         "imgSrc3": "https://www.superkicks.in/cdn/shop/files/6_31.png?v=1755174676&width=1946",
         "imgSrc4": "https://www.superkicks.in/cdn/shop/files/3_53.png?v=1755174676&width=1946",
-        "imgSrc5": "https://www.superkicks.in/cdn/shop/files/4_54.png?v=1755174676&width=1946"
+        "imgSrc5": "https://www.superkicks.in/cdn/shop/files/4_54.png?v=1755174676&width=1946",
+        "for": "male",
+        "review": {
+            "rating": 4.1,
+            "rated_by": 1260
+        }
     }
     ,
     {
@@ -30,7 +40,12 @@
         "imgSrc": "https://www.superkicks.in/cdn/shop/files/1_f838c5ca-f873-4807-8795-2d6fdae68bb5.png?v=1755076391&width=1946",
         "imgSrc2": "https://www.superkicks.in/cdn/shop/files/2_01c462d5-864f-40d5-ba8c-0f35529ca15a.png?v=1755076391&width=1946",
         "imgSrc3": "https://www.superkicks.in/cdn/shop/files/3_4a62983e-d83e-40f1-aaeb-8af7cd072c4b.png?v=1755076391&width=1946",
-        "imgSrc4": "https://www.superkicks.in/cdn/shop/files/4_6821027a-8f18-442c-ac64-e8d3c658269f.png?v=1755076391&width=1946"
+        "imgSrc4": "https://www.superkicks.in/cdn/shop/files/4_6821027a-8f18-442c-ac64-e8d3c658269f.png?v=1755076391&width=1946",
+        "for": "male",
+        "review": {
+            "rating": 3.7,
+            "rated_by": 360
+        }
     }
     ,
     {
@@ -42,7 +57,12 @@
         "imgSrc2": "https://www.superkicks.in/cdn/shop/files/4_ef0ab822-6db5-44b4-8e0a-fce9e0e5c426.png?v=1755076375&width=1946",
         "imgSrc3": "https://www.superkicks.in/cdn/shop/files/3_8b02e36a-b111-425e-bd47-069ca432cb10.png?v=1755076375&width=1946",
         "imgSrc4": "https://www.superkicks.in/cdn/shop/files/1_36bad89f-bdc6-4b06-857d-d8e4c9c4e448.png?v=1755076375&width=1946",
-        "imgSrc5": "https://www.superkicks.in/cdn/shop/files/2_ac610aac-52fc-4354-ac74-55b57c69dc5d.png?v=1755076375&width=1946"
+        "imgSrc5": "https://www.superkicks.in/cdn/shop/files/2_ac610aac-52fc-4354-ac74-55b57c69dc5d.png?v=1755076375&width=1946",
+        "for": "male",
+        "review": {
+            "rating": 4.2,
+            "rated_by": 1621
+        }
     }
     ,
     {
@@ -54,7 +74,12 @@
         "imgSrc2": "https://www.superkicks.in/cdn/shop/files/2_a52f0683-de91-4d93-87a3-289990944b7d.png?v=1755076359&width=1946",
         "imgSrc3": "https://www.superkicks.in/cdn/shop/files/3_ac3d6530-fc5d-4386-92af-1de935f18ad5.png?v=1755076359&width=1946",
         "imgSrc4": "https://www.superkicks.in/cdn/shop/files/1_cc18d88e-9a77-47b1-aeac-95600fc25189.png?v=1755076359&width=1946",
-        "imgSrc5": ""
+        "imgSrc5": "https://www.superkicks.in/cdn/shop/files/1_cc18d88e-9a77-47b1-aeac-95600fc25189.png?v=1755076359&width=1946",
+        "for": "male",
+        "review": {
+            "rating": 3.9,
+            "rated_by": 3860
+        }
     }
     ,
     {
@@ -67,274 +92,397 @@
     "imgSrc3": "https://www.superkicks.in/cdn/shop/files/3_51.png?v=1755068442&width=1946",
     "imgSrc4": "https://www.superkicks.in/cdn/shop/files/4_52.png?v=1755068442&width=1946",
     "imgSrc5": "https://www.superkicks.in/cdn/shop/files/2_53.png?v=1755068442&width=1946",
-    "imgSrc6": "https://www.superkicks.in/cdn/shop/files/6_30.png?v=1755068442&width=1946"
+    "imgSrc6": "https://www.superkicks.in/cdn/shop/files/6_30.png?v=1755068442&width=1946",
+    "for": "male",
+        "review": {
+            "rating": 3.8,
+            "rated_by": 860
+        }
     }
     ,
     {
-    "brand": "Nike",
-    "name": "STRUCTURE 26",
-    "color": "PARTICLE PINK/MTLC ROSE GOLD-TAUPE GREY",
-    "price": "₹11,895",
-    "imgSrc": "https://www.superkicks.in/cdn/shop/files/29-july_6d72ecdf-eff7-41e1-aa54-aceec3a36316.png?v=1754999014&width=1946",
-    "imgSrc2": "https://www.superkicks.in/cdn/shop/files/3_48_752377da-e61e-407e-ae2d-c903a976c80c.png?v=1754999014&width=1946",
-    "imgSrc3": "https://www.superkicks.in/cdn/shop/files/2_50_6127d91a-26dd-4936-9310-4aedd7c301f7.png?v=1754999014&width=1946",
-    "imgSrc4": "https://www.superkicks.in/cdn/shop/files/1_50_3c28d2b6-0848-46b7-ba97-abc3055e3348.png?v=1754999014&width=1946",
-    "imgSrc5": "https://www.superkicks.in/cdn/shop/files/6_28_a30dcb0f-1428-4487-88de-cfa83b7d7aa8.png?v=1754999014&width=1946",
-    "imgSrc6": "https://www.superkicks.in/cdn/shop/files/7_13_e2d8a473-7eaa-48fe-b8c0-7dfbbfdc74c6.png?v=1754999014&width=1946",
-    "imgSrc7": "https://www.superkicks.in/cdn/shop/files/4_49_35cf807f-11d1-4afb-88c6-d59d27ace0cc.png?v=1754999014&width=1946"
+        "brand": "Nike",
+        "name": "STRUCTURE 26",
+        "color": "PARTICLE PINK/MTLC ROSE GOLD-TAUPE GREY",
+        "price": "₹11,895",
+        "imgSrc": "https://www.superkicks.in/cdn/shop/files/29-july_6d72ecdf-eff7-41e1-aa54-aceec3a36316.png?v=1754999014&width=1946",
+        "imgSrc2": "https://www.superkicks.in/cdn/shop/files/3_48_752377da-e61e-407e-ae2d-c903a976c80c.png?v=1754999014&width=1946",
+        "imgSrc3": "https://www.superkicks.in/cdn/shop/files/2_50_6127d91a-26dd-4936-9310-4aedd7c301f7.png?v=1754999014&width=1946",
+        "imgSrc4": "https://www.superkicks.in/cdn/shop/files/1_50_3c28d2b6-0848-46b7-ba97-abc3055e3348.png?v=1754999014&width=1946",
+        "imgSrc5": "https://www.superkicks.in/cdn/shop/files/6_28_a30dcb0f-1428-4487-88de-cfa83b7d7aa8.png?v=1754999014&width=1946",
+        "imgSrc6": "https://www.superkicks.in/cdn/shop/files/7_13_e2d8a473-7eaa-48fe-b8c0-7dfbbfdc74c6.png?v=1754999014&width=1946",
+        "imgSrc7": "https://www.superkicks.in/cdn/shop/files/4_49_35cf807f-11d1-4afb-88c6-d59d27ace0cc.png?v=1754999014&width=1946",
+        "for": "male",
+        "review": {
+            "rating": 4.7,
+            "rated_by": 360
+        }
     }
     ,
     {
-    "brand": "Converse",
-    "name": "OMNI TRAINER",
-    "color": "BLACK/WHITE",
-    "price": "₹6,999",
-    "imgSrc": "https://www.superkicks.in/cdn/shop/files/1_49_255f53f3-db55-4f11-84cd-d36947eb70bb.png?v=1754996335&width=1946",
-    "imgSrc2": "https://www.superkicks.in/cdn/shop/files/2_49.png?v=1754996335&width=1946",
-    "imgSrc3": "https://www.superkicks.in/cdn/shop/files/5_38.png?v=1754996335&width=1946",
-    "imgSrc4": "https://www.superkicks.in/cdn/shop/files/3_47.png?v=1754996335&width=1946",
-    "imgSrc5": "https://www.superkicks.in/cdn/shop/files/4_48.png?v=1754996335&width=1946",
-    "imgSrc6": "https://www.superkicks.in/cdn/shop/files/6_27.png?v=1754996335&width=1946"
+        "brand": "Converse",
+        "name": "OMNI TRAINER",
+        "color": "BLACK/WHITE",
+        "price": "₹6,999",
+        "imgSrc": "https://www.superkicks.in/cdn/shop/files/1_49_255f53f3-db55-4f11-84cd-d36947eb70bb.png?v=1754996335&width=1946",
+        "imgSrc2": "https://www.superkicks.in/cdn/shop/files/2_49.png?v=1754996335&width=1946",
+        "imgSrc3": "https://www.superkicks.in/cdn/shop/files/5_38.png?v=1754996335&width=1946",
+        "imgSrc4": "https://www.superkicks.in/cdn/shop/files/3_47.png?v=1754996335&width=1946",
+        "imgSrc5": "https://www.superkicks.in/cdn/shop/files/4_48.png?v=1754996335&width=1946",
+        "imgSrc6": "https://www.superkicks.in/cdn/shop/files/6_27.png?v=1754996335&width=1946",
+        "for": "male",
+        "review": {
+            "rating": 4.8,
+            "rated_by": 540
+        }
     }
     ,
     {
-    "brand": "Converse",
-    "name": "OMNI TRAINER",
-    "color": "YELLOW",
-    "price": "₹6,999",
-    "imgSrc": "https://www.superkicks.in/cdn/shop/files/1_48_e66536fd-5e05-471d-8f8e-d7e602e58a0e.png?v=1754995562&width=1946",
-    "imgSrc2": "https://www.superkicks.in/cdn/shop/files/3_46.png?v=1754995562&width=1946",
-    "imgSrc3": "https://www.superkicks.in/cdn/shop/files/5_37.png?v=1754995562&width=1946",
-    "imgSrc4": "https://www.superkicks.in/cdn/shop/files/6_26.png?v=1754995562&width=1946",
-    "imgSrc5": "https://www.superkicks.in/cdn/shop/files/2_48.png?v=1754995562&width=1946",
-    "imgSrc6": "https://www.superkicks.in/cdn/shop/files/4_47.png?v=1754995562&width=1946",
-    "imgSrc7": "https://www.superkicks.in/cdn/shop/files/7_12.png?v=1754995562&width=1946"
+        "brand": "Converse",
+        "name": "OMNI TRAINER",
+        "color": "YELLOW",
+        "price": "₹6,999",
+        "imgSrc": "https://www.superkicks.in/cdn/shop/files/1_48_e66536fd-5e05-471d-8f8e-d7e602e58a0e.png?v=1754995562&width=1946",
+        "imgSrc2": "https://www.superkicks.in/cdn/shop/files/3_46.png?v=1754995562&width=1946",
+        "imgSrc3": "https://www.superkicks.in/cdn/shop/files/5_37.png?v=1754995562&width=1946",
+        "imgSrc4": "https://www.superkicks.in/cdn/shop/files/6_26.png?v=1754995562&width=1946",
+        "imgSrc5": "https://www.superkicks.in/cdn/shop/files/2_48.png?v=1754995562&width=1946",
+        "imgSrc6": "https://www.superkicks.in/cdn/shop/files/4_47.png?v=1754995562&width=1946",
+        "imgSrc7": "https://www.superkicks.in/cdn/shop/files/7_12.png?v=1754995562&width=1946",
+        "for": "male",
+        "review": {
+            "rating": 4.3,
+            "rated_by": 3197
+        }
     }
     ,
     {
-    "brand": "adidas originals",
-    "name": "SAMBA OG \"COW PRINT\"",
-    "color": "DARK BROWN/OFF WHIITE/GUM",
-    "price": "₹13,999",
-    "imgSrc": "https://www.superkicks.in/cdn/shop/files/1_42_c9f99ed7-2d53-47b1-b22c-c7aa2415444a.png?v=1754991116&width=1946",
-    "imgSrc2": "https://www.superkicks.in/cdn/shop/files/2_43.png?v=1754991116&width=1946",
-    "imgSrc3": "https://www.superkicks.in/cdn/shop/files/4_42.png?v=1754991116&width=1946",
-    "imgSrc4": "https://www.superkicks.in/cdn/shop/files/5_32.png?v=1754991116&width=1946",
-    "imgSrc5": "https://www.superkicks.in/cdn/shop/files/11-aug.png?v=1754991116&width=1946",
-    "imgSrc6": "https://www.superkicks.in/cdn/shop/files/8_2_349aa24c-c901-4047-ba9d-42b1ed9f2473.png?v=1754991116&width=1946"
+        "brand": "adidas originals",
+        "name": "SAMBA OG \"COW PRINT\"",
+        "color": "DARK BROWN/OFF WHIITE/GUM",
+        "price": "₹13,999",
+        "imgSrc": "https://www.superkicks.in/cdn/shop/files/1_42_c9f99ed7-2d53-47b1-b22c-c7aa2415444a.png?v=1754991116&width=1946",
+        "imgSrc2": "https://www.superkicks.in/cdn/shop/files/2_43.png?v=1754991116&width=1946",
+        "imgSrc3": "https://www.superkicks.in/cdn/shop/files/4_42.png?v=1754991116&width=1946",
+        "imgSrc4": "https://www.superkicks.in/cdn/shop/files/5_32.png?v=1754991116&width=1946",
+        "imgSrc5": "https://www.superkicks.in/cdn/shop/files/11-aug.png?v=1754991116&width=1946",
+        "imgSrc6": "https://www.superkicks.in/cdn/shop/files/8_2_349aa24c-c901-4047-ba9d-42b1ed9f2473.png?v=1754991116&width=1946",
+        "for": "male",
+        "review": {
+            "rating": 4.1,
+            "rated_by": 2860
+        }
     }
     ,
     {
-    "brand": "adidas originals",
-    "name": "JABBAR HI",
-    "color": "CLOUD WHITE/CORE BLACK",
-    "price": "₹10,999",
-    "imgSrc": "https://www.superkicks.in/cdn/shop/files/1_43_6026be2e-8fda-45c3-b993-4e68955f9de6.png?v=1754991140&width=1946",
-    "imgSrc2": "https://www.superkicks.in/cdn/shop/files/2_44.png?v=1754991140&width=1946",
-    "imgSrc3": "https://www.superkicks.in/cdn/shop/files/4_43.png?v=1754991140&width=1946",
-    "imgSrc4": "https://www.superkicks.in/cdn/shop/files/5_33.png?v=1754991140&width=1946",
-    "imgSrc5": "https://www.superkicks.in/cdn/shop/files/7_9.png?v=1754991140&width=1946",
-    "imgSrc6": "https://www.superkicks.in/cdn/shop/files/6_22.png?v=1754991140&width=1946",
-    "imgSrc7": "https://www.superkicks.in/cdn/shop/files/3_42.png?v=1754991140&width=1946"
+        "brand": "adidas originals",
+        "name": "JABBAR HI",
+        "color": "CLOUD WHITE/CORE BLACK",
+        "price": "₹10,999",
+        "imgSrc": "https://www.superkicks.in/cdn/shop/files/1_43_6026be2e-8fda-45c3-b993-4e68955f9de6.png?v=1754991140&width=1946",
+        "imgSrc2": "https://www.superkicks.in/cdn/shop/files/2_44.png?v=1754991140&width=1946",
+        "imgSrc3": "https://www.superkicks.in/cdn/shop/files/4_43.png?v=1754991140&width=1946",
+        "imgSrc4": "https://www.superkicks.in/cdn/shop/files/5_33.png?v=1754991140&width=1946",
+        "imgSrc5": "https://www.superkicks.in/cdn/shop/files/7_9.png?v=1754991140&width=1946",
+        "imgSrc6": "https://www.superkicks.in/cdn/shop/files/6_22.png?v=1754991140&width=1946",
+        "imgSrc7": "https://www.superkicks.in/cdn/shop/files/3_42.png?v=1754991140&width=1946",
+        "for": "male",
+        "review": {
+            "rating": 3.5,
+            "rated_by": 663
+        }
     }
     ,
     {
-    "brand": "adidas originals",
-    "name": "GAZELLE INDOOR",
-    "color": "BLUE BIRD/CLOUD WHITE/GUM",
-    "price": "₹11,999",
-    "imgSrc": "https://www.superkicks.in/cdn/shop/files/1_47_94cd7f99-0551-4d9a-8b9a-7cb65a4e0095.png?v=1754991655&width=1946",
-    "imgSrc2": "https://www.superkicks.in/cdn/shop/files/4_44.png?v=1754991655&width=1946",
-    "imgSrc3": "https://www.superkicks.in/cdn/shop/files/7_10.png?v=1754991655&width=1946",
-    "imgSrc4": "https://www.superkicks.in/cdn/shop/files/2_45.png?v=1754991655&width=1946",
-    "imgSrc5": "https://www.superkicks.in/cdn/shop/files/5_34.png?v=1754991655&width=1946",
-    "imgSrc6": "https://www.superkicks.in/cdn/shop/files/3_43.png?v=1754991655&width=1946",
-    "imgSrc7": "https://www.superkicks.in/cdn/shop/files/11-aug_1.png?v=1754991655&width=1946"
+        "brand": "adidas originals",
+        "name": "GAZELLE INDOOR",
+        "color": "BLUE BIRD/CLOUD WHITE/GUM",
+        "price": "₹11,999",
+        "imgSrc": "https://www.superkicks.in/cdn/shop/files/1_47_94cd7f99-0551-4d9a-8b9a-7cb65a4e0095.png?v=1754991655&width=1946",
+        "imgSrc2": "https://www.superkicks.in/cdn/shop/files/4_44.png?v=1754991655&width=1946",
+        "imgSrc3": "https://www.superkicks.in/cdn/shop/files/7_10.png?v=1754991655&width=1946",
+        "imgSrc4": "https://www.superkicks.in/cdn/shop/files/2_45.png?v=1754991655&width=1946",
+        "imgSrc5": "https://www.superkicks.in/cdn/shop/files/5_34.png?v=1754991655&width=1946",
+        "imgSrc6": "https://www.superkicks.in/cdn/shop/files/3_43.png?v=1754991655&width=1946",
+        "imgSrc7": "https://www.superkicks.in/cdn/shop/files/11-aug_1.png?v=1754991655&width=1946",
+        "for": "male",
+        "review": {
+            "rating": 4.2,
+            "rated_by": 2865
+        }
     }
     ,
     {
-    "brand": "Nike",
-    "name": "FIELD GENERAL",
-    "color": "PHANTOM/MTLC PEWTER-BLACK-FLAT PEWTER",
-    "price": "₹8,695",
-    "imgSrc": "https://www.superkicks.in/cdn/shop/files/4-2025-08-12T145930.003.jpg?v=1754991209&width=1946",
-    "imgSrc2": "https://www.superkicks.in/cdn/shop/files/3-2025-08-12T145934.742.jpg?v=1754991209&width=1946",
-    "imgSrc3": "https://www.superkicks.in/cdn/shop/files/2-2025-08-12T145938.504.jpg?v=1754991209&width=1946",
-    "imgSrc4": "https://www.superkicks.in/cdn/shop/files/1-2025-08-12T145939.572.jpg?v=1754991209&width=1946",
-    "imgSrc5": "https://www.superkicks.in/cdn/shop/files/6_85_5aa4c399-de80-4a71-abc3-e95b7f9142c9.jpg?v=1754991209&width=1946",
-    "imgSrc6": "https://www.superkicks.in/cdn/shop/files/7_65_1bbc5013-8b69-4461-9b0b-e59c4cbf1184.jpg?v=1754991209&width=1946"
+        "brand": "Nike",
+        "name": "FIELD GENERAL",
+        "color": "PHANTOM/MTLC PEWTER-BLACK-FLAT PEWTER",
+        "price": "₹8,695",
+        "imgSrc": "https://www.superkicks.in/cdn/shop/files/4-2025-08-12T145930.003.jpg?v=1754991209&width=1946",
+        "imgSrc2": "https://www.superkicks.in/cdn/shop/files/3-2025-08-12T145934.742.jpg?v=1754991209&width=1946",
+        "imgSrc3": "https://www.superkicks.in/cdn/shop/files/2-2025-08-12T145938.504.jpg?v=1754991209&width=1946",
+        "imgSrc4": "https://www.superkicks.in/cdn/shop/files/1-2025-08-12T145939.572.jpg?v=1754991209&width=1946",
+        "imgSrc5": "https://www.superkicks.in/cdn/shop/files/6_85_5aa4c399-de80-4a71-abc3-e95b7f9142c9.jpg?v=1754991209&width=1946",
+        "imgSrc6": "https://www.superkicks.in/cdn/shop/files/7_65_1bbc5013-8b69-4461-9b0b-e59c4cbf1184.jpg?v=1754991209&width=1946",
+        "for": "male",
+        "review": {
+            "rating": 4.6,
+            "rated_by": 3860
+        }
     }
     ,
     {
-    "brand": "Nike",
-    "name": "SB VERTEBRAE",
-    "color": "WHEAT/BLACK-LT BRITISH TAN-OBSIDIAN",
-    "price": "₹7,495",
-    "imgSrc": "https://www.superkicks.in/cdn/shop/files/3_45.png?v=1754991230&width=1946",
-    "imgSrc2": "https://www.superkicks.in/cdn/shop/files/4_46.png?v=1754991230&width=1946",
-    "imgSrc3": "https://www.superkicks.in/cdn/shop/files/5_36.png?v=1754991230&width=1946",
-    "imgSrc4": "https://www.superkicks.in/cdn/shop/files/1_46_9a2d2349-03c3-4ada-89fe-97be90582293.png?v=1754991230&width=1946",
-    "imgSrc5": "https://www.superkicks.in/cdn/shop/files/6_25.png?v=1754991230&width=1946",
-    "imgSrc6": "https://www.superkicks.in/cdn/shop/files/2_47.png?v=1754991230&width=1946"
+        "brand": "Nike",
+        "name": "SB VERTEBRAE",
+        "color": "WHEAT/BLACK-LT BRITISH TAN-OBSIDIAN",
+        "price": "₹7,495",
+        "imgSrc": "https://www.superkicks.in/cdn/shop/files/3_45.png?v=1754991230&width=1946",
+        "imgSrc2": "https://www.superkicks.in/cdn/shop/files/4_46.png?v=1754991230&width=1946",
+        "imgSrc3": "https://www.superkicks.in/cdn/shop/files/5_36.png?v=1754991230&width=1946",
+        "imgSrc4": "https://www.superkicks.in/cdn/shop/files/1_46_9a2d2349-03c3-4ada-89fe-97be90582293.png?v=1754991230&width=1946",
+        "imgSrc5": "https://www.superkicks.in/cdn/shop/files/6_25.png?v=1754991230&width=1946",
+        "imgSrc6": "https://www.superkicks.in/cdn/shop/files/2_47.png?v=1754991230&width=1946",
+        "for": "male",
+        "review": {
+            "rating": 3.9,
+            "rated_by": 8268
+        }
     }
     ,
     {
-    "brand": "Converse",
-    "name": "x GOLF WANG ONE STAR CC SLIP PRO",
-    "color": "GREEN",
-    "price": "₹6,999",
-    "imgSrc": "https://www.superkicks.in/cdn/shop/files/1_51_5fe7862f-afd5-4435-a79a-31e19e08bd5e.png?v=1755004291&width=1946",
-    "imgSrc2": "https://www.superkicks.in/cdn/shop/files/2_51.png?v=1755004291&width=1946",
-    "imgSrc3": "https://www.superkicks.in/cdn/shop/files/3_49.png?v=1755004291&width=1946",
-    "imgSrc4": "https://www.superkicks.in/cdn/shop/files/5_40.png?v=1755004320&width=1946",
-    "imgSrc5": "https://www.superkicks.in/cdn/shop/files/4_50.png?v=1755004320&width=1946"
+        "brand": "Converse",
+        "name": "x GOLF WANG ONE STAR CC SLIP PRO",
+        "color": "GREEN",
+        "price": "₹6,999",
+        "imgSrc": "https://www.superkicks.in/cdn/shop/files/1_51_5fe7862f-afd5-4435-a79a-31e19e08bd5e.png?v=1755004291&width=1946",
+        "imgSrc2": "https://www.superkicks.in/cdn/shop/files/2_51.png?v=1755004291&width=1946",
+        "imgSrc3": "https://www.superkicks.in/cdn/shop/files/3_49.png?v=1755004291&width=1946",
+        "imgSrc4": "https://www.superkicks.in/cdn/shop/files/5_40.png?v=1755004320&width=1946",
+        "imgSrc5": "https://www.superkicks.in/cdn/shop/files/4_50.png?v=1755004320&width=1946",
+        "for": "male",
+        "review": {
+            "rating": 4.2,
+            "rated_by": 5860
+        }
     }
     ,
     {
-    "brand": "adidas Originals",
-    "name": "SAMBA OG",
-    "color": "GOLDEN BEIGE/DARK BROWN/GUM",
-    "price": "₹10,999",
-    "imgSrc": "https://www.superkicks.in/cdn/shop/files/1_3a28f7bf-2ec7-431c-a04d-52985c36e0fc.png?v=1754571636&width=1946",
-    "imgSrc2": "https://www.superkicks.in/cdn/shop/files/2_75cc72ab-4d58-4b29-8486-54fcea1a6a53.png?v=1754571636&width=1946",
-    "imgSrc3": "https://www.superkicks.in/cdn/shop/files/4_18373d71-834e-4cb2-9532-f433d58914bc.png?v=1754571636&width=1946",
-    "imgSrc4": "https://www.superkicks.in/cdn/shop/files/5_6c053588-35f0-46c7-9c6b-16726fe9a702.png?v=1754571636&width=1946",
-    "imgSrc5": "https://www.superkicks.in/cdn/shop/files/6_d03d5569-c2a6-41f5-807c-6034db1ba388.png?v=1754571636&width=1946",
-    "imgSrc6": "https://www.superkicks.in/cdn/shop/files/7_4641391c-fb44-4585-b929-a40e2d64369a.png?v=1754571636&width=1946"
+        "brand": "adidas Originals",
+        "name": "SAMBA OG",
+        "color": "GOLDEN BEIGE/DARK BROWN/GUM",
+        "price": "₹10,999",
+        "imgSrc": "https://www.superkicks.in/cdn/shop/files/1_3a28f7bf-2ec7-431c-a04d-52985c36e0fc.png?v=1754571636&width=1946",
+        "imgSrc2": "https://www.superkicks.in/cdn/shop/files/2_75cc72ab-4d58-4b29-8486-54fcea1a6a53.png?v=1754571636&width=1946",
+        "imgSrc3": "https://www.superkicks.in/cdn/shop/files/4_18373d71-834e-4cb2-9532-f433d58914bc.png?v=1754571636&width=1946",
+        "imgSrc4": "https://www.superkicks.in/cdn/shop/files/5_6c053588-35f0-46c7-9c6b-16726fe9a702.png?v=1754571636&width=1946",
+        "imgSrc5": "https://www.superkicks.in/cdn/shop/files/6_d03d5569-c2a6-41f5-807c-6034db1ba388.png?v=1754571636&width=1946",
+        "imgSrc6": "https://www.superkicks.in/cdn/shop/files/7_4641391c-fb44-4585-b929-a40e2d64369a.png?v=1754571636&width=1946",
+        "for": "male",
+        "review": {
+            "rating": 3.8,
+            "rated_by": 5864
+        }
     }
     ,
     {
-    "brand": "Jordan",
-    "name": "AIR JORDAN 1 MID",
-    "color": "WHITE/CANNON",
-    "price": "₹11,495",
-    "imgSrc": "https://www.superkicks.in/cdn/shop/files/5-2025-08-05T172849.065.jpg?v=1754395225&width=1946",
-    "imgSrc2": "https://www.superkicks.in/cdn/shop/files/7_64_2fc7d7b2-9ccb-4ac0-9b8c-e83a70881451.jpg?v=1754395225&width=1946",
-    "imgSrc3": "https://www.superkicks.in/cdn/shop/files/6_83_9467784c-ee09-40bc-a7e2-549315cb898d.jpg?v=1754395225&width=1946",
-    "imgSrc4": "https://www.superkicks.in/cdn/shop/files/1-2025-08-05T172903.733.jpg?v=1754395225&width=1946",
-    "imgSrc5": "https://www.superkicks.in/cdn/shop/files/2-2025-08-05T172902.090.jpg?v=1754395225&width=1946",
-    "imgSrc6": "https://www.superkicks.in/cdn/shop/files/3-2025-08-05T172858.157.jpg?v=1754395225&width=1946"
+        "brand": "Jordan",
+        "name": "AIR JORDAN 1 MID",
+        "color": "WHITE/CANNON",
+        "price": "₹11,495",
+        "imgSrc": "https://www.superkicks.in/cdn/shop/files/5-2025-08-05T172849.065.jpg?v=1754395225&width=1946",
+        "imgSrc2": "https://www.superkicks.in/cdn/shop/files/7_64_2fc7d7b2-9ccb-4ac0-9b8c-e83a70881451.jpg?v=1754395225&width=1946",
+        "imgSrc3": "https://www.superkicks.in/cdn/shop/files/6_83_9467784c-ee09-40bc-a7e2-549315cb898d.jpg?v=1754395225&width=1946",
+        "imgSrc4": "https://www.superkicks.in/cdn/shop/files/1-2025-08-05T172903.733.jpg?v=1754395225&width=1946",
+        "imgSrc5": "https://www.superkicks.in/cdn/shop/files/2-2025-08-05T172902.090.jpg?v=1754395225&width=1946",
+        "imgSrc6": "https://www.superkicks.in/cdn/shop/files/3-2025-08-05T172858.157.jpg?v=1754395225&width=1946",
+        "for": "male",
+        "review": {
+            "rating": 4.2,
+            "rated_by": 4860
+        }
     }
     ,
     {
-    "brand": "Nike",
-    "name": "AIR MAX 90",
-    "color": "SAIL/BURGUNDY CRUSH-BLACK",
-    "price": "₹12,295",
-    "imgSrc": "https://www.superkicks.in/cdn/shop/files/4-2025-08-05T172634.950.jpg?v=1754395178&width=1946",
-    "imgSrc2": "https://www.superkicks.in/cdn/shop/files/1-2025-08-05T172649.218.jpg?v=1754395178&width=1946",
-    "imgSrc3": "https://www.superkicks.in/cdn/shop/files/6_82_35245e21-c2a0-4418-aa1f-d8a62ffb57c7.jpg?v=1754395178&width=1946",
-    "imgSrc4": "https://www.superkicks.in/cdn/shop/files/3-2025-08-05T172636.550.jpg?v=1754395178&width=1946",
-    "imgSrc5": "https://www.superkicks.in/cdn/shop/files/5_100_bfd57675-faec-45ad-a589-2f723ba10b5d.jpg?v=1754395178&width=1946",
-    "imgSrc6": "https://www.superkicks.in/cdn/shop/files/2-2025-08-05T172646.499.jpg?v=1754395178&width=1946"
+        "brand": "Nike",
+        "name": "AIR MAX 90",
+        "color": "SAIL/BURGUNDY CRUSH-BLACK",
+        "price": "₹12,295",
+        "imgSrc": "https://www.superkicks.in/cdn/shop/files/4-2025-08-05T172634.950.jpg?v=1754395178&width=1946",
+        "imgSrc2": "https://www.superkicks.in/cdn/shop/files/1-2025-08-05T172649.218.jpg?v=1754395178&width=1946",
+        "imgSrc3": "https://www.superkicks.in/cdn/shop/files/6_82_35245e21-c2a0-4418-aa1f-d8a62ffb57c7.jpg?v=1754395178&width=1946",
+        "imgSrc4": "https://www.superkicks.in/cdn/shop/files/3-2025-08-05T172636.550.jpg?v=1754395178&width=1946",
+        "imgSrc5": "https://www.superkicks.in/cdn/shop/files/5_100_bfd57675-faec-45ad-a589-2f723ba10b5d.jpg?v=1754395178&width=1946",
+        "imgSrc6": "https://www.superkicks.in/cdn/shop/files/2-2025-08-05T172646.499.jpg?v=1754395178&width=1946",
+        "for": "male",
+        "review": {
+            "rating": 4.2,
+            "rated_by": 1860
+        }
     }
     ,
     {
-    "brand": "Jordan",
-    "name": "AIR JORDAN 1 LOW SE",
-    "color": "OIL GREY/WHITE-CAVE STONE-ARCTIC PUNCH",
-    "price": "₹11,495",
-    "imgSrc": "https://www.superkicks.in/cdn/shop/files/3-2025-08-05T172230.178.jpg?v=1754395195&width=1946",
-    "imgSrc2": "https://www.superkicks.in/cdn/shop/files/1-2025-08-05T172233.188.jpg?v=1754395195&width=1946",
-    "imgSrc3": "https://www.superkicks.in/cdn/shop/files/2-2025-08-05T172236.733.jpg?v=1754395195&width=1946",
-    "imgSrc4": "https://www.superkicks.in/cdn/shop/files/4-2025-08-05T172228.112.jpg?v=1754395195&width=1946",
-    "imgSrc5": "https://www.superkicks.in/cdn/shop/files/7_61_c88c0a69-6880-4338-8579-451dfd1ae3b4.jpg?v=1754395195&width=1946",
-    "imgSrc6": "https://www.superkicks.in/cdn/shop/files/8_23.jpg?v=1754395195&width=1946"
+        "brand": "Jordan",
+        "name": "AIR JORDAN 1 LOW SE",
+        "color": "OIL GREY/WHITE-CAVE STONE-ARCTIC PUNCH",
+        "price": "₹11,495",
+        "imgSrc": "https://www.superkicks.in/cdn/shop/files/3-2025-08-05T172230.178.jpg?v=1754395195&width=1946",
+        "imgSrc2": "https://www.superkicks.in/cdn/shop/files/1-2025-08-05T172233.188.jpg?v=1754395195&width=1946",
+        "imgSrc3": "https://www.superkicks.in/cdn/shop/files/2-2025-08-05T172236.733.jpg?v=1754395195&width=1946",
+        "imgSrc4": "https://www.superkicks.in/cdn/shop/files/4-2025-08-05T172228.112.jpg?v=1754395195&width=1946",
+        "imgSrc5": "https://www.superkicks.in/cdn/shop/files/7_61_c88c0a69-6880-4338-8579-451dfd1ae3b4.jpg?v=1754395195&width=1946",
+        "imgSrc6": "https://www.superkicks.in/cdn/shop/files/8_23.jpg?v=1754395195&width=1946",
+        "for": "male",
+        "review": {
+            "rating": 4.4,
+            "rated_by": 2263
+        }
     }
     ,
     {
-    "brand": "Nike",
-    "name": "AIR MAX MUSE",
-    "color": "BLACK/METALLIC SILVER",
-    "price": "₹13,995",
-    "imgSrc": "https://www.superkicks.in/cdn/shop/files/3-2025-08-05T170844.176.jpg?v=1754394119&width=1946",
-    "imgSrc2": "https://www.superkicks.in/cdn/shop/files/4_99.jpg?v=1754394119&width=1946",
-    "imgSrc3": "https://www.superkicks.in/cdn/shop/files/5_95.jpg?v=1754394119&width=1946",
-    "imgSrc4": "https://www.superkicks.in/cdn/shop/files/6_77.jpg?v=1754394119&width=1946",
-    "imgSrc5": "https://www.superkicks.in/cdn/shop/files/14-july_f49dd203-3412-4982-8d81-6eb5f79fc652.jpg?v=1754394119&width=1946",
-    "imgSrc6": "https://www.superkicks.in/cdn/shop/files/7_58_e424711e-866e-4728-892c-45011625618d.jpg?v=1754394119&width=1946"
+        "brand": "Nike",
+        "name": "AIR MAX MUSE",
+        "color": "BLACK/METALLIC SILVER",
+        "price": "₹13,995",
+        "imgSrc": "https://www.superkicks.in/cdn/shop/files/3-2025-08-05T170844.176.jpg?v=1754394119&width=1946",
+        "imgSrc2": "https://www.superkicks.in/cdn/shop/files/4_99.jpg?v=1754394119&width=1946",
+        "imgSrc3": "https://www.superkicks.in/cdn/shop/files/5_95.jpg?v=1754394119&width=1946",
+        "imgSrc4": "https://www.superkicks.in/cdn/shop/files/6_77.jpg?v=1754394119&width=1946",
+        "imgSrc5": "https://www.superkicks.in/cdn/shop/files/14-july_f49dd203-3412-4982-8d81-6eb5f79fc652.jpg?v=1754394119&width=1946",
+        "imgSrc6": "https://www.superkicks.in/cdn/shop/files/7_58_e424711e-866e-4728-892c-45011625618d.jpg?v=1754394119&width=1946",
+        "for": "male",
+        "review": {
+            "rating": 4.3,
+            "rated_by": 2163
+        }
     }
 
     ,
     {
-    "brand": "Jordan",
-    "name": "AIR JORDAN 1 LOW",
-    "color": "SAIL/DEEP ROYAL BLUE-STADIUM GREEN",
-    "price": "₹8,995",
-    "imgSrc": "https://www.superkicks.in/cdn/shop/files/4_100_d28258a8-a717-4f77-9afb-cfa3941346d2.jpg?v=1754394667&width=1946",
-    "imgSrc2": "https://www.superkicks.in/cdn/shop/files/3-2025-08-05T170642.944.jpg?v=1754394667&width=1946",
-    "imgSrc3": "https://www.superkicks.in/cdn/shop/files/2-2025-08-05T170646.830.jpg?v=1754394667&width=1946",
-    "imgSrc4": "https://www.superkicks.in/cdn/shop/files/1-2025-08-05T170645.565.jpg?v=1754394667&width=1946",
-    "imgSrc5": "https://www.superkicks.in/cdn/shop/files/6_76_739620c1-bb3b-4615-927e-8b8724ccd687.jpg?v=1754394667&width=1946",
-    "imgSrc6": "https://www.superkicks.in/cdn/shop/files/7_57.jpg?v=1754394667&width=1946"
+        "brand": "Jordan",
+        "name": "AIR JORDAN 1 LOW",
+        "color": "SAIL/DEEP ROYAL BLUE-STADIUM GREEN",
+        "price": "₹8,995",
+        "imgSrc": "https://www.superkicks.in/cdn/shop/files/4_100_d28258a8-a717-4f77-9afb-cfa3941346d2.jpg?v=1754394667&width=1946",
+        "imgSrc2": "https://www.superkicks.in/cdn/shop/files/3-2025-08-05T170642.944.jpg?v=1754394667&width=1946",
+        "imgSrc3": "https://www.superkicks.in/cdn/shop/files/2-2025-08-05T170646.830.jpg?v=1754394667&width=1946",
+        "imgSrc4": "https://www.superkicks.in/cdn/shop/files/1-2025-08-05T170645.565.jpg?v=1754394667&width=1946",
+        "imgSrc5": "https://www.superkicks.in/cdn/shop/files/6_76_739620c1-bb3b-4615-927e-8b8724ccd687.jpg?v=1754394667&width=1946",
+        "imgSrc6": "https://www.superkicks.in/cdn/shop/files/7_57.jpg?v=1754394667&width=1946",
+        "for": "male",
+        "review": {
+            "rating": 4.1,
+            "rated_by": 1163
+        }
     }
 
     ,
     {
-    "brand": "Jordan",
-    "name": "FLIGHT COURT",
-    "color": "OIL GREY/CAVE STONE-ARCTIC PUNCH-MUSLIN",
-    "price": "₹8,695",
-    "imgSrc": "https://www.superkicks.in/cdn/shop/files/4_26.png?v=1754388486&width=1946",
-    "imgSrc2": "https://www.superkicks.in/cdn/shop/files/3_24.png?v=1754388486&width=1946",
-    "imgSrc3": "https://www.superkicks.in/cdn/shop/files/2_26_a79e785e-ff39-4bdb-8287-bb252d9e38a5.png?v=1754388486&width=1946",
-    "imgSrc4": "https://www.superkicks.in/cdn/shop/files/6_13.png?v=1754388486&width=1946",
-    "imgSrc5": "https://www.superkicks.in/cdn/shop/files/7_3.png?v=1754388486&width=1946",
-    "imgSrc6": "https://www.superkicks.in/cdn/shop/files/5_19.png?v=1754388486&width=1946"
+        "brand": "Jordan",
+        "name": "FLIGHT COURT",
+        "color": "OIL GREY/CAVE STONE-ARCTIC PUNCH-MUSLIN",
+        "price": "₹8,695",
+        "imgSrc": "https://www.superkicks.in/cdn/shop/files/4_26.png?v=1754388486&width=1946",
+        "imgSrc2": "https://www.superkicks.in/cdn/shop/files/3_24.png?v=1754388486&width=1946",
+        "imgSrc3": "https://www.superkicks.in/cdn/shop/files/2_26_a79e785e-ff39-4bdb-8287-bb252d9e38a5.png?v=1754388486&width=1946",
+        "imgSrc4": "https://www.superkicks.in/cdn/shop/files/6_13.png?v=1754388486&width=1946",
+        "imgSrc5": "https://www.superkicks.in/cdn/shop/files/7_3.png?v=1754388486&width=1946",
+        "imgSrc6": "https://www.superkicks.in/cdn/shop/files/5_19.png?v=1754388486&width=1946",
+        "for": "male",
+        "review": {
+            "rating": 3.6,
+            "rated_by": 1163
+        }
     }
     ,
     {
-    "brand": "Nike",
-    "name": "AIR MAX LTD 3",
-    "color": "BLACK/BLACK-BLACK",
-    "price": "₹10,295",
-    "imgSrc": "https://www.superkicks.in/cdn/shop/files/4_28.png?v=1754388522&width=1946",
-    "imgSrc2": "https://www.superkicks.in/cdn/shop/files/3_26.png?v=1754388522&width=1946",
-    "imgSrc3": "https://www.superkicks.in/cdn/shop/files/2_28_be0b760c-6631-4fbd-a94c-6fbbb2d3a5f1.png?v=1754388522&width=1946",
-    "imgSrc4": "https://www.superkicks.in/cdn/shop/files/1_27.png?v=1754388522&width=1946",
-    "imgSrc5": "https://www.superkicks.in/cdn/shop/files/6_15.png?v=1754388522&width=1946",
-    "imgSrc6": "https://www.superkicks.in/cdn/shop/files/7_5_e70ee151-0d90-474f-84ce-2b1e13c9649a.png?v=1754388522&width=1946",
-    "imgSrc7": "https://www.superkicks.in/cdn/shop/files/5_21.png?v=1754388522&width=1946"
+        "brand": "Nike",
+        "name": "AIR MAX LTD 3",
+        "color": "BLACK/BLACK-BLACK",
+        "price": "₹10,295",
+        "imgSrc": "https://www.superkicks.in/cdn/shop/files/4_28.png?v=1754388522&width=1946",
+        "imgSrc2": "https://www.superkicks.in/cdn/shop/files/3_26.png?v=1754388522&width=1946",
+        "imgSrc3": "https://www.superkicks.in/cdn/shop/files/2_28_be0b760c-6631-4fbd-a94c-6fbbb2d3a5f1.png?v=1754388522&width=1946",
+        "imgSrc4": "https://www.superkicks.in/cdn/shop/files/1_27.png?v=1754388522&width=1946",
+        "imgSrc5": "https://www.superkicks.in/cdn/shop/files/6_15.png?v=1754388522&width=1946",
+        "imgSrc6": "https://www.superkicks.in/cdn/shop/files/7_5_e70ee151-0d90-474f-84ce-2b1e13c9649a.png?v=1754388522&width=1946",
+        "imgSrc7": "https://www.superkicks.in/cdn/shop/files/5_21.png?v=1754388522&width=1946",
+        "for": "male",
+        "review": {
+            "rating": 4.3,
+            "rated_by": 2199
+        }
     }
     ,
     {
-    "brand": "New Balance",
-    "name": "1000",
-    "color": "BLACK/BLACK",
-    "price": "₹16,999",
-    "imgSrc": "https://www.superkicks.in/cdn/shop/files/1_25_8eaf3ad7-057c-46ad-9b26-ac945597b52f.png?v=1754376708&width=1946",
-    "imgSrc2": "https://www.superkicks.in/cdn/shop/files/2_25.png?v=1754376708&width=1946",
-    "imgSrc3": "https://www.superkicks.in/cdn/shop/files/3_23.png?v=1754376708&width=1946",
-    "imgSrc4": "https://www.superkicks.in/cdn/shop/files/4_25.png?v=1754376708&width=1946",
-    "imgSrc5": "https://www.superkicks.in/cdn/shop/files/5_18.png?v=1754376708&width=1946",
-    "imgSrc6": "https://www.superkicks.in/cdn/shop/files/1_25_8eaf3ad7-057c-46ad-9b26-ac945597b52f.png?v=1754376708&width=1946"
+        "brand": "New Balance",
+        "name": "1000",
+        "color": "BLACK/BLACK",
+        "price": "₹16,999",
+        "imgSrc": "https://www.superkicks.in/cdn/shop/files/1_25_8eaf3ad7-057c-46ad-9b26-ac945597b52f.png?v=1754376708&width=1946",
+        "imgSrc2": "https://www.superkicks.in/cdn/shop/files/2_25.png?v=1754376708&width=1946",
+        "imgSrc3": "https://www.superkicks.in/cdn/shop/files/3_23.png?v=1754376708&width=1946",
+        "imgSrc4": "https://www.superkicks.in/cdn/shop/files/4_25.png?v=1754376708&width=1946",
+        "imgSrc5": "https://www.superkicks.in/cdn/shop/files/5_18.png?v=1754376708&width=1946",
+        "imgSrc6": "https://www.superkicks.in/cdn/shop/files/1_25_8eaf3ad7-057c-46ad-9b26-ac945597b52f.png?v=1754376708&width=1946",
+        "for": "male",
+        "review": {
+            "rating": 4.1,
+            "rated_by": 2263
+        }
     }
     ,
     {
-    "brand": "Nike",
-    "name": "STRUCTURE 26",
-    "color": "BLACK/WHITE-COOL GREY-METALLIC SILVER",
-    "price": "₹11,895",
-    "imgSrc": "https://www.superkicks.in/cdn/shop/files/4_56.png?v=1755179003&width=1946",
-    "imgSrc2": "https://www.superkicks.in/cdn/shop/files/3_55.png?v=1755179003&width=1946",
-    "imgSrc3": "https://www.superkicks.in/cdn/shop/files/2_57.png?v=1755179003&width=1946",
-    "imgSrc4": "https://www.superkicks.in/cdn/shop/files/1_57_00cecfc9-4aa7-49af-aad7-62f35ae89638.png?v=1755179003&width=1946",
-    "imgSrc5": "https://www.superkicks.in/cdn/shop/files/7_15.png?v=1755179003&width=1946",
-    "imgSrc6": "https://www.superkicks.in/cdn/shop/files/8_5.png?v=1755179003&width=1946",
-    "imgSrc7": "https://www.superkicks.in/cdn/shop/files/6_32.png?v=1755179003&width=1946"
+        "brand": "Nike",
+        "name": "STRUCTURE 26",
+        "color": "BLACK/WHITE-COOL GREY-METALLIC SILVER",
+        "price": "₹11,895",
+        "imgSrc": "https://www.superkicks.in/cdn/shop/files/4_56.png?v=1755179003&width=1946",
+        "imgSrc2": "https://www.superkicks.in/cdn/shop/files/3_55.png?v=1755179003&width=1946",
+        "imgSrc3": "https://www.superkicks.in/cdn/shop/files/2_57.png?v=1755179003&width=1946",
+        "imgSrc4": "https://www.superkicks.in/cdn/shop/files/1_57_00cecfc9-4aa7-49af-aad7-62f35ae89638.png?v=1755179003&width=1946",
+        "imgSrc5": "https://www.superkicks.in/cdn/shop/files/7_15.png?v=1755179003&width=1946",
+        "imgSrc6": "https://www.superkicks.in/cdn/shop/files/8_5.png?v=1755179003&width=1946",
+        "imgSrc7": "https://www.superkicks.in/cdn/shop/files/6_32.png?v=1755179003&width=1946",
+        "for": "male",
+        "review": {
+            "rating": 4.6,
+            "rated_by": 1163
+        }
     }
     ,
     {
-    "brand": "adidas Originals",
-    "name": "SUPERSTAR II",
-    "color": "CORE BLACK/MATTE SILVER/CLOUD WHITE",
-    "price": "₹11,999",
-    "imgSrc": "https://www.superkicks.in/cdn/shop/files/1_21_e952bf6b-741e-4282-b42c-f6bafc1b60fe.png?v=1754292956&width=1946",
-    "imgSrc2": "https://www.superkicks.in/cdn/shop/files/2_21_edf76c5f-c2d5-446a-826b-05f1b167b56f.png?v=1754292956&width=1946",
-    "imgSrc3": "https://www.superkicks.in/cdn/shop/files/6_8.png?v=1754292956&width=1946",
-    "imgSrc4": "https://www.superkicks.in/cdn/shop/files/4_21.png?v=1754292956&width=1946",
-    "imgSrc5": "https://www.superkicks.in/cdn/shop/files/5_14.png?v=1754292956&width=1946",
-    "imgSrc6": "https://www.superkicks.in/cdn/shop/files/8_4552509d-0638-4b2d-b062-18d7ec8a2c26.png?v=1754292956&width=1946",
-    "imgSrc7": "https://www.superkicks.in/cdn/shop/files/3_19.png?v=1754292956&width=1946"
+        "brand": "adidas Originals",
+        "name": "SUPERSTAR II",
+        "color": "CORE BLACK/MATTE SILVER/CLOUD WHITE",
+        "price": "₹11,999",
+        "imgSrc": "https://www.superkicks.in/cdn/shop/files/1_21_e952bf6b-741e-4282-b42c-f6bafc1b60fe.png?v=1754292956&width=1946",
+        "imgSrc2": "https://www.superkicks.in/cdn/shop/files/2_21_edf76c5f-c2d5-446a-826b-05f1b167b56f.png?v=1754292956&width=1946",
+        "imgSrc3": "https://www.superkicks.in/cdn/shop/files/6_8.png?v=1754292956&width=1946",
+        "imgSrc4": "https://www.superkicks.in/cdn/shop/files/4_21.png?v=1754292956&width=1946",
+        "imgSrc5": "https://www.superkicks.in/cdn/shop/files/5_14.png?v=1754292956&width=1946",
+        "imgSrc6": "https://www.superkicks.in/cdn/shop/files/8_4552509d-0638-4b2d-b062-18d7ec8a2c26.png?v=1754292956&width=1946",
+        "imgSrc7": "https://www.superkicks.in/cdn/shop/files/3_19.png?v=1754292956&width=1946",
+        "for": "male",
+        "review": {
+            "rating": 4.1,
+            "rated_by": 2363
+        }
+    },
+    {
+        "brand": "adidas Originals",
+        "name": "SUPERSTAR II",
+        "color": "CORE BLACK/MATTE SILVER/CLOUD WHITE",
+        "price": "₹11,999",
+        "imgSrc": "https://www.superkicks.in/cdn/shop/files/1_21_e952bf6b-741e-4282-b42c-f6bafc1b60fe.png?v=1754292956&width=1946",
+        "imgSrc2": "https://www.superkicks.in/cdn/shop/files/2_21_edf76c5f-c2d5-446a-826b-05f1b167b56f.png?v=1754292956&width=1946",
+        "imgSrc3": "https://www.superkicks.in/cdn/shop/files/6_8.png?v=1754292956&width=1946",
+        "imgSrc4": "https://www.superkicks.in/cdn/shop/files/4_21.png?v=1754292956&width=1946",
+        "imgSrc5": "https://www.superkicks.in/cdn/shop/files/5_14.png?v=1754292956&width=1946",
+        "imgSrc6": "https://www.superkicks.in/cdn/shop/files/8_4552509d-0638-4b2d-b062-18d7ec8a2c26.png?v=1754292956&width=1946",
+        "imgSrc7": "https://www.superkicks.in/cdn/shop/files/3_19.png?v=1754292956&width=1946",
+        "for": "male",
+        "review": {
+            "rating": 4.1,
+            "rated_by": 2363
+        }
     }
 ]

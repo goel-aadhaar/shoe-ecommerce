@@ -9,7 +9,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 
 export default function CardCarousel() {
-    console.log("card carousel   ", shoes.length);
+    console.log("carouselCard.jsx caled....");
 
   return (
     <div className="relative w-full px-20 pt-10 pb-10 bg-white">
@@ -19,7 +19,7 @@ export default function CardCarousel() {
           nextEl: ".custom-next-card",
           prevEl: ".custom-prev-card",
         }}
-        spaceBetween={10}
+        spaceBetween={20}
         slidesPerView={4}
         loop={true}
         className="w-full"

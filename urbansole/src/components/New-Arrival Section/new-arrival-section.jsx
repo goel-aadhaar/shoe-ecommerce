@@ -1,19 +1,20 @@
 import React, { useState } from "react";
 
 import CardCarousel from "../carouselCardList/caroselCard";
-const TrendingSection = () => {
 
-  console.log("trending.jsx called");
+const NewArrivalSection = () => {
+
+  console.log("NewArrival.jsx called");
   
   return (
-    <div className="bg-white text-black py-10">
+    <div className="bg-white text-black">
       {/* Heading */}
-      <h1 className="text-center font-bold text-3xl mb-5 mr-10 pr-10">TRENDING</h1>
+      <h1 className="text-center font-bold text-3xl mb-5 pt-10 mr-10 pr-10">NEW ARRIVAL</h1>
 
       {/* Tabs + View All */}
       <div className="flex items-center justify-between">
         <div></div>
-        <GenderTabs />
+        <TypeTab />
         <a
           href="#"
           className="text-sm mr-10 font-semibold underline underline-offset-4"
@@ -29,24 +30,24 @@ const TrendingSection = () => {
 };
 
 
-function GenderTabs() {
-  const [active, setActive] = useState("men");
+function TypeTab() {
+  const [active, setActive] = useState("shoes");
 
   return (
     <div className="flex flex-col items-center">
       {/* Tabs */}
       <div className="flex space-x-10 text-2xl font-bold">
         <button
-          onClick={() => setActive("men")}
-          className={`${active === "men" ? "text-black" : "text-gray-500"}`}
+          onClick={() => setActive("shoes")}
+          className={`${active === "shoes" ? "text-black" : "text-gray-500"}`}
         >
-          MEN
+          SHOES
         </button>
         <button
-          onClick={() => setActive("women")}
-          className={`${active === "women" ? "text-black" : "text-gray-500"}`}
+          onClick={() => setActive("crocs")}
+          className={`${active === "crocs" ? "text-black" : "text-gray-500"}`}
         >
-          WOMEN
+          CROCS
         </button>
       </div>
 
@@ -54,12 +55,12 @@ function GenderTabs() {
       <div className="flex mt-2 w-40">
         <div
           className={`h-1 w-1/2 transition-all duration-500 ${
-            active === "men" ? "bg-red-600" : "bg-gray-300"
+            active === "shoes" ? "bg-red-600" : "bg-gray-300"
           }`}
         ></div>
         <div
           className={`h-1 w-1/2 transition-all duration-500 ${
-            active === "women" ? "bg-red-600" : "bg-gray-300"
+            active === "crocs" ? "bg-red-600" : "bg-gray-300"
           }`}
         ></div>
       </div>
@@ -67,4 +68,4 @@ function GenderTabs() {
   );
 }
 
-export default TrendingSection
+export default NewArrivalSection
