@@ -55,7 +55,7 @@ export default function FilterBar() {
   };
 
   return (
-    <div className="flex flex-wrap gap-4 px-20 bg-white shadow-sm">
+    <div className="flex flex-wrap gap-4 px-20 bg-white shadow-sm py-2">
       {Object.entries(filterOptions).map(([label, options], idx) => (
         <Dropdown
           key={idx}
