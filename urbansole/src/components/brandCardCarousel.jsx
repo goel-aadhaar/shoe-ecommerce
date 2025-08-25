@@ -1,5 +1,7 @@
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { ChevronRight, ChevronLeft } from "lucide-react";
+
 import { Navigation } from "swiper/modules";
 
 import "swiper/css";
@@ -14,7 +16,7 @@ export default function BrandCarousel() {
       logo: "https://www.superkicks.in/cdn/shop/files/0_1b00f53a-1b00-429c-8f9c-fb8cef60de39.png?v=1747660669",
     },
     {
-      name: "Adidas",
+      name: "Adidas Originals",
       link : "#",
       bg: "https://www.superkicks.in/cdn/shop/files/Adidas_ca63a075-a68e-4167-8f99-08ff5a81d4ae.jpg?v=1755081300",
       logo: "https://www.superkicks.in/cdn/shop/files/2_de6e99f3-bcae-48cf-8316-c9e40948a3ad.png?v=1747660734",
@@ -40,10 +42,9 @@ export default function BrandCarousel() {
   ];
 
   return (
-    <div className="absolute w-full px-20 py-12 bg-white">
+    <div className="relative w-full px-20 pt-20 pb-10 bg-white">
       <Swiper
         modules={[Navigation]}
-        
         navigation={{
           nextEl: ".custom-next",
           prevEl: ".custom-prev",
@@ -89,14 +90,28 @@ export default function BrandCarousel() {
       </Swiper>
 
       {/* Custom buttons */}
-      <div className="custom-prev absolute top-1/2 left-2 z-10 -translate-y-1/2 
-        bg-slate-500 text-white p-3 ms-6 rounded-full cursor-pointer hover:bg-slate-800">
-        ◀
-      </div>
-      <div className="custom-next absolute top-1/2 right-2 z-10 -translate-y-1/2 
-        bg-slate-500 text-white p-3 me-6 rounded-full cursor-pointer hover:bg-slate-800">
-        ▶
-      </div>
+      <CustomChevronBtn/>
     </div>
+  );
+}
+
+
+const CustomChevronBtn =  ()=>{
+  return (
+    <>
+      <div className="custom-prev absolute top-1/2 left-5 z-10 -translate-y-1/2
+        w-10 h-10 flex items-center justify-center
+        bg-black text-white rounded-full cursor-pointer 
+        hover:bg-slate-800">
+        <ChevronLeft size={20} />
+      </div>
+
+      <div className="custom-next absolute top-1/2 right-5 z-10 -translate-y-1/2
+        w-10 h-10 flex items-center justify-center
+        bg-black text-white rounded-full cursor-pointer 
+        hover:bg-slate-800">
+        <ChevronRight size={20} />
+      </div>
+    </>
   );
 }
