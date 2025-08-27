@@ -26,9 +26,9 @@ const ShoeDetail = ({ shoe, allShoes, onBack, onRelatedShoeClick }) => {
             <div className="max-w-7xl mx-auto">
                 <button
                     onClick={onBack}
-                    className="bg-gray-100 text-gray-800 font-semibold py-2 px-5 rounded-lg hover:bg-gray-200 transition-colors duration-300 flex items-center mb-8 shadow-sm border border-gray-200"
+                    className="bg-gray-100 text-gray-800 font-semibold py-2 px-4 mt-10 rounded-lg hover:bg-gray-200 transition-colors duration-300 flex items-center mb-8 shadow-sm border border-gray-200"
                 >
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                    <svg xmlns="http://www.w3.org/2000/svg" className=" h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
                         <path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd" />
                     </svg>
                     Back to All Shoes
@@ -38,8 +38,8 @@ const ShoeDetail = ({ shoe, allShoes, onBack, onRelatedShoeClick }) => {
                     <div className="lg:col-span-3">
                         <div className="grid grid-cols-2 gap-4">
                             {images.map((img, index) => (
-                                <div key={index} className="bg-gray-100 border rounded-lg flex items-center justify-center">
-                                    <img src={img} alt={`${shoe.name} view ${index + 1}`} className="object-contain w-full h-full rounded-lg" />
+                                <div key={index} className="bg-gray-100 border rounded-sm flex items-center justify-center">
+                                    <img src={img} alt={`${shoe.name} view ${index + 1}`} className="object-contain w-full h-full rounded-sm" />
                                 </div>
                             ))}
                         </div>
@@ -56,12 +56,12 @@ const ShoeDetail = ({ shoe, allShoes, onBack, onRelatedShoeClick }) => {
                                     <a href="#" className="text-sm text-indigo-600 hover:underline font-medium">Size Chart</a>
                                 </div>
                                 <div className="grid grid-cols-4 gap-2 mt-4">
-                                    {['6', '7', '8', '9', '10', '11', '12'].map(size => (
+                                    {['7', '8', '9', '10', '11'].map(size => (
                                         <button key={size} className="border border-gray-300 rounded py-3 text-center hover:border-black transition-colors duration-200">
                                             {size}
                                         </button>
                                     ))}
-                                    <button className="border border-gray-200 bg-gray-50 rounded py-3 text-center text-gray-400 cursor-not-allowed" disabled>13</button>
+                                    <button className="border border-gray-200 bg-gray-50 rounded py-3 text-center text-gray-400 cursor-not-allowed" disabled>12</button>
                                 </div>
                             </div>
                             <div className="mt-8 grid grid-cols-1 gap-4">

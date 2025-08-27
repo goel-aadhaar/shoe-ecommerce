@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import CardCarousel from "../carouselCardList/caroselCard";
-const TrendingSection = () => {
+const TrendingSection = ({onShoeClick}) => {
 
   console.log("trending.jsx called");
   
@@ -23,7 +23,9 @@ const TrendingSection = () => {
       </div>
 
       {/* Carousel */}
-      <CardCarousel />
+      <CardCarousel 
+        onShoeClick={onShoeClick}
+      />
     </div>
   );
 };
