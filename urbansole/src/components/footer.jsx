@@ -1,5 +1,6 @@
 import React from "react";
 import { Instagram, Facebook } from "lucide-react";
+import { Link } from "react-router";
 
 
 
@@ -14,11 +15,11 @@ export default function Footer() {
         {/* <div> */}
           <ul className="text-left">
             <li className="text-xl font-bold pb-3">INFORMATION</li>
-            <li><a href="#" className="hover:text-red-500 text-sm text-white">ABOUT US</a></li>
-            <li><a href="#" className="hover:text-red-500 text-sm text-white">CONTACT US</a></li>
+            <li><Link to={'/about'} className="hover:text-red-500 text-sm text-white">ABOUT US</Link></li>
+            <li><Link to={'/contact'} className="hover:text-red-500 text-sm text-white">CONTACT US</Link></li>
             <li><a href="#" className="hover:text-red-500 text-sm text-white">RELEASES</a></li>
             <li><a href="#" className="hover:text-red-500 text-sm text-white">STORE LOCATOR</a></li>
-            <li><a href="#" className="hover:text-red-500 text-sm text-white">BRANDS</a></li>
+            <li><Link to={"/brandsLogo"} className="hover:text-red-500 text-sm text-white">BRANDS</Link></li>
             <li><a href="#" className="hover:text-red-500 text-sm text-white">BLOGS</a></li>
           </ul>
         {/* </div> */}

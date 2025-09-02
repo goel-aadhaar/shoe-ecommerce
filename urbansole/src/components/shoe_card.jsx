@@ -4,7 +4,6 @@ import { useState } from 'react';
 import { createPortal } from "react-dom";
 import { forwardRef, useImperativeHandle, useRef } from "react";
 
-// 1. Added 'onClick' to the props to handle navigation
 const Shoe_Card = ({ brand = 'Nike', name, color, price, imgSrc, imgSrc2, onClick }) => {
     const modalRef = useRef();
     if (imgSrc == null) imgSrc = "https://www.superkicks.in/cdn/shop/files/1_23_63d4bcad-2f4f-4dff-8606-1b9687a04aa5.png?v=1754314154";
@@ -26,6 +25,7 @@ const Shoe_Card = ({ brand = 'Nike', name, color, price, imgSrc, imgSrc2, onClic
             className="overflow-hidden shadow-md hover:shadow-lg transition border border-slate-200 cursor-pointer"
             onMouseEnter={() => imgSrc2 && setCurrentImg(imgSrc2)}
             onMouseLeave={() => setCurrentImg(imgSrc)}
+
             onClick={onClick}
         >
             <img 

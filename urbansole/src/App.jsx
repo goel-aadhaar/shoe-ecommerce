@@ -10,13 +10,15 @@ import shoesData from './data/shoes.json';
 import FilterBar from './components/filter';
 import TrendingSection from './components/trending-section/trending';
 import Home from './components/home-page/home-page';
+import BrandFullPage from './components/brandPage/BrandFullPage';
+
 
 
 function App() {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedShoe, setSelectedShoe] = useState(null);
 
-    // This new code block listens for the browser's back button
+
     useEffect(() => {
         const handlePopState = () => {
             // If the URL has no #shoe, it means we went back to the main page
@@ -24,7 +26,7 @@ function App() {
                 setSelectedShoe(null);
             }
         };
-        // Add the event listener
+
         window.addEventListener('popstate', handlePopState);
         // Cleanup function to remove the listener
         return () => {
