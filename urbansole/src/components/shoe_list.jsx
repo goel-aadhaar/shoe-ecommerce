@@ -1,11 +1,12 @@
 import React from 'react'
 
-
 import { Shoe_Card } from "./shoe_card";
  
 
 function ShoeList({props}) {
-  console.log(Array.isArray(props));
+  // console.log(props);
+  
+  // console.log(Array.isArray(props));
 
   return (
     <>

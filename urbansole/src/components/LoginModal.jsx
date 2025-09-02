@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router';
 
 const CloseIcon = () => <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path></svg>;
 
@@ -20,16 +21,25 @@ const LoginModal = ({ isOpen, onClose }) => {
                 </div>
                 <div className="w-full md:w-1/2 bg-white text-black p-8 sm:p-12 flex flex-col justify-center">
                     <h3 className="text-2xl font-bold text-center">Grab! <br/> Welcome Discount</h3>
-                    <form className="mt-8 space-y-6">
+                    <form className="mt-4 space-y-4">
                         <div className="relative">
-                            <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-600">🇮🇳 +91</div>
-                            <input type="tel" placeholder="Enter Mobile Number" className="w-full pl-20 pr-3 py-3 bg-gray-100 border border-gray-300 rounded-md focus:ring-2 focus:ring-black focus:border-black outline-none"/>
+                            <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-600">Email Id</div>
+                            <input type="email" placeholder="Enter your registered email id" className="w-full pl-24 pr-3 py-3 bg-gray-100 border border-gray-300 rounded-md focus:ring-2 focus:ring-black focus:border-black outline-none"/>
+                        </div>
+                        <div className="relative">
+                            <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-600">Password</div>
+                            <input type="password" placeholder="Enter your password" className="w-full pl-24 pr-5 py-3 bg-gray-100 border border-gray-300 rounded-md focus:ring-2 focus:ring-black focus:border-black outline-none"/>
                         </div>
                         <div className="flex items-center">
                             <input id="notify" type="checkbox" className="h-4 w-4 text-black border-gray-400 rounded focus:ring-black"/>
                             <label htmlFor="notify" className="ml-2 block text-sm text-gray-700">Notify me for any updates & offers</label>
                         </div>
-                        <button type="submit" className="w-full bg-black text-white font-bold py-3 px-4 rounded-md hover:bg-gray-800 transition-colors">Submit</button>
+                        <div >
+                            <button type="submit" className="w-full bg-black text-white font-bold py-3 px-4 mb-2 rounded-md hover:bg-gray-800 transition-colors">Submit</button>
+                            <Link to="/registration">
+                                <button type="button" className="w-full bg-black text-white font-bold py-3 px-4 rounded-md hover:bg-gray-800 transition-colors">New User? Register Here</button>
+                            </Link>
+                        </div>
                     </form>
                     <div className="text-center mt-4 text-xs text-gray-500">
                         <p>I accept that I have read & understood Gokwik's <a href="#" className="underline">Privacy Policy</a> and <a href="#" className="underline">T&Cs</a>.</p>

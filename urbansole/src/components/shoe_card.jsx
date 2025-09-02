@@ -17,7 +17,8 @@ const Shoe_Card = ({ brand = 'Nike', name, color, price, imgSrc, imgSrc2 }) => {
         <div 
             className="overflow-hidden shadow-md hover:shadow-lg transition border border-slate-200"
             onMouseEnter={() => imgSrc2 && setCurrentImg(imgSrc2)}
-                          onMouseLeave={() => setCurrentImg(imgSrc)}>
+            onMouseLeave={() => setCurrentImg(imgSrc)}
+        >
             <img 
                 src={currentImg} 
                 alt={`${brand} shoe`} 

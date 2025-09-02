@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router';
 
 // Icon components
 const SearchIcon = () => <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>;
@@ -8,17 +9,19 @@ const MenuIcon = () => <svg className="w-6 h-6" fill="none" stroke="currentColor
 
 const Navbar = ({ onProfileClick }) => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-    const navLinks = ["New Arrival", "Footwear", "Apparel", "Accessories", "Brands", "Blogs"];
+    const navLinks = [
+        {navName :"New Arrival", to : '/newArrival'}, {navName: "Footwear", to :'/footwear'}, {navName: "Crocks", to : '/crocks'}, {navName:"Brands",to : '/brandsLogo'}, {navName : "Blogs", to : '/blogs'}
+    ];
 
     return (
-        <header className="fixed top-0 left-0 w-full z-30 bg-black bg-opacity-80">
+        <header className="fixed top-0 left-0 w-full z-30 bg-black bg-opacity-80 mb-10">
             <div className="container mx-auto px-6 py-4 flex justify-between items-center">
                 <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="md:hidden text-white focus:outline-none" aria-label="Toggle mobile menu">
                     <MenuIcon />
                 </button>
-                <h1 className="text-2xl font-black uppercase tracking-wider"><a href="#">URBANSOLE</a></h1>
+                <h1 className="text-2xl font-black uppercase tracking-wider"><Link to={"/"}>URBANSOLE</Link></h1>
                 <nav className="hidden md:flex items-center space-x-8 text-sm font-semibold uppercase">
-                    {navLinks.map(link => <a key={link} href="#" className="hover:text-gray-300 transition-colors">{link}</a>)}
+                    {navLinks.map(link => <Link key={link.navName} to={link.to} className="hover:text-gray-300 transition-colors">{link.navName}</Link>)}
                     <a href="#" className="text-red-500 hover:text-red-400 transition-colors">Sale</a>
                 </nav>
                 <div className="flex items-center space-x-5">
