@@ -13,11 +13,12 @@ import Home from './components/home-page/home-page';
 import BrandFullPage from './components/brandPage/BrandFullPage';
 
 
+
 function App() {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedShoe, setSelectedShoe] = useState(null);
 
-    // for browser's back button
+
     useEffect(() => {
         const handlePopState = () => {
             // If the URL has no #shoe, it means we went back to the main page
@@ -25,7 +26,7 @@ function App() {
                 setSelectedShoe(null);
             }
         };
-        // event listener
+
         window.addEventListener('popstate', handlePopState);
         // Cleanup function to remove the listener
         return () => {

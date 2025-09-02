@@ -10,7 +10,7 @@ function Dropdown({ label, options, isOpen, onToggle, onSelect, selected }) {
         className="flex justify-between items-center w-full border border-gray-300 px-4 py-2 bg-white text-black"
       >
         {selected || label}
-        <ChevronDown className="w-4 h-4 ml-2" />
+        <ChevronDown className="h-4" />
       </button>
 
       {/* Dropdown List */}
@@ -20,7 +20,7 @@ function Dropdown({ label, options, isOpen, onToggle, onSelect, selected }) {
             <div
               key={i}
               onClick={() => onSelect(label, opt)}
-              className="px-4 py-2 hover:bg-gray-100 bg-slate-100 m-2 cursor-pointer"
+              className="px-3 py-2 hover:bg-gray-100 bg-slate-100 m-2 cursor-pointer"
             >
               {opt}
             </div>
@@ -37,7 +37,7 @@ export default function FilterBar() {
   const [selectedValues, setSelectedValues] = useState({}); // store selected values
  
   const filterOptions = {
-    "Shoe Size (IND)": ["6", "7", "8", "9", "10", "11"],
+    "Shoe Size (IND)": ["7", "8", "9", "10", "11"],
     Brand: ["Nike", "Adidas", "Puma", "New Balance", "Reebok"],
     Color: ["Black", "White", "Blue", "Red", "Green", "Grey"],
     Gender: ["Men", "Women", "Kids"],

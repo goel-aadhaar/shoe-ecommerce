@@ -2,9 +2,9 @@ import React, { useState } from "react";
 
 import CardCarousel from "../carouselCardList/caroselCard";
 
-const NewArrivalSection = () => {
+const NewArrivalSection = ({onShoeClick}) => {
 
-  console.log("NewArrival.jsx called");
+  console.log("NewArrival.jsx called", typeof onShoeClick);
   
   return (
     <div className="bg-white text-black">
@@ -24,7 +24,9 @@ const NewArrivalSection = () => {
       </div>
 
       {/* Carousel */}
-      <CardCarousel />
+      <CardCarousel 
+          onShoeClick={onShoeClick}
+      />
     </div>
   );
 };

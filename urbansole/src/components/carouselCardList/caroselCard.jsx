@@ -8,39 +8,44 @@ import shoes from "../../data/shoes.json"
 import "swiper/css";
 import "swiper/css/navigation";
 
-export default function CardCarousel() {
-    console.log("carouselCard.jsx caled....");
-
-  return (
-    <div className="relative w-full px-20 pt-10 pb-10 bg-white">
-      <Swiper
-        modules={[Navigation]}
-        navigation={{
-          nextEl: ".custom-next-card",
-          prevEl: ".custom-prev-card",
-        }}
-        spaceBetween={20}
-        slidesPerView={4}
-        loop={true}
-        className="w-full"
-        breakpoints={{
-          320: { slidesPerView: 1 },   // mobile
-          640: { slidesPerView: 2 },   // small tablet
-          980: { slidesPerView: 3 },  // tablet / small desktop
-          1280: { slidesPerView: 4 },  // large desktop
-        }}
-      >
-        {shoes.map((shoe, index) => (
-          <SwiperSlide key={index}>
-              <Shoe_Card key={index} {...shoe} />
-          </SwiperSlide>
-        ))}
-      </Swiper>
-      
-      {/* Custom buttons */}
-      <CustomChevronBtn/>
-    </div>
-  );
+export default function CardCarousel({onShoeClick}) {
+  console.log("inside caroselCard   ", typeof onShoeClick);
+  console.log(onShoeClick);
+  
+    return (
+      <div className="relative w-full px-20 pt-10 pb-10 bg-white">
+        <Swiper
+          modules={[Navigation]}
+          navigation={{
+            nextEl: ".custom-next-card",
+            prevEl: ".custom-prev-card",
+          }}
+          spaceBetween={20}
+          slidesPerView={4}
+          loop={true}
+          className="w-full"
+          breakpoints={{
+            320: { slidesPerView: 1 },   // mobile
+            640: { slidesPerView: 2 },   // small tablet
+            980: { slidesPerView: 3 },  // tablet / small desktop
+            1280: { slidesPerView: 4 },  // large desktop
+          }}
+        >
+          {shoes.map((shoe, index) => (
+            <SwiperSlide key={index}>
+                <Shoe_Card 
+                    key={index} 
+                    {...shoe} 
+                    onClick={() => onShoeClick(shoe)}
+                />
+            </SwiperSlide>
+          ))}
+        </Swiper>
+        
+        {/* Custom buttons */}
+        <CustomChevronBtn/>
+      </div>
+    );
 }
 
 
