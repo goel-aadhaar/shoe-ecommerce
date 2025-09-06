@@ -1,29 +1,88 @@
-import React from 'react';
+
+import React, { useState, useContext } from 'react';
+import axios from 'axios';
+import { AuthContext } from './context/AuthContext'; 
+import { Link } from 'react-router';
+
+
 import { Shoe_Card } from './shoe_card';
+import shoeData from '../data/shoes.json';
+import {useParams} from 'react-router';
+import Navbar from './Navbar';
+import Footer from './footer';
+// import {chevron-left} from 'lucid-react';
 
-const parsePrice = (priceStr) => {
-    if (typeof priceStr !== 'string') return 0;
-    return Number(priceStr.replace(/[^0-9.-]+/g, ""));
-};
+// const parsePrice = (priceStr) => {
+//     if (typeof priceStr !== 'string') return 0;
+//     return Number(priceStr.replace(/[^0-9.-]+/g, ""));
+// };
 
-const ShoeDetail = ({ shoe, allShoes, onBack, onRelatedShoeClick }) => {
+const ShoeDetail = ({onBack, onRelatedShoeClick }) => {
+    const [selectedSize, setSelectedSize] = useState('');
+    // const { token } = useContext(AuthContext);
+    let token = true
+
+    const parcal = useParams();
+    let shoeArray = shoeData.filter(obj => obj.id == parcal.id)
+    const shoe = shoeArray[0]
     const images = Object.keys(shoe)
         .filter(key => key.startsWith('imgSrc') && shoe[key])
         .map(key => shoe[key]);
 
-    // ** NEW LOGIC: Find related shoes from the SAME BRAND **
-    const relatedShoes = allShoes
+    //  Find related shoes from the SAME BRAND 
+    const relatedShoes = shoeData
         .filter(s =>
             // 1. Match the brand (making it case-insensitive for accuracy)
             s.brand.toLowerCase() === shoe.brand.toLowerCase() &&
             // 2. Exclude the exact same shoe you're currently viewing
             (s.name !== shoe.name || s.color !== shoe.color)
         )
-        .slice(0, 4); // Show the first 4 matches
+        .slice(0, 4);
+
+    
+
+     const handleAddToCart = async () => {
+        if (!token) {
+            alert('Please log in to add items to your cart.');
+            return;
+        }
+        if (!selectedSize) {
+            alert('Please select a size.');
+            return;
+        }
+
+        try {
+            const config = {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'x-auth-token': token,
+                },
+            };
+
+            const body = {
+                productId: parcal.id,
+                selectedSize,
+                quantity: 1,
+            };
+
+            await axios.post('/api/cart', body, config);
+            alert('Item added to cart!');
+            // You might want to update a global cart state or context here
+        } catch (err) {
+            console.error(err.response.data);
+            alert('Error adding item to cart.');
+        }
+    };
 
     return (
+        <>
+        <Navbar/>
         <div className="bg-white text-black min-h-screen py-8 px-4 sm:px-6 lg:px-8">
             <div className="max-w-7xl mx-auto">
+                <Link
+                    key = {parcal.id}
+                    to = {'/'}
+                >
                 <button
                     onClick={onBack}
                     className="bg-gray-100 text-gray-800 font-semibold py-2 px-4 mt-10 rounded-lg hover:bg-gray-200 transition-colors duration-300 flex items-center mb-8 shadow-sm border border-gray-200"
@@ -33,6 +92,8 @@ const ShoeDetail = ({ shoe, allShoes, onBack, onRelatedShoeClick }) => {
                     </svg>
                     Back to All Shoes
                 </button>
+                </Link>
+                
                 
                 <div className="grid grid-cols-1 lg:grid-cols-5 gap-12">
                     <div className="lg:col-span-3">
@@ -57,15 +118,30 @@ const ShoeDetail = ({ shoe, allShoes, onBack, onRelatedShoeClick }) => {
                                 </div>
                                 <div className="grid grid-cols-4 gap-2 mt-4">
                                     {['7', '8', '9', '10', '11'].map(size => (
-                                        <button key={size} className="border border-gray-300 rounded py-3 text-center hover:border-black transition-colors duration-200">
+                                        <button
+                                            key={size}
+                                            // Add an onClick handler to update the selected size state
+                                            onClick={() => setSelectedSize(size)}
+                                            className={`border rounded py-3 text-center transition-colors duration-200 ${
+                                                // Check if the current size in the loop matches the selectedSize state
+                                                size === selectedSize
+                                                    ? 'bg-black text-white border-black' // Classes for the selected state
+                                                    : 'border-gray-300 hover:border-black' // Original classes for unselected state
+                                            }`}
+                                        >
                                             {size}
                                         </button>
                                     ))}
+
                                     <button className="border border-gray-200 bg-gray-50 rounded py-3 text-center text-gray-400 cursor-not-allowed" disabled>12</button>
                                 </div>
                             </div>
                             <div className="mt-8 grid grid-cols-1 gap-4">
-                                <button className="bg-black text-white font-bold py-4 rounded hover:bg-gray-800 transition-colors duration-300">ADD TO CART</button>
+                                <button 
+                                    onClick={handleAddToCart}
+                                    className="bg-black text-white font-bold py-4 rounded hover:bg-gray-800 transition-colors duration-300">
+                                            ADD TO CART
+                                    </button>
                             </div>
                         </div>
                     </div>
@@ -86,6 +162,8 @@ const ShoeDetail = ({ shoe, allShoes, onBack, onRelatedShoeClick }) => {
                 )}
             </div>
         </div>
+        <Footer/>
+        </>
     );
 };
 
