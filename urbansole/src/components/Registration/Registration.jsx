@@ -33,7 +33,7 @@ const Registration = () => {
     setMessage('');
 
     try {
-      const response = await axios.post('/api/register', formData); // Adjust the endpoint as needed
+      const response = await axios.post("api/v1/users/register", formData); // Adjust the endpoint as needed
       setMessage('Registration successful!');
       setFormData({
         fullName: '',
