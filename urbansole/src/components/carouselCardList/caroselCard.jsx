@@ -3,6 +3,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import { Shoe_Card } from "../shoe_card";
 import { ChevronRight, ChevronLeft } from "lucide-react";
+import {Link} from "react-router";
 
 import shoes from "../../data/shoes.json"
 import "swiper/css";
@@ -33,11 +34,14 @@ export default function CardCarousel({onShoeClick}) {
         >
           {shoes.map((shoe, index) => (
             <SwiperSlide key={index}>
-                <Shoe_Card 
-                    key={index} 
-                    {...shoe} 
-                    onClick={() => onShoeClick(shoe)}
-                />
+                <Link  key={shoe.id} 
+                        to = {'/shoe/' + shoe.id}
+                >
+                  <Shoe_Card 
+                      {...shoe} 
+                      onClick={() => onShoeClick(shoe)}
+                  />
+                </Link>
             </SwiperSlide>
           ))}
         </Swiper>

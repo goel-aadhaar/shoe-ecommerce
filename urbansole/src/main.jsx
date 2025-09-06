@@ -10,6 +10,7 @@ import AboutUs from './components/FooterNav/AboutUs.jsx';
 import ContactUs from './components/FooterNav/ContactUs.jsx';
 import BrandsLogoPage from './components/FooterNav/BrandsFooter.jsx';
 import Registration from './components/Registration/Registration.jsx';
+import ShoeDetail from './components/shoeDetail.jsx';
 
 const AppRouter = createBrowserRouter([
   {
@@ -42,6 +43,9 @@ const AppRouter = createBrowserRouter([
   {
     path:'/registration',
     element : <Registration/>
+  },{
+    path:'/shoe/:id',
+    element: <ShoeDetail/>
   }
 ]) 
 
