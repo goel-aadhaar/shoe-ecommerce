@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from 'react'; // Make sure to import useEffect
+import { AuthProvider } from './components/context/AuthProvider';
+
+
 import Navbar from './components/Navbar';
 import ImageSlider from './components/ImageSlider';
 import LoginModal from './components/LoginModal';
@@ -12,7 +15,7 @@ import TrendingSection from './components/trending-section/trending';
 import Home from './components/home-page/home-page';
 import BrandFullPage from './components/brandPage/BrandFullPage';
 
-
+import ProfilePage from './components/userProfilePage/profile';
 
 function App() {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -51,7 +54,7 @@ function App() {
     };
 
     return (
-        <>
+        <AuthProvider>
             <Navbar onProfileClick={toggleModal} />
             {selectedShoe ? (
                 <ShoeDetail
@@ -62,7 +65,9 @@ function App() {
                 />
             ) : (
                 <>
+                    {/* <ProfilePage/> */}
                     <ImageSlider />
+
                     <LoginModal isOpen={isModalOpen} onClose={toggleModal} />
                     <BrandCarousel />
                     <Home onShoeClick={handleShoeClick} />
@@ -70,7 +75,7 @@ function App() {
             )}
             
             <Footer />
-        </>
+        </AuthProvider>
     );
 }
 
