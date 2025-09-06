@@ -1,0 +1,16 @@
+import { Payment } from "../models/index.js";
+import asyncHandler from "../utils/asyncHandler.js";
+
+export const createPayment = asyncHandler(async (req, res) => {
+    const { orderId, amount, method } = req.body;
+
+    const payment = await Payment.create({
+        orderId,
+        amount,
+        paymentMethod: method || "stripe",
+        paymentStatus: "success",
+        transactionId: "txn_" + Date.now(),
+    });
+
+    res.status(201).json({ success: true, message: "Payment processed", data: payment });
+});
