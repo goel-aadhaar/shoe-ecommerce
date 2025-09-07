@@ -1,5 +1,5 @@
-import { Payment } from "../models/index.js";
-import asyncHandler from "../utils/asyncHandler.js";
+import { Payment } from "../models/model-export.js";
+import { asyncHandler } from "../utils/asyncHandler.js";
 
 export const createPayment = asyncHandler(async (req, res) => {
     const { orderId, amount, method } = req.body;

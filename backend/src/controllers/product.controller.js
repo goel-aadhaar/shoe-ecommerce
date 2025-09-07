@@ -1,5 +1,5 @@
-import { Product, ProductImage, Review } from "../models/index.js";
-import asyncHandler from "../utils/asyncHandler.js";
+import { Product, ProductImage, Review } from "../models/model-export.js";
+import { asyncHandler } from "../utils/asyncHandler.js";
 
 // CRUD
 export const createProduct = asyncHandler(async (req, res) => {

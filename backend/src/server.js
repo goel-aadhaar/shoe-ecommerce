@@ -1,10 +1,11 @@
 import express from "express";
 import dotenv from "dotenv";
-import connectDB from "./config/db.js";
-import routes from "./routes/index.js";
+import connectDB from "./db/connectDB.js";
+import routes from "./routes/route-combiner.js";
 import { logger } from "./utils/logger.js";
 import { notFoundMiddleware } from "./middlewares/notFound.middleware.js";
 import { errorMiddleware } from "./middlewares/error.middleware.js";
+import cors from "cors";
 
 dotenv.config();
 
@@ -12,6 +13,11 @@ dotenv.config();
 connectDB();
 
 const app = express();
+
+app.use(cors({
+  origin: 'http://localhost:5173',  // your frontend URL (Vite dev server)
+  credentials: true,                 // if you use cookies or auth
+}));
 
 // Middleware
 app.use(express.json()); // parse JSON body

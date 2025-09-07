@@ -1,5 +1,5 @@
-import { Cart, CartItem } from "../models/index.js";
-import asyncHandler from "../utils/asyncHandler.js";
+import { Cart, CartItem } from "../models/model-export.js";
+import { asyncHandler } from "../utils/asyncHandler.js";
 
 export const getCart = asyncHandler(async (req, res) => {
     let cart = await Cart.findOne({ userId: req.user.id });

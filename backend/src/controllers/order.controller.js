@@ -1,5 +1,5 @@
-import { Order, OrderItem, OrderStatusHistory } from "../models/index.js";
-import asyncHandler from "../utils/asyncHandler.js";
+import { Order, OrderItem, OrderStatusHistory } from "../models/model-export.js";
+import { asyncHandler } from "../utils/asyncHandler.js";
 
 export const createOrder = asyncHandler(async (req, res) => {
     const { items, totalAmount } = req.body;
