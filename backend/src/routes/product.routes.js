@@ -3,7 +3,7 @@ import {
     createProduct, getProducts, getProductById, updateProduct, deleteProduct, 
     addProductImage, addReview, getProductReviews 
 } from "../controllers/product.controller.js";
-import { authMiddleware, adminMiddleware } from "../middlewares/authMiddleware.js";
+import { authMiddleware, adminMiddleware } from "../middlewares/auth.middleware.js";
 
 const router = Router();
 

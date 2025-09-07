@@ -1,5 +1,5 @@
-import { User, Profile, Favourite } from "../models/index.js";
-import asyncHandler from "../utils/asyncHandler.js";
+import { User, Profile, Favourite } from "../models/model-export.js";
+import { asyncHandler } from "../utils/asyncHandler.js";
 
 // Fetch profile
 export const getProfile = asyncHandler(async (req, res) => {
