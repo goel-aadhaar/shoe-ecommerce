@@ -15,7 +15,7 @@ connectDB();
 const app = express();
 
 app.use(cors({
-  origin: 'http://localhost:5173',  // your frontend URL (Vite dev server)
+  origin: 'https://shoe-ecommerce-mu.vercel.app/',  // your frontend URL (Vite dev server)
   credentials: true,                 // if you use cookies or auth
 }));
 
