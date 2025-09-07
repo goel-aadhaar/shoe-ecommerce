@@ -8,9 +8,8 @@ const Registration = () => {
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
-    phoneNumber: '',
     password: '',
-    homeAddress: '',
+    confirmPassword: '',
   });
 
   const [loading, setLoading] = useState(false);
@@ -28,19 +27,23 @@ const Registration = () => {
 
   // Handle form submission
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
+    e.preventDefault(); 
     setMessage('');
 
+    if(formData.password != formData.confirmPassword){
+      setMessage("Password do not match");
+      return;
+    }
+    setLoading(true);
+
     try {
-      const response = await axios.post("api/v1/users/register", formData); // Adjust the endpoint as needed
+      const response = await axios.post('https://api-shoe-ecommerce.onrender.com/api/v1/auth/register', formData);
       setMessage('Registration successful!');
       setFormData({
         fullName: '',
         email: '',
-        phoneNumber: '',
         password: '',
-        homeAddress: '',
+        confirmPassword: '',
       });
     } catch (error) {
       setMessage(
@@ -84,15 +87,6 @@ const Registration = () => {
             className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-black"
         />
         <input
-            type="tel"
-            name="phoneNumber"
-            placeholder="📱 Phone Number"
-            value={formData.phoneNumber}
-            onChange={handleChange}
-            required
-            className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-black"
-        />
-        <input
             type="password"
             name="password"
             placeholder="🔒 Password"
@@ -102,14 +96,15 @@ const Registration = () => {
             className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-black"
         />
         <input
-            type="text"
-            name="homeAddress"
-            placeholder="🏠 Home Address"
-            value={formData.homeAddress}
+            type="password"
+            name="confirmPassword"
+            placeholder="🔒re-enter your password"
+            value={formData.confirmPassword}
             onChange={handleChange}
             required
             className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-black"
         />
+       
         <button
             type="submit"
             disabled={loading}
