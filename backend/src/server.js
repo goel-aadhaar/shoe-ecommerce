@@ -16,6 +16,7 @@ const app = express();
 
 app.use(cors({
   origin: 'https://shoe-ecommerce-mu.vercel.app',  // your frontend URL (Vite dev server)
+  methods: 'GET,POST,PUT,DELETE,PATCH',
   credentials: true,                 // if you use cookies or auth
 }));
 
