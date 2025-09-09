@@ -35,7 +35,7 @@ const ProfilePage = () => {
     // This function fetches the user's profile data from the backend
     const fetchProfileData = async () => {
       try {
-        const response = await axios.get('https://api-shoe-ecommerce.onrender.com/api/v1/user/profile', {
+        const response = await axios.get('https://api-shoe-ecommerce.onrender.com/api/v1/users/profile', {
           withCredentials: true // Crucial to send the cookies
         });
         

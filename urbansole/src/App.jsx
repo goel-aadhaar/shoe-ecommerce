@@ -31,7 +31,7 @@ function App() {
         const checkLoginStatus = async () => {
             try {
                 setLoading(true);
-                await axios.get('https://api-shoe-ecommerce.onrender.com/api/v1/user/profile', {
+                await axios.get('https://api-shoe-ecommerce.onrender.com/api/v1/users/profile', {
                     withCredentials: true
                 });
                
