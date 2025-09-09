@@ -1,11 +1,15 @@
 import React, { useState } from "react";
 
 import CardCarousel from "../carouselCardList/caroselCard";
+import data from "../../data/shoes.json"
 
-const NewArrivalSection = ({onShoeClick}) => {
+const NewArrivalSection = ({ onShoeClick }) => {
+  const [active, setActive] = useState("shoes");
 
-  console.log("NewArrival.jsx called", typeof onShoeClick);
+  const filteredData = data.filter((item) => item.category === active);
+  console.log( "Filtered data : ", filteredData);
   
+
   return (
     <div className="bg-white text-black">
       {/* Heading */}
@@ -14,7 +18,7 @@ const NewArrivalSection = ({onShoeClick}) => {
       {/* Tabs + View All */}
       <div className="flex items-center justify-between">
         <div></div>
-        <TypeTab />
+        <TypeTab active={active} setActive={setActive} />
         <a
           href="#"
           className="text-sm mr-10 font-semibold underline underline-offset-4"
@@ -24,17 +28,16 @@ const NewArrivalSection = ({onShoeClick}) => {
       </div>
 
       {/* Carousel */}
-      <CardCarousel 
-          onShoeClick={onShoeClick}
+      <CardCarousel
+        shoes={filteredData} // Pass the filtered data to the carousel
+        onShoeClick={onShoeClick}
       />
     </div>
   );
 };
 
 
-function TypeTab() {
-  const [active, setActive] = useState("shoes");
-
+function TypeTab({ active, setActive }) {
   return (
     <div className="flex flex-col items-center">
       {/* Tabs */}
@@ -70,4 +73,4 @@ function TypeTab() {
   );
 }
 
-export default NewArrivalSection
+export default NewArrivalSection;
