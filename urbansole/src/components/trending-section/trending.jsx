@@ -1,10 +1,16 @@
 import React, { useState } from "react";
-
 import CardCarousel from "../carouselCardList/caroselCard";
-const TrendingSection = ({onShoeClick}) => {
+import data from "../../data/shoes.json";
 
-  console.log("trending.jsx called");
+const TrendingSection = ({ onShoeClick }) => {
+  const [active, setActive] = useState("male"); 
+  console.log("Trending carousel called.... ");
   
+  
+  const filteredData = data.filter((item) => item.for === active);
+  console.log(filteredData);
+  
+
   return (
     <div className="bg-white text-black py-10">
       {/* Heading */}
@@ -13,7 +19,7 @@ const TrendingSection = ({onShoeClick}) => {
       {/* Tabs + View All */}
       <div className="flex items-center justify-between">
         <div></div>
-        <GenderTabs />
+        <GenderTabs active={active} setActive={setActive} />
         <a
           href="#"
           className="text-sm mr-10 font-semibold underline underline-offset-4"
@@ -23,30 +29,28 @@ const TrendingSection = ({onShoeClick}) => {
       </div>
 
       {/* Carousel */}
-      <CardCarousel 
+      <CardCarousel
+        shoes={filteredData}
         onShoeClick={onShoeClick}
       />
     </div>
   );
 };
 
-
-function GenderTabs() {
-  const [active, setActive] = useState("men");
-
+function GenderTabs({ active, setActive }) {
   return (
     <div className="flex flex-col items-center">
       {/* Tabs */}
       <div className="flex space-x-10 text-2xl font-bold">
         <button
-          onClick={() => setActive("men")}
-          className={`${active === "men" ? "text-black" : "text-gray-500"}`}
+          onClick={() => setActive("male")}
+          className={`${active === "male" ? "text-black" : "text-gray-500"}`}
         >
           MEN
         </button>
         <button
-          onClick={() => setActive("women")}
-          className={`${active === "women" ? "text-black" : "text-gray-500"}`}
+          onClick={() => setActive("female")}
+          className={`${active === "female" ? "text-black" : "text-gray-500"}`}
         >
           WOMEN
         </button>
@@ -56,12 +60,12 @@ function GenderTabs() {
       <div className="flex mt-2 w-40">
         <div
           className={`h-1 w-1/2 transition-all duration-500 ${
-            active === "men" ? "bg-red-600" : "bg-gray-300"
+            active === "male" ? "bg-red-600" : "bg-gray-300"
           }`}
         ></div>
         <div
           className={`h-1 w-1/2 transition-all duration-500 ${
-            active === "women" ? "bg-red-600" : "bg-gray-300"
+            active === "female" ? "bg-red-600" : "bg-gray-300"
           }`}
         ></div>
       </div>
@@ -69,4 +73,4 @@ function GenderTabs() {
   );
 }
 
-export default TrendingSection
+export default TrendingSection;
