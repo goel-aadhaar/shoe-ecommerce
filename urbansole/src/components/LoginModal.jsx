@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router';
 import axios from 'axios';
 
 const CloseIcon = () => (
@@ -114,12 +115,17 @@ const LoginModal = ({ isOpen, onClose }) => {
               >
                 {loading ? 'Logging In...' : 'Submit'}
               </button>
-              <button
-                type="button"
-                className="w-full bg-black text-white font-bold py-3 px-4 rounded-md hover:bg-gray-800 transition-colors"
+              <Link
+                key = {'register'}
+                to = {'/register'}
               >
-                New User? Register Here
-              </button>
+                <button
+                    type="button"
+                    className="w-full bg-black text-white font-bold py-3 px-4 rounded-md hover:bg-gray-800 transition-colors"
+                >
+                    New User? Register Here
+                </button>
+              </Link>
             </div>
           </form>
           <div className="text-center mt-4 text-xs text-gray-500">
