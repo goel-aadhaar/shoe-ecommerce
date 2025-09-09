@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 
 const CloseIcon = () => (
   <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -32,24 +33,12 @@ const LoginModal = ({ isOpen, onClose }) => {
     setLoading(true);
 
     try {
-      const response = await fetch('https://api-shoe-ecommerce.onrender.com/api/v1/auth/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
+      const response = await axios.post('https://api-shoe-ecommerce.onrender.com/api/v1/auth/login', formData);
 
-      const data = await response.json();
-
-      if (response.ok) {
-        setMessage('Login successful!');
-        // You might want to store the token here, e.g., localStorage.setItem('token', data.token);
-      } else {
-        setMessage(data.message || 'Something went wrong. Please try again.');
-      }
+      setMessage('Login successful!');
+      // You might want to store the token here, e.g., localStorage.setItem('token', response.data.token);
     } catch (error) {
-      setMessage('Something went wrong. Please check your network connection.');
+      setMessage(error.response?.data?.message || 'Something went wrong. Please try again.');
     } finally {
       setLoading(false);
     }
