@@ -38,6 +38,7 @@ function PriceRangeSlider({ min, max, value, onChange }) {
   const displayValue = value || max;
 
   return (
+  
     <div className="w-56">
         <label htmlFor="price" className="block text-sm font-medium text-gray-700">
             Price Range: ₹{min} - ₹{displayValue}
@@ -60,9 +61,9 @@ export default function FilterBar({ selectedFilters, onFilterChange, onReset, pr
 
   const filterOptions = {
     "Sort by": ["Popularity", "Newest", "Price: Low to High", "Price: High to Low"],
-    Brand: ["Nike", "Adidas", "Puma", "New Balance", "Reebok", "Crocs"],
+    Brand: ["Nike", "Adidas", "Puma", "New Balance", "Crocs"],
     Color: ["Black", "White", "Blue", "Red", "Green", "Grey"],
-    Gender: ["Men", "Women", "Kids"],
+    Gender: ["Men", "Women"],
   };
 
   const handleToggle = (label) => {
@@ -108,5 +109,6 @@ export default function FilterBar({ selectedFilters, onFilterChange, onReset, pr
         Reset
       </button>
     </div>
+   
   );
 }
