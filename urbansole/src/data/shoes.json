@@ -4,7 +4,7 @@
         "name": "PALERMO CLUB VEGAS LEATHER",
         "color": "SILVER-GLACIAL GRAY-ORANGE GLO",
         "price": "₹9,999",
-        "category" : "shoes",
+        "category": "shoes",
         "imgSrc": "https://www.superkicks.in/cdn/shop/files/4_53.png?v=1755174660&width=1946",
         "imgSrc2": "https://www.superkicks.in/cdn/shop/files/3_52.png?v=1755174660&width=1946",
         "imgSrc3": "https://www.superkicks.in/cdn/shop/files/5_43.png?v=1755174660&width=1946",
@@ -15,14 +15,16 @@
             "rating": 4.4,
             "rated_by": 4860
         },
-        "id": 1693
+        "id": 1693,
+        "newArrival": true,
+        "trending": false
     },
     {
         "brand": "Puma",
         "name": "MOSTRO PERFORATED",
         "color": "BLACK/WHITE",
         "price": "₹9,999",
-        "category" : "shoes",
+        "category": "shoes",
         "imgSrc": "https://www.superkicks.in/cdn/shop/files/1_55.png?v=1755174578&width=1946",
         "imgSrc2": "https://www.superkicks.in/cdn/shop/files/5_44.png?v=1755174676&width=1946",
         "imgSrc3": "https://www.superkicks.in/cdn/shop/files/6_31.png?v=1755174676&width=1946",
@@ -33,14 +35,16 @@
             "rating": 4.1,
             "rated_by": 1260
         },
-        "id": 8107
+        "id": 8107,
+        "newArrival": false,
+        "trending": true
     },
     {
         "brand": "New Balance",
         "name": "471",
         "color": "BROWN",
         "price": "₹10,999",
-        "category" : "shoes",
+        "category": "shoes",
         "imgSrc": "https://www.superkicks.in/cdn/shop/files/1_f838c5ca-f873-4807-8795-2d6fdae68bb5.png?v=1755076391&width=1946",
         "imgSrc2": "https://www.superkicks.in/cdn/shop/files/2_01c462d5-864f-40d5-ba8c-0f35529ca15a.png?v=1755076391&width=1946",
         "imgSrc3": "https://www.superkicks.in/cdn/shop/files/3_4a62983e-d83e-40f1-aaeb-8af7cd072c4b.png?v=1755076391&width=1946",
@@ -50,14 +54,16 @@
             "rating": 3.7,
             "rated_by": 360
         },
-        "id": 9974
+        "id": 9974,
+        "newArrival": true,
+        "trending": true
     },
     {
         "brand": "New Balance",
         "name": "9060",
         "color": "BLACK/BLACK",
         "price": "₹17,999",
-        "category" : "shoes",
+        "category": "shoes",
         "imgSrc": "https://www.superkicks.in/cdn/shop/files/5_d7d9ad3a-4096-4104-86cc-e327fba8cc3a.png?v=1755076375&width=1946",
         "imgSrc2": "https://www.superkicks.in/cdn/shop/files/4_ef0ab822-6db5-44b4-8e0a-fce9e0e5c426.png?v=1755076375&width=1946",
         "imgSrc3": "https://www.superkicks.in/cdn/shop/files/3_8b02e36a-b111-425e-bd47-069ca432cb10.png?v=1755076375&width=1946",
@@ -68,14 +74,16 @@
             "rating": 4.2,
             "rated_by": 1621
         },
-        "id": 5543
+        "id": 5543,
+        "newArrival": false,
+        "trending": false
     },
     {
         "brand": "New Balance",
         "name": "9060",
         "color": "GREEN/CREAM",
         "price": "₹17,999",
-        "category" : "shoes",
+        "category": "shoes",
         "imgSrc": "https://www.superkicks.in/cdn/shop/files/4_f55af9fb-8756-4bc3-9cef-76a03818d1ed.png?v=1755076359&width=1946",
         "imgSrc2": "https://www.superkicks.in/cdn/shop/files/2_a52f0683-de91-4d93-87a3-289990944b7d.png?v=1755076359&width=1946",
         "imgSrc3": "https://www.superkicks.in/cdn/shop/files/3_ac3d6530-fc5d-4386-92af-1de935f18ad5.png?v=1755076359&width=1946",
@@ -86,14 +94,16 @@
             "rating": 3.9,
             "rated_by": 3860
         },
-        "id": 2301
+        "id": 2301,
+        "newArrival": true,
+        "trending": true
     },
     {
         "brand": "Converse",
         "name": "x GOLF WANG ONE STAR CC SLIP PRO",
         "color": "BLACK",
         "price": "₹6,999",
-        "category" : "shoes",
+        "category": "shoes",
         "imgSrc": "https://www.superkicks.in/cdn/shop/files/1_53_f197516b-6c78-4e84-8a23-8c4ad1ef2bce.png?v=1755068442&width=1946",
         "imgSrc2": "https://www.superkicks.in/cdn/shop/files/8_4.png?v=1755068442&width=1946",
         "imgSrc3": "https://www.superkicks.in/cdn/shop/files/3_51.png?v=1755068442&width=1946",
@@ -105,14 +115,16 @@
             "rating": 3.8,
             "rated_by": 860
         },
-        "id": 7882
+        "id": 7882,
+        "newArrival": false,
+        "trending": true
     },
     {
         "brand": "Nike",
         "name": "STRUCTURE 26",
         "color": "PARTICLE PINK/MTLC ROSE GOLD-TAUPE GREY",
         "price": "₹11,895",
-        "category" : "shoes",
+        "category": "shoes",
         "imgSrc": "https://www.superkicks.in/cdn/shop/files/29-july_6d72ecdf-eff7-41e1-aa54-aceec3a36316.png?v=1754999014&width=1946",
         "imgSrc2": "https://www.superkicks.in/cdn/shop/files/3_48_752377da-e61e-407e-ae2d-c903a976c80c.png?v=1754999014&width=1946",
         "imgSrc3": "https://www.superkicks.in/cdn/shop/files/2_50_6127d91a-26dd-4936-9310-4aedd7c301f7.png?v=1754999014&width=1946",
@@ -125,14 +137,16 @@
             "rating": 4.7,
             "rated_by": 360
         },
-        "id": 2684
+        "id": 2684,
+        "newArrival": true,
+        "trending": false
     },
     {
         "brand": "Converse",
         "name": "OMNI TRAINER",
         "color": "BLACK/WHITE",
         "price": "₹6,999",
-        "category" : "shoes",
+        "category": "shoes",
         "imgSrc": "https://www.superkicks.in/cdn/shop/files/1_49_255f53f3-db55-4f11-84cd-d36947eb70bb.png?v=1754996335&width=1946",
         "imgSrc2": "https://www.superkicks.in/cdn/shop/files/2_49.png?v=1754996335&width=1946",
         "imgSrc3": "https://www.superkicks.in/cdn/shop/files/5_38.png?v=1754996335&width=1946",
@@ -144,14 +158,16 @@
             "rating": 4.8,
             "rated_by": 540
         },
-        "id": 5519
+        "id": 5519,
+        "newArrival": false,
+        "trending": false
     },
     {
         "brand": "Converse",
         "name": "OMNI TRAINER",
         "color": "YELLOW",
         "price": "₹6,999",
-        "category" : "shoes",
+        "category": "shoes",
         "imgSrc": "https://www.superkicks.in/cdn/shop/files/1_48_e66536fd-5e05-471d-8f8e-d7e602e58a0e.png?v=1754995562&width=1946",
         "imgSrc2": "https://www.superkicks.in/cdn/shop/files/3_46.png?v=1754995562&width=1946",
         "imgSrc3": "https://www.superkicks.in/cdn/shop/files/5_37.png?v=1754995562&width=1946",
@@ -164,14 +180,16 @@
             "rating": 4.3,
             "rated_by": 3197
         },
-        "id": 4833
+        "id": 4833,
+        "newArrival": true,
+        "trending": true
     },
     {
         "brand": "adidas originals",
         "name": "SAMBA OG \"COW PRINT\"",
         "color": "DARK BROWN/OFF WHIITE/GUM",
         "price": "₹13,999",
-        "category" : "shoes",
+        "category": "shoes",
         "imgSrc": "https://www.superkicks.in/cdn/shop/files/1_42_c9f99ed7-2d53-47b1-b22c-c7aa2415444a.png?v=1754991116&width=1946",
         "imgSrc2": "https://www.superkicks.in/cdn/shop/files/2_43.png?v=1754991116&width=1946",
         "imgSrc3": "https://www.superkicks.in/cdn/shop/files/4_42.png?v=1754991116&width=1946",
@@ -183,14 +201,16 @@
             "rating": 4.1,
             "rated_by": 2860
         },
-        "id": 3619
+        "id": 3619,
+        "newArrival": false,
+        "trending": true
     },
     {
         "brand": "adidas originals",
         "name": "JABBAR HI",
         "color": "CLOUD WHITE/CORE BLACK",
         "price": "₹10,999",
-        "category" : "shoes",
+        "category": "shoes",
         "imgSrc": "https://www.superkicks.in/cdn/shop/files/1_43_6026be2e-8fda-45c3-b993-4e68955f9de6.png?v=1754991140&width=1946",
         "imgSrc2": "https://www.superkicks.in/cdn/shop/files/2_44.png?v=1754991140&width=1946",
         "imgSrc3": "https://www.superkicks.in/cdn/shop/files/4_43.png?v=1754991140&width=1946",
@@ -203,14 +223,16 @@
             "rating": 3.5,
             "rated_by": 663
         },
-        "id": 4768
+        "id": 4768,
+        "newArrival": true,
+        "trending": false
     },
     {
         "brand": "adidas originals",
         "name": "GAZELLE INDOOR",
         "color": "BLUE BIRD/CLOUD WHITE/GUM",
         "price": "₹11,999",
-        "category" : "shoes",
+        "category": "shoes",
         "imgSrc": "https://www.superkicks.in/cdn/shop/files/1_47_94cd7f99-0551-4d9a-8b9a-7cb65a4e0095.png?v=1754991655&width=1946",
         "imgSrc2": "https://www.superkicks.in/cdn/shop/files/4_44.png?v=1754991655&width=1946",
         "imgSrc3": "https://www.superkicks.in/cdn/shop/files/7_10.png?v=1754991655&width=1946",
@@ -223,14 +245,16 @@
             "rating": 4.2,
             "rated_by": 2865
         },
-        "id": 9295
+        "id": 9295,
+        "newArrival": true,
+        "trending": true
     },
     {
         "brand": "Nike",
         "name": "FIELD GENERAL",
         "color": "PHANTOM/MTLC PEWTER-BLACK-FLAT PEWTER",
         "price": "₹8,695",
-        "category" : "shoes",
+        "category": "shoes",
         "imgSrc": "https://www.superkicks.in/cdn/shop/files/4-2025-08-12T145930.003.jpg?v=1754991209&width=1946",
         "imgSrc2": "https://www.superkicks.in/cdn/shop/files/3-2025-08-12T145934.742.jpg?v=1754991209&width=1946",
         "imgSrc3": "https://www.superkicks.in/cdn/shop/files/2-2025-08-12T145938.504.jpg?v=1754991209&width=1946",
@@ -242,14 +266,16 @@
             "rating": 4.6,
             "rated_by": 3860
         },
-        "id": 6599
+        "id": 6599,
+        "newArrival": false,
+        "trending": false
     },
     {
         "brand": "Nike",
         "name": "SB VERTEBRAE",
         "color": "WHEAT/BLACK-LT BRITISH TAN-OBSIDIAN",
         "price": "₹7,495",
-        "category" : "shoes",
+        "category": "shoes",
         "imgSrc": "https://www.superkicks.in/cdn/shop/files/3_45.png?v=1754991230&width=1946",
         "imgSrc2": "https://www.superkicks.in/cdn/shop/files/4_46.png?v=1754991230&width=1946",
         "imgSrc3": "https://www.superkicks.in/cdn/shop/files/5_36.png?v=1754991230&width=1946",
@@ -261,14 +287,16 @@
             "rating": 3.9,
             "rated_by": 8268
         },
-        "id": 7862
+        "id": 7862,
+        "newArrival": true,
+        "trending": true
     },
     {
         "brand": "Converse",
         "name": "x GOLF WANG ONE STAR CC SLIP PRO",
         "color": "GREEN",
         "price": "₹6,999",
-        "category" : "shoes",
+        "category": "shoes",
         "imgSrc": "https://www.superkicks.in/cdn/shop/files/1_51_5fe7862f-afd5-4435-a79a-31e19e08bd5e.png?v=1755004291&width=1946",
         "imgSrc2": "https://www.superkicks.in/cdn/shop/files/2_51.png?v=1755004291&width=1946",
         "imgSrc3": "https://www.superkicks.in/cdn/shop/files/3_49.png?v=1755004291&width=1946",
@@ -279,14 +307,16 @@
             "rating": 4.2,
             "rated_by": 5860
         },
-        "id": 9713
+        "id": 9713,
+        "newArrival": false,
+        "trending": true
     },
     {
         "brand": "adidas Originals",
         "name": "SAMBA OG",
         "color": "GOLDEN BEIGE/DARK BROWN/GUM",
         "price": "₹10,999",
-        "category" : "shoes",
+        "category": "shoes",
         "imgSrc": "https://www.superkicks.in/cdn/shop/files/1_3a28f7bf-2ec7-431c-a04d-52985c36e0fc.png?v=1754571636&width=1946",
         "imgSrc2": "https://www.superkicks.in/cdn/shop/files/2_75cc72ab-4d58-4b29-8486-54fcea1a6a53.png?v=1754571636&width=1946",
         "imgSrc3": "https://www.superkicks.in/cdn/shop/files/4_18373d71-834e-4cb2-9532-f433d58914bc.png?v=1754571636&width=1946",
@@ -298,14 +328,16 @@
             "rating": 3.8,
             "rated_by": 5864
         },
-        "id": 5606
+        "id": 5606,
+        "newArrival": true,
+        "trending": false
     },
     {
         "brand": "Jordan",
         "name": "AIR JORDAN 1 MID",
         "color": "WHITE/CANNON",
         "price": "₹11,495",
-        "category" : "shoes",
+        "category": "shoes",
         "imgSrc": "https://www.superkicks.in/cdn/shop/files/5-2025-08-05T172849.065.jpg?v=1754395225&width=1946",
         "imgSrc2": "https://www.superkicks.in/cdn/shop/files/7_64_2fc7d7b2-9ccb-4ac0-9b8c-e83a70881451.jpg?v=1754395225&width=1946",
         "imgSrc3": "https://www.superkicks.in/cdn/shop/files/6_83_9467784c-ee09-40bc-a7e2-549315cb898d.jpg?v=1754395225&width=1946",
@@ -317,14 +349,16 @@
             "rating": 4.2,
             "rated_by": 4860
         },
-        "id": 9979
+        "id": 9979,
+        "newArrival": false,
+        "trending": true
     },
     {
         "brand": "Nike",
         "name": "AIR MAX 90",
         "color": "SAIL/BURGUNDY CRUSH-BLACK",
         "price": "₹12,295",
-        "category" : "shoes",
+        "category": "shoes",
         "imgSrc": "https://www.superkicks.in/cdn/shop/files/4-2025-08-05T172634.950.jpg?v=1754395178&width=1946",
         "imgSrc2": "https://www.superkicks.in/cdn/shop/files/1-2025-08-05T172649.218.jpg?v=1754395178&width=1946",
         "imgSrc3": "https://www.superkicks.in/cdn/shop/files/6_82_35245e21-c2a0-4418-aa1f-d8a62ffb57c7.jpg?v=1754395178&width=1946",
@@ -336,14 +370,16 @@
             "rating": 4.2,
             "rated_by": 1860
         },
-        "id": 8452
+        "id": 8452,
+        "newArrival": true,
+        "trending": false
     },
     {
         "brand": "Jordan",
         "name": "AIR JORDAN 1 LOW SE",
         "color": "OIL GREY/WHITE-CAVE STONE-ARCTIC PUNCH",
         "price": "₹11,495",
-        "category" : "shoes",
+        "category": "shoes",
         "imgSrc": "https://www.superkicks.in/cdn/shop/files/3-2025-08-05T172230.178.jpg?v=1754395195&width=1946",
         "imgSrc2": "https://www.superkicks.in/cdn/shop/files/1-2025-08-05T172233.188.jpg?v=1754395195&width=1946",
         "imgSrc3": "https://www.superkicks.in/cdn/shop/files/2-2025-08-05T172236.733.jpg?v=1754395195&width=1946",
@@ -355,14 +391,16 @@
             "rating": 4.4,
             "rated_by": 2263
         },
-        "id": 5510
+        "id": 5510,
+        "newArrival": false,
+        "trending": true
     },
     {
         "brand": "Nike",
         "name": "AIR MAX MUSE",
         "color": "BLACK/METALLIC SILVER",
         "price": "₹13,995",
-        "category" : "shoes",
+        "category": "shoes",
         "imgSrc": "https://www.superkicks.in/cdn/shop/files/3-2025-08-05T170844.176.jpg?v=1754394119&width=1946",
         "imgSrc2": "https://www.superkicks.in/cdn/shop/files/4_99.jpg?v=1754394119&width=1946",
         "imgSrc3": "https://www.superkicks.in/cdn/shop/files/5_95.jpg?v=1754394119&width=1946",
@@ -374,14 +412,16 @@
             "rating": 4.3,
             "rated_by": 2163
         },
-        "id": 9294
+        "id": 9294,
+        "newArrival": true,
+        "trending": false
     },
     {
         "brand": "Jordan",
         "name": "AIR JORDAN 1 LOW",
         "color": "SAIL/DEEP ROYAL BLUE-STADIUM GREEN",
         "price": "₹8,995",
-        "category" : "shoes",
+        "category": "shoes",
         "imgSrc": "https://www.superkicks.in/cdn/shop/files/4_100_d28258a8-a717-4f77-9afb-cfa3941346d2.jpg?v=1754394667&width=1946",
         "imgSrc2": "https://www.superkicks.in/cdn/shop/files/3-2025-08-05T170642.944.jpg?v=1754394667&width=1946",
         "imgSrc3": "https://www.superkicks.in/cdn/shop/files/2-2025-08-05T170646.830.jpg?v=1754394667&width=1946",
@@ -393,14 +433,16 @@
             "rating": 4.1,
             "rated_by": 1163
         },
-        "id": 3543
+        "id": 3543,
+        "newArrival": false,
+        "trending": true
     },
     {
         "brand": "Jordan",
         "name": "FLIGHT COURT",
         "color": "OIL GREY/CAVE STONE-ARCTIC PUNCH-MUSLIN",
         "price": "₹8,695",
-        "category" : "shoes",
+        "category": "shoes",
         "imgSrc": "https://www.superkicks.in/cdn/shop/files/4_26.png?v=1754388486&width=1946",
         "imgSrc2": "https://www.superkicks.in/cdn/shop/files/3_24.png?v=1754388486&width=1946",
         "imgSrc3": "https://www.superkicks.in/cdn/shop/files/2_26_a79e785e-ff39-4bdb-8287-bb252d9e38a5.png?v=1754388486&width=1946",
@@ -412,14 +454,16 @@
             "rating": 3.6,
             "rated_by": 1163
         },
-        "id": 1422
+        "id": 1422,
+        "newArrival": true,
+        "trending": false
     },
     {
         "brand": "Nike",
         "name": "AIR MAX LTD 3",
         "color": "BLACK/BLACK-BLACK",
         "price": "₹10,295",
-        "category" : "shoes",
+        "category": "shoes",
         "imgSrc": "https://www.superkicks.in/cdn/shop/files/4_28.png?v=1754388522&width=1946",
         "imgSrc2": "https://www.superkicks.in/cdn/shop/files/3_26.png?v=1754388522&width=1946",
         "imgSrc3": "https://www.superkicks.in/cdn/shop/files/2_28_be0b760c-6631-4fbd-a94c-6fbbb2d3a5f1.png?v=1754388522&width=1946",
@@ -432,14 +476,16 @@
             "rating": 4.3,
             "rated_by": 2199
         },
-        "id": 2661
+        "id": 2661,
+        "newArrival": true,
+        "trending": true
     },
     {
         "brand": "New Balance",
         "name": "1000",
         "color": "BLACK/BLACK",
         "price": "₹16,999",
-        "category" : "shoes",
+        "category": "shoes",
         "imgSrc": "https://www.superkicks.in/cdn/shop/files/1_25_8eaf3ad7-057c-46ad-9b26-ac945597b52f.png?v=1754376708&width=1946",
         "imgSrc2": "https://www.superkicks.in/cdn/shop/files/2_25.png?v=1754376708&width=1946",
         "imgSrc3": "https://www.superkicks.in/cdn/shop/files/3_23.png?v=1754376708&width=1946",
@@ -451,14 +497,16 @@
             "rating": 4.1,
             "rated_by": 2263
         },
-        "id": 8513
+        "id": 8513,
+        "newArrival": false,
+        "trending": false
     },
     {
         "brand": "Nike",
         "name": "STRUCTURE 26",
         "color": "BLACK/WHITE-COOL GREY-METALLIC SILVER",
         "price": "₹11,895",
-        "category" : "shoes",
+        "category": "shoes",
         "imgSrc": "https://www.superkicks.in/cdn/shop/files/4_56.png?v=1755179003&width=1946",
         "imgSrc2": "https://www.superkicks.in/cdn/shop/files/3_55.png?v=1755179003&width=1946",
         "imgSrc3": "https://www.superkicks.in/cdn/shop/files/2_57.png?v=1755179003&width=1946",
@@ -471,14 +519,16 @@
             "rating": 4.6,
             "rated_by": 1163
         },
-        "id": 6393
+        "id": 6393,
+        "newArrival": true,
+        "trending": true
     },
     {
         "brand": "adidas Originals",
         "name": "SUPERSTAR II",
         "color": "CORE BLACK/MATTE SILVER/CLOUD WHITE",
         "price": "₹11,999",
-        "category" : "shoes",
+        "category": "shoes",
         "imgSrc": "https://www.superkicks.in/cdn/shop/files/1_21_e952bf6b-741e-4282-b42c-f6bafc1b60fe.png?v=1754292956&width=1946",
         "imgSrc2": "https://www.superkicks.in/cdn/shop/files/2_21_edf76c5f-c2d5-446a-826b-05f1b167b56f.png?v=1754292956&width=1946",
         "imgSrc3": "https://www.superkicks.in/cdn/shop/files/6_8.png?v=1754292956&width=1946",
@@ -491,14 +541,16 @@
             "rating": 4.1,
             "rated_by": 2363
         },
-        "id": 9235
+        "id": 9235,
+        "newArrival": false,
+        "trending": false
     },
     {
         "brand": "adidas Originals",
         "name": "SUPERSTAR II",
         "color": "CORE BLACK/MATTE SILVER/CLOUD WHITE",
         "price": "₹11,999",
-        "category" : "shoes",
+        "category": "shoes",
         "imgSrc": "https://www.superkicks.in/cdn/shop/files/1_21_e952bf6b-741e-4282-b42c-f6bafc1b60fe.png?v=1754292956&width=1946",
         "imgSrc2": "https://www.superkicks.in/cdn/shop/files/2_21_edf76c5f-c2d5-446a-826b-05f1b167b56f.png?v=1754292956&width=1946",
         "imgSrc3": "https://www.superkicks.in/cdn/shop/files/6_8.png?v=1754292956&width=1946",
@@ -511,14 +563,16 @@
             "rating": 4.1,
             "rated_by": 2363
         },
-        "id": 1618
+        "id": 1618,
+        "newArrival": true,
+        "trending": true
     },
     {
         "brand": "Crocs",
         "name": "FUTURA LAB X CROCS CLASSIC RO CLOG",
         "color": "GREEN IVY",
         "price": "₹3,398",
-        "category" : "crocs",
+        "category": "crocs",
         "imgSrc": "https://www.superkicks.in/cdn/shop/files/1_5352aea2-06a5-45aa-ac84-c78414263ec7.jpg?v=1710335386&width=1946",
         "imgSrc2": "https://www.superkicks.in/cdn/shop/files/6_17ecf759-056f-4150-98a1-4efc4affc1c8.jpg?v=1710335385&width=1946",
         "imgSrc3": "https://www.superkicks.in/cdn/shop/files/3_eec771c2-07be-4d24-a855-58558cbb2528.jpg?v=1710335513&width=1946",
@@ -530,14 +584,16 @@
             "rating": 4.1,
             "rated_by": 4363
         },
-        "id": 1910
+        "id": 1910,
+        "newArrival": false,
+        "trending": true
     },
     {
         "brand": "Crocs",
         "name": "KPP X CROCS FUR SURE CLOG",
         "color": "CREAM",
         "price": "₹2,998",
-        "category" : "crocs",
+        "category": "crocs",
         "imgSrc": "https://www.superkicks.in/cdn/shop/products/CROCS.jpg4_379f94ef-7c32-47b6-b506-bb16a85a42df.jpg?v=1675977226&width=1946",
         "imgSrc2": "https://www.superkicks.in/cdn/shop/products/CROCS.jpg1_44705fa4-fda7-48f8-814d-662dd35a8868.jpg?v=1675977226&width=1946",
         "imgSrc3": "https://www.superkicks.in/cdn/shop/products/CROCS_1f5e8637-0bec-441f-a611-d4f40b000377.jpg?v=1675977226&width=1946",
@@ -548,6 +604,8 @@
             "rating": 3.9,
             "rated_by": 5363
         },
-        "id": 1265
+        "id": 1265,
+        "newArrival": true,
+        "trending": false
     }
 ]
