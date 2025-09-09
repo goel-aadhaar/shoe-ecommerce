@@ -19,7 +19,7 @@ import ProfilePage from './components/userProfilePage/Userprofile';
 // import ProfilePage from './components/userProfilePage/profile';
 
 function App() {
-    const [isLoggedIn, setIsLoggedIn] = useState(true);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [loading, setLoading] = useState(true);
     const [message, setMessage] = useState('');
     const [isModalOpen, setIsModalOpen] = useState(false);
