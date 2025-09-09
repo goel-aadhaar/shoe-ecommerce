@@ -13,9 +13,8 @@ export default function CardCarousel({onShoeClick, shoes = data}) {
   console.log("inside caroselCard   ", typeof onShoeClick);
   console.log("with data : ", shoes );
   
-
   console.log(onShoeClick);
-  
+
     return (
       <div className="relative w-full px-20 pt-10 pb-10 bg-white">
         <Swiper
