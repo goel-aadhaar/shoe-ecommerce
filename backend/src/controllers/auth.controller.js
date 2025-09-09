@@ -48,8 +48,13 @@ export const register = asyncHandler(async (req, res) => {
         throw new ApiError(500 , "Something went wrong while registering a user");
     }
 
-    return res.status(201).json(
-        new ApiResponse(200 , createdUser , "User Registered Successfully")
+    return res.status(201)
+    .json(
+        new ApiResponse(
+            200,
+            createdUser,
+            "User Registered Successfully"
+        )
     );
 });
 
