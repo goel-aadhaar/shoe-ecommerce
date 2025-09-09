@@ -15,7 +15,6 @@ const Home = ({onShoeClick})=>{
                 onShoeClick = {onShoeClick}
             />
             <BrandCarousel/>
-            <FilterBar/>
             <TrendingSection
                 onShoeClick = {onShoeClick}
             />

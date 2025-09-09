@@ -67,7 +67,6 @@ function App() {
                 <>
                     {/* <ProfilePage/> */}
                     <ImageSlider />
-
                     <LoginModal isOpen={isModalOpen} onClose={toggleModal} />
                     <BrandCarousel />
                     <Home onShoeClick={handleShoeClick} />
