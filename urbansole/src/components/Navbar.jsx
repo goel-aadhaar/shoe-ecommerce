@@ -5,12 +5,11 @@ import {Heart, Search,Menu, UserRoundIcon, ShoppingCart} from 'lucide-react';
 const Navbar = ({ onProfileClick }) => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const navLinks = [
-        {navName :"New Arrival", to : '/newArrival'}, 
-        {navName: "Footwear", to :'/footwear'}, 
-        {navName: "Crocks", to : '/crocks'}, 
-        {navName:"Brands",to : '/brandsLogo'}, 
-        {navName : "Blogs", to : '/blogs'},
-        {navName:"Home", to :'/'}
+        {navName : "New Arrival", to : 'collections/NewArrival'}, 
+        {navName:  "Shoes", to :'collections/shoe'}, 
+        {navName: "Crocks", to : 'collections/crocks'}, 
+        {navName: "Brands",to : '/brandsLogo'}, 
+        {navName: "Home", to :'/'}
     ];
 
     return (
@@ -26,7 +25,13 @@ const Navbar = ({ onProfileClick }) => {
                 </nav>
                 <div className="flex items-center space-x-5">
                     <button className="hover:text-gray-300 transition-colors" aria-label="Search"><Search/></button>
-                    <button onClick={onProfileClick} className="hover:text-gray-300 transition-colors" aria-label="Profile"><UserRoundIcon /></button>
+                    <button 
+                        onClick={onProfileClick} 
+                        className="hover:text-gray-300 transition-colors" 
+                        aria-label="Profile"
+                    >
+                            <UserRoundIcon />
+                    </button>
                     <button className="hover:text-gray-300 transition-colors" aria-label="Shopping Cart"><Heart /></button>
                     <button className="hover:text-gray-300 transition-colors" aria-label="Shopping Cart"><ShoppingCart /></button>
                     {/* <button className="hover:text-gray-300 transition-colors" aria-label="Shopping Cart"><ScanSearch /></button> */}
