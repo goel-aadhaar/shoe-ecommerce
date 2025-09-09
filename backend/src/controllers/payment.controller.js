@@ -12,5 +12,11 @@ export const createPayment = asyncHandler(async (req, res) => {
         transactionId: "txn_" + Date.now(),
     });
 
-    res.status(201).json({ success: true, message: "Payment processed", data: payment });
+    res.status(201).json(
+        new ApiResponse(
+            201,
+            "Payment processed successfully",
+            payment
+        )
+    );
 });

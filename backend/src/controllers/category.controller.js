@@ -3,10 +3,24 @@ import { asyncHandler } from "../utils/asyncHandler.js";
 
 export const createCategory = asyncHandler(async (req, res) => {
     const category = await Category.create(req.body);
-    res.status(201).json({ success: true, message: "Category created", data: category });
+    res.status(201)
+    .json(
+        new ApiResponse(
+            200,
+            "Category created",
+            category
+        )
+    )
 });
 
 export const getCategories = asyncHandler(async (req, res) => {
     const categories = await Category.find();
-    res.json({ success: true, data: categories });
+    res.status(201)
+    .json(
+        new ApiResponse(
+            200,
+            "Categories fetched successfully",
+            categories
+        )
+    )
 });

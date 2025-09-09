@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 
 import { AuthContext } from './context/AuthContext';
@@ -65,6 +65,15 @@ const ShoeDetail = ({ onBack, onRelatedShoeClick }) => {
 
     const parcal = useParams();
     const shoe = shoeData.find(obj => obj.id == parcal.id);
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [parcal.id]); // The dependency array ensures this runs on ID change
+
+    if (!shoe) {
+        return <div>Shoe not found.</div>;
+    }
+
     const images = Object.keys(shoe)
         .filter(key => key.startsWith('imgSrc') && shoe[key])
         .map(key => shoe[key]);
@@ -92,7 +101,7 @@ const ShoeDetail = ({ onBack, onRelatedShoeClick }) => {
         <>
             <Navbar />
             <div className="bg-white text-black min-h-screen">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-16 my-16">
                     <Link to={'/'}>
                         <button
                             onClick={onBack}
