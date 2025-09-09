@@ -83,7 +83,7 @@ export const login = asyncHandler(async (req, res) => {
     .select("-password -refreshToken");
 
     const options = {
-        httpOnly: true,
+        httpOnly: false,
         secure: true
     }
 
@@ -117,7 +117,7 @@ export const logout = asyncHandler(async (req, res) => {
     )
 
     const options = {
-        httpOnly: true,
+        httpOnly: false,
         secure: true
     }
  
