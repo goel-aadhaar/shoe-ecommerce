@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'; // Make sure to import useEffect
 import { AuthProvider } from './components/context/AuthProvider';
-
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 import Navbar from './components/Navbar';
 import ImageSlider from './components/ImageSlider';
@@ -9,70 +10,67 @@ import Footer from './components/footer';
 import ShoeList from './components/shoe_list';
 import BrandCarousel from './components/brandCardCarousel';
 import ShoeDetail from './components/shoeDetail';
-import shoesData from './data/shoes.json';
+// import shoesData from './data/shoes.json';
 import FilterBar from './components/filter';
 import TrendingSection from './components/trending-section/trending';
 import Home from './components/home-page/home-page';
-import BrandFullPage from './components/brandPage/BrandFullPage';
-
-import ProfilePage from './components/userProfilePage/profile';
+// import BrandFullPage from './components/brandPage/BrandFullPage';
+import ProfilePage from './components/userProfilePage/Userprofile';
+// import ProfilePage from './components/userProfilePage/profile';
 
 function App() {
+    const [isLoggedIn, setIsLoggedIn] = useState(true);
+    const [loading, setLoading] = useState(true);
+    const [message, setMessage] = useState('');
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [selectedShoe, setSelectedShoe] = useState(null);
+    const [showProfilePage, setShowProfilePage] = useState(false);
 
 
+    const navigate = useNavigate();
     useEffect(() => {
-        const handlePopState = () => {
-            // If the URL has no #shoe, it means we went back to the main page
-            if (!window.location.hash.startsWith('#shoe')) {
-                setSelectedShoe(null);
+        const checkLoginStatus = async () => {
+            try {
+                setLoading(true);
+                await axios.get('https://api-shoe-ecommerce.onrender.com/api/v1/user/profile', {
+                    withCredentials: true
+                });
+               
+                setIsLoggedIn(true);
+                setMessage('You are currently logged in.');
+                
+            } catch (error) {
+                // A 401 or 403 error means the user is not authenticated
+                setIsLoggedIn(false);
+                setMessage('You are not logged in.');
+            } finally {
+                setLoading(false);
             }
         };
-
-        window.addEventListener('popstate', handlePopState);
-        // Cleanup function to remove the listener
-        return () => {
-            window.removeEventListener('popstate', handlePopState);
-        };
-    }, []); // Empty array means this runs only once
+        
+        checkLoginStatus();
+    }, []); 
 
     const toggleModal = () => {
-        setIsModalOpen(!isModalOpen);
+        if(!isLoggedIn){
+            setIsModalOpen(!isModalOpen);
+        }else{
+            setShowProfilePage(!showProfilePage);
+            if(showProfilePage) navigate('/profile')
+        }
     };
 
-    const handleShoeClick = (shoe) => {
-        setSelectedShoe(shoe);
-        // This adds an entry to the browser history, enabling the back button
-        window.history.pushState({ shoeName: shoe.name }, '', `#shoe/${shoe.name.replace(/\s+/g, '-')}`);
-        window.scrollTo(0, 0);
-    };
 
-    const handleBackToList = () => {
-        // This tells the browser to go back one step in its history
-        window.history.back();
-    };
+
 
     return (
         <AuthProvider>
             <Navbar onProfileClick={toggleModal} />
-            {selectedShoe ? (
-                <ShoeDetail
-                    shoe={selectedShoe}
-                    allShoes={shoesData}
-                    onBack={handleBackToList}
-                    onRelatedShoeClick={handleShoeClick}
-                />
-            ) : (
-                <>
-                    {/* <ProfilePage/> */}
-                    <ImageSlider />
-                    <LoginModal isOpen={isModalOpen} onClose={toggleModal} />
-                    <BrandCarousel />
-                    <Home onShoeClick={handleShoeClick} />
-                </>
-            )}
-            
+            <>
+                <ImageSlider />
+                <LoginModal isOpen={isModalOpen} onClose={toggleModal} />
+                <BrandCarousel />
+                <Home/>
+            </>    
             <Footer />
         </AuthProvider>
     );
