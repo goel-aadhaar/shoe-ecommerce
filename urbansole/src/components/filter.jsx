@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, X } from "lucide-react";
 
 function Dropdown({ label, options, isOpen, onToggle, onSelect, selected }) {
   return (
     <div className="relative w-48">
-      {/* Button */}
       <button
         onClick={onToggle}
         className="flex justify-between items-center w-full border border-gray-300 px-4 py-2 bg-white text-black"
@@ -12,8 +11,6 @@ function Dropdown({ label, options, isOpen, onToggle, onSelect, selected }) {
         {selected || label}
         <ChevronDown className="h-4" />
       </button>
-
-      {/* Dropdown List */}
       {isOpen && (
         <div className="absolute mt-1 w-full max-h-60 overflow-y-auto border border-gray-200 bg-white shadow-lg z-10 text-black">
           {options.map((opt, i) => (
@@ -31,31 +28,58 @@ function Dropdown({ label, options, isOpen, onToggle, onSelect, selected }) {
   );
 }
 
+// A dedicated component for the price range slider
+function PriceRangeSlider({ min, max, value, onChange }) {
+  const handleSliderChange = (e) => {
+    onChange(parseInt(e.target.value));
+  };
+  
+  // If no value is set, default to the max price
+  const displayValue = value || max;
 
-export default function FilterBar() {
-  const [openDropdown, setOpenDropdown] = useState(null); // which dropdown is open
-  const [selectedValues, setSelectedValues] = useState({}); // store selected values
- 
+  return (
+    <div className="w-56">
+        <label htmlFor="price" className="block text-sm font-medium text-gray-700">
+            Price Range: ₹{min} - ₹{displayValue}
+        </label>
+        <input
+            id="price"
+            type="range"
+            min={min}
+            max={max}
+            value={displayValue}
+            onChange={handleSliderChange}
+            className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
+        />
+    </div>
+  );
+}
+
+export default function FilterBar({ selectedFilters, onFilterChange, onReset, priceConfig }) {
+  const [openDropdown, setOpenDropdown] = useState(null);
+
   const filterOptions = {
-    "Shoe Size (IND)": ["7", "8", "9", "10", "11"],
-    Brand: ["Nike", "Adidas", "Puma", "New Balance", "Reebok"],
+    "Sort by": ["Popularity", "Newest", "Price: Low to High", "Price: High to Low"],
+    Brand: ["Nike", "Adidas", "Puma", "New Balance", "Reebok", "Crocs"],
     Color: ["Black", "White", "Blue", "Red", "Green", "Grey"],
     Gender: ["Men", "Women", "Kids"],
-    Price: ["Under ₹2000", "₹2000 - ₹5000", "₹5000 - ₹10000", "Above ₹10000"],
-    "Sort by": ["Popularity", "Newest", "Price: Low to High", "Price: High to Low"],
   };
 
   const handleToggle = (label) => {
-    setOpenDropdown(openDropdown === label ? null : label); // toggle open/close
+    setOpenDropdown(openDropdown === label ? null : label);
   };
 
   const handleSelect = (label, value) => {
-    setSelectedValues((prev) => ({ ...prev, [label]: value }));
-    setOpenDropdown(null); // close after selecting
+    onFilterChange((prev) => ({ ...prev, [label]: value }));
+    setOpenDropdown(null);
+  };
+  
+  const handlePriceChange = (priceValue) => {
+    onFilterChange((prev) => ({...prev, price: priceValue}));
   };
 
   return (
-    <div className="flex flex-wrap gap-3 px-20 bg-white shadow-sm py-2">
+    <div className="flex flex-wrap items-center gap-4 px-20 bg-white shadow-sm py-3">
       {Object.entries(filterOptions).map(([label, options], idx) => (
         <Dropdown
           key={idx}
@@ -64,9 +88,25 @@ export default function FilterBar() {
           isOpen={openDropdown === label}
           onToggle={() => handleToggle(label)}
           onSelect={handleSelect}
-          selected={selectedValues[label]}
+          selected={selectedFilters[label]}
         />
       ))}
+      
+      {/* Render the Price Slider */}
+      <PriceRangeSlider 
+        min={priceConfig.min}
+        max={priceConfig.max}
+        value={selectedFilters.price}
+        onChange={handlePriceChange}
+      />
+
+      <button 
+        onClick={onReset}
+        className="flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-red-600 hover:bg-red-700"
+      >
+        <X size={16} className="mr-1"/>
+        Reset
+      </button>
     </div>
   );
 }
