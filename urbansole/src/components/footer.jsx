@@ -28,7 +28,8 @@ export default function Footer() {
         {/* <div> */}
           <ul className="text-left">
             <li className="text-xl font-bold pb-3">IMPORTANT LINKS</li>
-            <li><a href="#" className="hover:text-red-500 text-sm text-white" >HELP CENTER</a></li>
+            {/* <li><a href="#" className="hover:text-red-500 text-sm text-white" >HELP CENTER</a></li> */}
+            <li><Link to={'/support'} className="hover:text-red-500 text-sm text-white">HELP CENTER</Link></li>
             <li><a href="#" className="hover:text-red-500 text-sm text-white">FAQ</a></li>
             <li><a href="#" className="hover:text-red-500 text-sm text-white">PRIVACY POLICY</a></li>
             <li><a href="#" className="hover:text-red-500 text-sm text-white">PARTNER WITH US</a></li>
