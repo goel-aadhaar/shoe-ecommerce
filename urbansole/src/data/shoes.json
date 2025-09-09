@@ -438,6 +438,26 @@
         "trending": true
     },
     {
+        "brand": "adidas Originals",
+        "name": "SAMBA OG",
+        "color": "DARK BROWN/OFF WHITE/GUM",
+        "price": "₹13,995",
+        "category" : "shoes",
+        "imgSrc": "https://www.superkicks.in/cdn/shop/files/1_42_c9f99ed7-2d53-47b1-b22c-c7aa2415444a.png?v=1754991116&width=1946",
+        "imgSrc2": "https://www.superkicks.in/cdn/shop/files/2_43.png?v=1754991116&width=1946",
+        "imgSrc3": "https://www.superkicks.in/cdn/shop/files/4_42.png?v=1754991116&width=1946",
+        "imgSrc4": "https://www.superkicks.in/cdn/shop/files/5_32.png?v=1754991116&width=1946",
+        "imgSrc5": "https://www.superkicks.in/cdn/shop/files/11-aug.png?v=1754991116&width=1946",
+        "imgSrc6": "https://www.superkicks.in/cdn/shop/files/8_2_349aa24c-c901-4047-ba9d-42b1ed9f2473.png?v=1754991116&width=1946",
+        "imgSrc7": "https://www.superkicks.in/cdn/shop/files/3_41.png?v=1754991116&width=1946",
+        "for": "female",
+        "review": {
+            "rating": 4.2,
+            "rated_by": 1363
+        },
+        "id": 3343
+    },
+    {
         "brand": "Jordan",
         "name": "FLIGHT COURT",
         "color": "OIL GREY/CAVE STONE-ARCTIC PUNCH-MUSLIN",
