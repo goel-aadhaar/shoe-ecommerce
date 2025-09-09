@@ -13,10 +13,22 @@ export const createOrder = asyncHandler(async (req, res) => {
 
     await OrderStatusHistory.create({ orderId: order._id, status: "pending" });
 
-    res.status(201).json({ success: true, message: "Order created", data: order });
+    res.status(201).json(
+        new ApiResponse(
+            201,
+            "Order created successfully",
+            order
+        )
+    );
 });
 
 export const getOrders = asyncHandler(async (req, res) => {
     const orders = await Order.find({ userId: req.user.id });
-    res.json({ success: true, data: orders });
+    res.status(200).json(
+        new ApiResponse(
+            200,
+            "Orders fetched successfully",
+            orders
+        )
+    );
 });

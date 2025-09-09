@@ -1,4 +1,5 @@
 import { Cart, CartItem } from "../models/model-export.js";
+import { ApiResponse } from "../utils/ApiResponse.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 
 export const getCart = asyncHandler(async (req, res) => {
@@ -7,7 +8,14 @@ export const getCart = asyncHandler(async (req, res) => {
         cart = await Cart.create({ userId: req.user.id });
     }
     const items = await CartItem.find({ cartId: cart._id }).populate("productId");
-    res.json({ success: true, data: { cart, items } });
+    res.status(201)
+    .json(
+        new ApiResponse(
+            200, 
+            "Cart fetched Successfully",
+            {cart , items}
+        )
+    )
 });
 
 export const addToCart = asyncHandler(async (req, res) => {
@@ -25,10 +33,24 @@ export const addToCart = asyncHandler(async (req, res) => {
             quantity: req.body.quantity || 1,
         });
     }
-    res.status(201).json({ success: true, message: "Item added to cart", data: item });
+    res.status(201)
+    .json(
+        new ApiResponse(
+            200,
+            "Item Added To Cart",
+            item
+        )
+    )
 });
 
 export const removeFromCart = asyncHandler(async (req, res) => {
     await CartItem.findByIdAndDelete(req.params.id);
-    res.json({ success: true, message: "Item removed from cart" });
+    res.status(201)
+    .json(
+        new ApiResponse(
+            200,
+            "Item Removed from the Cart",
+            null
+        )
+    )
 });
