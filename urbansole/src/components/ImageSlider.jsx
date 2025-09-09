@@ -44,7 +44,13 @@ const ImageSlider = () => {
                 <div className="flex flex-row space-x-2 mx-4">
                     {slidesData.map((_, index) => <button key={index} onClick={() => goToSlide(index)} className={`w-2 h-2 rounded-full border-2 border-white transition-colors ${index === currentSlide ? 'bg-white' : ''}`} aria-label={`Go to slide ${index + 1}`}></button>)}
                 </div>
-                <button onClick={nextSlide} className="p-2 text-white hover:text-gray-400 transition-colors" aria-label="Next slide"><svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path></svg></button>
+                <button 
+                    onClick={nextSlide} 
+                    className="p-2 text-white hover:text-gray-400 transition-colors" 
+                    aria-label="Next slide"
+                    >
+                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path></svg>
+                </button>
             </div>
         </main>
     );

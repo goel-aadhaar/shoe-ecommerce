@@ -5,12 +5,15 @@ import { Shoe_Card } from "../shoe_card";
 import { ChevronRight, ChevronLeft } from "lucide-react";
 import {Link} from "react-router";
 
-import shoes from "../../data/shoes.json"
+import data from "../../data/shoes.json"
 import "swiper/css";
 import "swiper/css/navigation";
 
-export default function CardCarousel({onShoeClick}) {
+export default function CardCarousel({onShoeClick, shoes = data}) {
   console.log("inside caroselCard   ", typeof onShoeClick);
+  console.log("with data : ", shoes );
+  
+
   console.log(onShoeClick);
   
     return (
