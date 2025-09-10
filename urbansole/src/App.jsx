@@ -20,7 +20,7 @@ function App() {
 
   const navigate = useNavigate();
 
-  // ✅ Only run once on initial page load
+ 
   useEffect(() => {
     const checkLoginStatus = async () => {
       try {
@@ -66,6 +66,7 @@ function App() {
   };
 
   if (loading) {
+    // will replace it with shimmer UI
     return <div>Loading...</div>; // optional loading state
   }
 
