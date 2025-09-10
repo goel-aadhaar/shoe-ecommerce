@@ -15,7 +15,7 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [message, setMessage] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [showProfilePage, setShowProfilePage] = useState(false);
+//   const [showProfilePage, setShowProfilePage] = useState(false);
 
   const navigate = useNavigate();
 
@@ -30,9 +30,11 @@ function App() {
         );
 
         if (res.data?.user) {
+          console.log('User is logged in');
           setIsLoggedIn(true);
           setMessage('You are currently logged in.');
         } else {
+            console.log('User not logged in or session expired....');
           setIsLoggedIn(false);
           setMessage('You are not logged in.');
         }
@@ -46,15 +48,14 @@ function App() {
     };
 
     checkLoginStatus();
-  }, []); // ✅ Empty dependency array
+  }, [isLoggedIn]); 
 
   // ✅ Handle modal toggle / profile navigation
   const toggleModal = () => {
     if (!isLoggedIn) {
       setIsModalOpen(!isModalOpen);
     } else {
-      setShowProfilePage(!showProfilePage);
-      if (!showProfilePage) navigate('/profile');
+      navigate('/profile');
     }
   };
 
