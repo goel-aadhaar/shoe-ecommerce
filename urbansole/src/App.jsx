@@ -30,7 +30,7 @@ function App() {
           { withCredentials: true }
         );
 
-        if (res.data?.user) {
+        if (res.user) {
           console.log('User is logged in');
           setIsLoggedIn(true);
           setMessage('You are currently logged in.');
