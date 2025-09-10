@@ -34,7 +34,16 @@ const LoginModal = ({ isOpen, onClose }) => {
     setLoading(true);
 
     try {
-      const response = await axios.post('https://api-shoe-ecommerce.onrender.com/api/v1/auth/login', formData);
+      const response = await axios.post(
+        'https://api-shoe-ecommerce.onrender.com/api/v1/auth/login',
+        formData,
+        {
+          withCredentials: true, // ✅ important for cookies
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        }
+      );
 
       setMessage('Login successful!');
       // You might want to store the token here, e.g., localStorage.setItem('token', response.data.token);
