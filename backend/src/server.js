@@ -5,6 +5,7 @@ import routes from "./routes/route-combiner.js";
 import { logger } from "./utils/logger.js";
 import { notFoundMiddleware } from "./middlewares/notFound.middleware.js";
 import { errorMiddleware } from "./middlewares/error.middleware.js";
+import cookieParser from "cookie-parser";
 import cors from "cors";
 
 dotenv.config();
