@@ -15,6 +15,7 @@ import HelpCenter from './components/FooterNav/HelpCenter.jsx';
 import DummyFooterNavpage from './components/FooterNav/DummyNavpage.jsx'
 import AllShoePage from './components/allShoePage.jsx';
 import ProfilePage from './components/userProfilePage/Userprofile';
+import AdminPanelApp from './components/Admin/AdminPanel.jsx';
 
 const AppRouter = createBrowserRouter([
   {
@@ -60,6 +61,9 @@ const AppRouter = createBrowserRouter([
   {
     path : '/profile',
     element : <ProfilePage/>
+  }, {
+    path: '/admin',
+    element : <AdminPanelApp/>
   }
 
 ]) 
