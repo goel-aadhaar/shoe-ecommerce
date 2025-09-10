@@ -38,10 +38,14 @@ const ProfilePage = () => {
         const response = await axios.get('https://api-shoe-ecommerce.onrender.com/api/v1/users/profile', {
           withCredentials: true // Crucial to send the cookies
         });
+        console.log(document.cookie);
+        
         
         if (response.status === 200 && response.data.data) {
           setProfile(response.data.data);
         } else {
+          console.log("cookies not saved.....");
+          
           // If the backend doesn't return profile data, it means the user is not authenticated
           navigate('/login');
         }
