@@ -5,15 +5,13 @@ import { ApiError } from "../utils/ApiError.js";
 
 // Get user profile
 export const getProfile = asyncHandler(async (req, res) => {
-    const profile = await Profile.findOne({ userId: req.user.id });
+   
 
-    res.status(200).json(
-        new ApiResponse(200, "Profile fetched successfully", profile)
-    );
-});
-
-export const getCurrentUser = async (req, res) => {
+    // res.status(200).json(
+    //     new ApiResponse(200, "Profile fetched successfully", profile)
+    // );
     try {
+        const profile = await Profile.findOne({ userId: req.user.id });
         const user = await User.findById(req.user._id).select("-password");
         console.log('In getCurrentUser:  ', user);
         
@@ -21,11 +19,15 @@ export const getCurrentUser = async (req, res) => {
             throw new ApiError(404, "User not found");
         }
         res.status(200).json(
-            new ApiResponse(200, "User fetched successfully", user)
+            new ApiResponse(200, "User fetched successfully", {user , profile})
         );
     } catch (err) {
         throw new ApiError(500, "Failed to fetch user");
     }
+});
+
+export const getCurrentUser = async (req, res) => {
+    
 };
 
 

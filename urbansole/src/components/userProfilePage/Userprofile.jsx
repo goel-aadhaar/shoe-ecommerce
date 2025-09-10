@@ -40,8 +40,10 @@ const ProfilePage = () => {
         });
         console.log("printingggggggg...     " , response);
         
+        console.log("Response status: ", response?.status);
+        console.log("Response data: ", response?.user);
         
-        if (response?.status === 200 && response?.data?.data) {
+        if (response?.status === 200 && response?.user?.data?.data) {
           setProfile(response.data.data);
         } else {
           console.log("cookies not saved.....");
