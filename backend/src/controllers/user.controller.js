@@ -15,6 +15,8 @@ export const getProfile = asyncHandler(async (req, res) => {
 export const getCurrentUser = async (req, res) => {
     try {
         const user = await User.findById(req.user._id).select("-password");
+        console.log('In getCurrentUser:  ', user);
+        
         if(!user) {
             throw new ApiError(404, "User not found");
         }
