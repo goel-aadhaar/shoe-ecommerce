@@ -38,10 +38,10 @@ const ProfilePage = () => {
         const response = await axios.get('https://api-shoe-ecommerce.onrender.com/api/v1/users/profile', {
           withCredentials: true // Crucial to send the cookies
         });
-        console.log("printingggggggg" ,document.cookie);
+        console.log("printingggggggg...     " , response);
         
         
-        if (response.status === 200 && response.data.data) {
+        if (response?.status === 200 && response?.data?.data) {
           setProfile(response.data.data);
         } else {
           console.log("cookies not saved.....");
@@ -87,16 +87,16 @@ const ProfilePage = () => {
     <div className="min-h-screen bg-gray-100 p-4 font-sans flex items-center justify-center">
       <div className="w-full max-w-xl mx-auto">
         <div className="bg-white p-6 my-4 rounded-xl shadow-md">
-          <h1 className="text-xl font-bold mb-4 text-black">Hi {profile.fullName || 'User'},</h1>
+          <h1 className="text-xl font-bold mb-4 text-black">Hi {profile?.fullName || 'User'},</h1>
           <div className="space-y-2 text-gray-700">
             <p className="flex items-center space-x-2">
               <Mail className='text-black' size={16} />
-              <span>{profile.email}</span>
+              <span>{profile?.email}</span>
             </p>
             {profile.phone && (
               <p className="flex items-center space-x-2">
                 <Phone className='text-black' size={16} />
-                <span>{profile.phone}</span>
+                <span>{profile?.phone}</span>
               </p>
             )}
           </div>

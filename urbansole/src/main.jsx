@@ -56,7 +56,8 @@ const AppRouter = createBrowserRouter([
   {
     path: '/Pages/:pageName',
     element: <DummyFooterNavpage />,
-  },{
+  },
+  {
     path : '/profile',
     element : <ProfilePage/>
   }

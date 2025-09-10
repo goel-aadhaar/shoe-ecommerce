@@ -89,7 +89,7 @@ export const login = asyncHandler(async (req, res) => {
         path: '/',     
         maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
     }
-
+    console.log("User data: " , user);
     res.status(200)
     .cookie("accessToken", accessToken, options)
     .cookie("refreshToken", refreshToken, options)

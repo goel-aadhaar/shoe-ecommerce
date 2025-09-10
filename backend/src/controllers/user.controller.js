@@ -1,6 +1,7 @@
 import { User, Profile, Favourite } from "../models/model-export.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
+import { ApiError } from "../utils/ApiError.js";
 
 // Get user profile
 export const getProfile = asyncHandler(async (req, res) => {
@@ -10,6 +11,18 @@ export const getProfile = asyncHandler(async (req, res) => {
         new ApiResponse(200, "Profile fetched successfully", profile)
     );
 });
+
+export const getCurrentUser = async (req, res) => {
+    try {
+        const user = await User.findById(req.user._id).select("-password");
+        res.status(200).json(
+            new ApiResponse(200, "User fetched successfully", user)
+        );
+    } catch (err) {
+        throw new ApiError(500, "Failed to fetch user");
+    }
+};
+
 
 // Update user profile
 export const updateProfile = asyncHandler(async (req, res) => {
