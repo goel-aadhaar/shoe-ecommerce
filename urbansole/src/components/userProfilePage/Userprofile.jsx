@@ -38,7 +38,7 @@ const ProfilePage = () => {
         const response = await axios.get('https://api-shoe-ecommerce.onrender.com/api/v1/users/profile', {
           withCredentials: true // Crucial to send the cookies
         });
-        console.log(document.cookie);
+        console.log("printingggggggg" ,document.cookie);
         
         
         if (response.status === 200 && response.data.data) {

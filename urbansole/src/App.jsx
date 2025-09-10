@@ -34,12 +34,15 @@ function App() {
                 await axios.get('https://api-shoe-ecommerce.onrender.com/api/v1/users/profile', {
                     withCredentials: true
                 });
+               console.log("Setting cokkkiesssss");
                
                 setIsLoggedIn(true);
                 setMessage('You are currently logged in.');
                 
             } catch (error) {
                 // A 401 or 403 error means the user is not authenticated
+                console.log('not settttttt');
+                
                 setIsLoggedIn(false);
                 setMessage('You are not logged in.');
             } finally {
