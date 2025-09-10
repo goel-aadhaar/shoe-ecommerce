@@ -44,7 +44,7 @@ const LoginModal = ({ isOpen, onClose }) => {
           }
         }
       );
-
+      console.log(response)
       setMessage('Login successful!');
       // You might want to store the token here, e.g., localStorage.setItem('token', response.data.token);
     } catch (error) {

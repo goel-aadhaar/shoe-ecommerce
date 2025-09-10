@@ -85,8 +85,9 @@ export const login = asyncHandler(async (req, res) => {
     const options = {
         httpOnly: true,
         secure: true,
-        sameSite: "None",
+        sameSite: "none",
         path: '/',     
+        maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
     }
 
     res.status(200)
@@ -122,8 +123,9 @@ export const logout = asyncHandler(async (req, res) => {
     const options = {
         httpOnly: true,
         secure: true,
-        sameSite: "None",
+        sameSite: "none",
         path: '/',     
+        maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
     }
  
     return res.status(200)
