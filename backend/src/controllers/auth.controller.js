@@ -83,7 +83,7 @@ export const login = asyncHandler(async (req, res) => {
     .select("-password -refreshToken");
 
     const options = {
-        httpOnly: false,
+        httpOnly: true,
         secure: true,
         sameSite: "None",
         path: '/',     
@@ -107,51 +107,6 @@ export const login = asyncHandler(async (req, res) => {
 });
 
 
-// controllers/authController.js (or wherever your login logic is)
-
-// export const login = async (req, res, next) => {
-//   try {
-//     console.log("Login request body:", req.body); // ✅ log incoming data
-
-//     const { email, password } = req.body;
-
-//     const user = await User.findOne({ email });
-//     console.log("User found:", user); // ✅ log DB result
-
-//     if (!user) {
-//       console.log("User not found, throwing 404"); // ✅ log before throwing error
-//       throw new ApiError(404, "User not found");
-//     }
-
-//     const isPasswordValid = await user.isPasswordCorrect(password);
-//     if (!isPasswordValid) {
-//       console.log("Invalid password"); // ✅ log password check
-//       throw new ApiError(401, "Invalid credentials");
-//     }
-
-//     console.log("Signing JWT..."); // ✅ log before signing token
-//     const accessToken = jwt.sign(
-//       { _id: user._id },
-//       process.env.ACCESS_TOKEN_SECRET,
-//       { expiresIn: "1h" }
-//     );
-//     console.log("JWT signed successfully"); // ✅ log after signing token
-
-//     res
-//       .cookie("accessToken", accessToken, {
-//         httpOnly: true,
-//         secure: process.env.NODE_ENV === "production",
-//         sameSite: "None",
-//       })
-//       .status(200)
-//       .json({ message: "Logged in successfully" });
-//   } catch (err) {
-//     console.error("Login error:", err);
-//     next(err); // pass to your error middleware
-//   }
-// };
-
-
 export const logout = asyncHandler(async (req, res) => {
     await User.findByIdAndUpdate(
         req.user._id,
@@ -166,7 +121,7 @@ export const logout = asyncHandler(async (req, res) => {
     )
 
     const options = {
-        httpOnly: false,
+        httpOnly: true,
         secure: true,
         sameSite: "None",
         path: '/',     
