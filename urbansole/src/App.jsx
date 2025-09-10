@@ -49,9 +49,8 @@ function App() {
                 setLoading(false);
             }
         };
-        
         checkLoginStatus();
-    }, []); 
+    }); 
 
     const toggleModal = () => {
         if(!isLoggedIn){
