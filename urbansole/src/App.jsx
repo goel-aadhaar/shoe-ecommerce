@@ -29,8 +29,10 @@ function App() {
           'https://api-shoe-ecommerce.onrender.com/api/v1/users/profile',
           { withCredentials: true }
         );
+        console.log("Full Response:", res);
+        console.log("Profile:", res.data.data);
 
-        if (res.user) {
+        if (res.status == 200 ) {
           console.log('User is logged in');
           setIsLoggedIn(true);
           setMessage('You are currently logged in.');
