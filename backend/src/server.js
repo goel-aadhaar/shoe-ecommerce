@@ -19,6 +19,7 @@ app.use(
     origin: "https://shoe-ecommerce-mu.vercel.app",
     methods: "GET,POST,PUT,DELETE,PATCH",
     credentials: true,
+    allowedHeaders: ['Content-Type', 'Authorization']
   })
 );
 

@@ -85,7 +85,9 @@ export const login = asyncHandler(async (req, res) => {
     const options = {
         httpOnly: false,
         secure: true,
-        sameSite: "None"
+        sameSite: "None",
+        path: '/',     
+        domain: '.onrender.com'
     }
 
     res.status(200)
@@ -120,7 +122,9 @@ export const logout = asyncHandler(async (req, res) => {
     const options = {
         httpOnly: false,
         secure: true,
-        sameSite: "None"
+        sameSite: "None",
+        path: '/',     
+        domain: '.onrender.com'
     }
  
     return res.status(200)
