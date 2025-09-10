@@ -16,6 +16,7 @@ function App() {
   const [message, setMessage] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
 //   const [showProfilePage, setShowProfilePage] = useState(false);
+    const [profileIconClicked, setProfileIconClicked] = useState(false);
 
   const navigate = useNavigate();
 
@@ -48,10 +49,13 @@ function App() {
     };
 
     checkLoginStatus();
-  }, [isLoggedIn]); 
+  }, [profileIconClicked]); 
 
-  // ✅ Handle modal toggle / profile navigation
+
   const toggleModal = () => {
+    setProfileIconClicked(!profileIconClicked);
+    console.log(isLoggedIn + "  printingggggggg....");
+    
     if (!isLoggedIn) {
       setIsModalOpen(!isModalOpen);
     } else {
