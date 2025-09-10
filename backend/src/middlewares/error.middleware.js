@@ -5,6 +5,10 @@ export const errorMiddleware = (err, req, res, next) => {
 
     const statusCode = err.statusCode || 500;
 
+    // Ensure CORS headers are included even on errors
+    res.header("Access-Control-Allow-Origin", "https://shoe-ecommerce-mu.vercel.app");
+    res.header("Access-Control-Allow-Credentials", "true");
+
     res.status(statusCode).json(
         new ApiResponse(
             statusCode,

@@ -9,19 +9,27 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 
 dotenv.config();
-
 connectDB();
 
 const app = express();
 
+const allowedOrigins = [
+  "https://shoe-ecommerce-mu.vercel.app",
+  "http://localhost:5173" // for local dev
+];
+
 app.use(
   cors({
-    origin: "https://shoe-ecommerce-mu.vercel.app",
-    methods: "GET,POST,PUT,DELETE,PATCH",
+    origin: allowedOrigins,
     credentials: true,
-    allowedHeaders: ['Content-Type', 'Authorization']
   })
 );
+
+// Handle preflight requests
+app.options("*", cors({
+  origin: allowedOrigins,
+  credentials: true,
+}));
 
 app.use(express.json());
 app.use(logger);
