@@ -12,40 +12,39 @@ import {
 } from "lucide-react";
 
 // A simple in-memory database to simulate MERN data fetching
-const generateProducts = (count) => {
-  const products = [];
-  const productNames = [
-    "Classic Loafer",
-    "Stylish Sneaker",
-    "Leather Oxford",
-    "Running Shoe",
-    "Hiking Boot",
-    "Sandals",
-    "Winter Boots",
-    "Formal Pumps",
-    "Athletic Trainers",
-    "Slip-on Moccasin",
-  ];
-  const categories = ["Men's", "Women's", "Kids'", "Unisex"];
-  const brands = ["Nike", "Adidas", "Puma", "Reebok", "New Balance"];
-  const attributes = ["Popular", "New Arrival", "Bestseller", "On Sale"];
-  const statuses = ["In Stock", "Out of Stock", "Discontinued"];
+// const generateProducts = (count) => {
+//   const products = [];
+//   const productNames = [
+//     "Classic Loafer",
+//     "Stylish Sneaker",
+//     "Leather Oxford",
+//     "Running Shoe",
+//     "Hiking Boot",
+//     "Sandals",
+//     "Winter Boots",
+//     "Formal Pumps",
+//     "Athletic Trainers",
+//     "Slip-on Moccasin",
+//   ];
+//   const categories = ["Men's", "Women's", "Kids'", "Unisex"];
+//   const brands = ["Nike", "Adidas", "Puma", "Reebok", "New Balance"];
+//   const attributes = ["Popular", "New Arrival", "Bestseller", "On Sale"];
+//   const statuses = ["In Stock", "Out of Stock", "Discontinued"];
 
-  for (let i = 0; i < count; i++) {
-    products.push({
-      id: Math.random().toString(36).substr(2, 9),
-      product: productNames[i % productNames.length],
-      productId: `#${Math.floor(Math.random() * 90000) + 10000}`,
-      category: categories[i % categories.length],
-      price: `$${(Math.random() * 100 + 50).toFixed(2)}`,
-      brand: brands[i % brands.length],
-      attribute: attributes[i % attributes.length],
-      status: statuses[i % statuses.length],
-    });
-  }
-  return products;
-};
-const products = generateProducts(10);
+//   for (let i = 0; i < count; i++) {
+//     products.push({
+//       _id: Math.random().toString(36).substr(2, 9),
+//       name: productNames[i % productNames.length],
+//       category: categories[i % categories.length],
+//       price: `$${(Math.random() * 100 + 50).toFixed(2)}`,
+//       brand: brands[i % brands.length],
+//       attributes: attributes[i % attributes.length],
+//       status: statuses[i % statuses.length],
+//     });
+//   }
+//   return products;
+// // };
+// const products = [];
 
 const Sidebar = ({ activeTab, setActiveTab }) => (
   <aside className="w-64 bg-black text-white flex flex-col h-full rounded-l-2xl shadow-xl">
@@ -127,7 +126,7 @@ const Header = () => (
 const AdminPanelApp = () => {
   const [activeTab, setActiveTab] = useState("products");
   const [searchTerm, setSearchTerm] = useState("");
-  const [products, setProducts] = useState(generateProducts(10));
+  const [products, setProducts] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
