@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Search, Plus, MoreHorizontal } from "lucide-react";
-import AddProductImages from "./AddImageModal";
+import AddProductImagesModal from "./AddImageModal";
 
 const ProductTable = ({ products, searchTerm, setSearchTerm, onAddClick, onEditProduct, onDeleteProduct }) => {
   const [dropdownOpen, setDropdownOpen] = useState(null);
@@ -128,7 +128,7 @@ const ProductTable = ({ products, searchTerm, setSearchTerm, onAddClick, onEditP
                 </td>
 
                 {/* Action Dropdown */}
-                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-500 relative">
+                <td className="px-4 py-4 whitespace-nowrap text-sm font-medium text-gray-500 relative">
                   <button
                     onClick={() => toggleDropdown(product._id)}
                     className="p-1 rounded-full hover:bg-gray-100 transition-colors"
@@ -136,9 +136,9 @@ const ProductTable = ({ products, searchTerm, setSearchTerm, onAddClick, onEditP
                     <MoreHorizontal size={20} />
                   </button>
                   {dropdownOpen === product._id && (
-                    <div className="absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-lg py-1 z-10">
+                    <div className="absolute right-0 mt-0 w-48 bg-white rounded-xl shadow-lg py-0 z-10">
                       <button 
-                        className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                        className="block w-full text-left px-4 py-2 text-sm text-cyan-700 hover:bg-cyan-100"
                         onClick={() => {
                           setDropdownOpen(null);
                           onEditProduct(product);
@@ -148,7 +148,7 @@ const ProductTable = ({ products, searchTerm, setSearchTerm, onAddClick, onEditP
                       </button>
 
                       <button 
-                        className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                        className="block w-full text-left px-4 py-2 text-sm text-green-700 hover:bg-green-100"
                         onClick={() => {
                           setSelectedProductId(product._id);
                           setShowAddImageModal(true);
@@ -175,7 +175,7 @@ const ProductTable = ({ products, searchTerm, setSearchTerm, onAddClick, onEditP
         </table>
       </div>
       {showAddImageModal && (
-        <AddProductImages
+        <AddProductImagesModal
           productId={selectedProductId}
           onClose={() => setShowAddImageModal(false)}
         />

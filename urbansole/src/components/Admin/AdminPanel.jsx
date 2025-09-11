@@ -5,6 +5,38 @@ import AddProductModal from "./AddProductModal";
 import UpdateProductModal from "./UpdateProductModal";
 
 
+const dummyProducts = [
+  {
+    _id: "1",
+    name: "Running Shoes",
+    description: "Comfortable running shoes",
+    brand: "Nike",
+    price: 120,
+    stock: 50,
+    for: "Male",
+    color: "Black/White",
+    category: { id: "cat1", name: "Shoes" },
+    rating: 4.5,
+    ratedBy: 200,
+    attributes: ["newArrival", "trending"],
+  },
+  {
+    _id: "2",
+    name: "Running Shoes",
+    description: "Comfortable running shoes",
+    brand: "Nike",
+    price: 120,
+    stock: 50,
+    for: "Male",
+    color: "Black/White",
+    category: { id: "cat1", name: "Shoes" },
+    rating: 4.5,
+    ratedBy: 200,
+    attributes: ["newArrival", "trending"],
+  },
+]
+
+
 import {
   Home,
   ShoppingBag,
@@ -93,7 +125,7 @@ const Header = () => (
 const AdminPanelApp = () => {
   const [activeTab, setActiveTab] = useState("products");
   const [searchTerm, setSearchTerm] = useState("");
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState(dummyProducts);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null)
