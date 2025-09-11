@@ -27,7 +27,7 @@ const productSchema = new Schema(
     },
     for: {
       type: String,
-      enum: ["male", "female"], // only allowed values
+      enum: ["Male", "Female"], // only allowed values
       required: true,
     },
     color: {
