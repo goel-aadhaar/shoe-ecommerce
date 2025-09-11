@@ -155,11 +155,13 @@ const AdminPanelApp = () => {
   }, []);
 
   const handleAddProduct = async (newProduct) => {
-    console.log("Adding product:,,,,,,,,");
+    console.log("Adding product:,,,,,,,,", newProduct);
     try {
+      console.log('New Product Data:', newProduct);
       const response = await axios.post(
         "https://api-shoe-ecommerce.onrender.com/api/v1/products",
-        newProduct
+        newProduct,
+         { withCredentials: true }
       );
 
       console.log("Product added successfully!", response.data);
