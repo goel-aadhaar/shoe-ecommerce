@@ -3,6 +3,8 @@ import { Search, Plus, MoreHorizontal } from "lucide-react";
 
 const ProductTable = ({ products, searchTerm, setSearchTerm, onAddClick, onEditProduct, onDeleteProduct }) => {
   const [dropdownOpen, setDropdownOpen] = useState(null);
+  const [showAddImageModal, setShowAddImageModal] = useState(false);
+  const [selectedProductId, setSelectedProductId] = useState(null);
 
   // filter by name (safe check)
   const filteredProducts = products.filter((p) =>
@@ -143,6 +145,17 @@ const ProductTable = ({ products, searchTerm, setSearchTerm, onAddClick, onEditP
                       >
                         Edit Product Details
                       </button>
+
+                      <button 
+                        className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                        onClick={() => {
+                          setSelectedProductId(product._id);
+                          setShowAddImageModal(true);
+                        }}
+                      >
+                        Add Product Images
+                      </button>
+
                       <button 
                         className="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50"
                         onClick={() => {
@@ -160,6 +173,12 @@ const ProductTable = ({ products, searchTerm, setSearchTerm, onAddClick, onEditP
           </tbody>
         </table>
       </div>
+      {showAddImageModal && (
+        <AddProductImages
+          productId={selectedProductId}
+          onClose={() => setShowAddImageModal(false)}
+        />
+      )}
     </div>
   );
 };

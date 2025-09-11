@@ -5,11 +5,7 @@ import { ApiError } from "../utils/ApiError.js";
 
 // Get user profile
 export const getProfile = asyncHandler(async (req, res) => {
-   
 
-    // res.status(200).json(
-    //     new ApiResponse(200, "Profile fetched successfully", profile)
-    // );
     try {
         const profile = await Profile.findOne({ userId: req.user.id });
         const user = await User.findById(req.user._id).select("-password");

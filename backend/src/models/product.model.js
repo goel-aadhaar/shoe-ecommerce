@@ -51,6 +51,10 @@ const productSchema = new Schema(
       enum: ["newArrival", "trending", "bestSeller", "onSale"],
       default: [],
     },
+    imageSet: {
+      type: Schema.Types.ObjectId,
+      ref: "ProductImage",
+    },
   },
   {
     timestamps: true,
