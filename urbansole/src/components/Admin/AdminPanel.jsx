@@ -11,41 +11,6 @@ import {
   Users,
 } from "lucide-react";
 
-// A simple in-memory database to simulate MERN data fetching
-// const generateProducts = (count) => {
-//   const products = [];
-//   const productNames = [
-//     "Classic Loafer",
-//     "Stylish Sneaker",
-//     "Leather Oxford",
-//     "Running Shoe",
-//     "Hiking Boot",
-//     "Sandals",
-//     "Winter Boots",
-//     "Formal Pumps",
-//     "Athletic Trainers",
-//     "Slip-on Moccasin",
-//   ];
-//   const categories = ["Men's", "Women's", "Kids'", "Unisex"];
-//   const brands = ["Nike", "Adidas", "Puma", "Reebok", "New Balance"];
-//   const attributes = ["Popular", "New Arrival", "Bestseller", "On Sale"];
-//   const statuses = ["In Stock", "Out of Stock", "Discontinued"];
-
-//   for (let i = 0; i < count; i++) {
-//     products.push({
-//       _id: Math.random().toString(36).substr(2, 9),
-//       name: productNames[i % productNames.length],
-//       category: categories[i % categories.length],
-//       price: `$${(Math.random() * 100 + 50).toFixed(2)}`,
-//       brand: brands[i % brands.length],
-//       attributes: attributes[i % attributes.length],
-//       status: statuses[i % statuses.length],
-//     });
-//   }
-//   return products;
-// // };
-// const products = [];
-
 const Sidebar = ({ activeTab, setActiveTab }) => (
   <aside className="w-64 bg-black text-white flex flex-col h-full rounded-l-2xl shadow-xl">
     <div className="p-6 text-2xl font-bold flex items-center space-x-2 border-b border-white">
@@ -132,7 +97,7 @@ const AdminPanelApp = () => {
   const [error, setError] = useState(null);
   const fetchProducts = async () => {
     console.log("Fetching products...");
-    
+
     setLoading(true);
     setError(null);
     try {
@@ -156,11 +121,11 @@ const AdminPanelApp = () => {
   const handleAddProduct = async (newProduct) => {
     console.log("Adding product:,,,,,,,,", newProduct);
     try {
-      console.log('New Product Data:', newProduct);
+      console.log("New Product Data:", newProduct);
       const response = await axios.post(
         "https://api-shoe-ecommerce.onrender.com/api/v1/products",
         newProduct,
-         { withCredentials: true }
+        { withCredentials: true }
       );
 
       console.log("Product added successfully!", response.data);
