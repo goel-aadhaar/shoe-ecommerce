@@ -4,6 +4,8 @@ import { ApiResponse } from "../utils/ApiResponse.js";
 
 // CRUD
 export const createProduct = asyncHandler(async (req, res) => {
+    console.log("Creating product with data:", req.body);
+    
     const product = await Product.create(req.body);
 
     res.status(201).json(
@@ -12,6 +14,8 @@ export const createProduct = asyncHandler(async (req, res) => {
 });
 
 export const getProducts = asyncHandler(async (req, res) => {
+    console.log("Fetching products from database...");
+    
     const products = await Product.find().populate("categoryId");
 
     res.status(200).json(

@@ -132,6 +132,8 @@ const AdminPanelApp = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const fetchProducts = async () => {
+    console.log("Fetching products...");
+    
     setLoading(true);
     setError(null);
     try {
@@ -153,6 +155,7 @@ const AdminPanelApp = () => {
   }, []);
 
   const handleAddProduct = async (newProduct) => {
+    console.log("Adding product:,,,,,,,,");
     try {
       const response = await axios.post(
         "https://api-shoe-ecommerce.onrender.com/api/v1/products",
