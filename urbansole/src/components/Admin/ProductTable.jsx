@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Search, Plus, MoreHorizontal } from "lucide-react";
 
-const ProductTable = ({ products, searchTerm, setSearchTerm, onAddClick }) => {
+const ProductTable = ({ products, searchTerm, setSearchTerm, onAddClick, onEditProduct }) => {
   const [dropdownOpen, setDropdownOpen] = useState(null);
 
   // filter by name (safe check)
@@ -134,10 +134,22 @@ const ProductTable = ({ products, searchTerm, setSearchTerm, onAddClick }) => {
                   </button>
                   {dropdownOpen === product._id && (
                     <div className="absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-lg py-1 z-10">
-                      <button className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                      <button 
+                        className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                        onClick={() => {
+                          setDropdownOpen(null);
+                          onEditProduct(product);
+                        }}
+                      >
                         Edit Product Details
                       </button>
-                      <button className="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50">
+                      <button 
+                        className="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50"
+                        onClick={() => {
+                          setDropdownOpen(null);
+                          onDeleteProduct(product._id);
+                        }}
+                        >
                         Delete Product
                       </button>
                     </div>

@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import ProductTable from "./ProductTable";
 import AddProductModal from "./AddProductModal";
+import UpdateProductModal from "./UpdateProductModal";
+
 
 import {
   Home,
@@ -93,6 +95,8 @@ const AdminPanelApp = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [products, setProducts] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState(null)
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const fetchProducts = async () => {
@@ -138,6 +142,43 @@ const AdminPanelApp = () => {
     }
   };
 
+  const handleEditProduct = (product) => {
+    setSelectedProduct(product);
+    setIsEditModalOpen(true);
+  };
+  
+  const handleSaveUpdate = async (updatedProduct) => {
+    try {
+      const response = await axios.put(
+        `https://api-shoe-ecommerce.onrender.com/api/v1/products/${updatedProduct._id}`,
+        updatedProduct
+      );
+
+      // Update local state
+      setProducts(products.map((p) =>
+        p._id === updatedProduct._id ? response.data : p
+      ));
+
+      alert("Product updated successfully!");
+      setIsEditModalOpen(false);
+      setSelectedProduct(null);
+    } catch (error) {
+      console.error("Update failed:", error);
+      alert("Failed to update product");
+    }
+  };
+
+  const handleDeleteProduct = async (id) => {
+    if (!window.confirm("Are you sure you want to delete this product?")) return;
+    try {
+      await axios.delete(`/api/v1/products/${id}`);
+      setProducts(products.filter(p => p._id !== id));
+    } catch (err) {
+      console.error("Error deleting product:", err);
+    }
+  };
+
+
   return (
     <div className="flex h-screen bg-gray-100 p-8 font-sans">
       <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} />
@@ -147,6 +188,8 @@ const AdminPanelApp = () => {
           products={products}
           searchTerm={searchTerm}
           setSearchTerm={setSearchTerm}
+          onEditProduct={handleEditProduct}
+          onDeleteProduct={handleDeleteProduct}
           onAddClick={() => setIsModalOpen(true)}
         />
         <AddProductModal
@@ -154,6 +197,15 @@ const AdminPanelApp = () => {
           onClose={() => setIsModalOpen(false)}
           onSave={handleAddProduct}
         />
+
+        {isEditModalOpen && selectedProduct && (
+          <UpdateProductModal
+            isOpen={isEditModalOpen}
+            onClose={() => setIsEditModalOpen(false)}
+            product={selectedProduct}
+            onSave={handleSaveUpdate}  // <-- triggers PUT request
+          />
+        )}
       </div>
     </div>
   );
