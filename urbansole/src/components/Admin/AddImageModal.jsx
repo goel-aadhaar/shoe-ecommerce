@@ -1,6 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
-import AddProductImages from "./AddImageModal";
+
 
 export default function AddProductImages({ productId, onClose }) {
   const [thumbnail, setThumbnail] = useState(null);

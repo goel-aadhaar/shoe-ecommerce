@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Search, Plus, MoreHorizontal } from "lucide-react";
+import AddProductImages from "./AddImageModal";
 
 const ProductTable = ({ products, searchTerm, setSearchTerm, onAddClick, onEditProduct, onDeleteProduct }) => {
   const [dropdownOpen, setDropdownOpen] = useState(null);
