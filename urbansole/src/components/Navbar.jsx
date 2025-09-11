@@ -5,8 +5,8 @@ import {Heart, Search,Menu, UserRoundIcon, ShoppingCart} from 'lucide-react';
 const Navbar = ({ onProfileClick }) => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const navLinks = [
-        {navName : "New Arrival", to : 'collections/NewArrival'}, 
-        {navName:  "Shoes", to :'collections/shoe'}, 
+        {navName: "New Arrival", to : 'collections/NewArrival'}, 
+        {navName: "Shoes", to :'collections/shoe'}, 
         {navName: "Crocks", to : 'collections/crocks'}, 
         {navName: "Brands",to : '/brandsLogo'}, 
         {navName: "Home", to :'/'}

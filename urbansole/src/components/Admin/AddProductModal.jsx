@@ -4,17 +4,15 @@ import {X} from 'lucide-react';
 const AddProductModal = ({ isOpen, onClose, onSave }) => {
   const attributeOptions = ["newArrival", "trending", "bestSeller", "onSale"];
   const categoryOptions = [
-    { id: "65d506a7c3e80f93021f1e7a", name: "Men's Shoes" },
-    { id: "65d506a7c3e80f93021f1e7b", name: "Women's Shoes" },
-    { id: "65d506a7c3e80f93021f1e7c", name: "Kids' Shoes" },
+    { id: "65d506a7c3e80f93021f1e7a", name: "Shoes" },
+    { id: "65d506a7c3e80f93021f1e7b", name: "Clogs" }
   ];
   const forOptions = [
     {id:"65d506a7c3e80f21m1e7a", name : "Male"},
-    {id:"65d506a7c3e80f23f1e7a", name: "Female"},
+    {id:"65d506a7c3e80f23f1e7a", name: "Female"}
   ]
 
   const [product, setProduct] = useState({
-    id: '',
     name: '',
     description: '',
     brand: '',
@@ -61,17 +59,13 @@ const AddProductModal = ({ isOpen, onClose, onSave }) => {
     <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center z-50">
       <div className="bg-white p-8 rounded-2xl shadow-2xl w-full max-w-2xl mx-4">
         <div className="flex justify-between items-center mb-6">
-          <h3 className="text-2xl font-bold">Add New Product</h3>
+          <h3 className="text-2xl font-bold text-black">Add New Product</h3>
           <button onClick={onClose} className="text-gray-400 hover:text-gray-600 transition-colors">
             <X size={24} />
           </button>
         </div>
-        <form onSubmit={handleSubmit} className="space-y-4 text-black">
+        <form onSubmit={handleSubmit} className="space-y-4 text-black max-h-[70vh] overflow-y-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-700">Product ID<span className="text-red-500 ml-1">*</span></label>
-              <input type="number" name="id" value={product.id} onChange={handleChange} minLength={4} required className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" />
-            </div>
             <div>
               <label className="block text-sm font-medium text-gray-700">Product Name<span className="text-red-500 ml-1">*</span></label>
               <input type="text" name="name" value={product.name} onChange={handleChange} required className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" />

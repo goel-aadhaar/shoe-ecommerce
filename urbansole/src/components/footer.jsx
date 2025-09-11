@@ -32,7 +32,7 @@ export default function Footer() {
             <li><Link to={'/support'} className="hover:text-red-500 text-sm text-white">HELP CENTER</Link></li>
             <li><a href="#" className="hover:text-red-500 text-sm text-white">FAQ</a></li>
             <li><a href="#" className="hover:text-red-500 text-sm text-white">PRIVACY POLICY</a></li>
-            <li><a href="#" className="hover:text-red-500 text-sm text-white">PARTNER WITH US</a></li>
+            <li><Link to={'/admin'} className="hover:text-red-500 text-sm text-white">Admin</Link></li>
             <li><a href="#" className="hover:text-red-500 text-sm text-white">RETURN & EXCHANGE</a></li>
             <li><a href="#" className="hover:text-red-500 text-sm text-white">TERMS & CONDITIONS</a></li>
             <li><a href="#" className="hover:text-red-500 text-sm text-white">ORDER & SHIPPING</a></li>
