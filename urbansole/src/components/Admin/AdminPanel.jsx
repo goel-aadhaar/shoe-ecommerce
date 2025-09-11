@@ -146,12 +146,13 @@ const AdminPanelApp = () => {
     setSelectedProduct(product);
     setIsEditModalOpen(true);
   };
-  
+
   const handleSaveUpdate = async (updatedProduct) => {
     try {
       const response = await axios.put(
         `https://api-shoe-ecommerce.onrender.com/api/v1/products/${updatedProduct._id}`,
-        updatedProduct
+        updatedProduct,
+         { withCredentials: true }
       );
 
       // Update local state
@@ -171,7 +172,9 @@ const AdminPanelApp = () => {
   const handleDeleteProduct = async (id) => {
     if (!window.confirm("Are you sure you want to delete this product?")) return;
     try {
-      await axios.delete(`/api/v1/products/${id}`);
+      await axios.delete(`https://api-shoe-ecommerce.onrender.com/api/v1/products/${id}`,
+         { withCredentials: true }
+      );
       setProducts(products.filter(p => p._id !== id));
     } catch (err) {
       console.error("Error deleting product:", err);
