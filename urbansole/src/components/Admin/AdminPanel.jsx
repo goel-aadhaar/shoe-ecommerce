@@ -129,7 +129,7 @@ const AdminPanelApp = () => {
       );
 
       console.log("Product added successfully!", response.data);
-      fetchProducts(); // Refresh the product list
+      fetchProducts();
     } catch (e) {
       console.error("Failed to add product:", e);
       setError(

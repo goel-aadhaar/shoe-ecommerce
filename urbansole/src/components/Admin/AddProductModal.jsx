@@ -53,6 +53,19 @@ const AddProductModal = ({ isOpen, onClose, onSave }) => {
     e.preventDefault();
     onSave(product);
     onClose();
+    setProduct({
+      name: '',
+      description: '',
+      brand: '',
+      for: '',
+      price: '',
+      stock: '',
+      color: '',
+      category: '',
+      rating: '',
+      ratedBy: '',
+      attributes: [],
+    })
   };
 
   return (
@@ -91,15 +104,6 @@ const AddProductModal = ({ isOpen, onClose, onSave }) => {
               <label className="block text-sm font-medium text-gray-700">Description</label>
               <textarea name="description" value={product.description} onChange={handleChange} className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"></textarea>
             </div>
-            {/* <div>
-              <label className="block text-sm font-medium text-gray-700">Category<span className="text-red-500 ml-1">*</span></label>
-              <select name="categoryId" value={product.categoryId} onChange={handleChange} required className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
-                <option value="" disabled>Select a category</option>
-                {categoryOptions.map(cat => (
-                  <option key={cat.id} value={cat.id}>{cat.name}</option>
-                ))}
-              </select>
-            </div> */}
             <div>
               <label className="block text-sm font-medium text-gray-700">Category</label>
               <select name="category" value={product.category} onChange={handleChange} required className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
