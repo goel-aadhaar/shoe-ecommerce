@@ -15,7 +15,7 @@ router.put("/:id", authMiddleware, adminMiddleware, updateProduct);
 router.delete("/:id", authMiddleware, adminMiddleware, deleteProduct);
 
 // Product images
-router.post("/images", authMiddlewar    e, adminMiddleware, addProductImage);
+router.post("/images", authMiddleware, adminMiddleware, addProductImage);
 
 // Reviews
 router.post("/reviews", authMiddleware, addReview);
