@@ -20,7 +20,7 @@ const AddProductModal = ({ isOpen, onClose, onSave }) => {
     price: '',
     stock: '',
     color: '',
-    categoryId: '',
+    category: '',
     rating: '',
     ratedBy: '',
     attributes: [],
@@ -91,7 +91,7 @@ const AddProductModal = ({ isOpen, onClose, onSave }) => {
               <label className="block text-sm font-medium text-gray-700">Description</label>
               <textarea name="description" value={product.description} onChange={handleChange} className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"></textarea>
             </div>
-            <div>
+            {/* <div>
               <label className="block text-sm font-medium text-gray-700">Category<span className="text-red-500 ml-1">*</span></label>
               <select name="categoryId" value={product.categoryId} onChange={handleChange} required className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
                 <option value="" disabled>Select a category</option>
@@ -99,8 +99,15 @@ const AddProductModal = ({ isOpen, onClose, onSave }) => {
                   <option key={cat.id} value={cat.id}>{cat.name}</option>
                 ))}
               </select>
+            </div> */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700">Category</label>
+              <select name="category" value={product.category} onChange={handleChange} required className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                <option value="" disabled>Select a category</option>
+                <option key={shoes} value="shoes">Shoes</option>
+                <option key={clogs} value="clogs">Clogs</option>
+              </select>
             </div>
-
             <div>
               <label className="block text-sm font-medium text-gray-700">For</label>
               <select name="for" value={product.for} onChange={handleChange} required className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
@@ -110,7 +117,6 @@ const AddProductModal = ({ isOpen, onClose, onSave }) => {
                 ))}
               </select>
             </div>
-
             <div>
               <label className="block text-sm font-medium text-gray-700">Rating</label>
               <input type="number" name="rating" value={product.rating} onChange={handleChange} min="0" max="5" step="0.1" className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" />

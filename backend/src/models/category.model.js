@@ -1,21 +1,18 @@
 import mongoose, { Schema } from "mongoose";
 
 const categorySchema = new Schema(
-    {
-        name: {
-            type: String,
-            required: true,
-            trim: true,
-        },
-        parentId: {
-            type: Schema.Types.ObjectId,
-            ref: "Category",
-            default: null,
-        },
+  {
+    name: {
+      type: String,
+      required: true,
+      enum: ["shoes", "clogs"],
+      unique: true,             
+      trim: true,
     },
-    {
-        timestamps: true,
-    }
+  },
+  {
+    timestamps: true,
+  }
 );
 
 export const Category = mongoose.model("Category", categorySchema);
