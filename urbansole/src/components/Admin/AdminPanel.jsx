@@ -159,6 +159,7 @@ const AdminPanelApp = () => {
       setProducts(products.map((p) =>
         p._id === updatedProduct._id ? response.data : p
       ));
+      fetchProducts();
 
       alert("Product updated successfully!");
       setIsEditModalOpen(false);
