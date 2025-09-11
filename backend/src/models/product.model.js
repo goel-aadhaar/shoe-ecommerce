@@ -35,9 +35,8 @@ const productSchema = new Schema(
       default: "SAIL/BURGUNDY CRUSH-BLACK",
     },
     category: {
-      type: String,
-      enum: ["shoes", "clogs"], // only 2 categories allowed
-      required: true,
+      type: Schema.Types.ObjectId,
+      ref: "Category",
     },
     rating: {
       type: Number,
