@@ -148,6 +148,7 @@ const AdminPanelApp = () => {
   };
 
   const handleSaveUpdate = async (updatedProduct) => {
+    console.log("Saving updated product:", updatedProduct);
     try {
       const response = await axios.put(
         `https://api-shoe-ecommerce.onrender.com/api/v1/products/${updatedProduct._id}`,
@@ -170,6 +171,7 @@ const AdminPanelApp = () => {
   };
 
   const handleDeleteProduct = async (id) => {
+    console.log("Deleting product with id:", id);
     if (!window.confirm("Are you sure you want to delete this product?")) return;
     try {
       await axios.delete(`https://api-shoe-ecommerce.onrender.com/api/v1/products/${id}`,

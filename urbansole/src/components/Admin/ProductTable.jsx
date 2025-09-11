@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Search, Plus, MoreHorizontal } from "lucide-react";
 
-const ProductTable = ({ products, searchTerm, setSearchTerm, onAddClick, onEditProduct }) => {
+const ProductTable = ({ products, searchTerm, setSearchTerm, onAddClick, onEditProduct, onDeleteProduct }) => {
   const [dropdownOpen, setDropdownOpen] = useState(null);
 
   // filter by name (safe check)
