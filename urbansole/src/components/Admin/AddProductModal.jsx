@@ -3,9 +3,9 @@ import {X} from 'lucide-react';
 
 const AddProductModal = ({ isOpen, onClose, onSave }) => {
   const attributeOptions = ["newArrival", "trending", "bestSeller", "onSale"];
-  const categoryOptions = [
-    { id: "65d506a7c3e80f93021f1e7a", name: "Shoes" },
-    { id: "65d506a7c3e80f93021f1e7b", name: "Clogs" }
+  const category = [
+    { id: "68c2b3c360f6de3da49615b2", name: "Shoes" },
+    { id: "68c2b3f260f6de3da49615b3", name: "Clogs" }
   ];
   const forOptions = [
     {id:"65d506a7c3e80f21m1e7a", name : "Male"},
@@ -104,8 +104,11 @@ const AddProductModal = ({ isOpen, onClose, onSave }) => {
               <label className="block text-sm font-medium text-gray-700">Category</label>
               <select name="category" value={product.category} onChange={handleChange} required className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
                 <option value="" disabled>Select a category</option>
-                <option key="shoes" value="shoes">Shoes</option>
-                <option key="clogs" value="clogs">Clogs</option>
+                {
+                  category.map(cat => (
+                    <option key={cat.id} value={cat.id}>{cat.name}</option>
+                  ))
+                }
               </select>
             </div>
             <div>
