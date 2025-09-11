@@ -38,7 +38,7 @@ const ProfilePage = () => {
         const response = await axios.get('https://api-shoe-ecommerce.onrender.com/api/v1/users/profile', {
           withCredentials: true // Crucial to send the cookies
         });
-        console.log("printingggggggg...     " , response);
+        console.log("printingggggggg... " , response);
         
         console.log("Response status: ", response?.status);
         // console.log("Response data: ", response?.user);
@@ -118,10 +118,13 @@ const ProfilePage = () => {
           </p>
         </Section>
 
-        <button onClick={handleLogout} className="w-full bg-black text-white py-3 rounded-full font-semibold mt-6 flex items-center justify-center space-x-2 shadow-lg hover:bg-gray-800 transition-colors">
+        <button 
+          onClick={handleLogout} 
+          className="w-full bg-black text-white py-3 rounded-full font-semibold mt-6 flex items-center justify-center space-x-2 shadow-lg hover:bg-gray-800 transition-colors">
           <LogOut size={20} className="text-white" />
           <span>Log out</span>
         </button>
+        
       </div>
     </div>
   );
