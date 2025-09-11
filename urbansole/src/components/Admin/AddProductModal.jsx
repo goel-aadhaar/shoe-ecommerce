@@ -116,7 +116,7 @@ const AddProductModal = ({ isOpen, onClose, onSave }) => {
               <select name="for" value={product.for} onChange={handleChange} required className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
                 <option value="" disabled>Select a category</option>
                 {forOptions.map(cat => (
-                  <option key={cat.id} value={cat.id}>{cat.name}</option>
+                  <option key={cat.id} value={cat.name}>{cat.name}</option>
                 ))}
               </select>
             </div>
