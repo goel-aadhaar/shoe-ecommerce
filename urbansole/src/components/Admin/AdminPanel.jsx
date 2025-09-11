@@ -147,11 +147,11 @@ const AdminPanelApp = () => {
     setIsEditModalOpen(true);
   };
 
-  const handleSaveUpdate = async (updatedProduct) => {
-    console.log("Saving updated product:", updatedProduct);
+  const handleSaveUpdate = async (id, updatedProduct) => {
+    console.log("Saving updated product id :", id, "Our product is " ,updatedProduct);
     try {
       const response = await axios.put(
-        `https://api-shoe-ecommerce.onrender.com/api/v1/products/${updatedProduct._id}`,
+        `https://api-shoe-ecommerce.onrender.com/api/v1/products/${id}`,
         updatedProduct,
          { withCredentials: true }
       );
