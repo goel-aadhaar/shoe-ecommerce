@@ -1,6 +1,6 @@
 import multer from "multer";
 import { v2 as cloudinary } from "cloudinary";
-import { CloudinaryStorage } from "multer-storage-cloudinary";
+import streamifier from "streamifier";
 
 // Configure Cloudinary
 cloudinary.config({
@@ -9,16 +9,22 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-// Set up Cloudinary storage
-const storage = new CloudinaryStorage({
-  cloudinary,
-  params: {
-    folder: "ecommerce_products", // same folder you had
-    allowed_formats: ["jpg", "png", "jpeg", "webp"],
-  },
-});
-
-// Multer middleware
+// Multer memory storage (stores files in memory)
+const storage = multer.memoryStorage();
 const upload = multer({ storage });
 
-export default upload;
+// Function to upload buffer to Cloudinary
+const uploadToCloudinary = (buffer, folder) => {
+  return new Promise((resolve, reject) => {
+    const stream = cloudinary.uploader.upload_stream(
+      { folder },
+      (error, result) => {
+        if (error) return reject(error);
+        resolve(result);
+      }
+    );
+    streamifier.createReadStream(buffer).pipe(stream);
+  });
+};
+
+export { upload, uploadToCloudinary };
