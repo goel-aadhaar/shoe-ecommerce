@@ -22,6 +22,10 @@ export default function AddProductImagesModal({ productId, onClose }) {
   const getProductName = async () => {
     try {
       const response = await axios.get('https://api-shoe-ecommerce.onrender.com/api/v1/products/' + productId);
+      console.log( "Response:  ", response);
+      console.log("Response data ", response.data);
+      console.log(response.data.product);
+      
       setProductName(response.data.product.name);
     } catch (error) {
       console.error('Error fetching product name:', error);
