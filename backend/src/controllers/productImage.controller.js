@@ -1,36 +1,44 @@
+import { ProductImage } from "../models/productImage.model.js";
 import { uploadToCloudinary } from "../middlewares/upload.middleware.js";
-import {Product} from "../models/product.model.js";
 
 export const addProductImageById = async (req, res) => {
   try {
-    const product = await Product.findById(req.params.productId);
-    if (!product) return res.status(404).json({ message: "Product not found" });
+    const { productId } = req.params;
+    const files = req.files; // thumbnail, hover, sides
+    const uploadedImages = {};
 
-    // Upload thumbnail
-    if (req.files.thumbnail) {
-      const result = await uploadToCloudinary(req.files.thumbnail[0].buffer, "products");
-      product.thumbnail = result.secure_url;
+    if (files.thumbnail) {
+      const result = await uploadToCloudinary(files.thumbnail[0].buffer, "ecommerce_products");
+      uploadedImages.thumbnail = result.secure_url;
     }
 
-    // Upload hover
-    if (req.files.hover) {
-      const result = await uploadToCloudinary(req.files.hover[0].buffer, "products");
-      product.hover = result.secure_url;
+    if (files.hover) {
+      const result = await uploadToCloudinary(files.hover[0].buffer, "ecommerce_products");
+      uploadedImages.hover = result.secure_url;
     }
 
-    // Upload sides
-    if (req.files.sides) {
-      product.sides = [];
-      for (const file of req.files.sides) {
-        const result = await uploadToCloudinary(file.buffer, "products");
-        product.sides.push(result.secure_url);
+    if (files.sides) {
+      uploadedImages.sides = [];
+      for (const side of files.sides) {
+        const result = await uploadToCloudinary(side.buffer, "ecommerce_products");
+        uploadedImages.sides.push(result.secure_url);
       }
     }
 
-    await product.save();
-    res.status(200).json(product);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: "Upload failed", error: err.message });
+    // ✅ Upsert into ProductImage collection
+    const productImage = await ProductImage.findOneAndUpdate(
+      { productId },
+      { $set: uploadedImages, productId },
+      { new: true, upsert: true }
+    );
+
+    res.status(200).json({
+      success: true,
+      message: "Images uploaded & saved successfully!",
+      productImage,
+    });
+  } catch (error) {
+    console.error("Upload error:", error);
+    res.status(500).json({ success: false, message: error.message });
   }
 };
