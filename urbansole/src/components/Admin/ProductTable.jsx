@@ -17,7 +17,7 @@ const ProductTable = ({ products, searchTerm, setSearchTerm, onAddClick, onEditP
   };
 
   return (
-    <div className="bg-white p-6 rounded-b-xl shadow-lg max-h-full overflow-y-auto">
+    <div className="bg-white p-4 rounded-b-xl shadow-lg max-h-full overflow-y-auto">
       {/* Header */}
       <div className="flex items-center justify-between mb-4">
         <div className="flex space-x-4">
