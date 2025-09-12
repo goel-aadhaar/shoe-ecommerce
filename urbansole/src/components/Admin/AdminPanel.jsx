@@ -221,8 +221,8 @@ const AdminPanelApp = () => {
     <>
       <Navbar />
       <div className="flex mt-20 h-screen bg-gray-100 px-12 py-5 font-sans">
-        <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} />
-        <div className="w-4/5 flex-1 flex flex-col pl-2"> 
+        <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} className="w-1/5" />
+        <div className="w-4/5 flex flex-col pl-2">
           <Header />
           <ProductTable
             products={products}

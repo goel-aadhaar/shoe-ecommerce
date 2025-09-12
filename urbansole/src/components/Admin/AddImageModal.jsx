@@ -66,7 +66,9 @@ export default function AddProductImagesModal({ productId, onClose }) {
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 backdrop-blur-sm">
       <div className="bg-white rounded-lg shadow-xl p-8 max-w-lg w-full transform transition-all scale-100 opacity-100">
         <div className="flex justify-between items-center mb-6">
-          <h2 className="text-2xl font-semibold text-gray-800">Add Images for {productName}</h2>
+          <h2 className="text-2xl font-semibold text-gray-800 max-w-[320px] truncate">
+            Add Images for {productName}
+          </h2>
           <button
             onClick={onClose}
             className="text-gray-400 hover:text-gray-600 transition-colors"

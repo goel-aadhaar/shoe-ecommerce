@@ -87,16 +87,14 @@ const ProductTable = ({ products, searchTerm, setSearchTerm, onAddClick, onEditP
             {filteredProducts.map((product) => (
               <tr key={product._id}>
                 {/* Name */}
-                <td className="px-6 py-3 max-h-[150px] text-sm font-medium text-gray-900">
+                <td className="px-6 py-3 max-h-[200px] text-sm font-medium text-gray-900">
                   {product.name}
                 </td>
 
-                {/* MongoDB _id */}
                 <td className="px-6 py-3 whitespace-nowrap text-sm text-gray-500">
                   {product._id}
                 </td>
 
-                {/* Category (populated or id) */}
                 <td className="px-6 py-3 whitespace-nowrap text-sm text-gray-500">
                   {product.category?.name || "Uncategorized"}
                 </td>
