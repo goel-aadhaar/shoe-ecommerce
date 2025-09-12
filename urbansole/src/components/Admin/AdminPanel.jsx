@@ -3,7 +3,8 @@ import axios from "axios";
 import ProductTable from "./ProductTable";
 import AddProductModal from "./AddProductModal";
 import UpdateProductModal from "./UpdateProductModal";
-
+import Navbar from "../Navbar";
+import Footer from "../Footer";
 
 const dummyProducts = [
   {
@@ -18,7 +19,7 @@ const dummyProducts = [
     category: { id: "cat1", name: "Shoes" },
     rating: 4.5,
     ratedBy: 200,
-    attributes: ["newArrival", "trending","bestSeller", "onsale"],
+    attributes: ["newArrival", "trending", "bestSeller", "onsale"],
   },
   {
     _id: "2",
@@ -33,9 +34,8 @@ const dummyProducts = [
     rating: 4.5,
     ratedBy: 200,
     attributes: ["newArrival", "trending"],
-  }
-]
-
+  },
+];
 
 import {
   Home,
@@ -46,7 +46,7 @@ import {
 } from "lucide-react";
 
 const Sidebar = ({ activeTab, setActiveTab }) => (
-  <aside className="w-72 bg-black text-white flex flex-col h-full rounded-l-2xl shadow-xl">
+  <aside className="w-1/5 bg-black text-white flex flex-col h-full rounded-l-2xl shadow-xl">
     <div className="p-6 text-2xl font-bold flex items-center space-x-2 border-b border-white">
       <ShoppingBag size={28} />
       <span>Admin Panel</span>
@@ -128,7 +128,7 @@ const AdminPanelApp = () => {
   const [products, setProducts] = useState(dummyProducts);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-  const [selectedProduct, setSelectedProduct] = useState(null)
+  const [selectedProduct, setSelectedProduct] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const fetchProducts = async () => {
@@ -180,7 +180,7 @@ const AdminPanelApp = () => {
   };
 
   const handleSaveUpdate = async (id, updatedProduct) => {
-    console.log("Saving updated product id :",updatedProduct);
+    console.log("Saving updated product id :", updatedProduct);
     try {
       const response = await axios.put(
         `https://api-shoe-ecommerce.onrender.com/api/v1/products/${id}`,
@@ -188,9 +188,9 @@ const AdminPanelApp = () => {
         { withCredentials: true }
       );
       console.log("Product updated successfully!", response.data);
-      setProducts(products.map((p) =>
-        p._id === updatedProduct._id ? response.data : p
-      ));
+      setProducts(
+        products.map((p) => (p._id === updatedProduct._id ? response.data : p))
+      );
       fetchProducts();
 
       alert("Product updated successfully!");
@@ -204,47 +204,52 @@ const AdminPanelApp = () => {
 
   const handleDeleteProduct = async (id) => {
     console.log("Deleting product with id:", id);
-    if (!window.confirm("Are you sure you want to delete this product?")) return;
+    if (!window.confirm("Are you sure you want to delete this product?"))
+      return;
     try {
-      await axios.delete(`https://api-shoe-ecommerce.onrender.com/api/v1/products/${id}`,
-         { withCredentials: true }
+      await axios.delete(
+        `https://api-shoe-ecommerce.onrender.com/api/v1/products/${id}`,
+        { withCredentials: true }
       );
-      setProducts(products.filter(p => p._id !== id));
+      setProducts(products.filter((p) => p._id !== id));
     } catch (err) {
       console.error("Error deleting product:", err);
     }
   };
 
-
   return (
-    <div className="flex h-screen bg-gray-100 px-12 py-10 font-sans">
-      <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} />
-      <div className="flex-1 flex flex-col pl-2 mr-6">
-        <Header />
-        <ProductTable
-          products={products}
-          searchTerm={searchTerm}
-          setSearchTerm={setSearchTerm}
-          onEditProduct={handleEditProduct}
-          onDeleteProduct={handleDeleteProduct}
-          onAddClick={() => setIsModalOpen(true)}
-        />
-        <AddProductModal
-          isOpen={isModalOpen}
-          onClose={() => setIsModalOpen(false)}
-          onSave={handleAddProduct}
-        />
-
-        {isEditModalOpen && selectedProduct && (
-          <UpdateProductModal
-            isOpen={isEditModalOpen}
-            onClose={() => setIsEditModalOpen(false)}
-            product={selectedProduct}
-            onSave={handleSaveUpdate} 
+    <>
+      <Navbar />
+      <div className="flex mt-20 h-screen bg-gray-100 px-12 py-5 font-sans">
+        <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} />
+        <div className="w-4/5 flex-1 flex flex-col pl-2"> 
+          <Header />
+          <ProductTable
+            products={products}
+            searchTerm={searchTerm}
+            setSearchTerm={setSearchTerm}
+            onEditProduct={handleEditProduct}
+            onDeleteProduct={handleDeleteProduct}
+            onAddClick={() => setIsModalOpen(true)}
           />
-        )}
+          <AddProductModal
+            isOpen={isModalOpen}
+            onClose={() => setIsModalOpen(false)}
+            onSave={handleAddProduct}
+          />
+
+          {isEditModalOpen && selectedProduct && (
+            <UpdateProductModal
+              isOpen={isEditModalOpen}
+              onClose={() => setIsEditModalOpen(false)}
+              product={selectedProduct}
+              onSave={handleSaveUpdate}
+            />
+          )}
+        </div>
       </div>
-    </div>
+      <Footer />
+    </>
   );
 };
 

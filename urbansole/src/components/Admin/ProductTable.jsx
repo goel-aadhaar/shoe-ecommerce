@@ -87,7 +87,7 @@ const ProductTable = ({ products, searchTerm, setSearchTerm, onAddClick, onEditP
             {filteredProducts.map((product) => (
               <tr key={product._id}>
                 {/* Name */}
-                <td className="px-6 py-3 max-h-[120px] text-sm font-medium text-gray-900">
+                <td className="px-6 py-3 max-h-[150px] text-sm font-medium text-gray-900">
                   {product.name}
                 </td>
 
