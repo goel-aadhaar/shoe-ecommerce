@@ -47,7 +47,7 @@ const ProductTable = ({ products, searchTerm, setSearchTerm, onAddClick, onEditP
           </div>
           <button
             onClick={onAddClick}
-            className="bg-black text-white px-4 py-2 rounded-xl flex items-center space-x-2 hover:bg-blue-800 hover:text-blue-100 transition-colors"
+            className="bg-black text-white px-3 py-2 rounded-xl flex items-center space-x-2 hover:bg-blue-800 hover:text-blue-100 transition-colors"
           >
             <Plus size={18} />
             <span>Add new item</span>
@@ -87,37 +87,37 @@ const ProductTable = ({ products, searchTerm, setSearchTerm, onAddClick, onEditP
             {filteredProducts.map((product) => (
               <tr key={product._id}>
                 {/* Name */}
-                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                <td className="px-6 py-3 max-h-[120px] text-sm font-medium text-gray-900">
                   {product.name}
                 </td>
 
                 {/* MongoDB _id */}
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                <td className="px-6 py-3 whitespace-nowrap text-sm text-gray-500">
                   {product._id}
                 </td>
 
                 {/* Category (populated or id) */}
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                <td className="px-6 py-3 whitespace-nowrap text-sm text-gray-500">
                   {product.category?.name || "Uncategorized"}
                 </td>
 
                 {/* Price */}
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                <td className="px-6 py-3 whitespace-nowrap text-sm text-gray-500">
                   ₹{product.price}
                 </td>
 
                 {/* Brand */}
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                <td className="px-6 py-3 whitespace-nowrap text-sm text-gray-500">
                   {product.brand}
                 </td>
 
                 {/* Attributes (array) */}
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                <td className="px-6 py-3 max-w-[200px] text-sm text-gray-500">
                   {product.attributes?.length > 0 ? (
                     product.attributes.map((attr, i) => (
                       <span
                         key={i}
-                        className="px-2 mr-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800"
+                        className="px-2 mt-1 mr-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800"
                       >
                         {attr}
                       </span>
@@ -128,7 +128,7 @@ const ProductTable = ({ products, searchTerm, setSearchTerm, onAddClick, onEditP
                 </td>
 
                 {/* Action Dropdown */}
-                <td className="px-4 py-4 whitespace-nowrap text-sm font-medium text-gray-500 relative">
+                <td className="px-3 py-3 whitespace-nowrap text-sm font-medium text-gray-500 relative">
                   <button
                     onClick={() => toggleDropdown(product._id)}
                     className="p-1 rounded-full hover:bg-gray-100 transition-colors"
@@ -138,7 +138,7 @@ const ProductTable = ({ products, searchTerm, setSearchTerm, onAddClick, onEditP
                   {dropdownOpen === product._id && (
                     <div className="absolute right-0 mt-0 w-48 bg-white rounded-xl shadow-lg py-0 z-10">
                       <button 
-                        className="block w-full text-left px-4 py-2 text-sm text-cyan-700 hover:bg-cyan-100"
+                        className="block w-full text-left px-3 py-2 text-sm text-cyan-700 hover:bg-cyan-100"
                         onClick={() => {
                           setDropdownOpen(null);
                           onEditProduct(product);
@@ -148,7 +148,7 @@ const ProductTable = ({ products, searchTerm, setSearchTerm, onAddClick, onEditP
                       </button>
 
                       <button 
-                        className="block w-full text-left px-4 py-2 text-sm text-green-700 hover:bg-green-100"
+                        className="block w-full text-left px-3 py-2 text-sm text-green-700 hover:bg-green-100"
                         onClick={() => {
                           setSelectedProductId(product._id);
                           setShowAddImageModal(true);
@@ -158,7 +158,7 @@ const ProductTable = ({ products, searchTerm, setSearchTerm, onAddClick, onEditP
                       </button>
 
                       <button 
-                        className="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50"
+                        className="block w-full text-left px-3 py-2 text-sm text-red-600 hover:bg-red-50"
                         onClick={() => {
                           setDropdownOpen(null);
                           onDeleteProduct(product._id);

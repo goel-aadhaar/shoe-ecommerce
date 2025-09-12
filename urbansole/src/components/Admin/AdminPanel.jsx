@@ -7,8 +7,8 @@ import UpdateProductModal from "./UpdateProductModal";
 
 const dummyProducts = [
   {
-    _id: "1",
-    name: "Dummy Shoes",
+    _id: "68c40c037a7016c5895bf06b",
+    name: "Dummy Shoes Ka naam bahut hi jyada hi bada hai.....",
     description: "Comfortable running shoes",
     brand: "Nike",
     price: 120,
@@ -18,7 +18,7 @@ const dummyProducts = [
     category: { id: "cat1", name: "Shoes" },
     rating: 4.5,
     ratedBy: 200,
-    attributes: ["newArrival", "trending"],
+    attributes: ["newArrival", "trending","bestSeller", "onsale"],
   },
   {
     _id: "2",
