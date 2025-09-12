@@ -1,5 +1,5 @@
 import { uploadToCloudinary } from "../middlewares/upload.middleware.js";
-import Product from "../models/product.model.js";
+import {Product} from "../models/product.model.js";
 
 export const addProductImageById = async (req, res) => {
   try {
