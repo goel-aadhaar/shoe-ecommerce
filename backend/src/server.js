@@ -16,7 +16,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: "https://shoe-ecommerce-mu.vercel.app",
+    origin: ["https://shoe-ecommerce-mu.vercel.app","https://localhost:5137","http://localhost:3000"],
     methods: "GET,POST,PUT,DELETE,PATCH",
     credentials: true,
     allowedHeaders: ['Content-Type', 'Authorization']
