@@ -1,5 +1,5 @@
 import express from "express";
-import upload from "../middlewares/upload.middleware.js"; // multer middleware
+import {upload} from "../middlewares/upload.middleware.js"; // multer middleware
 import { addProductImageById } from "../controllers/productImage.controller.js";
 import { authMiddleware, adminMiddleware } from "../middlewares/auth.middleware.js";
 
