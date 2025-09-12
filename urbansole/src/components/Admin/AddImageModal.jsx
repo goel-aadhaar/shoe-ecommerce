@@ -3,6 +3,7 @@ import axios from 'axios';
 
 export default function AddProductImagesModal({ productId, onClose }) {
   const [thumbnail, setThumbnail] = useState(null);
+  const [productName, setProductName] = useState('');
   const [hover, setHover] = useState(null);
   const [sides, setSides] = useState([]);
   const [isUploading, setIsUploading] = useState(false);
@@ -18,6 +19,18 @@ export default function AddProductImagesModal({ productId, onClose }) {
     setError(null);
     setSides(files);
   };
+  const getProductName = async () => {
+    try {
+      const response = await axios.get('https://api-shoe-ecommerce.onrender.com/api/v1/products/' + productId);
+      setProductName(response.data.product.name);
+    } catch (error) {
+      console.error('Error fetching product name:', error);
+    }
+  };
+
+  useState(() => {
+    getProductName();
+  }, [productId]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
