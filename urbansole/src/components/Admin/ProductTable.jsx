@@ -19,7 +19,7 @@ const ProductTable = ({ products, searchTerm, setSearchTerm, onAddClick, onEditP
   return (
     <div className="bg-white p-4 rounded-b-xl shadow-lg max-h-full overflow-y-auto">
       {/* Header */}
-      <div className="flex items-center justify-between mb-4">
+      <div className="flex items-center justify-between sticky top-0 z-10 bg-gray-100 p-2">
         <div className="flex space-x-4">
           <div className="flex items-center">
             <h2 className="text-xl font-semibold text-gray-800">Products</h2>
@@ -56,9 +56,9 @@ const ProductTable = ({ products, searchTerm, setSearchTerm, onAddClick, onEditP
       </div>
 
       {/* Table */}
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto mt-4 ">
         <table className="min-w-full divide-y divide-gray-200">
-          <thead className="bg-gray-50">
+          <thead className="bg-gray-50 sticky top-[10px] z-20">
             <tr>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Product
