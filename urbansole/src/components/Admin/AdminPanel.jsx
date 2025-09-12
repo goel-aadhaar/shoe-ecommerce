@@ -4,7 +4,7 @@ import ProductTable from "./ProductTable";
 import AddProductModal from "./AddProductModal";
 import UpdateProductModal from "./UpdateProductModal";
 import Navbar from "../Navbar";
-import Footer from "../Footer";
+import Footer from "../footer";
 
 const dummyProducts = [
   {
@@ -248,7 +248,7 @@ const AdminPanelApp = () => {
           )}
         </div>
       </div>
-      <Footer />
+      <Footer/>
     </>
   );
 };
