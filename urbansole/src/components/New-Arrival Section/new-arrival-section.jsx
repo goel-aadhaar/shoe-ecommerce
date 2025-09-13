@@ -35,7 +35,7 @@ const NewArrivalSection = () => {
   console.log('before loading...');
   
   const arr = [0,0,0,0]
-  if (loading) {
+  if (loading || data.length < 4) {
     console.log('loading....');
     return(
      <>

@@ -27,19 +27,24 @@ const TrendingSection = () => {
   useEffect(() => {
     fetchShoes();
   }, []);
-
-  if (loading) {
-    <>
-        <div className="w-full mx-auto px-20 py-12 bg-white">
-            <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-x-5 gap-y-7">
-                {arr.map((index) => (
-                  <div Key={index}>
-                    <ShimmerShoeCard/>
-                  </div>
-                ))}
-            </div>
-        </div>
-    </>
+  const arr = [0,0,0,0];
+  console.log("len:  ",data.length);
+  
+  if (loading || data.length < 4) {
+    console.log('yes here i am');
+    return(
+      <>
+          <div className="w-full mx-auto px-20 py-12 bg-white">
+              <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-x-5 gap-y-7">
+                  {arr.map((index) => (
+                    <div Key={index}>     
+                      <ShimmerShoeCard/>
+                    </div>
+                  ))}
+              </div>
+          </div>
+      </>
+    );
   }
 
   console.log("All shoes data in trending:", data);
