@@ -13,7 +13,7 @@ const NewArrivalSection = () => {
     console.log("Fetching shoes data...");
     
     try {
-      const response = await axios.get("https://api-shoe-ecommerce.onrender.com/api/v1/products",{withCredentials: true});
+      const response = await axios.get("https://api-shoe-ecommerce.onrender.com/api/v1/products");
       console.log("Fetched shoes data:", response);
       console.log("Fetched shoes data:", response.data);
       

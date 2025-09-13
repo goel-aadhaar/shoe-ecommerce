@@ -73,9 +73,7 @@ const ShoeDetail = ({ onBack, onRelatedShoeClick }) => {
 
             try {
                 const response = await axios.get(`https://api-shoe-ecommerce.onrender.com/api/v1/products/${id}`);
-                console.log("response from Shoe detail: ", response);
-                console.log("SD : r.data: ", response?.data);
-                setShoe(response?.data);
+                setShoe(response?.data?.data);
             }catch (error) {
                 console.error("Error fetching shoes data in shoe detail section:", error);
             }finally{
