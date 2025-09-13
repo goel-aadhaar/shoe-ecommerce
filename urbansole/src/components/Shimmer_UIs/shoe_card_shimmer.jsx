@@ -2,7 +2,7 @@ import React from 'react';
 
 const ShimmerShoeCard = () => {
     return (
-        <div className="overflow-hidden shadow-md transition border border-slate-200 animate-pulse">
+        <div className="max-w-[300px]  overflow-hidden shadow-md transition border border-slate-200 animate-pulse">
             <div className="aspect-square w-full bg-gray-200"></div>
 
             <div className="p-2 pb-0">

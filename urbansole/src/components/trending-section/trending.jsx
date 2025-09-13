@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import CardCarousel from "../carouselCardList/caroselCard";
 import axios from 'axios'
+import ShimmerShoeCard from "../Shimmer_UIs/shoe_card_shimmer";
 
 const TrendingSection = () => {
   const [active, setActive] = useState("Male"); 
@@ -28,8 +29,17 @@ const TrendingSection = () => {
   }, []);
 
   if (loading) {
-    // use Shimmer Ui here.....
-    return <p className="text-center py-10">Loading new arrivals...</p>;
+    <>
+        <div className="w-full mx-auto px-20 py-12 bg-white">
+            <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-x-5 gap-y-7">
+                {arr.map((index) => (
+                  <div Key={index}>
+                    <ShimmerShoeCard/>
+                  </div>
+                ))}
+            </div>
+        </div>
+    </>
   }
 
   console.log("All shoes data in trending:", data);
@@ -59,7 +69,6 @@ const TrendingSection = () => {
         </a>
       </div>
 
-      {/* Calling Carousel */}
       <CardCarousel
         shoes={filteredData}
       />
