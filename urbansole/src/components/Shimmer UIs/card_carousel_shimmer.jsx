@@ -1,7 +1,7 @@
 import React from 'react';
 
 const ShimmerShoeCard = () => {
-    console.log("call coming here in shimmercardui ");
+    console.log("call coming here in ");
     
     return (
         <div className="overflow-hidden shadow-md transition border border-slate-200 animate-shimmer">

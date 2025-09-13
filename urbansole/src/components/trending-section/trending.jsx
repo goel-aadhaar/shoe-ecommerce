@@ -3,7 +3,7 @@ import CardCarousel from "../carouselCardList/caroselCard";
 import axios from 'axios'
 
 const TrendingSection = () => {
-  const [active, setActive] = useState("male"); 
+  const [active, setActive] = useState("Male"); 
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true)
 
@@ -38,7 +38,7 @@ const TrendingSection = () => {
   const trendingData = data.filter(product =>
     product.attributes.includes("trending")
   );
-  const filteredData  = trendingData.filter((item) => item.for === active);
+  const filteredData  = trendingData.filter((item) => item?.for === active);
 
   console.log("Filtered data in trending section : " ,filteredData);
   
@@ -74,14 +74,14 @@ function GenderTabs({ active, setActive }) {
       {/* Tabs */}
       <div className="flex space-x-10 text-2xl font-bold">
         <button
-          onClick={() => setActive("male")}
-          className={`${active === "male" ? "text-black" : "text-gray-500"}`}
+          onClick={() => setActive("Male")}
+          className={`${active === "Male" ? "text-black" : "text-gray-500"}`}
         >
           MEN
         </button>
         <button
-          onClick={() => setActive("female")}
-          className={`${active === "female" ? "text-black" : "text-gray-500"}`}
+          onClick={() => setActive("Female")}
+          className={`${active === "Female" ? "text-black" : "text-gray-500"}`}
         >
           WOMEN
         </button>

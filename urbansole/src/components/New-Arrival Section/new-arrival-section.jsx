@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import CardCarousel from "../carouselCardList/caroselCard";
-import ShimmerShoeCard from "../Shimmer UIs/shoe_card_shimmer";
+import ShimmerShoeCard from "../Shimmer UIs/card_carousel_shimmer";
 
 const NewArrivalSection = () => {
 

@@ -5,7 +5,6 @@ import { createPortal } from "react-dom";
 import { forwardRef, useImperativeHandle, useRef } from "react";
 
 const Shoe_Card = ({ shoes, onClick }) => {
-    console.log("shoe data .... ", shoes);
   
     const modalRef = useRef();
     const brand = shoes.brand || "BrandName";
