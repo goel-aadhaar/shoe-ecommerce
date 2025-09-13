@@ -11,7 +11,7 @@ const TrendingSection = () => {
 
   
   const fetchShoes = async () => {
-    console.log("Fetching shoes data...");
+    console.log("Fetching shoes data in trending...");
     
     try {
       const response = await axios.get("https://api-shoe-ecommerce.onrender.com/api/v1/products");
@@ -31,6 +31,9 @@ const TrendingSection = () => {
     // use Shimmer Ui here.....
     return <p className="text-center py-10">Loading new arrivals...</p>;
   }
+
+  console.log("All shoes data in trending:", data);
+
 
   const trendingData = data.filter(product =>
     product.attributes.includes("trending")
