@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 import CardCarousel from "../carouselCardList/caroselCard";
-// import data from "../../data/shoes.json"
 
 const NewArrivalSection = ({ onShoeClick }) => {
   const [active, setActive] = useState("shoes");
@@ -11,7 +10,6 @@ const NewArrivalSection = ({ onShoeClick }) => {
   const fetchShoes = async () => {
     try {
       const response = await axios.get("https://api-shoe-ecommerce.onrender.com/api/v1/products");
-      // const response = await axios.get("http://localhost:5173/api/v1/products");
       console.log("Fetched shoes data:", response.data);
       
       setShoes(response?.data?.data);
@@ -27,11 +25,18 @@ const NewArrivalSection = ({ onShoeClick }) => {
 
   console.log("All shoes data:", data);
   // const filteredData=
-  const filteredData = data;
+  const newArrivalData = data.filter(product =>
+    product.attributes.includes("newArrival")
+  );
+
+  console.log(
+    "Filtered shoes data for category newArrival :", newArrivalData
+  );
   
-  // const filteredData = data.filter((item) => item.category === active);
-  // console.log( "Filtered data : ", filteredData);
+  const filteredData  = newArrivalData.filter((item) => item.category.name === active);
   
+  console.log("Filtered shoes data after category filter:", filteredData);
+
 
   return (
     <div className="bg-white text-black">
@@ -73,9 +78,9 @@ function TypeTab({ active, setActive }) {
         </button>
         <button
           onClick={() => setActive("crocs")}
-          className={`${active === "crocs" ? "text-black" : "text-gray-500"}`}
+          className={`${active === "clogs" ? "text-black" : "text-gray-500"}`}
         >
-          CROCS
+          CLOGS
         </button>
       </div>
 
