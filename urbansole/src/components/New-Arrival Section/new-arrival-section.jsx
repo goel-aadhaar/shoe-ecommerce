@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import CardCarousel from "../carouselCardList/caroselCard";
+import ShimmerShoeCard from "../Shimmer UIs/shoe_card_shimmer";
 
 const NewArrivalSection = () => {
 
@@ -29,9 +30,14 @@ const NewArrivalSection = () => {
     fetchShoes();
   }, []);
 
+  console.log('before loading...');
+  
   if (loading) {
-    // use Shimmer Ui here.....
-    return <p className="text-center py-10">Loading new arrivals...</p>;
+    console.log('loading....');
+    
+    return(
+      <ShimmerShoeCard/>
+    );
   }
 
   console.log("All shoes data:", data);
