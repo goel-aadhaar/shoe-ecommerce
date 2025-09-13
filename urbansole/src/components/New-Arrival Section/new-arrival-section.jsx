@@ -21,8 +21,7 @@ const NewArrivalSection = ({ onShoeClick }) => {
       console.error("Error fetching shoes data:", error);
     }
   };
-
-  fetchShoes();
+  
   useEffect(() => {
     fetchShoes();
   }, []);
@@ -59,10 +58,10 @@ const NewArrivalSection = ({ onShoeClick }) => {
       </div>
 
       {/* Carousel */}
-      {/* <CardCarousel
+      <CardCarousel
         shoes={filteredData} // Pass the filtered data to the carousel
         onShoeClick={onShoeClick}
-      /> */}
+      />
     </div>
   );
 };
