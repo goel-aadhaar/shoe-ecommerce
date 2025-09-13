@@ -26,11 +26,6 @@ const NewArrivalSection = ({ onShoeClick }) => {
   }, []);
 
   console.log("All shoes data:", data);
-  
-  const filteredData = data.filter((item) => item.category === active);
-  console.log( "Filtered data : ", filteredData);
-  
-
   return (
     <div className="bg-white text-black">
       {/* Heading */}
