@@ -38,7 +38,7 @@ const TrendingSection = () => {
   const trendingData = data.filter(product =>
     product.attributes.includes("trending")
   );
-  const filteredData  = trendingData.filter((item) => item.category.name === active);
+  const filteredData  = trendingData.filter((item) => item.for === active);
 
   console.log("Filtered data in trending section : " ,filteredData);
   
