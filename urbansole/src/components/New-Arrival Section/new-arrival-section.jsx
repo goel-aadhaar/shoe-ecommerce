@@ -77,7 +77,7 @@ function TypeTab({ active, setActive }) {
           SHOES
         </button>
         <button
-          onClick={() => setActive("crocs")}
+          onClick={() => setActive("clogs")}
           className={`${active === "clogs" ? "text-black" : "text-gray-500"}`}
         >
           CLOGS
