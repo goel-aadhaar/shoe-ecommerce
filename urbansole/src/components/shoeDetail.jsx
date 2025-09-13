@@ -55,43 +55,52 @@ const faqs = [
 
 const ShoeDetail = ({ onBack, onRelatedShoeClick }) => {
     const [selectedSize, setSelectedSize] = useState('');
-    const [openSections, setOpenSections] = useState({}); // State for About/Details sections
+    const [openSections, setOpenSections] = useState({});
     const [openFaqIndex, setOpenFaqIndex] = useState(null);
-    const [shoe, setShoe] = useState({});
+    const [loading, setLoading] = useState(true);
+    const [shoe, setShoe] = useState({
+        name : '',
+        brand: '',
+        color: '',
+        price: ''
+    });
+
+    const { id } = useParams();
     
-    const parcal = useParams();
-
-    const fetchShoes = async () => {
-        console.log("Fetching shoes data...");
-        
-        try {
-            const response = await axios.get(`https://api-shoe-ecommerce.onrender.com/api/v1/products/${parcal.id}`);
-            console.log("response from Shoe detail: ",response);
-            console.log("SD : r.data: ", response?.data);
-            setShoe(response?.data);
-        } catch (error) {
-            console.error("Error fetching shoes data in shoe detail section:", error);
-        }
-    };
-
-
     useEffect(() => {
-        fetchShoes();
-        window.scrollTo(0, 0);
-    }, [parcal.id]); 
+        const fetchShoes = async () => {
+        console.log("Fetching shoes data...");
 
+            try {
+                const response = await axios.get(`https://api-shoe-ecommerce.onrender.com/api/v1/products/${id}`);
+                console.log("response from Shoe detail: ", response);
+                console.log("SD : r.data: ", response?.data);
+                setShoe(response?.data);
+            }catch (error) {
+                console.error("Error fetching shoes data in shoe detail section:", error);
+            }finally{
+                setLoading(false)
+            }
+        };
+
+        if (id) {
+            fetchShoes();
+            window.scrollTo(0, 0);
+        }
+    }, [id]);
+
+
+
+    if(loading){
+        // replace with shimmer Ui....
+        return <p>Loading your shoe detail......</p>
+    }
+
+    
     if (!shoe) {
-        // Route('/');
         return <div>Shoe not found.</div>;
     }
 
-    // const images = Object.keys(shoe)
-    //     .filter(key => key.startsWith('imgSrc') && shoe[key])
-    //     .map(key => shoe[key]);
-
-    // const relatedShoes = shoeData.filter(s => s.brand.toLowerCase() === shoe.brand.toLowerCase() && s.name !== shoe.name).slice(0, 4);
-    
-    // --- Single handler for all collapsible sections ---
     const toggleSection = (key) => {
         setOpenSections(prev => ({ ...prev, [key]: !prev[key] }));
     };

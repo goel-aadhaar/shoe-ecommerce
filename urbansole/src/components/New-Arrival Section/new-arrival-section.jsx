@@ -6,6 +6,7 @@ const NewArrivalSection = () => {
 
   const [active, setActive] = useState("shoes");
   const [data, setShoes] = useState([]);
+  const [loading, setLoading] = useState(true);
 
 
   const fetchShoes = async () => {
@@ -19,12 +20,19 @@ const NewArrivalSection = () => {
       setShoes(response?.data?.data);
     } catch (error) {
       console.error("Error fetching shoes data:", error);
+    }finally{
+      setLoading(false)
     }
   };
   
   useEffect(() => {
     fetchShoes();
   }, []);
+
+  if (loading) {
+    // use Shimmer Ui here.....
+    return <p className="text-center py-10">Loading new arrivals...</p>;
+  }
 
   console.log("All shoes data:", data);
   const newArrivalData = data.filter(product =>

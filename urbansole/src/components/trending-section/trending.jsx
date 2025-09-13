@@ -5,6 +5,7 @@ import axios from 'axios'
 const TrendingSection = () => {
   const [active, setActive] = useState("male"); 
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true)
 
   console.log("Trending carousel called.... ");
 
@@ -17,12 +18,19 @@ const TrendingSection = () => {
       setData(response?.data?.data);
     } catch (error) {
       console.error("Error fetching shoes data in trending section:", error);
+    }finally{
+      setLoading(false)
     }
   };
   
   useEffect(() => {
     fetchShoes();
   }, []);
+
+  if (loading) {
+    // use Shimmer Ui here.....
+    return <p className="text-center py-10">Loading new arrivals...</p>;
+  }
 
   const trendingData = data.filter(product =>
     product.attributes.includes("trending")
