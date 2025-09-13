@@ -4,12 +4,19 @@ import { useState } from 'react';
 import { createPortal } from "react-dom";
 import { forwardRef, useImperativeHandle, useRef } from "react";
 
-const Shoe_Card = ({ brand = 'Nike', name, color, price, imgSrc, imgSrc2, onClick }) => {
+const Shoe_Card = ({ shoes }) => {
     const modalRef = useRef();
-    if (imgSrc == null) imgSrc = "https://www.superkicks.in/cdn/shop/files/1_23_63d4bcad-2f4f-4dff-8606-1b9687a04aa5.png?v=1754314154";
-    if (imgSrc2 == null) imgSrc2 = imgSrc;
+    const brand = shoes.brand || "BrandName";
+    const name = shoes.name || "Shoe Name";
+    const color = shoes.color || "Color";
+    const price = shoes.price || "Price";
+    const thumbnailImg = shoes?.imageSet?.thumbnail;
+    const hoverImg = shoes?.imageSet?.hover;
+    
+    if (thumbnailImg == null) thumbnailImg = "https://www.superkicks.in/cdn/shop/files/1_23_63d4bcad-2f4f-4dff-8606-1b9687a04aa5.png?v=1754314154";
+    if (hoverImg == null) hoverImg = thumbnailImg;
 
-    const [currentImg, setCurrentImg] = useState(imgSrc);
+    const [currentImg, setCurrentImg] = useState(thumbnailImg);
 
     // 2. Created a new handler for the modal button
     const handleAddToCartClick = (e) => {
@@ -23,8 +30,8 @@ const Shoe_Card = ({ brand = 'Nike', name, color, price, imgSrc, imgSrc2, onClic
         {/* 3. Added the main onClick and a cursor pointer to the wrapper */}
         <div 
             className="overflow-hidden shadow-md hover:shadow-lg transition border border-slate-200 cursor-pointer"
-            onMouseEnter={() => imgSrc2 && setCurrentImg(imgSrc2)}
-            onMouseLeave={() => setCurrentImg(imgSrc)}
+            onMouseEnter={() => hoverImg && setCurrentImg(hoverImg)}
+            onMouseLeave={() => setCurrentImg(thumbnailImg)}
 
             onClick={onClick}
         >
@@ -54,7 +61,7 @@ const Shoe_Card = ({ brand = 'Nike', name, color, price, imgSrc, imgSrc2, onClic
         <Shoe_Modal 
           shoe_name={name} 
           shoe_price={price} 
-          shoe_src={imgSrc} 
+          shoe_src={thumbnailImg} 
           ref={modalRef} 
         />
       </>

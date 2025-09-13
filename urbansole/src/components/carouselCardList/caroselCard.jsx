@@ -40,7 +40,7 @@ export default function CardCarousel({onShoeClick, shoes = data}) {
                         to = {'/shoe/' + shoe._id}
                 >
                   <Shoe_Card 
-                      {...shoe} 
+                      shoe = {shoe} 
                       onClick={() => onShoeClick(shoe)}
                   />
                 </Link>
