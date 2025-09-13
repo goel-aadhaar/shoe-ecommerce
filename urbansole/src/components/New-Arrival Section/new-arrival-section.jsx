@@ -14,7 +14,7 @@ const NewArrivalSection = ({ onShoeClick }) => {
       // const response = await axios.get("http://localhost:5173/api/v1/products");
       console.log("Fetched shoes data:", response.data);
       
-      setShoes(response.data);
+      setShoes(response?.data?.data);
     } catch (error) {
       console.error("Error fetching shoes data:", error);
     }
