@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { createPortal } from "react-dom";
 import { forwardRef, useImperativeHandle, useRef } from "react";
 
-const Shoe_Card = ({ shoes }) => {
+const Shoe_Card = ({ shoes, onClick }) => {
     console.log("shoe data .... ", shoes);
   
     const modalRef = useRef();
