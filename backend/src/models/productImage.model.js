@@ -11,7 +11,7 @@ const productImageSchema = new Schema(
         thumbnail: {
             type: String,
             required: true,
-            default: "https://placehold.co/400", // fallback URL
+            default: "https://placehold.co/400", 
         },
         hover: {
             type: String,

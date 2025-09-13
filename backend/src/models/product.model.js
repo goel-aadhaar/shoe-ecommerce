@@ -54,6 +54,7 @@ const productSchema = new Schema(
     imageSet: {
       type: Schema.Types.ObjectId,
       ref: "ProductImage",
+      default: null,
     },
   },
   {
