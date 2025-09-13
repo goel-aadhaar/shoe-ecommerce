@@ -7,8 +7,11 @@ const NewArrivalSection = ({ onShoeClick }) => {
   console.log("Inside NewArrivalSection, onShoeClick type: ", typeof onShoeClick);
   const [active, setActive] = useState("shoes");
   const [data, setShoes] = useState([]);
-  // get shoes data from using axios from backend
+
+  
   const fetchShoes = async () => {
+    console.log("Fetching shoes data...");
+    
     try {
       const response = await axios.get("https://api-shoe-ecommerce.onrender.com/api/v1/products");
       console.log("Fetched shoes data:", response);
@@ -19,14 +22,11 @@ const NewArrivalSection = ({ onShoeClick }) => {
       console.error("Error fetching shoes data:", error);
     }
   };
-
-  // Fetch shoes data when the component mounts
   useEffect(() => {
     fetchShoes();
   }, []);
 
   console.log("All shoes data:", data);
-  // const filteredData=
   const newArrivalData = data.filter(product =>
     product.attributes.includes("newArrival")
   );
