@@ -13,7 +13,7 @@ export default function CardCarousel({onShoeClick, shoes = data}) {
   console.log("inside caroselCard   ", typeof onShoeClick);
   console.log("with data : ", shoes );
   
-  console.log(onShoeClick);
+  // console.log(onShoeClick);
 
     return (
       <div className="relative w-full px-20 pt-10 pb-10 bg-white">
@@ -36,8 +36,8 @@ export default function CardCarousel({onShoeClick, shoes = data}) {
         >
           {shoes.map((shoe, index) => (
             <SwiperSlide key={index}>
-                <Link  key={shoe.id} 
-                        to = {'/shoe/' + shoe.id}
+                <Link  key={shoe._id} 
+                        to = {'/shoe/' + shoe._id}
                 >
                   <Shoe_Card 
                       {...shoe} 
