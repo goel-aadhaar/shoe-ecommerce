@@ -1,11 +1,32 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 import CardCarousel from "../carouselCardList/caroselCard";
-import data from "../../data/shoes.json"
+// import data from "../../data/shoes.json"
 
 const NewArrivalSection = ({ onShoeClick }) => {
   const [active, setActive] = useState("shoes");
+  const [data, setShoes] = useState([]);
+  // get shoes data from using axios from backend
+  const fetchShoes = async () => {
+    try {
+      const response = await axios.get("https://api-shoe-ecommerce.onrender.com/api/v1/products");
+      // const response = await axios.get("http://localhost:5173/api/v1/products");
+      console.log("Fetched shoes data:", response.data);
+      
+      setShoes(response.data);
+    } catch (error) {
+      console.error("Error fetching shoes data:", error);
+    }
+  };
 
+  // Fetch shoes data when the component mounts
+  useEffect(() => {
+    fetchShoes();
+  }, []);
+
+  console.log("All shoes data:", data);
+  
   const filteredData = data.filter((item) => item.category === active);
   console.log( "Filtered data : ", filteredData);
   
