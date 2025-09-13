@@ -1,15 +1,12 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-
-import { AuthContext } from './context/AuthContext';
+import { Route } from 'react-router';
 import { Link, useParams } from 'react-router-dom';
 
 import { Shoe_Card } from './shoe_card';
-import shoeData from '../data/shoes.json';
 import Navbar from './Navbar';
 import Footer from './footer';
 
-// created a single, reusable component for all collapsible sections to keep the code DRY.
 const CollapsibleItem = ({ title, isOpen, onClick, children, titleClassName }) => {
     return (
         <div className="border-b border-gray-200 last:border-b-0">
@@ -60,25 +57,39 @@ const ShoeDetail = ({ onBack, onRelatedShoeClick }) => {
     const [selectedSize, setSelectedSize] = useState('');
     const [openSections, setOpenSections] = useState({}); // State for About/Details sections
     const [openFaqIndex, setOpenFaqIndex] = useState(null);
-    // const { token } = useContext(AuthContext);
-    let token = true;
-
+    const [shoe, setShoe] = useState({});
+    
     const parcal = useParams();
-    const shoe = shoeData.find(obj => obj.id == parcal.id);
+
+    const fetchShoes = async () => {
+        console.log("Fetching shoes data...");
+        
+        try {
+            const response = await axios.get(`https://api-shoe-ecommerce.onrender.com/api/v1/products/${parcal.id}`);
+            console.log("response from Shoe detail: ",response);
+            console.log("SD : r.data: ", response?.data);
+            setShoe(response?.data);
+        } catch (error) {
+            console.error("Error fetching shoes data in shoe detail section:", error);
+        }
+    };
+
 
     useEffect(() => {
+        fetchShoes();
         window.scrollTo(0, 0);
-    }, [parcal.id]); // The dependency array ensures this runs on ID change
+    }, [parcal.id]); 
 
     if (!shoe) {
+        // Route('/');
         return <div>Shoe not found.</div>;
     }
 
-    const images = Object.keys(shoe)
-        .filter(key => key.startsWith('imgSrc') && shoe[key])
-        .map(key => shoe[key]);
+    // const images = Object.keys(shoe)
+    //     .filter(key => key.startsWith('imgSrc') && shoe[key])
+    //     .map(key => shoe[key]);
 
-    const relatedShoes = shoeData.filter(s => s.brand.toLowerCase() === shoe.brand.toLowerCase() && s.name !== shoe.name).slice(0, 4);
+    // const relatedShoes = shoeData.filter(s => s.brand.toLowerCase() === shoe.brand.toLowerCase() && s.name !== shoe.name).slice(0, 4);
     
     // --- Single handler for all collapsible sections ---
     const toggleSection = (key) => {
@@ -93,9 +104,23 @@ const ShoeDetail = ({ onBack, onRelatedShoeClick }) => {
         alert(`Added ${shoe.name} (Size: ${selectedSize}) to cart!`);
     };
 
+    let images = []
+
+    images.push(shoe?.imageSet?.thumbnail , shoe?.imageSet?.hover)
+
+    shoe?.imageSet?.sides.forEach(img => {
+        images.push(img);
+    });
+
+    console.log("All images in shoe deatil : ", images);
+
+
     if (!shoe) {
         return <div>Shoe not found.</div>;
     }
+
+    // for now putting same data....
+    let relatedShoes = [shoe]
 
     return (
         <>

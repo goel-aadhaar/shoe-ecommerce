@@ -77,7 +77,7 @@ function App() {
         <ImageSlider />
         <LoginModal isOpen={isModalOpen} onClose={toggleModal} />
         <BrandCarousel />
-        <Home />
+        <Home/>
       </>
       <Footer />
     </AuthProvider>

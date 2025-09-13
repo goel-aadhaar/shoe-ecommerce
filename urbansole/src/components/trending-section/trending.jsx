@@ -1,22 +1,42 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import CardCarousel from "../carouselCardList/caroselCard";
-import data from "../../data/shoes.json";
+import axios from 'axios'
 
-const TrendingSection = ({ onShoeClick }) => {
+const TrendingSection = () => {
   const [active, setActive] = useState("male"); 
+  const [data, setData] = useState([]);
+
   console.log("Trending carousel called.... ");
+
   
+  const fetchShoes = async () => {
+    console.log("Fetching shoes data...");
+    
+    try {
+      const response = await axios.get("https://api-shoe-ecommerce.onrender.com/api/v1/products");
+      setData(response?.data?.data);
+    } catch (error) {
+      console.error("Error fetching shoes data in trending section:", error);
+    }
+  };
   
-  const filteredData = data.filter((item) => item.for === active);
-  console.log(filteredData);
+  useEffect(() => {
+    fetchShoes();
+  }, []);
+
+  const trendingData = data.filter(product =>
+    product.attributes.includes("trending")
+  );
+  const filteredData  = trendingData.filter((item) => item.category.name === active);
+
+  console.log("Filtered data in trending section : " ,filteredData);
   
 
   return (
     <div className="bg-white text-black py-10">
-      {/* Heading */}
+      
       <h1 className="text-center font-bold text-3xl mb-5 mr-10 pr-10">TRENDING</h1>
 
-      {/* Tabs + View All */}
       <div className="flex items-center justify-between">
         <div></div>
         <GenderTabs active={active} setActive={setActive} />
@@ -28,11 +48,11 @@ const TrendingSection = ({ onShoeClick }) => {
         </a>
       </div>
 
-      {/* Carousel */}
+      {/* Calling Carousel */}
       <CardCarousel
         shoes={filteredData}
-        onShoeClick={onShoeClick}
       />
+
     </div>
   );
 };
