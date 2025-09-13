@@ -69,12 +69,11 @@ const ShoeDetail = ({ onBack, onRelatedShoeClick }) => {
     
     useEffect(() => {
         const fetchShoes = async () => {
-        console.log("Fetching shoes data...");
+        console.log("Fetching shoes data for detail show...");
 
             try {
                 const response = await axios.get(`https://api-shoe-ecommerce.onrender.com/api/v1/products/${id}`);
                 setShoe(response?.data?.data);
-                console.log(shoe);
             }catch (error) {
                 console.error("Error fetching shoes data in shoe detail section:", error);
             }finally{
@@ -120,6 +119,9 @@ const ShoeDetail = ({ onBack, onRelatedShoeClick }) => {
         images.push(img);
     });
 
+    console.log("Shoe Details: ", shoe);
+    
+
     console.log("All images in shoe deatil : ", images);
 
 
@@ -159,10 +161,10 @@ const ShoeDetail = ({ onBack, onRelatedShoeClick }) => {
                         </div>
                         <div className="lg:col-span-2">
                             <div className="sticky top-24">
-                                <h2 className="text-md font-bold uppercase text-gray-500 tracking-wider">{shoe.brand}</h2>
-                                <h1 className="text-2xl font-bold mt-1 text-gray-900">{shoe.name}</h1>
-                                <p className="text-gray-600 mt-1">{shoe.color}</p>
-                                <p className="text-2xl font-semibold mt-4 text-gray-900">{shoe.price}</p>
+                                <h2 className="text-md font-bold uppercase text-gray-500 tracking-wider">{shoe?.brand}</h2>
+                                <h1 className="text-2xl font-bold mt-1 text-gray-900">{shoe?.name}</h1>
+                                <p className="text-gray-600 mt-1">{shoe?.color}</p>
+                                <p className="text-2xl font-semibold mt-4 text-gray-900">{shoe?.price}</p>
                                 
                                 <div className="mt-6">
                                     <div className="flex justify-between items-center">
