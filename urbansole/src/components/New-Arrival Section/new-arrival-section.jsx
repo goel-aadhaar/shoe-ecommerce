@@ -4,12 +4,14 @@ import axios from "axios";
 import CardCarousel from "../carouselCardList/caroselCard";
 
 const NewArrivalSection = ({ onShoeClick }) => {
+  console.log("Inside NewArrivalSection, onShoeClick type: ", typeof onShoeClick);
   const [active, setActive] = useState("shoes");
   const [data, setShoes] = useState([]);
   // get shoes data from using axios from backend
   const fetchShoes = async () => {
     try {
       const response = await axios.get("https://api-shoe-ecommerce.onrender.com/api/v1/products");
+      console.log("Fetched shoes data:", response);
       console.log("Fetched shoes data:", response.data);
       
       setShoes(response?.data?.data);
