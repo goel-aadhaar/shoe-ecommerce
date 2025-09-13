@@ -42,3 +42,14 @@ export const addProductImageById = async (req, res) => {
     res.status(500).json({ success: false, message: error.message });
   }
 };
+export const getProductImage = asyncHandler(async (req, res) => {
+    const productImage = await ProductImage.find();
+    res.status(201)
+    .json(
+        new ApiResponse(
+            200,
+            "productImage fetched successfully",
+            productImage
+        )
+    )
+});
