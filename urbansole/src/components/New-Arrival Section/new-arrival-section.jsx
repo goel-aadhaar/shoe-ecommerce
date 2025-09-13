@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-
 import CardCarousel from "../carouselCardList/caroselCard";
 
 const NewArrivalSection = ({ onShoeClick }) => {
@@ -8,12 +7,12 @@ const NewArrivalSection = ({ onShoeClick }) => {
   const [active, setActive] = useState("shoes");
   const [data, setShoes] = useState([]);
 
-  
+
   const fetchShoes = async () => {
     console.log("Fetching shoes data...");
     
     try {
-      const response = await axios.get("https://api-shoe-ecommerce.onrender.com/api/v1/products");
+      const response = await axios.get("https://api-shoe-ecommerce.onrender.com/api/v1/products",{withCredentials: true});
       console.log("Fetched shoes data:", response);
       console.log("Fetched shoes data:", response.data);
       
