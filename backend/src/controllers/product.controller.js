@@ -26,7 +26,7 @@ export const getProducts = asyncHandler(async (req, res) => {
 export const getProductById = asyncHandler(async (req, res) => {
     const product = await Product.findById(req.params.id).populate("category");
     const product2 = await Product.findById(req.params.id).populate("category").populate("imageSet");
-    console.log("Fetched product:", product1);
+    console.log("Fetched product:", product);
     console.log("Fetched product:", product2);
 
     res.status(200).json(
