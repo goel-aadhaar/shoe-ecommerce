@@ -1,7 +1,8 @@
 import express from "express";
 import {upload} from "../middlewares/upload.middleware.js"; // multer middleware
-import { addProductImageById } from "../controllers/productImage.controller.js";
+import { addProductImageById , getProductImage} from "../controllers/productImage.controller.js";
 import { authMiddleware, adminMiddleware } from "../middlewares/auth.middleware.js";
+import { get } from "mongoose";
 
 const router = express.Router();
 
@@ -17,5 +18,6 @@ router.post(
     ]),
     addProductImageById
 );
+router.get("/", getProductImage);
 
 export default router;
