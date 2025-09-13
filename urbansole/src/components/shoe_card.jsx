@@ -5,13 +5,15 @@ import { createPortal } from "react-dom";
 import { forwardRef, useImperativeHandle, useRef } from "react";
 
 const Shoe_Card = ({ shoes }) => {
+    console.log("shoe data .... ", shoes);
+  
     const modalRef = useRef();
     const brand = shoes.brand || "BrandName";
     const name = shoes.name || "Shoe Name";
     const color = shoes.color || "Color";
     const price = shoes.price || "Price";
-    const thumbnailImg = shoes?.imageSet?.thumbnail;
-    const hoverImg = shoes?.imageSet?.hover;
+    let thumbnailImg = shoes?.imageSet?.thumbnail;
+    let hoverImg = shoes?.imageSet?.hover;
     
     if (thumbnailImg == null) thumbnailImg = "https://www.superkicks.in/cdn/shop/files/1_23_63d4bcad-2f4f-4dff-8606-1b9687a04aa5.png?v=1754314154";
     if (hoverImg == null) hoverImg = thumbnailImg;
