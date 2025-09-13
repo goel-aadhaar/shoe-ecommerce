@@ -1,13 +1,15 @@
 import express from "express";
 import {upload} from "../middlewares/upload.middleware.js"; // multer middleware
 import { addProductImageById } from "../controllers/productImage.controller.js";
-// import { authMiddleware, adminMiddleware } from "../middlewares/auth.middleware.js";
+import { authMiddleware, adminMiddleware } from "../middlewares/auth.middleware.js";
 
 const router = express.Router();
 
 // Upload images for a product
 router.post(
   "/:productId/images",
+    authMiddleware,
+    adminMiddleware,
     upload.fields([
         { name: "thumbnail", maxCount: 1 },
         { name: "hover", maxCount: 1 },
