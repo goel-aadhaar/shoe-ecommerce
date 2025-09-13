@@ -5,18 +5,14 @@ import BrandCarousel from "../brandCardCarousel";
 import AdCard from "./adCard1";
 import AdCard2 from "./adCard2";
 import AdCard3 from "./adCard3";
-const Home = ({onShoeClick})=>{
+const Home = ()=>{
     console.log("Home-page.jsx called...");
     console.log("carouselCard.jsx caled....");
     return(
         <>
-            <NewArrivalSection
-                onShoeClick = {onShoeClick}
-            />
+            <NewArrivalSection/>
             <BrandCarousel/>
-            <TrendingSection
-                onShoeClick = {onShoeClick}
-            />
+            <TrendingSection/>
             <AdCard2/>
             <AdCard3/>
             <AdCard/>

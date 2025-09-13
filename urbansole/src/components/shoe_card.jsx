@@ -4,30 +4,30 @@ import { useState } from 'react';
 import { createPortal } from "react-dom";
 import { forwardRef, useImperativeHandle, useRef } from "react";
 
-const Shoe_Card = ({ shoes }) => {
+const Shoe_Card = ({ shoes, onClick }) => {
+    console.log("shoe data .... ", shoes);
+  
     const modalRef = useRef();
     const brand = shoes.brand || "BrandName";
     const name = shoes.name || "Shoe Name";
     const color = shoes.color || "Color";
     const price = shoes.price || "Price";
-    const thumbnailImg = shoes?.imageSet?.thumbnail;
-    const hoverImg = shoes?.imageSet?.hover;
+    let thumbnailImg = shoes?.imageSet?.thumbnail;
+    let hoverImg = shoes?.imageSet?.hover;
     
     if (thumbnailImg == null) thumbnailImg = "https://www.superkicks.in/cdn/shop/files/1_23_63d4bcad-2f4f-4dff-8606-1b9687a04aa5.png?v=1754314154";
     if (hoverImg == null) hoverImg = thumbnailImg;
 
     const [currentImg, setCurrentImg] = useState(thumbnailImg);
 
-    // 2. Created a new handler for the modal button
+
     const handleAddToCartClick = (e) => {
-      // This stops the card's main onClick from firing when you click the '+' icon
       e.stopPropagation();
       modalRef.current?.openModal();
     };
 
     return (
       <>
-        {/* 3. Added the main onClick and a cursor pointer to the wrapper */}
         <div 
             className="overflow-hidden shadow-md hover:shadow-lg transition border border-slate-200 cursor-pointer"
             onMouseEnter={() => hoverImg && setCurrentImg(hoverImg)}
