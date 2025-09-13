@@ -20,16 +20,14 @@ const Shoe_Card = ({ shoes, onClick }) => {
 
     const [currentImg, setCurrentImg] = useState(thumbnailImg);
 
-    // 2. Created a new handler for the modal button
+
     const handleAddToCartClick = (e) => {
-      // This stops the card's main onClick from firing when you click the '+' icon
       e.stopPropagation();
       modalRef.current?.openModal();
     };
 
     return (
       <>
-        {/* 3. Added the main onClick and a cursor pointer to the wrapper */}
         <div 
             className="overflow-hidden shadow-md hover:shadow-lg transition border border-slate-200 cursor-pointer"
             onMouseEnter={() => hoverImg && setCurrentImg(hoverImg)}

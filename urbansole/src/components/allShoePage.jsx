@@ -3,7 +3,6 @@ import { Shoe_Card } from './shoe_card';
 import FilterBar from './filter';
 import shoesData from '../data/shoes.json';
 
-// The Breadcrumb and Pagination components 
 const Breadcrumb = ({ newArrival, trending, brand }) => {
   let path = "Home";
   let title = "All Products";

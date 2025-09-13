@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import CardCarousel from "../carouselCardList/caroselCard";
 
-const NewArrivalSection = ({ onShoeClick }) => {
-  console.log("Inside NewArrivalSection, onShoeClick type: ", typeof onShoeClick);
+const NewArrivalSection = () => {
+
   const [active, setActive] = useState("shoes");
   const [data, setShoes] = useState([]);
 
@@ -42,10 +42,9 @@ const NewArrivalSection = ({ onShoeClick }) => {
 
   return (
     <div className="bg-white text-black">
-      {/* Heading */}
+
       <h1 className="text-center font-bold text-3xl mb-5 pt-10 mr-10 pr-10">NEW ARRIVAL</h1>
 
-      {/* Tabs + View All */}
       <div className="flex items-center justify-between">
         <div></div>
         <TypeTab active={active} setActive={setActive} />
@@ -57,10 +56,8 @@ const NewArrivalSection = ({ onShoeClick }) => {
         </a>
       </div>
 
-      {/* Carousel */}
       <CardCarousel
-        shoes={filteredData} // Pass the filtered data to the carousel
-        onShoeClick={onShoeClick}
+        shoes={filteredData}
       />
     </div>
   );
