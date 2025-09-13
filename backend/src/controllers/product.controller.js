@@ -24,10 +24,7 @@ export const getProducts = asyncHandler(async (req, res) => {
 });
 
 export const getProductById = asyncHandler(async (req, res) => {
-    const product = await Product.findById(req.params.id).populate("category");
-    const product2 = await Product.findById(req.params.id).populate("category").populate("imageSet");
-    console.log("Fetched product:", product);
-    console.log("Fetched product:", product2);
+    const product = await Product.findById(req.params.id).populate("category").populate("imageSet");
 
     res.status(200).json(
         new ApiResponse(200, "Product fetched successfully", product)
