@@ -4,13 +4,13 @@ import { useState } from 'react';
 import { createPortal } from "react-dom";
 import { forwardRef, useImperativeHandle, useRef } from "react";
 
-const Shoe_Card = ({ shoes, onClick }) => {
-  
+const Shoe_Card = ({ shoes }) => {
+
     const modalRef = useRef();
-    const brand = shoes.brand || "BrandName";
-    const name = shoes.name || "Shoe Name";
-    const color = shoes.color || "Color";
-    const price = shoes.price || "Price";
+    const brand = shoes?.brand || "BrandName";
+    const name = shoes?.name || "Shoe Name";
+    const color = shoes?.color || "Color";
+    const price = shoes?.price || "Price";
     let thumbnailImg = shoes?.imageSet?.thumbnail;
     let hoverImg = shoes?.imageSet?.hover;
     
@@ -31,8 +31,6 @@ const Shoe_Card = ({ shoes, onClick }) => {
             className="overflow-hidden shadow-md hover:shadow-lg transition border border-slate-200 cursor-pointer"
             onMouseEnter={() => hoverImg && setCurrentImg(hoverImg)}
             onMouseLeave={() => setCurrentImg(thumbnailImg)}
-
-            onClick={onClick}
         >
             <img 
                 src={currentImg} 
