@@ -55,86 +55,171 @@ const Pagination = ({ shoesPerPage, totalShoes, paginate, currentPage }) => {
 
 
 // Main Page Component with updated logic
-export default function AllShoePage({ heading = "All Products", trending = false, newArrival = false, brand = null }) {
+// export default function AllShoePage({ heading = "All Products", trending = false, newArrival = false, brand = null }) {
+//   const [selectedFilters, setSelectedFilters] = useState({});
+//   const [currentPage, setCurrentPage] = useState(1);
+//   const SHOES_PER_PAGE = 12;
+
+//   // Calculate min and max price from the entire dataset once
+//   const priceConfig = useMemo(() => {
+//     const prices = shoesData.map(s => parseInt(s.price.replace(/[^0-9]/g, '')));
+//     return {
+//       min: Math.min(...prices),
+//       max: Math.max(...prices)
+//     };
+//   }, []);
+  
+//   const handleResetFilters = () => {
+//     setSelectedFilters({});
+//     setCurrentPage(1);
+//   };
+
+//   const filteredShoes = useMemo(() => {
+//     let shoesToShow = [...shoesData];
+    
+//     // Initial filtering based on props
+//     if (newArrival) {
+//       shoesToShow = shoesToShow.filter(shoe => shoe.newArrival);
+//     } else if (trending) {
+//       shoesToShow = shoesToShow.filter(shoe => shoe.trending);
+//     } else if (brand) {
+//       shoesToShow = shoesToShow.filter(shoe => shoe.brand.toLowerCase() === brand.toLowerCase());
+//     }
+
+//     // Apply user-selected filters
+//     Object.entries(selectedFilters).forEach(([filterKey, filterValue]) => {
+//       if (!filterValue) return;
+
+//       switch (filterKey) {
+//         case 'Brand':
+//           shoesToShow = shoesToShow.filter(shoe => shoe.brand === filterValue);
+//           break;
+//         case 'Gender':
+//           const genderMap = { 'Men': 'male', 'Women': 'female', 'Kids': 'kids' };
+//           shoesToShow = shoesToShow.filter(shoe => shoe.for === genderMap[filterValue]);
+//           break;
+//         case 'Color':
+//           // FIX: Uses .includes() for partial matching, and converts both to lower case
+//           shoesToShow = shoesToShow.filter(shoe => 
+//             shoe.color.toLowerCase().includes(filterValue.toLowerCase())
+//           );
+//           break;
+//         case 'price':
+//             // UPDATED: Filters based on the slider's numeric value
+//             shoesToShow = shoesToShow.filter(shoe => {
+//                 const shoePrice = parseInt(shoe.price.replace(/[^0-9]/g, ''));
+//                 return shoePrice <= filterValue;
+//             });
+//             break;
+//       }
+//     });
+    
+//     // Apply sorting
+//     const sortBy = selectedFilters['Sort by'];
+//     if (sortBy) {
+//         // ... (sorting logic is unchanged)
+//          shoesToShow.sort((a, b) => {
+//             const priceA = parseInt(a.price.replace(/[^0-9]/g, ''));
+//             const priceB = parseInt(b.price.replace(/[^0-9]/g, ''));
+//             if (sortBy === 'Price: Low to High') return priceA - priceB;
+//             if (sortBy === 'Price: High to Low') return priceB - priceA;
+//             return 0;
+//       });
+//     }
+    
+//     setCurrentPage(1); // Reset to first page on any filter change
+//     return shoesToShow;
+//   }, [newArrival, trending, brand, selectedFilters]);
+  
+//   const indexOfLastShoe = currentPage * SHOES_PER_PAGE;
+//   const indexOfFirstShoe = indexOfLastShoe - SHOES_PER_PAGE;
+//   const currentShoes = filteredShoes.slice(indexOfFirstShoe, indexOfLastShoe);
+export default function AllShoePage({
+  heading = "All Products",
+  trending = false,
+  newArrival = false,
+  brand = null,
+  shoesData = [],
+}) {
   const [selectedFilters, setSelectedFilters] = useState({});
   const [currentPage, setCurrentPage] = useState(1);
   const SHOES_PER_PAGE = 12;
 
-  // Calculate min and max price from the entire dataset once
+  // Preprocess min and max prices once
   const priceConfig = useMemo(() => {
     const prices = shoesData.map(s => parseInt(s.price.replace(/[^0-9]/g, '')));
     return {
       min: Math.min(...prices),
-      max: Math.max(...prices)
+      max: Math.max(...prices),
     };
-  }, []);
-  
+  }, [shoesData]);
+
   const handleResetFilters = () => {
     setSelectedFilters({});
     setCurrentPage(1);
   };
 
+  // Optimized filtering, sorting in a single pass
   const filteredShoes = useMemo(() => {
-    let shoesToShow = [...shoesData];
-    
-    // Initial filtering based on props
-    if (newArrival) {
-      shoesToShow = shoesToShow.filter(shoe => shoe.newArrival);
-    } else if (trending) {
-      shoesToShow = shoesToShow.filter(shoe => shoe.trending);
-    } else if (brand) {
-      shoesToShow = shoesToShow.filter(shoe => shoe.brand.toLowerCase() === brand.toLowerCase());
+    const genderMap = { 'Men': 'male', 'Women': 'female', 'Kids': 'kids' };
+
+    let filtered = [];
+
+    for (const shoe of shoesData) {
+      // Initial prop-based filtering
+      if (newArrival && !shoe.newArrival) continue;
+      if (trending && !shoe.trending) continue;
+      if (brand && shoe.brand.toLowerCase() !== brand.toLowerCase()) continue;
+
+      // Apply user-selected filters combined in a single pass
+      let include = true;
+      for (const [key, value] of Object.entries(selectedFilters)) {
+        if (!value) continue;
+
+        switch (key) {
+          case 'Brand':
+            if (shoe.brand !== value) include = false;
+            break;
+          case 'Gender':
+            if (shoe.for !== genderMap[value]) include = false;
+            break;
+          case 'Color':
+            if (!shoe.color.toLowerCase().includes(value.toLowerCase())) include = false;
+            break;
+          case 'price':
+            const price = parseInt(shoe.price.replace(/[^0-9]/g, ''));
+            if (price > value) include = false;
+            break;
+          default:
+            break;
+        }
+        if (!include) break; // Early exit if filter fails
+      }
+
+      if (include) filtered.push(shoe);
     }
 
-    // Apply user-selected filters
-    Object.entries(selectedFilters).forEach(([filterKey, filterValue]) => {
-      if (!filterValue) return;
-
-      switch (filterKey) {
-        case 'Brand':
-          shoesToShow = shoesToShow.filter(shoe => shoe.brand === filterValue);
-          break;
-        case 'Gender':
-          const genderMap = { 'Men': 'male', 'Women': 'female', 'Kids': 'kids' };
-          shoesToShow = shoesToShow.filter(shoe => shoe.for === genderMap[filterValue]);
-          break;
-        case 'Color':
-          // FIX: Uses .includes() for partial matching, and converts both to lower case
-          shoesToShow = shoesToShow.filter(shoe => 
-            shoe.color.toLowerCase().includes(filterValue.toLowerCase())
-          );
-          break;
-        case 'price':
-            // UPDATED: Filters based on the slider's numeric value
-            shoesToShow = shoesToShow.filter(shoe => {
-                const shoePrice = parseInt(shoe.price.replace(/[^0-9]/g, ''));
-                return shoePrice <= filterValue;
-            });
-            break;
-      }
-    });
-    
-    // Apply sorting
+    // Sorting
     const sortBy = selectedFilters['Sort by'];
     if (sortBy) {
-        // ... (sorting logic is unchanged)
-         shoesToShow.sort((a, b) => {
-            const priceA = parseInt(a.price.replace(/[^0-9]/g, ''));
-            const priceB = parseInt(b.price.replace(/[^0-9]/g, ''));
-            if (sortBy === 'Price: Low to High') return priceA - priceB;
-            if (sortBy === 'Price: High to Low') return priceB - priceA;
-            return 0;
+      filtered.sort((a, b) => {
+        const priceA = parseInt(a.price.replace(/[^0-9]/g, ''));
+        const priceB = parseInt(b.price.replace(/[^0-9]/g, ''));
+        if (sortBy === 'Price: Low to High') return priceA - priceB;
+        if (sortBy === 'Price: High to Low') return priceB - priceA;
+        return 0;
       });
     }
-    
-    setCurrentPage(1); // Reset to first page on any filter change
-    return shoesToShow;
-  }, [newArrival, trending, brand, selectedFilters]);
-  
-  const indexOfLastShoe = currentPage * SHOES_PER_PAGE;
-  const indexOfFirstShoe = indexOfLastShoe - SHOES_PER_PAGE;
-  const currentShoes = filteredShoes.slice(indexOfFirstShoe, indexOfLastShoe);
 
+    setCurrentPage(1);
+    return filtered;
+  }, [shoesData, newArrival, trending, brand, selectedFilters]);
+
+  // Pagination logic
+  const indexLastShoe = currentPage * SHOES_PER_PAGE;
+  const indexFirstShoe = indexLastShoe - SHOES_PER_PAGE;
+  const currentShoes = filteredShoes.slice(indexFirstShoe, indexLastShoe);
+  console.log("Filtered shoes data after category filter:", filteredShoes);
   return (
     <div className="bg-white font-sans">
       <div className="px-20 py-6">
