@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import CardCarousel from "../carouselCardList/caroselCard";
-import ShimmerShoeCard from "../Shimmer UIs/card_carousel_shimmer";
+import ShimmerShoeCard from "../Shimmer_UIs/shoe_card_shimmer";
+import { Key } from "lucide-react";
+
 
 const NewArrivalSection = () => {
 
@@ -32,11 +34,21 @@ const NewArrivalSection = () => {
 
   console.log('before loading...');
   
-  if (loading) {
+  const arr = [0,0,0,0]
+  if (loading || data.length < 4) {
     console.log('loading....');
-    
     return(
-      <ShimmerShoeCard/>
+     <>
+        <div className="w-full mx-auto px-20 py-12 bg-white">
+            <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-x-5 gap-y-7">
+                {arr.map((index) => (
+                  <div Key={index}>
+                    <ShimmerShoeCard/>
+                  </div>
+                ))}
+            </div>
+        </div>
+      </>
     );
   }
 
@@ -73,6 +85,7 @@ const NewArrivalSection = () => {
       <CardCarousel
         shoes={filteredData}
       />
+    
     </div>
   );
 };

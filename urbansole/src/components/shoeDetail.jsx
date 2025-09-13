@@ -53,7 +53,7 @@ const faqs = [
 ];
 
 
-const ShoeDetail = ({ onBack, onRelatedShoeClick }) => {
+const ShoeDetail = () => {
     const [selectedSize, setSelectedSize] = useState('');
     const [openSections, setOpenSections] = useState({});
     const [openFaqIndex, setOpenFaqIndex] = useState(null);
@@ -69,8 +69,8 @@ const ShoeDetail = ({ onBack, onRelatedShoeClick }) => {
     
     useEffect(() => {
         const fetchShoes = async () => {
-        console.log("Fetching shoes data for detail show...");
-
+            console.log("Fetching shoes data for detail show...");
+            setLoading(true)
             try {
                 const response = await axios.get(`https://api-shoe-ecommerce.onrender.com/api/v1/products/${id}`);
                 setShoe(response?.data?.data);
@@ -82,6 +82,7 @@ const ShoeDetail = ({ onBack, onRelatedShoeClick }) => {
         };
 
         if (id) {
+            
             fetchShoes();
             window.scrollTo(0, 0);
         }
@@ -139,7 +140,6 @@ const ShoeDetail = ({ onBack, onRelatedShoeClick }) => {
                 <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-16 my-16">
                     <Link to={'/'}>
                         <button
-                            onClick={onBack}
                             className="bg-gray-100 text-gray-800 font-semibold py-2 px-4 my-6 rounded-lg hover:bg-gray-200 transition-colors duration-300 flex items-center shadow-sm border border-gray-200"
                         >
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
@@ -240,9 +240,7 @@ const ShoeDetail = ({ onBack, onRelatedShoeClick }) => {
                                     >
                                         <Shoe_Card 
                                             {...rshoe} 
-                                            onClick={() => onRelatedShoeClick(rshoe)} 
                                         />
-
                                     </Link>
                                     )
                                 }
