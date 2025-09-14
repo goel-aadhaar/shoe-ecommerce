@@ -102,7 +102,7 @@ export default function AllShoePage() {
     setCurrentPage(1);
   };
 
-  let filteredShoes = [...shoesData];
+  let filteredShoes = Array.isArray(shoesData) ? [...shoesData] : [];
 
   // Logic to filter based on the URL parameter (queryType)
   if (queryType === 'new-arrival') {
@@ -154,15 +154,15 @@ export default function AllShoePage() {
     });
   }
 
-  const priceConfig = shoesData.length === 0
-    ? { min: 599, max: 20000 }
-    : (() => {
+  const priceConfig = shoesData && shoesData.length > 0
+    ? (() => {
       const prices = shoesData.map(s => s.price || 0);
       return {
         min: Math.min(...prices),
         max: Math.max(...prices)
       };
-    })();
+    })()
+    : { min: 599, max: 20000 };
 
   const indexOfLastShoe = currentPage * SHOES_PER_PAGE;
   const indexOfFirstShoe = indexOfLastShoe - SHOES_PER_PAGE;
