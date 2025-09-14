@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom'; // Use react-router-dom for Link
 import {Heart, Search,Menu, UserRoundIcon, ShoppingCart} from 'lucide-react';
 
 const Navbar = ({ onProfileClick }) => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const navLinks = [
-        {navName: "New Arrival", to : 'collections/NewArrival'}, 
-        {navName: "Shoes", to :'collections/shoe'}, 
-        {navName: "Crocks", to : 'collections/crocks'}, 
+        {navName: "New Arrival", to : '/collections/new-arrival'}, 
+        {navName: "Shoes", to :'/collections/shoe'}, 
+        {navName: "Crocks", to : '/collections/crocks'}, 
         {navName: "Brands",to : '/brandsLogo'}, 
         {navName: "Home", to :'/'}
     ];
@@ -34,7 +34,6 @@ const Navbar = ({ onProfileClick }) => {
                     </button>
                     <button className="hover:text-gray-300 transition-colors" aria-label="Shopping Cart"><Heart /></button>
                     <button className="hover:text-gray-300 transition-colors" aria-label="Shopping Cart"><ShoppingCart /></button>
-                    {/* <button className="hover:text-gray-300 transition-colors" aria-label="Shopping Cart"><ScanSearch /></button> */}
                 </div>
             </div>
             {isMobileMenuOpen && (

@@ -1,22 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useParams } from 'react-router-dom';
 import { Shoe_Card } from './shoe_card';
 import FilterBar from './filter';
 import ShimmerShoeDetail from './Shimmer_UIs/shoe_detail_shimmerui';
 
-const Breadcrumb = ({ newArrival, trending, brand }) => {
+const Breadcrumb = ({ queryType }) => {
   let path = "Home";
   let title = "All Products";
 
-  if (newArrival) {
-    path = "Home > New Arrivals";
-    title = "New Arrivals";
-  } else if (trending) {
-    path = "Home > Trending";
-    title = "Trending";
-  } else if (brand) {
-    path = `Home > Brand > ${brand}`;
-    title = brand;
+  if (queryType) {
+    const formattedTitle = queryType.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+    path = `Home > ${formattedTitle}`;
+    title = formattedTitle;
   }
 
   return (
@@ -53,20 +49,22 @@ const Pagination = ({ shoesPerPage, totalShoes, paginate, currentPage }) => {
   );
 };
 
-export default function AllShoePage({ heading = "All Products", trending = false, newArrival = false, brand = null }) {
+export default function AllShoePage() {
   const [shoesData, setShoesData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [selectedFilters, setSelectedFilters] = useState({});
   const [currentPage, setCurrentPage] = useState(1);
   const SHOES_PER_PAGE = 16;
+  
+  const { queryType } = useParams();
 
   useEffect(() => {
     const fetchShoes = async () => {
       try {
         setLoading(true);
         const response = await axios.get('https://api-shoe-ecommerce.onrender.com/api/v1/products');
-        setShoesData(response.data);
+        setShoesData(response.data.products); // Adjusted to access the 'products' array from the response
         setError(null);
       } catch (err) {
         console.error("Error fetching data:", err);
@@ -77,22 +75,15 @@ export default function AllShoePage({ heading = "All Products", trending = false
     };
 
     fetchShoes();
-  }, []);
+  }, [queryType]);
 
-  // Now, after all hooks have been called, you can have your conditional returns.
-  // The hooks above will be called on every render, regardless of what is returned here.
   if (loading) {
+    console.log("Coming here in oading ..");
+    
     return (<ShimmerShoeDetail />);
   }
 
-  // if (error) {
-  //   return (
-  //     <div className="bg-white font-sans text-center py-20">
-  //       <h2 className="text-2xl font-semibold text-red-500">Error!</h2>
-  //       <p className="text-gray-500 mt-2">{error}</p>
-  //     </div>
-  //   );
-  // }
+
 
   const handleFilterChange = (newFilters) => {
     setSelectedFilters(newFilters);
@@ -104,15 +95,20 @@ export default function AllShoePage({ heading = "All Products", trending = false
     setCurrentPage(1);
   };
 
-  // Logic to filter and sort shoes (no useMemo needed here if we don't want it)
   let filteredShoes = [...shoesData];
 
-  if (newArrival) {
-    filteredShoes = filteredShoes.filter(shoe => shoe.newArrival);
-  } else if (trending) {
-    filteredShoes = filteredShoes.filter(shoe => shoe.trending);
-  } else if (brand) {
-    filteredShoes = filteredShoes.filter(shoe => shoe.brand.toLowerCase() === brand.toLowerCase());
+  // Logic to filter based on the URL parameter (queryType)
+  if (queryType === 'new-arrival') {
+    filteredShoes = filteredShoes.filter(shoe => shoe.attributes.includes('newArrival'));
+  } else if (queryType === 'trending') {
+    filteredShoes = filteredShoes.filter(shoe => shoe.attributes.includes('trending'));
+  } else if (queryType === 'shoe') {
+    filteredShoes = filteredShoes.filter(shoe => shoe.category.name.toLowerCase() === 'shoes');
+  } else if (queryType === 'clogs') {
+    filteredShoes = filteredShoes.filter(shoe => shoe.category.name.toLowerCase() === 'clogs');
+  } else if (queryType) {
+    // If queryType is not a special type, treat it as a brand
+    filteredShoes = filteredShoes.filter(shoe => shoe.brand.toLowerCase() === queryType.toLowerCase());
   }
 
   Object.entries(selectedFilters).forEach(([filterKey, filterValue]) => {
@@ -134,8 +130,8 @@ export default function AllShoePage({ heading = "All Products", trending = false
         break;
       case 'price':
         filteredShoes = filteredShoes.filter(shoe => {
-          const shoePrice = parseInt(shoe.price.replace(/[^0-9]/g, ''));
-          return shoePrice <= filterValue;
+          // Price is now a number, so we don't need to parse it
+          return shoe.price <= filterValue;
         });
         break;
       default:
@@ -146,19 +142,17 @@ export default function AllShoePage({ heading = "All Products", trending = false
   const sortBy = selectedFilters['Sort by'];
   if (sortBy) {
     filteredShoes.sort((a, b) => {
-      const priceA = parseInt(a.price.replace(/[^0-9]/g, ''));
-      const priceB = parseInt(b.price.replace(/[^0-9]/g, ''));
-      if (sortBy === 'Price: Low to High') return priceA - priceB;
-      if (sortBy === 'Price: High to Low') return priceB - priceA;
+      if (sortBy === 'Price: Low to High') return a.price - b.price;
+      if (sortBy === 'Price: High to Low') return b.price - a.price;
       return 0;
     });
   }
 
-  // Calculate price configuration directly
   const priceConfig = shoesData.length === 0
     ? { min: 599, max: 20000 }
     : (() => {
-        const prices = shoesData.map(s => parseInt(s.price.replace(/[^0-9]/g, ''), 10) || 0);
+        // Price is a number, direct mapping is possible
+        const prices = shoesData.map(s => s.price || 0);
         return {
           min: Math.min(...prices),
           max: Math.max(...prices)
@@ -172,7 +166,7 @@ export default function AllShoePage({ heading = "All Products", trending = false
   return (
     <div className="bg-white font-sans">
       <div className="px-20 py-6">
-        <Breadcrumb newArrival={newArrival} trending={trending} brand={brand} />
+        <Breadcrumb queryType={queryType} />
       </div>
 
       <FilterBar
