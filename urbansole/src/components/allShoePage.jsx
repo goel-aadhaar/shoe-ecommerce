@@ -110,8 +110,8 @@ export default function AllShoePage() {
 
   console.log("All shoe after fetch: ", shoesData);
   
-
   let filteredShoes = Array.isArray(shoesData) ? [...shoesData] : [];
+  console.log("filtered shoes", filteredShoes);  
 
   // Logic to filter based on the URL parameter (queryType)
   if (queryType === 'new-arrival') {
@@ -176,6 +176,9 @@ export default function AllShoePage() {
   const indexOfLastShoe = currentPage * SHOES_PER_PAGE;
   const indexOfFirstShoe = indexOfLastShoe - SHOES_PER_PAGE;
   const currentShoes = filteredShoes.slice(indexOfFirstShoe, indexOfLastShoe);
+  
+  console.log("Current shoes -> ", currentShoes);
+  
 
   return (
     <div className="bg-white font-sans">
