@@ -5,14 +5,17 @@ import BrandCarousel from "../brandCardCarousel";
 import AdCard from "./adCard1";
 import AdCard2 from "./adCard2";
 import AdCard3 from "./adCard3";
+import ImageSlider from '../ImageSlider';
+
 const Home = ()=>{
     console.log("Home-page.jsx called...");
     console.log("carouselCard.jsx caled....");
     return(
         <>
-            <NewArrivalSection/>
-            <BrandCarousel/>
+            <ImageSlider/>
             <TrendingSection/>
+            <BrandCarousel/>
+            <NewArrivalSection/>
             <AdCard2/>
             <AdCard3/>
             <AdCard/>

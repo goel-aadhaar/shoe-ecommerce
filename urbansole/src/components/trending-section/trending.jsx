@@ -34,7 +34,7 @@ const TrendingSection = () => {
     console.log('yes here i am');
     return(
       <>
-          <div className="w-full mx-auto px-20 py-12 bg-white">
+          <div className="w-full mx-auto px-24 py-12 bg-white">
               <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-x-5 gap-y-7">
                   {arr.map((index) => (
                     <div Key={index}>     

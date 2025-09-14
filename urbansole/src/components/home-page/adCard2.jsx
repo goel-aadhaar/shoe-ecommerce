@@ -2,7 +2,7 @@ import React from "react";
 
 const AdCard2 = () => {
   return (
-    <div className="grid lg:grid-cols-2 gap-5 px-4 sm:px-10 lg:px-20 bg-white text-black">
+    <div className="grid lg:grid-cols-2 gap-5 px-4 sm:px-10 lg:px-24 bg-white text-black">
       
       {/* LEFT PART>>>> */}
       <div>
