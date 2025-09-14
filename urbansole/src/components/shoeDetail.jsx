@@ -239,7 +239,7 @@ const ShoeDetail = () => {
                                         to ={'/shoe/' + rshoe.id}
                                     >
                                         <Shoe_Card 
-                                            {...rshoe} 
+                                            shoes={rshoe} 
                                         />
                                     </Link>
                                     )

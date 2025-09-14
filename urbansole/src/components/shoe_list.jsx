@@ -15,8 +15,7 @@ function ShoeList({ shoes, onShoeClick }){
                     to = {'/shoe' + shoe.id}
                   >
                     <Shoe_Card   
-                      {...shoe}
-                      onClick={() => onShoeClick(shoe)}
+                      shoes={shoe}
                     />
                   </Link>
                 ))}
