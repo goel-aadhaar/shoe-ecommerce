@@ -6,7 +6,6 @@ import { Link, useParams } from 'react-router-dom';
 import { Shoe_Card } from './shoe_card';
 import Navbar from './Navbar';
 import Footer from './footer';
-import ShimmerShoeDetail from './Shimmer_UIs/shoe_detail_shimmerui';
 
 const CollapsibleItem = ({ title, isOpen, onClick, children, titleClassName }) => {
     return (
@@ -92,9 +91,8 @@ const ShoeDetail = () => {
 
 
     if(loading){
-        return(
-            <ShimmerShoeDetail/>
-        );
+        // replace with shimmer Ui....
+        return <p>Loading your shoe detail......</p>
     }
 
     

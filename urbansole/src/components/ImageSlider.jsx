@@ -26,7 +26,7 @@ const ImageSlider = () => {
     }, [nextSlide]);
 
     return (
-        <main className="relative mt-12 h-[100vh] overflow-hidden">
+        <main className="relative w-full h-[100vh] overflow-hidden">
             <div className="relative w-full h-full">
                 {slidesData.map((slide, index) => (
                     <div key={index} className="absolute w-full h-full transition-opacity duration-700 ease-in-out" style={{ opacity: index === currentSlide ? 1 : 0 }}>

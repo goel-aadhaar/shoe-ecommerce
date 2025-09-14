@@ -56,7 +56,7 @@ export default function BrandCarousel() {
         breakpoints={{
           320: { slidesPerView: 1 },   // mobile
           640: { slidesPerView: 2 },   // small tablet
-          1000: { slidesPerView: 3 },  // tablet / small desktop
+          980: { slidesPerView: 3 },  // tablet / small desktop
           1280: { slidesPerView: 4 },  // large desktop
         }}
       >

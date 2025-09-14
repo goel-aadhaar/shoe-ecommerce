@@ -5,23 +5,27 @@ const ShimmerShoeCard = () => {
         <>
             <style>
                 {`
-
-                .shimmer-bg {
-                    background: #f0f0f0;
-                    background-image: linear-gradient(to right, #f0f0f0 0%, #e0e0e0 20%, #f0f0f0 40%, #f0f0f0 100%);
-                    background-size: 1000px 100%;
-                    animation: shimmer 1.5s infinite linear;
-                }
-
-                @keyframes shimmer {
+                @keyframes radial-shimmer {
                     0% {
-                        background-position: -1000px 0;
+                        background-position: -200% 0;
                     }
                     100% {
-                        background-position: 1000px 0;
+                        background-position: 200% 0;
                     }
                 }
-            `}
+                .shimmer-bg {
+                    background-color: #f6f7f8;
+                    background-image: radial-gradient(
+                        circle at center, 
+                        rgba(255, 255, 255, 0.6) 0%, 
+                        rgba(224, 224, 224, 0.6) 50%, 
+                        rgba(246, 247, 248, 0.6) 100%
+                    );
+                    background-repeat: no-repeat;
+                    background-size: 200% 100%;
+                    animation: radial-shimmer 2s ease-in-out infinite;
+                }
+                `}
             </style>
             <div className="max-w-[300px] overflow-hidden shadow-md transition border border-slate-200">
                 <div className="aspect-square w-full shimmer-bg"></div>
