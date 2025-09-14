@@ -1,7 +1,8 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { Shoe_Card } from './shoe_card';
 import FilterBar from './filter';
-import shoesData from '../data/shoes.json';
+import ShimmerShoeDetail from './Shimmer_UIs/shoe_detail_shimmerui';
 
 const Breadcrumb = ({ newArrival, trending, brand }) => {
   let path = "Home";
@@ -52,182 +53,131 @@ const Pagination = ({ shoesPerPage, totalShoes, paginate, currentPage }) => {
   );
 };
 
-
-// Main Page Component with updated logic
-// export default function AllShoePage({ heading = "All Products", trending = false, newArrival = false, brand = null }) {
-//   const [selectedFilters, setSelectedFilters] = useState({});
-//   const [currentPage, setCurrentPage] = useState(1);
-//   const SHOES_PER_PAGE = 12;
-
-//   // Calculate min and max price from the entire dataset once
-//   const priceConfig = useMemo(() => {
-//     const prices = shoesData.map(s => parseInt(s.price.replace(/[^0-9]/g, '')));
-//     return {
-//       min: Math.min(...prices),
-//       max: Math.max(...prices)
-//     };
-//   }, []);
-  
-//   const handleResetFilters = () => {
-//     setSelectedFilters({});
-//     setCurrentPage(1);
-//   };
-
-//   const filteredShoes = useMemo(() => {
-//     let shoesToShow = [...shoesData];
-    
-//     // Initial filtering based on props
-//     if (newArrival) {
-//       shoesToShow = shoesToShow.filter(shoe => shoe.newArrival);
-//     } else if (trending) {
-//       shoesToShow = shoesToShow.filter(shoe => shoe.trending);
-//     } else if (brand) {
-//       shoesToShow = shoesToShow.filter(shoe => shoe.brand.toLowerCase() === brand.toLowerCase());
-//     }
-
-//     // Apply user-selected filters
-//     Object.entries(selectedFilters).forEach(([filterKey, filterValue]) => {
-//       if (!filterValue) return;
-
-//       switch (filterKey) {
-//         case 'Brand':
-//           shoesToShow = shoesToShow.filter(shoe => shoe.brand === filterValue);
-//           break;
-//         case 'Gender':
-//           const genderMap = { 'Men': 'male', 'Women': 'female', 'Kids': 'kids' };
-//           shoesToShow = shoesToShow.filter(shoe => shoe.for === genderMap[filterValue]);
-//           break;
-//         case 'Color':
-//           // FIX: Uses .includes() for partial matching, and converts both to lower case
-//           shoesToShow = shoesToShow.filter(shoe => 
-//             shoe.color.toLowerCase().includes(filterValue.toLowerCase())
-//           );
-//           break;
-//         case 'price':
-//             // UPDATED: Filters based on the slider's numeric value
-//             shoesToShow = shoesToShow.filter(shoe => {
-//                 const shoePrice = parseInt(shoe.price.replace(/[^0-9]/g, ''));
-//                 return shoePrice <= filterValue;
-//             });
-//             break;
-//       }
-//     });
-    
-//     // Apply sorting
-//     const sortBy = selectedFilters['Sort by'];
-//     if (sortBy) {
-//         // ... (sorting logic is unchanged)
-//          shoesToShow.sort((a, b) => {
-//             const priceA = parseInt(a.price.replace(/[^0-9]/g, ''));
-//             const priceB = parseInt(b.price.replace(/[^0-9]/g, ''));
-//             if (sortBy === 'Price: Low to High') return priceA - priceB;
-//             if (sortBy === 'Price: High to Low') return priceB - priceA;
-//             return 0;
-//       });
-//     }
-    
-//     setCurrentPage(1); // Reset to first page on any filter change
-//     return shoesToShow;
-//   }, [newArrival, trending, brand, selectedFilters]);
-  
-//   const indexOfLastShoe = currentPage * SHOES_PER_PAGE;
-//   const indexOfFirstShoe = indexOfLastShoe - SHOES_PER_PAGE;
-//   const currentShoes = filteredShoes.slice(indexOfFirstShoe, indexOfLastShoe);
-export default function AllShoePage({
-  heading = "All Products",
-  trending = false,
-  newArrival = false,
-  brand = null,
-  shoesData = [],
-}) {
+export default function AllShoePage({ heading = "All Products", trending = false, newArrival = false, brand = null }) {
+  const [shoesData, setShoesData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [selectedFilters, setSelectedFilters] = useState({});
   const [currentPage, setCurrentPage] = useState(1);
-  const SHOES_PER_PAGE = 12;
+  const SHOES_PER_PAGE = 16;
 
-  // Preprocess min and max prices once
-  const priceConfig = useMemo(() => {
-    const prices = shoesData.map(s => parseInt(s.price.replace(/[^0-9]/g, '')));
-    return {
-      min: Math.min(...prices),
-      max: Math.max(...prices),
+  useEffect(() => {
+    const fetchShoes = async () => {
+      try {
+        setLoading(true);
+        const response = await axios.get('https://api-shoe-ecommerce.onrender.com/api/v1/products');
+        setShoesData(response.data);
+        setError(null);
+      } catch (err) {
+        console.error("Error fetching data:", err);
+        setError("Failed to fetch products. Please try again later.");
+      } finally {
+        setLoading(false);
+      }
     };
-  }, [shoesData]);
+
+    fetchShoes();
+  }, []);
+
+  // Now, after all hooks have been called, you can have your conditional returns.
+  // The hooks above will be called on every render, regardless of what is returned here.
+  if (loading) {
+    return (<ShimmerShoeDetail />);
+  }
+
+  // if (error) {
+  //   return (
+  //     <div className="bg-white font-sans text-center py-20">
+  //       <h2 className="text-2xl font-semibold text-red-500">Error!</h2>
+  //       <p className="text-gray-500 mt-2">{error}</p>
+  //     </div>
+  //   );
+  // }
+
+  const handleFilterChange = (newFilters) => {
+    setSelectedFilters(newFilters);
+    setCurrentPage(1);
+  };
 
   const handleResetFilters = () => {
     setSelectedFilters({});
     setCurrentPage(1);
   };
 
-  // Optimized filtering, sorting in a single pass
-  const filteredShoes = useMemo(() => {
-    const genderMap = { 'Men': 'male', 'Women': 'female', 'Kids': 'kids' };
+  // Logic to filter and sort shoes (no useMemo needed here if we don't want it)
+  let filteredShoes = [...shoesData];
 
-    let filtered = [];
+  if (newArrival) {
+    filteredShoes = filteredShoes.filter(shoe => shoe.newArrival);
+  } else if (trending) {
+    filteredShoes = filteredShoes.filter(shoe => shoe.trending);
+  } else if (brand) {
+    filteredShoes = filteredShoes.filter(shoe => shoe.brand.toLowerCase() === brand.toLowerCase());
+  }
 
-    for (const shoe of shoesData) {
-      // Initial prop-based filtering
-      if (newArrival && !shoe.newArrival) continue;
-      if (trending && !shoe.trending) continue;
-      if (brand && shoe.brand.toLowerCase() !== brand.toLowerCase()) continue;
+  Object.entries(selectedFilters).forEach(([filterKey, filterValue]) => {
+    if (!filterValue) return;
 
-      // Apply user-selected filters combined in a single pass
-      let include = true;
-      for (const [key, value] of Object.entries(selectedFilters)) {
-        if (!value) continue;
-
-        switch (key) {
-          case 'Brand':
-            if (shoe.brand !== value) include = false;
-            break;
-          case 'Gender':
-            if (shoe.for !== genderMap[value]) include = false;
-            break;
-          case 'Color':
-            if (!shoe.color.toLowerCase().includes(value.toLowerCase())) include = false;
-            break;
-          case 'price':
-            const price = parseInt(shoe.price.replace(/[^0-9]/g, ''));
-            if (price > value) include = false;
-            break;
-          default:
-            break;
-        }
-        if (!include) break; // Early exit if filter fails
+    switch (filterKey) {
+      case 'Brand':
+        filteredShoes = filteredShoes.filter(shoe => shoe.brand === filterValue);
+        break;
+      case 'Gender': {
+        const genderMap = { 'Men': 'Male', 'Women': 'Female' };
+        filteredShoes = filteredShoes.filter(shoe => shoe.for === genderMap[filterValue]);
+        break;
       }
-
-      if (include) filtered.push(shoe);
+      case 'Color':
+        filteredShoes = filteredShoes.filter(shoe =>
+          shoe.color.toLowerCase().includes(filterValue.toLowerCase())
+        );
+        break;
+      case 'price':
+        filteredShoes = filteredShoes.filter(shoe => {
+          const shoePrice = parseInt(shoe.price.replace(/[^0-9]/g, ''));
+          return shoePrice <= filterValue;
+        });
+        break;
+      default:
+        break;
     }
+  });
 
-    // Sorting
-    const sortBy = selectedFilters['Sort by'];
-    if (sortBy) {
-      filtered.sort((a, b) => {
-        const priceA = parseInt(a.price.replace(/[^0-9]/g, ''));
-        const priceB = parseInt(b.price.replace(/[^0-9]/g, ''));
-        if (sortBy === 'Price: Low to High') return priceA - priceB;
-        if (sortBy === 'Price: High to Low') return priceB - priceA;
-        return 0;
-      });
-    }
+  const sortBy = selectedFilters['Sort by'];
+  if (sortBy) {
+    filteredShoes.sort((a, b) => {
+      const priceA = parseInt(a.price.replace(/[^0-9]/g, ''));
+      const priceB = parseInt(b.price.replace(/[^0-9]/g, ''));
+      if (sortBy === 'Price: Low to High') return priceA - priceB;
+      if (sortBy === 'Price: High to Low') return priceB - priceA;
+      return 0;
+    });
+  }
 
-    setCurrentPage(1);
-    return filtered;
-  }, [shoesData, newArrival, trending, brand, selectedFilters]);
+  // Calculate price configuration directly
+  const priceConfig = shoesData.length === 0
+    ? { min: 599, max: 20000 }
+    : (() => {
+        const prices = shoesData.map(s => parseInt(s.price.replace(/[^0-9]/g, ''), 10) || 0);
+        return {
+          min: Math.min(...prices),
+          max: Math.max(...prices)
+        };
+      })();
 
-  // Pagination logic
-  const indexLastShoe = currentPage * SHOES_PER_PAGE;
-  const indexFirstShoe = indexLastShoe - SHOES_PER_PAGE;
-  const currentShoes = filteredShoes.slice(indexFirstShoe, indexLastShoe);
-  console.log("Filtered shoes data after category filter:", filteredShoes);
+  const indexOfLastShoe = currentPage * SHOES_PER_PAGE;
+  const indexOfFirstShoe = indexOfLastShoe - SHOES_PER_PAGE;
+  const currentShoes = filteredShoes.slice(indexOfFirstShoe, indexOfLastShoe);
+
   return (
     <div className="bg-white font-sans">
       <div className="px-20 py-6">
         <Breadcrumb newArrival={newArrival} trending={trending} brand={brand} />
       </div>
 
-      <FilterBar 
-        selectedFilters={selectedFilters} 
-        onFilterChange={setSelectedFilters}
+      <FilterBar
+        selectedFilters={selectedFilters}
+        onFilterChange={handleFilterChange}
         onReset={handleResetFilters}
         priceConfig={priceConfig}
       />
