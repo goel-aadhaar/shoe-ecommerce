@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom'; // Import useParams
 import { Shoe_Card } from './shoe_card';
 import FilterBar from './filter';
 import ShimmerShoeDetail from './Shimmer_UIs/shoe_detail_shimmerui';
@@ -10,6 +10,7 @@ const Breadcrumb = ({ queryType }) => {
   let title = "All Products";
 
   if (queryType) {
+    // Capitalize the first letter and replace hyphens with spaces for display
     const formattedTitle = queryType.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
     path = `Home > ${formattedTitle}`;
     title = formattedTitle;
@@ -56,7 +57,8 @@ export default function AllShoePage() {
   const [selectedFilters, setSelectedFilters] = useState({});
   const [currentPage, setCurrentPage] = useState(1);
   const SHOES_PER_PAGE = 16;
-  
+
+  // Get the queryType from the URL params
   const { queryType } = useParams();
 
   useEffect(() => {
@@ -64,7 +66,7 @@ export default function AllShoePage() {
       try {
         setLoading(true);
         const response = await axios.get('https://api-shoe-ecommerce.onrender.com/api/v1/products');
-        setShoesData(response.data.products); // Adjusted to access the 'products' array from the response
+        setShoesData(response.data.products);
         setError(null);
       } catch (err) {
         console.error("Error fetching data:", err);
@@ -78,12 +80,17 @@ export default function AllShoePage() {
   }, [queryType]);
 
   if (loading) {
-    console.log("Coming here in oading ..");
-    
     return (<ShimmerShoeDetail />);
   }
 
-
+  if (error) {
+    return (
+      <div className="bg-white font-sans text-center py-20">
+        <h2 className="text-2xl font-semibold text-red-500">Error!</h2>
+        <p className="text-gray-500 mt-2">{error}</p>
+      </div>
+    );
+  }
 
   const handleFilterChange = (newFilters) => {
     setSelectedFilters(newFilters);
@@ -104,8 +111,8 @@ export default function AllShoePage() {
     filteredShoes = filteredShoes.filter(shoe => shoe.attributes.includes('trending'));
   } else if (queryType === 'shoe') {
     filteredShoes = filteredShoes.filter(shoe => shoe.category.name.toLowerCase() === 'shoes');
-  } else if (queryType === 'clogs') {
-    filteredShoes = filteredShoes.filter(shoe => shoe.category.name.toLowerCase() === 'clogs');
+  } else if (queryType === 'crocks') {
+    filteredShoes = filteredShoes.filter(shoe => shoe.category.name.toLowerCase() === 'crocks');
   } else if (queryType) {
     // If queryType is not a special type, treat it as a brand
     filteredShoes = filteredShoes.filter(shoe => shoe.brand.toLowerCase() === queryType.toLowerCase());
@@ -130,7 +137,6 @@ export default function AllShoePage() {
         break;
       case 'price':
         filteredShoes = filteredShoes.filter(shoe => {
-          // Price is now a number, so we don't need to parse it
           return shoe.price <= filterValue;
         });
         break;
@@ -151,13 +157,12 @@ export default function AllShoePage() {
   const priceConfig = shoesData.length === 0
     ? { min: 599, max: 20000 }
     : (() => {
-        // Price is a number, direct mapping is possible
-        const prices = shoesData.map(s => s.price || 0);
-        return {
-          min: Math.min(...prices),
-          max: Math.max(...prices)
-        };
-      })();
+      const prices = shoesData.map(s => s.price || 0);
+      return {
+        min: Math.min(...prices),
+        max: Math.max(...prices)
+      };
+    })();
 
   const indexOfLastShoe = currentPage * SHOES_PER_PAGE;
   const indexOfFirstShoe = indexOfLastShoe - SHOES_PER_PAGE;
