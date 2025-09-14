@@ -2,7 +2,7 @@ import React from "react";
 
 const AdCard3 = () => {
   return (
-    <div className="grid lg:grid-cols-2 gap-5 px-4 sm:px-10 lg:px-20 bg-white text-black py-5">
+    <div className="grid lg:grid-cols-2 gap-10 px-4 sm:px-10 lg:px-24 bg-white text-black py-5">
       
         {/* Left PART>>>>>>> */}
         <div className="border border-slate-300 grid grid-cols-3">
@@ -52,7 +52,7 @@ const AdCard3 = () => {
       {/* RIght Part>> */}
       <div>
         <img
-          src="https://www.superkicks.in/cdn/shop/files/IMG_4196.jpg?v=1753430049&width=2000"
+          src="https://www.superkicks.in/cdn/shop/files/Timeless-Classics-Desk_1.gif?v=1756814443"
           alt="Collab Room"
           className="w-full h-auto"
         />

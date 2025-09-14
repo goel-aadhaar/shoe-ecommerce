@@ -34,7 +34,7 @@ const TrendingSection = () => {
     console.log('yes here i am');
     return(
       <>
-          <div className="w-full mx-auto px-20 py-12 bg-white">
+          <div className="w-full mx-auto px-24 py-12 bg-white">
               <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-x-5 gap-y-7">
                   {arr.map((index) => (
                     <div Key={index}>     
@@ -105,12 +105,12 @@ function GenderTabs({ active, setActive }) {
       <div className="flex mt-2 w-40">
         <div
           className={`h-1 w-1/2 transition-all duration-500 ${
-            active === "male" ? "bg-red-600" : "bg-gray-300"
+            active === "Male" ? "bg-red-600" : "bg-gray-300"
           }`}
         ></div>
         <div
           className={`h-1 w-1/2 transition-all duration-500 ${
-            active === "female" ? "bg-red-600" : "bg-gray-300"
+            active === "Female" ? "bg-red-600" : "bg-gray-300"
           }`}
         ></div>
       </div>
