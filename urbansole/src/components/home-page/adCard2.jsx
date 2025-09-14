@@ -2,13 +2,12 @@ import React from "react";
 
 const AdCard2 = () => {
   return (
-    <div className="grid lg:grid-cols-2 gap-10 px-4 sm:px-10 lg:px-24 bg-white text-black">
+    <div className="grid lg:grid-cols-2 gap-5 px-4 sm:px-10 lg:px-20 bg-white text-black">
       
       {/* LEFT PART>>>> */}
       <div>
         <img
-          // src="https://www.superkicks.in/cdn/shop/files/IMG_4192.jpg?v=1753430478&width=2000"
-          src="https://www.superkicks.in/cdn/shop/files/Beyond-Basics-Desk_1.gif?v=1756813270"
+          src="https://www.superkicks.in/cdn/shop/files/IMG_4192.jpg?v=1753430478&width=2000"
           alt="Collab Room"
           className="w-full h-auto"
         />

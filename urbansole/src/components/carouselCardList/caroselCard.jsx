@@ -16,7 +16,7 @@ export default function CardCarousel({onShoeClick, shoes = data}) {
   // console.log(onShoeClick);
 
     return (
-      <div className="relative w-full px-24 pt-10 pb-10 bg-white">
+      <div className="relative w-full px-20 pt-10 pb-10 bg-white">
         <Swiper
           modules={[Navigation]}
           navigation={{

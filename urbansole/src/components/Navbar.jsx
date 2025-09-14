@@ -7,8 +7,9 @@ const Navbar = ({ onProfileClick }) => {
     const navLinks = [
         {navName: "New Arrival", to : 'collections/NewArrival'}, 
         {navName: "Shoes", to :'collections/shoe'}, 
-        {navName: "Clogs", to : 'collections/crocks'}, 
+        {navName: "Crocks", to : 'collections/crocks'}, 
         {navName: "Brands",to : '/brandsLogo'}, 
+        {navName: "Home", to :'/'}
     ];
 
     return (
@@ -48,7 +49,7 @@ const Navbar = ({ onProfileClick }) => {
                                 {link.navName}
                             </Link>
                         ))}
-                        <Link to="/" className="text-red-500 hover:text-red-400 transition-colors">Home</Link>
+                        <a href="#" className="text-red-500 hover:text-red-400 transition-colors">Sale</a>
                     </nav>
                 </div>
             )}
