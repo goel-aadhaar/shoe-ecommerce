@@ -197,7 +197,7 @@ export default function AllShoePage() {
         {currentShoes.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
             {currentShoes.map(shoe => (
-              <Shoe_Card key={shoe.id} {...shoe} />
+              <Shoe_Card key={shoe.id} shoes={shoe} />
             ))}
           </div>
         ) : (
