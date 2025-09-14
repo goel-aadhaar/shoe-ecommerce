@@ -51,6 +51,9 @@ const Pagination = ({ shoesPerPage, totalShoes, paginate, currentPage }) => {
 };
 
 export default function AllShoePage() {
+
+  console.log("All shoe page called...");
+  
   const [shoesData, setShoesData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -66,9 +69,12 @@ export default function AllShoePage() {
       try {
         setLoading(true);
         const response = await axios.get('https://api-shoe-ecommerce.onrender.com/api/v1/products');
-        setShoesData(response.data.products);
+        setShoesData(response.data.data);
+        console.log("data got fetched.. ", response);
+        
         setError(null);
       } catch (err) {
+
         console.error("Error fetching data:", err);
         setError("Failed to fetch products. Please try again later.");
       } finally {
@@ -101,6 +107,9 @@ export default function AllShoePage() {
     setSelectedFilters({});
     setCurrentPage(1);
   };
+
+  console.log("All shoe after fetch: ", shoesData);
+  
 
   let filteredShoes = Array.isArray(shoesData) ? [...shoesData] : [];
 
