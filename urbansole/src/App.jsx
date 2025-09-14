@@ -9,6 +9,7 @@ import LoginModal from './components/LoginModal';
 import Footer from './components/footer';
 import BrandCarousel from './components/brandCardCarousel';
 import Home from './components/home-page/home-page';
+import ShimmerHome from './components/Shimmer_UIs/shimmer_home';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -66,8 +67,10 @@ function App() {
   };
 
   if (loading) {
-    // will replace it with shimmer UI
-    return <div>Loading...</div>; // optional loading state
+
+    return(
+      <ShimmerHome/>
+    )
   }
 
   return (
