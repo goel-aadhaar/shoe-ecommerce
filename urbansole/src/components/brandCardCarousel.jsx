@@ -42,7 +42,7 @@ export default function BrandCarousel() {
   ];
 
   return (
-    <div className="relative w-full px-20 pt-20 pb-10 bg-white">
+    <div className="relative w-full px-24 pt-20 pb-10 bg-white">
       <Swiper
         modules={[Navigation]}
         navigation={{

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'; // Make sure to import useEffect
+// import React, { useState, useEffect } from 'react'; 
 import TrendingSection from "../trending-section/trending";
 import NewArrivalSection from "../New-Arrival Section/new-arrival-section"
 import BrandCarousel from "../brandCardCarousel";
@@ -10,9 +10,9 @@ const Home = ()=>{
     console.log("carouselCard.jsx caled....");
     return(
         <>
-            <NewArrivalSection/>
-            <BrandCarousel/>
             <TrendingSection/>
+            <BrandCarousel/>
+            <NewArrivalSection/>
             <AdCard2/>
             <AdCard3/>
             <AdCard/>
