@@ -106,9 +106,9 @@ export default function AllShoePage() {
 
   // Logic to filter based on the URL parameter (queryType)
   if (queryType === 'new-arrival') {
-    filteredShoes = filteredShoes.filter(shoe => shoe.attributes.includes('newArrival'));
+  filteredShoes = filteredShoes.filter(shoe => Array.isArray(shoe.attributes) && shoe.attributes.includes('newArrival'));
   } else if (queryType === 'trending') {
-    filteredShoes = filteredShoes.filter(shoe => shoe.attributes.includes('trending'));
+    filteredShoes = filteredShoes.filter(shoe => Array.isArray(shoe.attributes) && shoe.attributes.includes('trending'));
   } else if (queryType === 'shoe') {
     filteredShoes = filteredShoes.filter(shoe => shoe.category.name.toLowerCase() === 'shoes');
   } else if (queryType === 'crocks') {
