@@ -58,7 +58,8 @@ export default function AllShoePage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [selectedFilters, setSelectedFilters] = useState({});
-  const [attribute, setAtribute]  = useState('trending');
+  const [sufLink, setSufLink] = useState('');
+  const [param1, setParam1]  = useState('trending');
   const [currentPage, setCurrentPage] = useState(1);
   const SHOES_PER_PAGE = 16;
 
@@ -70,11 +71,16 @@ export default function AllShoePage() {
  
   useEffect(() => {
     if (queryType === 'new-arrival') {
-      setAtribute('newArrival');
-    } else {
-      setAtribute('trending');
+      setParam1('newArrival');
+      setSufLink('filter/attribute')
+    } else if(queryType === 'trending') {
+      setParam1('trending');
+      setSufLink('filter/attribute')
+    }else {
+      setParam1(queryType);
+      setSufLink('filter/brand')
     }
-  }, [queryType,attribute]);
+  }, [queryType, param1]);
 
   useEffect(() => {
     const fetchShoes = async () => {
@@ -83,8 +89,8 @@ export default function AllShoePage() {
         
         setLoading(true);
         const response = 
-          await axios.get("https://api-shoe-ecommerce.onrender.com/api/v1/products/filter/attribute",{
-            params: { attribute: attribute, limit: 18 }
+          await axios.get(`https://api-shoe-ecommerce.onrender.com/api/v1/products/${sufLink}`,{
+            params: { param1, limit: 18 }
         });
         setShoesData(response.data.data);
         setError(null);
