@@ -63,8 +63,8 @@ export default function AllShoePage() {
   const SHOES_PER_PAGE = 16;
 
   // Get the queryType from the URL params
-  const { queryType } = useParams();
-  console.log(queryType);
+  // const { queryType } = useParams();
+  // console.log(queryType);
   
  
   // useEffect(() => {
@@ -100,17 +100,18 @@ export default function AllShoePage() {
   // }, [attribute]);
 
   if (loading || shoesData.length < 4) {
-    return (<ShimmerShoeDetail />);
+    // return (<ShimmerShoeDetail />);
+    return (<p1>Kuchh to dikkat hai bhai... </p1>);
   }
 
-  if (error) {
-    return (
-      <div className="bg-white font-sans text-center py-20">
-        <h2 className="text-2xl font-semibold text-red-500">Error!</h2>
-        <p className="text-gray-500 mt-2">{error}</p>
-      </div>
-    );
-  }
+  // if (error) {
+  //   return (
+  //     <div className="bg-white font-sans text-center py-20">
+  //       <h2 className="text-2xl font-semibold text-red-500">Error!</h2>
+  //       <p className="text-gray-500 mt-2">{error}</p>
+  //     </div>
+  //   );
+  // }
 
   const handleFilterChange = (newFilters) => {
     setSelectedFilters(newFilters);
@@ -183,9 +184,9 @@ export default function AllShoePage() {
 
   return (
     <div className="bg-white font-sans">
-      <div className="px-20 py-6">
+      {/* <div className="px-20 py-6">
         <Breadcrumb queryType={queryType} />
-      </div>
+      </div> */}
 
       {/* <FilterBar
         selectedFilters={selectedFilters}
