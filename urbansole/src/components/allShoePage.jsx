@@ -65,16 +65,20 @@ export default function AllShoePage() {
   // Get the queryType from the URL params
   const { queryType } = useParams();
  
-  if (queryType === 'new-arrival') {
-    setAtribute('newArrival')
-  }
+  useEffect(() => {
+    if (queryType === 'new-arrival') {
+      setAtribute('newArrival');
+    } else {
+      setAtribute('trending');
+    }
+  }, [queryType]);
 
   useEffect(() => {
     const fetchShoes = async () => {
       try {
         setLoading(true);
         const response = await axios.get('https://api-shoe-ecommerce.onrender.com/api/v1/products/filter',{
-          params:{attribute : {attribute}, limit : 16 }
+          params: { attribute, limit: 16 }
         });
         setShoesData(response.data.data);
         console.log("data got fetched.. ", response.data.data);
