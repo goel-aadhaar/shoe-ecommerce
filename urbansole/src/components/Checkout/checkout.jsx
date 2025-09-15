@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import axios from 'axios';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router';
 
 const API_BASE_URL = 'https://api-shoe-ecommerce.onrender.com/api/v1';
 
