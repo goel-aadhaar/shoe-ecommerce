@@ -102,7 +102,7 @@ export default function AllShoePage() {
   }, [attribute]);
 
   if (loading || shoesData.length < 4) {
-    const Arr = [0,0,0,0,0,0,0,0,0,0,0,0,0]
+    const Arr = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
     return (
       <>
         <div className="w-full mx-auto px-24 py-12 bg-white">
