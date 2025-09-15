@@ -171,8 +171,8 @@ const CartPage = () => {
                 <div key={item._id} className="flex items-start py-8 border-b border-gray-200 last:border-b-0">
                     <div className="w-28 h-28 flex-shrink-0 bg-gray-100 rounded-lg overflow-hidden relative">
                     <img 
-                        src={item.productId.mainImage} 
-                        alt={item.productId.name} 
+                        src={item?.productId?.imageSet?.thumbnail} 
+                        alt={item?.productId?.name} 
                         className="w-full h-full object-cover" 
                         onError={(e) => { e.target.onerror = null; e.target.src="https://placehold.co/112x112/E5E7EB/4B5563?text=No+Image"; }}
                     />
@@ -185,29 +185,29 @@ const CartPage = () => {
 
                     <div className="flex-1 ml-6 flex flex-col justify-between">
                     <div>
-                        <h3 className="text-lg font-semibold">{item.productId.name}</h3>
-                        <p className="text-sm text-gray-500">Brand: {item.productId.brand}</p>
+                        <h3 className="text-lg font-semibold">{item?.productId?.name}</h3>
+                        <p className="text-sm text-gray-500">Brand: {item?.productId?.brand}</p>
                         <p className="text-sm text-gray-500 mt-1">
-                        Color: {item.selectedColor || 'N/A'} | Size: {item.selectedSize || 'N/A'}
+                        Color: {item?.selectedColor || 'N/A'} | Size: {item?.selectedSize || 'N/A'}
                         </p>
                     </div>
 
                     <div className="flex items-center mt-4 text-gray-600">
                         <span className="text-sm font-medium mr-4">QTY:</span>
                         <button 
-                        onClick={() => handleUpdateQuantity(item._id, item.productId._id, item.quantity - 1)}
+                        onClick={() => handleUpdateQuantity(item?._id, item?.productId?._id, item?.quantity - 1)}
                         className="p-1 rounded-full border border-gray-300 hover:bg-gray-100 transition-colors">
                         <Minus size={16} />
                         </button>
                         <span className="mx-4 text-lg font-semibold text-black">{item.quantity}</span>
                         <button 
-                        onClick={() => handleUpdateQuantity(item._id, item.productId._id, item.quantity + 1)}
+                        onClick={() => handleUpdateQuantity(item?._id, item?.productId._id, item?.quantity + 1)}
                         className="p-1 rounded-full border border-gray-300 hover:bg-gray-100 transition-colors">
                         <Plus size={16} />
                         </button>
 
                         <button 
-                        onClick={() => handleRemoveItem(item._id)} 
+                        onClick={() => handleRemoveItem(item?._id)} 
                         className="flex items-center ml-10 text-red-600 hover:text-red-800 transition-colors"
                         >
                         <Trash size={16} className="mr-2" />
@@ -217,7 +217,7 @@ const CartPage = () => {
                     </div>
 
                     <div className="text-right ml-auto">
-                    <p className="text-lg font-semibold text-black">₹{(item.productId.price * item.quantity).toFixed(2)}</p>
+                    <p className="text-lg font-semibold text-black">₹{(item?.productId?.price * item?.quantity).toFixed(2)}</p>
                     </div>
                 </div>
                 ))
