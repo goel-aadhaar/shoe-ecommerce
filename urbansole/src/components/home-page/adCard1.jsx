@@ -7,7 +7,7 @@ const AdCard = () => {
       {/* LEFT PART>>>> */}
       <div>
         <img
-          src="https://www.superkicks.in/cdn/shop/files/collab-room-desktop_ff0214b9-1e33-489a-96aa-23566e7b2b16.gif?v=1750772114"
+          src="https://www.superkicks.in/cdn/shop/files/collab-room-Desk-_1.gif?v=1756813063"
           alt="Collab Room"
           className="w-full h-auto"
         />
@@ -56,7 +56,7 @@ function TextBox() {
   return (
     <div className="flex flex-col justify-center p-4 text-center">
       <h1 className="text-sm font-bold">PUMA X A$AP Rocky</h1>
-      <p className="text-sm mt-2">A$AP Rocky is back again with progressive graphics and utilitarian streetwear in his capsule drop with PUMA.</p>
+      <p className="text-sm mt-2">A$AP Rocky is back again with progressiven his capsule drop with PUMA.</p>
     </div>
   );
 }

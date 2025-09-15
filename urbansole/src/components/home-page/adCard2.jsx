@@ -7,7 +7,7 @@ const AdCard2 = () => {
       {/* LEFT PART>>>> */}
       <div>
         <img
-          src="https://www.superkicks.in/cdn/shop/files/IMG_4192.jpg?v=1753430478&width=2000"
+          src="https://www.superkicks.in/cdn/shop/files/Beyond-Basics-Desk_1.gif?v=1756813270"
           alt="Collab Room"
           className="w-full h-auto"
         />
@@ -19,19 +19,19 @@ const AdCard2 = () => {
         {/* Row 1 */}
         <div className="flex items-center justify-center">
           <img
-            src="https://www.superkicks.in/cdn/shop/files/Adidas_57d5602a-2686-4892-aaba-a1489455d32d.jpg?v=1750840064"
+            src="https://www.superkicks.in/cdn/shop/files/3-june_b5d996fb-58d5-40f9-9469-5809743fbf3d.jpg?v=1756813726"
             alt="Puma"
             className="w-full h-auto object-cover"
           />
         </div>
         <TextBox
           title='Nike'
-          content="The legacy of Nike in running style silhouettes is unmatched with tried and tested performance and iconic design."
+          content="The legacy of Nike in running style  nd tested performance and iconic design."
         />
 
         <div className="flex items-center justify-center">
           <img
-            src="https://www.superkicks.in/cdn/shop/files/Nike_ca3789db-7902-4275-90d2-32ade114edef.jpg?v=1750840091"
+            src="https://www.superkicks.in/cdn/shop/files/11-aug_1_a7883b13-08ad-4d60-96b6-9b08ffb9be43.png?v=1756813510"
             alt="ASAP Rocky"
             className="w-full h-auto object-cover m-0 p-0"
           />
@@ -39,21 +39,21 @@ const AdCard2 = () => {
 
        <TextBox
           title="ASICS"
-          content = "Adizero EVO SL is already making waves with runners and non runners alike, powered by the world Lightstrike pro foam."
+          content = "Adizero EVO SL is already makingwered by the world Lightstrike pro foam."
         />
 
 
         
          <div className="flex items-center justify-center">
           <img
-            src="https://www.superkicks.in/cdn/shop/files/Asics_1.jpg?v=1750844289"
+            src="https://www.superkicks.in/cdn/shop/files/7_3e7197d3-8cd7-4642-8801-33167a0644f3.jpg?v=1756814202"
             alt="Avavav"
             className="w-full h-auto object-cover"
           />
         </div>
         <TextBox
           title="Adidas"
-          content = "A sound body & mind begins with sound movement, dive into early retrofuturistic aesthetics and the crowd favourite Gel Tech."
+          content = "A sound body & mind begins with sound movement, dive into early avourite Gel Tech."
         />
       </div>
     </div>
