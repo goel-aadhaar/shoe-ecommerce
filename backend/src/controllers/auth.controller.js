@@ -135,3 +135,16 @@ export const logout = asyncHandler(async (req, res) => {
         new ApiResponse(200 , {} , "User logged Out")
     )
 });
+
+
+export const checkAuth = asyncHandler(async (req, res) => {
+  if (!req.user) {
+    return res.status(401).json(
+      new ApiResponse(401, "Not logged in", { isLoggedIn: false })
+    );
+  }
+
+  return res.status(200).json(
+    new ApiResponse(200, "User is logged in", { isLoggedIn: true, userId: req.user._id })
+  );
+});
