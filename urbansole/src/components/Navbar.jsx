@@ -6,10 +6,10 @@ const Navbar = ({ onProfileClick }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const navLinks = [
     { navName: "New Arrival", to: '/collections/new-arrival' },
+    { navName: "Trending", to: '/collections/trending' },
     { navName: "Shoes", to: '/collections/shoe' },
     { navName: "Clogs", to: '/collections/clogs' },
     { navName: "Brands", to: '/brandsLogo' },
-    { navName: "Home", to: '/' }
   ];
 
   return (
@@ -21,7 +21,7 @@ const Navbar = ({ onProfileClick }) => {
         <h1 className="text-2xl font-black uppercase tracking-wider"><Link to={"/"}>URBANSOLE</Link></h1>
         <nav className="hidden md:flex items-center space-x-8 text-sm font-semibold uppercase">
           {navLinks.map(link => <Link key={link.navName} to={link.to} className="hover:text-gray-300 transition-colors">{link.navName}</Link>)}
-          <a href="#" className="text-red-500 hover:text-red-400 transition-colors">Sale</a>
+          <Link to="/" className="text-red-500 hover:text-red-400 transition-colors">Home</Link>
         </nav>
         <div className="flex items-center space-x-5">
           <button className="hover:text-gray-300 transition-colors" aria-label="Search"><Search /></button>
@@ -32,8 +32,16 @@ const Navbar = ({ onProfileClick }) => {
           >
             <UserRoundIcon />
           </button>
+
           <button className="hover:text-gray-300 transition-colors" aria-label="Shopping Cart"><Heart /></button>
-          <button className="hover:text-gray-300 transition-colors" aria-label="Shopping Cart"><ShoppingCart /></button>
+
+          <Link
+            key='ShoppingCart'
+            to='/cart'
+          >
+            <button className="hover:text-gray-300 transition-colors" aria-label="Shopping Cart"><ShoppingCart /></button>
+          </Link>
+          
         </div>
       </div>
       {isMobileMenuOpen && (
@@ -43,12 +51,13 @@ const Navbar = ({ onProfileClick }) => {
               <Link
                 key={link.navName}
                 to={link.to}
+                onClick={()=> {setIsMobileMenuOpen(!isMobileMenuOpen)}}
                 className="hover:text-gray-300 transition-colors"
               >
                 {link.navName}
               </Link>
             ))}
-            <a href="#" className="text-red-500 hover:text-red-400 transition-colors">Sale</a>
+            {/* <Link to="/" className="text-red-500 hover:text-red-400 transition-colors">Home</Link> */}
           </nav>
         </div>
       )}
