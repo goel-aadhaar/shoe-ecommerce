@@ -181,15 +181,15 @@ export default function AllShoePage() {
   //   });
   // }
 
-  // const priceConfig = shoesData && shoesData.length > 0
-  //   ? (() => {
-  //     const prices = shoesData.map(s => s.price || 0);
-  //     return {
-  //       min: Math.min(...prices),
-  //       max: Math.max(...prices)
-  //     };
-  //   })()
-  //   : { min: 599, max: 20000 };
+  const priceConfig = shoesData && shoesData.length > 0
+    ? (() => {
+      const prices = shoesData.map(s => s.price || 0);
+      return {
+        min: Math.min(...prices),
+        max: Math.max(...prices)
+      };
+    })()
+    : { min: 599, max: 20000 };
 
   const indexOfLastShoe = currentPage * SHOES_PER_PAGE;
   const indexOfFirstShoe = indexOfLastShoe - SHOES_PER_PAGE;
@@ -199,17 +199,17 @@ export default function AllShoePage() {
   console.log("Current shoes -> ", currentShoes.length);
 
   return (
-    <div className="bg-white font-sans">
+    <div className="bg-white font-sans mt-10">
       <div className="px-20 py-6">
         <Breadcrumb queryType={queryType} />
       </div>
 
-      {/* <FilterBar
+      <FilterBar
         selectedFilters={selectedFilters}
         onFilterChange={handleFilterChange}
         onReset={handleResetFilters}
         priceConfig={priceConfig}
-      /> */}
+      />
 
       <main className="px-20 py-10">
         {currentShoes.length > 0 ? (
