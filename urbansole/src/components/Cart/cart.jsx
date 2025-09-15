@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Plus, Minus, X, Volume2, Trash } from 'lucide-react';
-// import { useNavigate } from 'react-router'
+import { useNavigate } from 'react-router'
 
 axios.defaults.withCredentials = true;
 
@@ -24,7 +24,7 @@ const CartPage = () => {
   const [cartItems, setCartItems] = useState(dummyCartItems); 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   function getRandomSize() {
     return Math.floor(Math.random() * (5)) + 6;
@@ -107,7 +107,7 @@ const CartPage = () => {
         console.log("Order created successfully:", newOrder);
         
         // Redirect to the new checkout page with the order ID
-        // navigate(`/checkout/${newOrder._id}`);
+        navigate(`/checkout/${newOrder._id}`);
         
       } catch (err) {
         console.error("Checkout failed:", err);
