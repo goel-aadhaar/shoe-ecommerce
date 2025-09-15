@@ -1,4 +1,4 @@
-import { Payment, OrderStatusHistory, Order, Cart } from "../models/model-export.js";
+import { Payment, OrderStatusHistory, Order, Cart, CartItem  } from "../models/model-export.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import { stripe } from "../utils/stripe.js"; // This import is used by createStripePayment
@@ -42,17 +42,18 @@ export const confirmPayment = asyncHandler(async (req, res) => {
     }
 
     if (status === "success") {
-        // Update order status
+       
         await Order.findByIdAndUpdate(payment.orderId, { currentStatus: "paid" });
         await OrderStatusHistory.create({
             orderId: payment.orderId,
             status: "paid",
         });
-        const userCart = await Cart.findOne({ userId: req.user.id });
+
+        const userCart = await Cart.findOne({ userId: order.userId });
 
         if (userCart) {
             await CartItem.deleteMany({ cartId: userCart._id });
-            console.log(`Cart for user ${req.user.id} cleared successfully.`);
+            console.log(`Payment Done and Cart for user ${order.userId} cleared successfully.`);
         }
     }
 
