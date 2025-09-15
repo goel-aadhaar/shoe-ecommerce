@@ -3,15 +3,13 @@ import { asyncHandler } from "../utils/asyncHandler.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import { stripe } from "../utils/stripe.js";
 
+import { createStripePayment as createStripePaymentService } from "../services/stripe.service.js";
 
 export const createStripePayment = asyncHandler(async (req, res) => {
     const { orderId, amount } = req.body;
 
-    const paymentIntent = await stripe.paymentIntents.create({
-        amount: amount * 100, // Stripe works in cents
-        currency: "usd",
-        payment_method_types: ["card"],
-    });
+    // Use the service function to create the PaymentIntent
+    const paymentIntent = await createStripePaymentService(amount * 100);
 
     const payment = await Payment.create({
         orderId,
@@ -28,6 +26,7 @@ export const createStripePayment = asyncHandler(async (req, res) => {
         })
     );
 });
+
 
 export const confirmPayment = asyncHandler(async (req, res) => {
 import { Payment } from "../models/model-export.js";
