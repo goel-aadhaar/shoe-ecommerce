@@ -132,7 +132,7 @@ const ShoeDetail = () => {
             alert('Please select a size.');
             return;
         }
-        if(isLoggedIn){
+        if(!isLoggedIn){
             alert('Please Login before adding to cart.');
             return;
         }
