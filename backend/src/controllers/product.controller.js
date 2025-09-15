@@ -32,8 +32,10 @@ export const getProductById = asyncHandler(async (req, res) => {
 });
 
 export const getProductsByAttribute = asyncHandler(async (req, res) => {
+    
     const { attribute, limit } = req.query;
-
+    console.log("Request for the get Product of ", attribute);
+    
     const attr = attribute || "trending";
     const max = Number(limit) || 10;
 
