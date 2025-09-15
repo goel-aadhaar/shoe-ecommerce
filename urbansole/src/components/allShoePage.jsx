@@ -110,7 +110,7 @@ export default function AllShoePage() {
     };
 
     fetchShoes();
-  }, [attribute]);
+  }, [param1,sufLink]);
 
   if (loading || shoesData.length < 4) {
     const Arr = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
