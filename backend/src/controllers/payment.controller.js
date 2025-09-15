@@ -1,15 +1,16 @@
-import { Payment } from "../models/payment.model.js";
+import { Payment, OrderStatusHistory, Order } from "../models/model-export.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
-import { stripe } from "../utils/stripe.js";
-
-import { createStripePayment as createStripePaymentService } from "../services/stripe.service.js";
+import { stripe } from "../utils/stripe.js"; // This import is used by createStripePayment
 
 export const createStripePayment = asyncHandler(async (req, res) => {
     const { orderId, amount } = req.body;
 
-    // Use the service function to create the PaymentIntent
-    const paymentIntent = await createStripePaymentService(amount * 100);
+    const paymentIntent = await stripe.paymentIntents.create({
+        amount: amount * 100, // Stripe works in cents
+        currency: "usd",
+        payment_method_types: ["card"],
+    });
 
     const payment = await Payment.create({
         orderId,
@@ -27,13 +28,6 @@ export const createStripePayment = asyncHandler(async (req, res) => {
     );
 });
 
-
-export const confirmPayment = asyncHandler(async (req, res) => {
-import { Payment } from "../models/model-export.js";
-import { OrderStatusHistory, Order } from "../models/model-export.js";
-import { asyncHandler } from "../utils/asyncHandler.js";
-import { ApiResponse } from "../utils/ApiResponse.js";
-
 export const confirmPayment = asyncHandler(async (req, res) => {
     const { transactionId, status } = req.body;
 
@@ -49,7 +43,7 @@ export const confirmPayment = asyncHandler(async (req, res) => {
 
     if (status === "success") {
         // Update order status
-        await Order.findByIdAndUpdate(payment.orderId, { status: "paid" });
+        await Order.findByIdAndUpdate(payment.orderId, { currentStatus: "paid" });
         await OrderStatusHistory.create({
             orderId: payment.orderId,
             status: "paid",
@@ -60,4 +54,3 @@ export const confirmPayment = asyncHandler(async (req, res) => {
         new ApiResponse(200, "Payment updated successfully", payment)
     );
 });
-
