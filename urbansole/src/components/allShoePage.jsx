@@ -64,6 +64,8 @@ export default function AllShoePage() {
 
   // Get the queryType from the URL params
   const { queryType } = useParams();
+  console.log(queryType);
+  
  
   useEffect(() => {
     if (queryType === 'new-arrival') {
@@ -79,11 +81,11 @@ export default function AllShoePage() {
         console.log("cal from the all shoe page... ");
         
         setLoading(true);
-        const response = 
-          await axios.get("https://api-shoe-ecommerce.onrender.com/api/v1/products/filter/attribute",{
-            params: { attribute: attribute, limit: 16 }
-        });
-        setShoesData(response.data.data);
+        // const response = 
+        //   await axios.get("https://api-shoe-ecommerce.onrender.com/api/v1/products/filter/attribute",{
+        //     params: { attribute: attribute, limit: 16 }
+        // });
+        // setShoesData(response.data.data);
         setError(null);
       } catch (err) {
 
@@ -97,7 +99,7 @@ export default function AllShoePage() {
     fetchShoes();
   }, [attribute]);
 
-  if (loading) {
+  if (loading || shoesData.length < 4) {
     return (<ShimmerShoeDetail />);
   }
 
