@@ -72,13 +72,19 @@ export default function AllShoePage() {
   useEffect(() => {
     if (queryType === 'new-arrival') {
       setParam1('newArrival');
-      setSufLink('filter/attribute')
+      setSufLink('attribute')
     } else if(queryType === 'trending') {
       setParam1('trending');
-      setSufLink('filter/attribute')
+      setSufLink('attribute')
+    }else if(queryType === 'Male') {
+      setParam1('Male')
+      setSufLink('gender')
+    }else if(queryType === 'Female'){
+      setParam1('Female')
+      setSufLink('gender')
     }else {
-      setParam1(queryType);
-      setSufLink('filter/brand')
+      setParam1(queryType)
+      setSufLink('brand')
     }
   }, [queryType, param1]);
 
@@ -89,7 +95,7 @@ export default function AllShoePage() {
         
         setLoading(true);
         const response = 
-          await axios.get(`https://api-shoe-ecommerce.onrender.com/api/v1/products/${sufLink}`,{
+          await axios.get(`https://api-shoe-ecommerce.onrender.com/api/v1/products/filter/${sufLink}`,{
             params: { param1, limit: 18 }
         });
         setShoesData(response.data.data);
