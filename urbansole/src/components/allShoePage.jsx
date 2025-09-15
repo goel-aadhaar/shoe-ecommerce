@@ -7,12 +7,12 @@ import ShimmerShoeCard from './Shimmer_UIs/shoe_card_shimmer';
 import { Link } from 'react-router';
 
 
-const Breadcrumb = ({ queryType }) => {
+const Breadcrumb = ({ queryType_ }) => {
   let path = "Home";
   let title = "All Products";
 
-  if (queryType) {
-    const formattedTitle = queryType.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+  if (queryType_) {
+    const formattedTitle = queryType_.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
     path = `Home > ${formattedTitle}`;
     title = formattedTitle;
   }
@@ -62,39 +62,48 @@ export default function AllShoePage() {
   const [sufLink, setSufLink] = useState('');
   const [param1, setParam1]  = useState('trending');
   const [currentPage, setCurrentPage] = useState(1);
+  const [queryType_, setqueryType] = useState('');
   const SHOES_PER_PAGE = 16;
 
-  // Get the queryType from the URL params
-  let {queryType}  = useParams();
+  // Get the queryType_ from the URL params
   
-  console.log(queryType);
+  const { queryType } = useParams();  // call hook at top level
+
+  useEffect(() => {
+    if (queryType) {
+      setqueryType(queryType);
+    }
+  }, [queryType]);
+
+  
+  console.log(queryType_);
   
  
   useEffect(() => {
-    if (queryType.toLowerCase() === 'new-arrival') {
+    if (queryType_.toLowerCase() === 'new-arrival') {
       setParam1('newArrival');
       setSufLink('attribute')
-    } else if(queryType.toLowerCase() === 'trending') {
+    } else if(queryType_.toLowerCase() === 'trending') {
       setParam1('trending');
       setSufLink('attribute')
-    }else if(queryType.toLowerCase() === 'male') {
+    }else if(queryType_.toLowerCase() === 'male') {
       setParam1('Male')
       setSufLink('gender')
-    }else if(queryType.toLowerCase() === 'female'){
+    }else if(queryType_.toLowerCase() === 'female'){
       setParam1('Female')
       setSufLink('gender')
-    }else if(queryType.toLowerCase() === 'shoes'){
+    }else if(queryType_.toLowerCase() === 'shoes'){
       setParam1('shoes')
       setSufLink('category')
-    }else if(queryType.toLowerCase() === 'clogs'){
+    }else if(queryType_.toLowerCase() === 'clogs'){
       setParam1('clogs')
       setSufLink('category')
     }
     else {
-      setParam1(queryType)
+      setParam1(queryType_)
       setSufLink('brand')
     }
-  }, [queryType]);
+  }, [queryType_]);
 
   useEffect(() => {
     const fetchShoes = async () => {
@@ -220,7 +229,7 @@ export default function AllShoePage() {
   return (
     <div className="bg-white font-sans mt-10">
       <div className="px-20 py-6">
-        <Breadcrumb queryType={queryType} />
+        <Breadcrumb queryType_={queryType_} />
       </div>
 
       <FilterBar
