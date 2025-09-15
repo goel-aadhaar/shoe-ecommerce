@@ -31,6 +31,26 @@ export const getProductById = asyncHandler(async (req, res) => {
     );
 });
 
+export const getProductsByAttribute = asyncHandler(async (req, res) => {
+    const { attribute, limit } = req.query;
+
+    const attr = attribute || "trending";
+    const max = Number(limit) || 10;
+
+
+    const products = await Product.find({ attributes: attr })
+        .limit(max)
+        .populate("category")
+        .populate({
+            path: "imageSet",
+            select: "thumbnail hover"
+        });
+
+    res.status(200).json(
+        new ApiResponse(200, `Products with attribute '${attr}' fetched successfully`, products)
+    );
+});
+
 export const updateProduct = asyncHandler(async (req, res) => {
     const product = await Product.findByIdAndUpdate(
         req.params.id,
