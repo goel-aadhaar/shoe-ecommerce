@@ -67,37 +67,37 @@ export default function AllShoePage() {
   console.log(queryType);
   
  
-  useEffect(() => {
-    if (queryType === 'new-arrival') {
-      setAtribute('newArrival');
-    } else {
-      setAtribute('trending');
-    }
-  }, [queryType,attribute]);
+  // useEffect(() => {
+  //   if (queryType === 'new-arrival') {
+  //     setAtribute('newArrival');
+  //   } else {
+  //     setAtribute('trending');
+  //   }
+  // }, [queryType,attribute]);
 
-  useEffect(() => {
-    const fetchShoes = async () => {
-      try {
-        console.log("cal from the all shoe page... ");
+  // useEffect(() => {
+  //   const fetchShoes = async () => {
+  //     try {
+  //       console.log("cal from the all shoe page... ");
         
-        setLoading(true);
-        // const response = 
-        //   await axios.get("https://api-shoe-ecommerce.onrender.com/api/v1/products/filter/attribute",{
-        //     params: { attribute: attribute, limit: 16 }
-        // });
-        // setShoesData(response.data.data);
-        setError(null);
-      } catch (err) {
+  //       setLoading(true);
+  //       // const response = 
+  //       //   await axios.get("https://api-shoe-ecommerce.onrender.com/api/v1/products/filter/attribute",{
+  //       //     params: { attribute: attribute, limit: 16 }
+  //       // });
+  //       // setShoesData(response.data.data);
+  //       setError(null);
+  //     } catch (err) {
 
-         console.error("Error fetching data:", err);
-        setError("Failed to fetch products. Please try again later.");
-      } finally {
-        setLoading(false);
-      }
-    };
+  //        console.error("Error fetching data:", err);
+  //       setError("Failed to fetch products. Please try again later.");
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
 
-    fetchShoes();
-  }, [attribute]);
+  //   fetchShoes();
+  // }, [attribute]);
 
   if (loading || shoesData.length < 4) {
     return (<ShimmerShoeDetail />);
@@ -179,7 +179,7 @@ export default function AllShoePage() {
   const currentShoes = filteredShoes.slice(indexOfFirstShoe, indexOfLastShoe);
   
   console.log("Current shoes -> ", currentShoes.length);
-  
+
   return (
     <div className="bg-white font-sans">
       <div className="px-20 py-6">
