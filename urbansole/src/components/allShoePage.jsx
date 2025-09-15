@@ -6,24 +6,23 @@ import FilterBar from './filter';
 import ShimmerShoeCard from './Shimmer_UIs/shoe_card_shimmer';
 
 
-// const Breadcrumb = ({ queryType }) => {
-//   let path = "Home";
-//   let title = "All Products";
+const Breadcrumb = ({ queryType }) => {
+  let path = "Home";
+  let title = "All Products";
 
-//   if (queryType) {
-//     // Capitalize the first letter and replace hyphens with spaces for display
-//     const formattedTitle = queryType.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
-//     path = `Home > ${formattedTitle}`;
-//     title = formattedTitle;
-//   }
+  if (queryType) {
+    const formattedTitle = queryType.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+    path = `Home > ${formattedTitle}`;
+    title = formattedTitle;
+  }
 
-//   return (
-//     <div className='text-left'>
-//       <p className="text-gray-500">{path}</p>
-//       <h1 className="text-4xl text-black font-bold mt-1 tracking-wider">{title.toUpperCase()}</h1>
-//     </div>
-//   );
-// };
+  return (
+    <div className='text-left'>
+      <p className="text-gray-500">{path}</p>
+      <h1 className="text-4xl text-black font-bold mt-1 tracking-wider">{title.toUpperCase()}</h1>
+    </div>
+  );
+};
 
 const Pagination = ({ shoesPerPage, totalShoes, paginate, currentPage }) => {
   const pageNumbers = [];
@@ -201,9 +200,9 @@ export default function AllShoePage() {
 
   return (
     <div className="bg-white font-sans">
-      {/* <div className="px-20 py-6">
+      <div className="px-20 py-6">
         <Breadcrumb queryType={queryType} />
-      </div> */}
+      </div>
 
       {/* <FilterBar
         selectedFilters={selectedFilters}
