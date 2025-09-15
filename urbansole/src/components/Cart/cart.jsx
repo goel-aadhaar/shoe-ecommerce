@@ -65,7 +65,6 @@ const CartPage = () => {
       setError(null);
       const response = await axios.get(`${API_BASE_URL}/cart`);
       setCartItems(response.data.data.items); 
-      setsize_(getRandomSize());
     } catch (err) {
       console.error('Failed to fetch cart:', err);
       setError('Could not load cart. Please try again.');
