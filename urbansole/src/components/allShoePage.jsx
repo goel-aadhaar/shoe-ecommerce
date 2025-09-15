@@ -64,8 +64,10 @@ export default function AllShoePage() {
   const SHOES_PER_PAGE = 16;
 
   // Get the queryType from the URL params
-  // const { queryType } = useParams();
-  // console.log(queryType);
+  const { query } = useParams();
+  console.log(query);
+  const queryType = query || 'trending';
+  console.log(queryType);
   
  
   // useEffect(() => {
