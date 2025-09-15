@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom'; // Import useParams
 import { Shoe_Card } from './shoe_card';
 import FilterBar from './filter';
 import ShimmerShoeCard from './Shimmer_UIs/shoe_card_shimmer';
+import { Link } from 'react-router';
 
 
 const Breadcrumb = ({ queryType }) => {
