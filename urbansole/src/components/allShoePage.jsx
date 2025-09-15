@@ -145,32 +145,31 @@ export default function AllShoePage() {
 
   
 
-  // Object.entries(selectedFilters).forEach(([filterKey, filterValue]) => {
-  //   if (!filterValue) return;
-
-  //   switch (filterKey) {
-  //     case 'Brand':
-  //       filteredShoes = filteredShoes.filter(shoe => shoe.brand === filterValue);
-  //       break;
-  //     case 'Gender': {
-  //       const genderMap = { 'Men': 'Male', 'Women': 'Female' };
-  //       filteredShoes = filteredShoes.filter(shoe => shoe.for === genderMap[filterValue]);
-  //       break;
-  //     }
-  //     case 'Color':
-  //       filteredShoes = filteredShoes.filter(shoe =>
-  //         shoe.color.toLowerCase().includes(filterValue.toLowerCase())
-  //       );
-  //       break;
-  //     case 'price':
-  //       filteredShoes = filteredShoes.filter(shoe => {
-  //         return shoe.price <= filterValue;
-  //       });
-  //       break;
-  //     default:
-  //       break;
-  //   }
-  // });
+  Object.entries(selectedFilters).forEach(([filterKey, filterValue]) => {
+    if (!filterValue) return;
+    switch (filterKey) {
+      case 'Brand':
+        filteredShoes = filteredShoes.filter(shoe => shoe.brand === filterValue);
+        break;
+      case 'Gender': {
+        const genderMap = { 'Men': 'Male', 'Women': 'Female' };
+        filteredShoes = filteredShoes.filter(shoe => shoe.for === genderMap[filterValue]);
+        break;
+      }
+      case 'Color':
+        filteredShoes = filteredShoes.filter(shoe =>
+          shoe.color.toLowerCase().includes(filterValue.toLowerCase())
+        );
+        break;
+      case 'price':
+        filteredShoes = filteredShoes.filter(shoe => {
+          return shoe.price <= filterValue;
+        });
+        break;
+      default:
+        break;
+    }
+  });
 
   const sortBy = selectedFilters['Sort by'];
   if (sortBy) {
