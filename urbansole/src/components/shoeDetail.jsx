@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Route } from 'react-router';
 import { Link, useParams } from 'react-router-dom';
-
+import ShimmerShoeDetail from './Shimmer_UIs/shoe_detail_shimmerui';
 import { Shoe_Card } from './shoe_card';
 import Navbar from './Navbar';
 import Footer from './footer';
@@ -91,8 +91,9 @@ const ShoeDetail = () => {
 
 
     if(loading){
-        // replace with shimmer Ui....
-        return <p>Loading your shoe detail......</p>
+        return(
+            <ShimmerShoeDetail/>
+        );
     }
 
     
