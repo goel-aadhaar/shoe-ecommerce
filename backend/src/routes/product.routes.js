@@ -4,6 +4,7 @@ import {
     getProducts,
     getProductById,
     getProductsByAttribute,
+    getProductsByBrand,
     updateProduct, 
     deleteProduct, 
     addProductImage, 
@@ -19,6 +20,7 @@ router.post("/", authMiddleware, adminMiddleware, createProduct);
 router.get("/", getProducts);
 router.get("/:id", getProductById);
 router.get("/filter/attribute", getProductsByAttribute);
+router.get("/filter/brand", getProductsByBrand);
 router.put("/:id", authMiddleware, adminMiddleware, updateProduct);
 router.delete("/:id", authMiddleware, adminMiddleware, deleteProduct);
 
