@@ -9,7 +9,7 @@ export const getCart = asyncHandler(async (req, res) => {
     if (!cart) {
         cart = await Cart.create({ userId: req.user.id });
     }
-    const items = await CartItem.find({ cartId: cart._id }).populate("productId");
+    const items = await CartItem.find({ cartId: cart._id }).populate("productId").populate('imageSet', 'thumbnail');
     res.status(200)
     .json(
         new ApiResponse(
