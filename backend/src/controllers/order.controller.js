@@ -1,5 +1,6 @@
-import { Order, OrderItem, OrderStatusHistory, ApiResponse } from "../models/model-export.js";
+import { Order, OrderItem, OrderStatusHistory } from "../models/model-export.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
+import { ApiResponse } from "../utils/ApiResponse.js";
 import { sendOrderEmail } from "../utils/email.js";
 
 export const createOrder = asyncHandler(async (req, res) => {
