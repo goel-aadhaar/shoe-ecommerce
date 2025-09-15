@@ -5,50 +5,50 @@ import { Shoe_Card } from './shoe_card';
 import FilterBar from './filter';
 import ShimmerShoeDetail from './Shimmer_UIs/shoe_detail_shimmerui';
 
-const Breadcrumb = ({ queryType }) => {
-  let path = "Home";
-  let title = "All Products";
+// const Breadcrumb = ({ queryType }) => {
+//   let path = "Home";
+//   let title = "All Products";
 
-  if (queryType) {
-    // Capitalize the first letter and replace hyphens with spaces for display
-    const formattedTitle = queryType.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
-    path = `Home > ${formattedTitle}`;
-    title = formattedTitle;
-  }
+//   if (queryType) {
+//     // Capitalize the first letter and replace hyphens with spaces for display
+//     const formattedTitle = queryType.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+//     path = `Home > ${formattedTitle}`;
+//     title = formattedTitle;
+//   }
 
-  return (
-    <div className='text-left'>
-      <p className="text-gray-500">{path}</p>
-      <h1 className="text-4xl text-black font-bold mt-1 tracking-wider">{title.toUpperCase()}</h1>
-    </div>
-  );
-};
+//   return (
+//     <div className='text-left'>
+//       <p className="text-gray-500">{path}</p>
+//       <h1 className="text-4xl text-black font-bold mt-1 tracking-wider">{title.toUpperCase()}</h1>
+//     </div>
+//   );
+// };
 
-const Pagination = ({ shoesPerPage, totalShoes, paginate, currentPage }) => {
-  const pageNumbers = [];
-  for (let i = 1; i <= Math.ceil(totalShoes / shoesPerPage); i++) {
-    pageNumbers.push(i);
-  }
+// const Pagination = ({ shoesPerPage, totalShoes, paginate, currentPage }) => {
+//   const pageNumbers = [];
+//   for (let i = 1; i <= Math.ceil(totalShoes / shoesPerPage); i++) {
+//     pageNumbers.push(i);
+//   }
 
-  if (pageNumbers.length <= 1) return null;
+//   if (pageNumbers.length <= 1) return null;
 
-  return (
-    <nav className="flex justify-center my-8">
-      <ul className="flex items-center space-x-2">
-        {pageNumbers.map(number => (
-          <li key={number}>
-            <button
-              onClick={() => paginate(number)}
-              className={`px-4 py-2 border rounded ${currentPage === number ? 'bg-black text-white' : 'bg-white text-black'}`}
-            >
-              {number}
-            </button>
-          </li>
-        ))}
-      </ul>
-    </nav>
-  );
-};
+//   return (
+//     <nav className="flex justify-center my-8">
+//       <ul className="flex items-center space-x-2">
+//         {pageNumbers.map(number => (
+//           <li key={number}>
+//             <button
+//               onClick={() => paginate(number)}
+//               className={`px-4 py-2 border rounded ${currentPage === number ? 'bg-black text-white' : 'bg-white text-black'}`}
+//             >
+//               {number}
+//             </button>
+//           </li>
+//         ))}
+//       </ul>
+//     </nav>
+//   );
+// };
 
 export default function AllShoePage() {
 
@@ -128,55 +128,56 @@ export default function AllShoePage() {
 
   
 
-  Object.entries(selectedFilters).forEach(([filterKey, filterValue]) => {
-    if (!filterValue) return;
+  // Object.entries(selectedFilters).forEach(([filterKey, filterValue]) => {
+  //   if (!filterValue) return;
 
-    switch (filterKey) {
-      case 'Brand':
-        filteredShoes = filteredShoes.filter(shoe => shoe.brand === filterValue);
-        break;
-      case 'Gender': {
-        const genderMap = { 'Men': 'Male', 'Women': 'Female' };
-        filteredShoes = filteredShoes.filter(shoe => shoe.for === genderMap[filterValue]);
-        break;
-      }
-      case 'Color':
-        filteredShoes = filteredShoes.filter(shoe =>
-          shoe.color.toLowerCase().includes(filterValue.toLowerCase())
-        );
-        break;
-      case 'price':
-        filteredShoes = filteredShoes.filter(shoe => {
-          return shoe.price <= filterValue;
-        });
-        break;
-      default:
-        break;
-    }
-  });
+  //   switch (filterKey) {
+  //     case 'Brand':
+  //       filteredShoes = filteredShoes.filter(shoe => shoe.brand === filterValue);
+  //       break;
+  //     case 'Gender': {
+  //       const genderMap = { 'Men': 'Male', 'Women': 'Female' };
+  //       filteredShoes = filteredShoes.filter(shoe => shoe.for === genderMap[filterValue]);
+  //       break;
+  //     }
+  //     case 'Color':
+  //       filteredShoes = filteredShoes.filter(shoe =>
+  //         shoe.color.toLowerCase().includes(filterValue.toLowerCase())
+  //       );
+  //       break;
+  //     case 'price':
+  //       filteredShoes = filteredShoes.filter(shoe => {
+  //         return shoe.price <= filterValue;
+  //       });
+  //       break;
+  //     default:
+  //       break;
+  //   }
+  // });
 
-  const sortBy = selectedFilters['Sort by'];
-  if (sortBy) {
-    filteredShoes.sort((a, b) => {
-      if (sortBy === 'Price: Low to High') return a.price - b.price;
-      if (sortBy === 'Price: High to Low') return b.price - a.price;
-      return 0;
-    });
-  }
+  // const sortBy = selectedFilters['Sort by'];
+  // if (sortBy) {
+  //   filteredShoes.sort((a, b) => {
+  //     if (sortBy === 'Price: Low to High') return a.price - b.price;
+  //     if (sortBy === 'Price: High to Low') return b.price - a.price;
+  //     return 0;
+  //   });
+  // }
 
-  const priceConfig = shoesData && shoesData.length > 0
-    ? (() => {
-      const prices = shoesData.map(s => s.price || 0);
-      return {
-        min: Math.min(...prices),
-        max: Math.max(...prices)
-      };
-    })()
-    : { min: 599, max: 20000 };
+  // const priceConfig = shoesData && shoesData.length > 0
+  //   ? (() => {
+  //     const prices = shoesData.map(s => s.price || 0);
+  //     return {
+  //       min: Math.min(...prices),
+  //       max: Math.max(...prices)
+  //     };
+  //   })()
+  //   : { min: 599, max: 20000 };
 
-  const indexOfLastShoe = currentPage * SHOES_PER_PAGE;
-  const indexOfFirstShoe = indexOfLastShoe - SHOES_PER_PAGE;
-  const currentShoes = filteredShoes.slice(indexOfFirstShoe, indexOfLastShoe);
+  // const indexOfLastShoe = currentPage * SHOES_PER_PAGE;
+  // const indexOfFirstShoe = indexOfLastShoe - SHOES_PER_PAGE;
+  // const currentShoes = filteredShoes.slice(indexOfFirstShoe, indexOfLastShoe);
+  const currentShoes = filteredShoes
   
   console.log("Current shoes -> ", currentShoes.length);
 
@@ -186,12 +187,12 @@ export default function AllShoePage() {
         <Breadcrumb queryType={queryType} />
       </div>
 
-      <FilterBar
+      {/* <FilterBar
         selectedFilters={selectedFilters}
         onFilterChange={handleFilterChange}
         onReset={handleResetFilters}
         priceConfig={priceConfig}
-      />
+      /> */}
 
       <main className="px-20 py-10">
         {currentShoes.length > 0 ? (
@@ -208,12 +209,12 @@ export default function AllShoePage() {
         )}
       </main>
 
-      <Pagination
+      {/* <Pagination
         shoesPerPage={SHOES_PER_PAGE}
         totalShoes={filteredShoes.length}
         paginate={setCurrentPage}
         currentPage={currentPage}
-      />
+      /> */}
     </div>
   );
 }
