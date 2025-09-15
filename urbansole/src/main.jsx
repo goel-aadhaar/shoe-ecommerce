@@ -15,6 +15,7 @@ import AllShoePage from './components/allShoePage.jsx';
 import ProfilePage from './components/userProfilePage/Userprofile';
 import AdminPanelApp from './components/Admin/AdminPanel.jsx';
 import Home from './components/home-page/home-page';
+import LoginPage from './components/Registration/Login.jsx';
 
 const AppRouter = createBrowserRouter([
   {
@@ -59,6 +60,10 @@ const AppRouter = createBrowserRouter([
         path: 'profile',
         element: <ProfilePage />
       }, {
+        path: 'login',
+        element: <LoginPage/>
+      },
+      {
         path: 'admin',
         element: <AdminPanelApp />
       }

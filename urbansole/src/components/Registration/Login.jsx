@@ -1,14 +1,19 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router";
 import { Link } from "react-router";
 
-const Registration = () => {
+const LoginPage = () => {
   const [formData, setFormData] = useState({
-    fullName: "",
     email: "",
-    password: "",
-    confirmPassword: "",
+    password: ""
   });
+
+
+  const navigate = useNavigate();
+  function onLoginSuccess(){
+    navigate('/');
+  }
 
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
@@ -25,36 +30,35 @@ const Registration = () => {
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setMessage("");
-
-    if (formData.password !== formData.confirmPassword) {
-      setMessage("Passwords do not match!");
-      return;
-    }
-
+    setMessage('');
     setLoading(true);
 
     try {
-      await axios.post(
-        "https://api-shoe-ecommerce.onrender.com/api/v1/auth/register",
-        formData
+      const response = await axios.post(
+        'https://api-shoe-ecommerce.onrender.com/api/v1/auth/login',
+        formData,
+        {
+          withCredentials: true,
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
       );
-      setMessage("🎉 Registration successful!");
-      setFormData({
-        fullName: "",
-        email: "",
-        password: "",
-        confirmPassword: "",
-      });
+      if (response.status === 200) {
+        setMessage('Login successful!');
+        setTimeout(() => {
+          onLoginSuccess(); // Call the prop function on success
+        }, 1000); // Wait a second before closing to show the message
+      }
     } catch (error) {
-      setMessage(
-        error.response?.data?.message ||
-          "Something went wrong. Please try again."
-      );
+      setMessage(error.response?.data?.message || 'Something went wrong. Please try again.');
     } finally {
       setLoading(false);
     }
   };
+
+
+
 
   return (
     <>
@@ -79,7 +83,7 @@ const Registration = () => {
           {/* Right Section - Registration Form */}
           <div className="flex-1 p-10 flex flex-col justify-center">
             <h2 className="text-3xl font-bold text-gray-900 text-center">
-              Sign Up
+              Log In
             </h2>
             <p className="text-center text-gray-500 mb-6">
               To avail exclusive offers!
@@ -92,15 +96,7 @@ const Registration = () => {
             )}
 
             <form onSubmit={handleSubmit} className="space-y-4 text-black">
-              <input
-                type="text"
-                name="fullName"
-                placeholder="Full Name"
-                value={formData.fullName}
-                onChange={handleChange}
-                required
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-800 outline-none"
-              />
+
               <input
                 type="email"
                 name="email"
@@ -119,36 +115,26 @@ const Registration = () => {
                 required
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-800 outline-none"
               />
-              <input
-                type="password"
-                name="confirmPassword"
-                placeholder="Confirm Password"
-                value={formData.confirmPassword}
-                onChange={handleChange}
-                required
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-800 outline-none"
-              />
 
               <button
                 type="submit"
                 disabled={loading}
                 className="w-full bg-black text-white py-3 rounded-lg font-bold text-md hover:bg-gray-800 transition-all"
               >
-                {loading ? "Registering..." : "SIGN UP NOW"}
+                {loading ? "Log in...." : "Login Now"}
               </button>
-              <Link 
-                key='login'
-                to={'/login'}
-              >
-                <button
-                  type="submit"
-                  disabled={loading}
-                  className="w-full bg-black mt-2 text-white py-3 rounded-lg font-bold text-md hover:bg-gray-800 transition-all"
+                <Link 
+                    key='login'
+                    to={'/register'}
                 >
-                  Already a user ? Log In here
-                </button>
-              </Link>
-            
+                    <button
+                    type="submit"
+                    disabled={loading}
+                    className="w-full bg-black mt-2 text-white py-3 rounded-md font-bold text-md hover:bg-gray-800 transition-all"
+                    >
+                        New User ? Sign Up here
+                    </button>
+                </Link>
             </form>
           </div>
         </div>
@@ -157,4 +143,4 @@ const Registration = () => {
   );
 };
 
-export default Registration;
+export default LoginPage;

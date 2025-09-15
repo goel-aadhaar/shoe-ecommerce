@@ -48,8 +48,8 @@ function App() {
 
   const handleLoginSuccess = () => {
     setIsLoggedIn(true);
-    setIsModalOpen(false); // Close the modal
-    navigate('/profile'); // Navigate to the profile page
+    setIsModalOpen(false); 
+    navigate('/');
   };
 
   if (loading) {
