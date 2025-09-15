@@ -5,12 +5,6 @@ export default function ShimmerShoeDetail() {
     <>
       {/* Custom styles for the shimmer effect */}
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f7fafc;
-        }
-
         .shimmer-bg {
             background: #f0f0f0;
             background-image: linear-gradient(to right, #f0f0f0 0%, #e0e0e0 20%, #f0f0f0 40%, #f0f0f0 100%);
