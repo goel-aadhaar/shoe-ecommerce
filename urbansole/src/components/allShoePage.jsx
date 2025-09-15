@@ -58,20 +58,26 @@ export default function AllShoePage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [selectedFilters, setSelectedFilters] = useState({});
+  const [attribute, setAtribute]  = useState('trending');
   const [currentPage, setCurrentPage] = useState(1);
   const SHOES_PER_PAGE = 16;
 
   // Get the queryType from the URL params
   const { queryType } = useParams();
+ 
+  if (queryType === 'new-arrival') {
+    setAtribute('newArrival')
+  }
 
   useEffect(() => {
     const fetchShoes = async () => {
       try {
         setLoading(true);
-        const response = await axios.get('https://api-shoe-ecommerce.onrender.com/api/v1/products');
+        const response = await axios.get('https://api-shoe-ecommerce.onrender.com/api/v1/products/filter',{
+          params:{attribute : {attribute}, limit : 16 }
+        });
         setShoesData(response.data.data);
-        console.log("data got fetched.. ", response);
-        
+        console.log("data got fetched.. ", response.data.data);
         setError(null);
       } catch (err) {
 
@@ -83,7 +89,7 @@ export default function AllShoePage() {
     };
 
     fetchShoes();
-  }, [queryType]);
+  }, [attribute]);
 
   if (loading) {
     return (<ShimmerShoeDetail />);
@@ -108,24 +114,11 @@ export default function AllShoePage() {
     setCurrentPage(1);
   };
 
-  console.log("All shoe after fetch: ", shoesData);
   
   let filteredShoes = Array.isArray(shoesData) ? [...shoesData] : [];
   console.log("filtered shoes", filteredShoes);  
 
-  // Logic to filter based on the URL parameter (queryType)
-  if (queryType === 'new-arrival') {
-  filteredShoes = filteredShoes.filter(shoe => Array.isArray(shoe.attributes) && shoe.attributes.includes('newArrival'));
-  } else if (queryType === 'trending') {
-    filteredShoes = filteredShoes.filter(shoe => Array.isArray(shoe.attributes) && shoe.attributes.includes('trending'));
-  } else if (queryType === 'shoe') {
-    filteredShoes = filteredShoes.filter(shoe => shoe.category.name.toLowerCase() === 'shoes');
-  } else if (queryType === 'crocks') {
-    filteredShoes = filteredShoes.filter(shoe => shoe.category.name.toLowerCase() === 'crocks');
-  } else if (queryType) {
-    // If queryType is not a special type, treat it as a brand
-    filteredShoes = filteredShoes.filter(shoe => shoe.brand.toLowerCase() === queryType.toLowerCase());
-  }
+  
 
   Object.entries(selectedFilters).forEach(([filterKey, filterValue]) => {
     if (!filterValue) return;
