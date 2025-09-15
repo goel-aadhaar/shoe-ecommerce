@@ -20,10 +20,10 @@ function App() {
       try {
         setLoading(true);
         const res = await axios.get(
-          'https://api-shoe-ecommerce.onrender.com/api/v1/users/profile',
+          'https://api-shoe-ecommerce.onrender.com/api/v1/users/check',
           { withCredentials: true }
         );
-        if (res.status === 200) {
+        if (res.data.data.isLoggedIn) {
           setIsLoggedIn(true);
         } else {
           setIsLoggedIn(false);
@@ -36,7 +36,7 @@ function App() {
     };
 
     checkLoginStatus();
-  }, []); // Run only once on component mount
+  }, []); 
 
   const handleProfileClick = () => {
     if (isLoggedIn) {
