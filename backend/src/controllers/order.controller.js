@@ -27,6 +27,11 @@ export const createOrder = asyncHandler(async (req, res) => {
         path: 'productId',
         select: 'name brand price' // Fetching necessary product details
     });
+    // const populatedOrderItems = await OrderItem.find({ orderId: order._id }).populate({
+    //     path: 'productId',
+    //     select: 'name brand price' // Fetching necessary product details
+    // });
+
     console.log('populatedorderitems   ',populatedOrderItems);
     
 
@@ -39,7 +44,7 @@ export const createOrder = asyncHandler(async (req, res) => {
     console.log('full order : ',fullOrder);
     
     // sendOrderEmail now receives a full order object with product details
-    await sendOrderEmail(req.user.email, fullOrder);
+    // await sendOrderEmail(req.user.email, fullOrder);
 
     res.status(201).json(
         new ApiResponse(201, "Order created successfully", {
