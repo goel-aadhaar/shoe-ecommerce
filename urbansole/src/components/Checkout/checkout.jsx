@@ -1,5 +1,3 @@
-// new file: src/pages/CheckoutPage.jsx
-
 import React, { useState, useEffect } from 'react';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import axios from 'axios';
