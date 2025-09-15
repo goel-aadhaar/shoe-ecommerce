@@ -80,6 +80,27 @@ export const getProductsByBrand = asyncHandler(async (req, res) => {
 });
 
 
+export const getProductsByGender = asyncHandler(async (req, res) => {
+  const { gender, limit } = req.query;
+  console.log("Request for the get Product of gender:", gender);
+
+  const genderValue = gender || "Male"; 
+  const max = Number(limit) || 10;
+
+  const products = await Product.find({ for: genderValue })
+    .limit(max)
+    .populate("category")
+    .populate({
+      path: "imageSet",
+      select: "thumbnail hover"
+    });
+
+  res.status(200).json(
+    new ApiResponse(200, `Products for gender '${genderValue}' fetched successfully`, products)
+  );
+});
+
+
 
 
 export const updateProduct = asyncHandler(async (req, res) => {
