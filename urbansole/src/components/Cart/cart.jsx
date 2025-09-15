@@ -220,16 +220,13 @@ const CartPage = () => {
                 </span>
               </div>
             </div>
-            {/* <Link */}
-              // key = 'checkout_'
-              // to = {'/checkout'}
-            {/* > */}
+         
               <button 
                 onClick={handleCheckout}
                 className="mt-6 w-full bg-black text-white py-3 rounded-lg text-lg font-semibold hover:bg-gray-800 transition-colors">
                 CHECKOUT
               </button>
-            {/* </Link> */}
+            
 
             <div className="border-t border-gray-300 mt-6 pt-6">
               <h3 className="text-lg font-bold mb-2">✨ Recommended for you</h3>
