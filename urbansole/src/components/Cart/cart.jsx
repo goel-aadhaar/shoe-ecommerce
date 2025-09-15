@@ -43,40 +43,14 @@ const dummyCartItems = [
     quantity: 1,
     color: 'Optical White',
     size: '9',
-  },
-  {
-    product: {
-      _id: 'prod_4',
-      name: 'Chuck Taylor All Star',
-      brand: 'Converse',
-      price: 60.00,
-      mainImage: 'https://placehold.co/112x112/E5E7EB/4B5563?text=Chuck',
-    },
-    quantity: 1,
-    color: 'Optical White',
-    size: '9',
-  },
-  {
-    product: {
-      _id: 'prod_5',
-      name: 'Chuck Taylor All Star',
-      brand: 'Converse',
-      price: 60.00,
-      mainImage: 'https://placehold.co/112x112/E5E7EB/4B5563?text=Chuck',
-    },
-    quantity: 1,
-    color: 'Optical White',
-    size: '9',
-  },
+  }
 ];
 
 const CartPage = () => {
-  const [cartItems, setCartItems] = useState(dummyCartItems); // Use dummy data
-  const [loading, setLoading] = useState(false); // No loading with dummy data
+  const [cartItems, setCartItems] = useState(dummyCartItems); 
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [recommendations, setRecommendations] = useState([]);
-  const [recommendationsLoading, setRecommendationsLoading] = useState(false);
-  const [size_, setsize_] = useState(8);
+//   const [size_, setsize_] = useState(8);
 
   function getRandomSize() {
     return Math.floor(Math.random() * (5)) + 6;
@@ -169,6 +143,8 @@ const CartPage = () => {
             {!loading && !error && cartItems.map(item => (
                 <div key={item._id} className="flex items-start py-8 border-b border-gray-200 last:border-b-0">
                     <div className="w-28 h-28 flex-shrink-0 bg-gray-100 rounded-lg overflow-hidden relative">
+                    console.log("Product " ,item?.productId);
+                    console.log("Product ImageSet ", item?.productId?.imageSet);
                     <img 
                         src={item?.productId?.imageSet?.thumbnail} 
                         alt={item?.productId?.name} 
@@ -187,7 +163,7 @@ const CartPage = () => {
                         <h3 className="text-lg font-semibold">{item?.productId?.name}</h3>
                         <p className="text-sm text-gray-500">Brand: {item?.productId?.brand}</p>
                         <p className="text-sm text-gray-500 mt-1">
-                        Color: {item?.selectedColor || 'N/A'} | Size: {item?.selectedSize || 'N/A'}
+                        Color: {item?.selectedColor || 'Black/White'} | Size: {getRandomSize() || 'N/A'}
                         </p>
                     </div>
 
@@ -254,7 +230,6 @@ const CartPage = () => {
               <h3 className="text-lg font-bold mb-2">✨ Recommended for you</h3>
               <button
                 className="w-full text-center py-2 px-4 rounded-lg text-sm text-black border border-black hover:bg-black hover:text-white transition-colors"
-                disabled={recommendationsLoading}
               >
                 Get Recommendations
               </button>
