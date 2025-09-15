@@ -85,7 +85,7 @@ export default function AllShoePage() {
         setLoading(true);
         const response = 
           await axios.get("https://api-shoe-ecommerce.onrender.com/api/v1/products/filter/attribute",{
-            params: { attribute: attribute, limit: 16 }
+            params: { attribute: attribute, limit: 18 }
         });
         setShoesData(response.data.data);
         setError(null);
