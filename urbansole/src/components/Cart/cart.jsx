@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { createRoot } from 'react-dom/client';
 import axios from 'axios';
 import { Plus, Minus, X, Volume2, Trash } from 'lucide-react';
+// import { useNavigate } from 'react-router'
 
-// Tell axios to send cookies with every request for authentication
 axios.defaults.withCredentials = true;
 
-// Dummy data to showcase the UI without a running backend
 const dummyCartItems = [
   {
     product: {
@@ -19,30 +17,6 @@ const dummyCartItems = [
     quantity: 1,
     color: 'White/Black',
     size: '10',
-  },
-  {
-    product: {
-      _id: 'prod_2',
-      name: 'Superstar Shoes',
-      brand: 'Adidas',
-      price: 90.00,
-      mainImage: 'https://placehold.co/112x112/E5E7EB/4B5563?text=Superstar',
-    },
-    quantity: 2,
-    color: 'Core Black',
-    size: '11',
-  },
-  {
-    product: {
-      _id: 'prod_3',
-      name: 'Chuck Taylor All Star',
-      brand: 'Converse',
-      price: 60.00,
-      mainImage: 'https://placehold.co/112x112/E5E7EB/4B5563?text=Chuck',
-    },
-    quantity: 1,
-    color: 'Optical White',
-    size: '9',
   }
 ];
 
@@ -50,7 +24,7 @@ const CartPage = () => {
   const [cartItems, setCartItems] = useState(dummyCartItems); 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-//   const [size_, setsize_] = useState(8);
+  // const navigate = useNavigate();
 
   function getRandomSize() {
     return Math.floor(Math.random() * (5)) + 6;
@@ -58,7 +32,6 @@ const CartPage = () => {
 
   const API_BASE_URL = 'https://api-shoe-ecommerce.onrender.com/api/v1';
 
-  // Function to fetch cart data from the backend
   const fetchCart = async () => {
     try {
       setLoading(true);
@@ -113,6 +86,33 @@ const CartPage = () => {
             console.error('Failed to remove item:', err);
             setError('Failed to remove item from cart.');
         }
+    };
+
+    const handleCheckout = async () => {
+      try {
+        const items = cartItems.map(item => ({
+          productId: item?.productId?._id,
+          quantity: item?.quantity,
+          price: item?.productId?.price,
+          selectedColor: item?.selectedColor,
+          selectedSize: item?.selectedSize
+        }));
+
+        const response = await axios.post(`${API_BASE_URL}/orders`, {
+          items,
+          totalAmount: total.toFixed(2),
+        });
+
+        const newOrder = response.data.data.order;
+        console.log("Order created successfully:", newOrder);
+        
+        // Redirect to the new checkout page with the order ID
+        // navigate(`/checkout/${newOrder._id}`);
+        
+      } catch (err) {
+        console.error("Checkout failed:", err);
+        setError("Checkout failed. Please try again.");
+      }
     };
 
 
@@ -202,27 +202,34 @@ const CartPage = () => {
             <div className="space-y-4">
               <div className="flex justify-between items-center text-sm">
                 <span>SUBTOTAL</span>
-                <span className="font-semibold">₹{subtotal.toFixed(2)}</span>
+                <span className="font-semibold">₹{subtotal.toFixed(2) || 0}</span>
               </div>
               <div className="flex justify-between items-center text-sm">
                 <span>SHIPPING</span>
-                <span className="font-semibold">₹{shipping.toFixed(2)}</span>
+                <span className="font-semibold">₹{shipping.toFixed(2) || 0}</span>
               </div>
               <div className="flex justify-between items-center text-sm">
                 <span>TAX</span>
-                <span className="font-semibold">₹{tax.toFixed(2)}</span>
+                <span className="font-semibold">₹{tax.toFixed(2) || 0}</span>
               </div>
               <div className="border-t border-gray-300 pt-4 flex justify-between items-center text-lg font-bold">
                 <span>TOTAL</span>
                 <span className="flex items-center space-x-2">
-                  <span>₹{total.toFixed(2)}</span>
+                  <span>₹{total.toFixed(2) || 0}</span>
                  
                 </span>
               </div>
             </div>
-            <button className="mt-6 w-full bg-black text-white py-3 rounded-lg text-lg font-semibold hover:bg-gray-800 transition-colors">
-              CHECKOUT
-            </button>
+            {/* <Link */}
+              // key = 'checkout_'
+              // to = {'/checkout'}
+            {/* > */}
+              <button 
+                onClick={handleCheckout}
+                className="mt-6 w-full bg-black text-white py-3 rounded-lg text-lg font-semibold hover:bg-gray-800 transition-colors">
+                CHECKOUT
+              </button>
+            {/* </Link> */}
 
             <div className="border-t border-gray-300 mt-6 pt-6">
               <h3 className="text-lg font-bold mb-2">✨ Recommended for you</h3>
