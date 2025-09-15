@@ -1,4 +1,4 @@
-import { Payment } from "../models/model-export.js";
+import { Payment } from "../models/payment.model.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import { stripe } from "../utils/stripe.js";
