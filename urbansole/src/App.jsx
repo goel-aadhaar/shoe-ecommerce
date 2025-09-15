@@ -20,7 +20,7 @@ function App() {
       try {
         setLoading(true);
         const res = await axios.get(
-          'https://api-shoe-ecommerce.onrender.com/api/v1/users/check',
+          'https://api-shoe-ecommerce.onrender.com/api/v1/auth/check',
           { withCredentials: true }
         );
         if (res.data.data.isLoggedIn) {
