@@ -32,7 +32,7 @@ export const createOrder = asyncHandler(async (req, res) => {
     //     select: 'name brand price' // Fetching necessary product details
     // });
 
-    console.log('populatedorderitems   ',populatedOrderItems);
+    // console.log('populatedorderitems   ',populatedOrderItems);
     
 
     const fullOrder = {
@@ -41,7 +41,7 @@ export const createOrder = asyncHandler(async (req, res) => {
         totalAmount,
     };
 
-    console.log('full order : ',fullOrder);
+    // console.log('full order : ',fullOrder);
     
     // sendOrderEmail now receives a full order object with product details
     // await sendOrderEmail(req.user.email, fullOrder);
