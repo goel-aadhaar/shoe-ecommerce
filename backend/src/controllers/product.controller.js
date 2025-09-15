@@ -60,6 +60,12 @@ export const getProductsByBrand = asyncHandler(async (req, res) => {
   const brandName = brand || "Puma";
   const max = Number(limit) || 10;
 
+  if (!brandName) {
+    return res.status(400).json(
+      new ApiResponse(400, "Brand query parameter is required")
+    );
+  }
+
   const products = await Product.find({ brand: brandName })
     .limit(max)
     .populate("category")
