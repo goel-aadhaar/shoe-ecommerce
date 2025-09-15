@@ -6,21 +6,20 @@ import { Key } from "lucide-react";
 
 
 const NewArrivalSection = () => {
+  console.log("Call in NewArrival Section");
+  
 
   const [active, setActive] = useState("shoes");
   const [data, setShoes] = useState([]);
   const [loading, setLoading] = useState(true);
 
 
-  const fetchShoes = async () => {
-    console.log("Fetching shoes data...");
-    
+  const fetchShoes = async () => {    
     try {
       const response = 
         await axios.get("https://api-shoe-ecommerce.onrender.com/api/v1/products/filter/attribute",{
           params: { attribute: "newArrival", limit: 16 }
         });
-      console.log("Fetched shoes data inside trending section:", response?.data?.data);
       setShoes(response?.data?.data);
     } catch (error) {
       console.error("Error fetching shoes data:", error);
@@ -32,12 +31,9 @@ const NewArrivalSection = () => {
   useEffect(() => {
     fetchShoes();
   }, []);
-
-  console.log('before loading...');
   
   const arr = [0,0,0,0]
   if (loading || data.length < 4) {
-    console.log('loading....');
     return(
      <>
         <div className="w-full mx-auto px-24 py-12 bg-white">
@@ -52,12 +48,9 @@ const NewArrivalSection = () => {
       </>
     );
   }
-
-  console.log("All shoes data:", data);
  
-  const filteredData  = data.filter((item) => item.category.name === active);
-  
-  console.log("Filtered shoes data after category filter:", filteredData.length);
+  const filteredData  = data.filter((item) => item.category.name === active);  
+  console.log("Filtered shoes data after category filter:", filteredData.length, filteredData);
 
   return (
     <div className="bg-white text-black">

@@ -11,9 +11,7 @@ const TrendingSection = () => {
   console.log("Trending carousel called.... ");
 
   
-  const fetchShoes = async () => {
-    console.log("Fetching shoes data in trending...");
-    
+  const fetchShoes = async () => {  
     try {
       const response = 
         await axios.get("https://api-shoe-ecommerce.onrender.com/api/v1/products/filter/attribute",{
@@ -31,10 +29,8 @@ const TrendingSection = () => {
     fetchShoes();
   }, []);
   const arr = [0,0,0,0];
-  console.log("len:  ",data.length);
   
   if (loading || data.length < 4) {
-    console.log('yes here i am');
     return(
       <>
           <div className="w-full mx-auto px-24 py-12 bg-white">
@@ -50,13 +46,10 @@ const TrendingSection = () => {
     );
   }
 
-  console.log("All shoes data in trending:", data);
 
   const filteredData  = data.filter((item) => item?.for === active);
-
   console.log("Filtered data in trending section : " ,filteredData.length);
   
-
   return (
     <div className="bg-white text-black py-10">
       

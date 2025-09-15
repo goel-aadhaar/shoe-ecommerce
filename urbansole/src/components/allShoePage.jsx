@@ -73,7 +73,7 @@ export default function AllShoePage() {
     } else {
       setAtribute('trending');
     }
-  }, [queryType]);
+  }, [queryType,attribute]);
 
   useEffect(() => {
     const fetchShoes = async () => {
@@ -178,9 +178,8 @@ export default function AllShoePage() {
   const indexOfFirstShoe = indexOfLastShoe - SHOES_PER_PAGE;
   const currentShoes = filteredShoes.slice(indexOfFirstShoe, indexOfLastShoe);
   
-  console.log("Current shoes -> ", currentShoes);
+  console.log("Current shoes -> ", currentShoes.length);
   
-
   return (
     <div className="bg-white font-sans">
       <div className="px-20 py-6">
