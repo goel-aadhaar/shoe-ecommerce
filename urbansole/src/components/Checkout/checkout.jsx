@@ -77,7 +77,8 @@ const Checkout = () => {
                     status: 'success',
                 });
                 alert('Payment successful!');
-                navigate(`/order-confirmation/${order._id}`);
+                navigate('/');
+                // ab cart khali krna rhega........
             }
         } catch (err) {
             console.error(err);
@@ -91,23 +92,23 @@ const Checkout = () => {
     if (error) return <div className="text-center text-red-500 mt-16">{error}</div>;
 
     return (
-        <div className="bg-gray-100 min-h-screen p-8">
+        <div className="bg-gray-100 min-h-screen p-8 mt-12 text-black">
             <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-lg p-8">
-                <h1 className="text-3xl font-bold mb-6">Checkout</h1>
+                <h1 className="text-3xl font-bold mb-6 text-black">Checkout</h1>
                 <div className="flex flex-col lg:flex-row gap-8">
                     {/* Order Summary */}
                     <div className="lg:w-1/2">
-                        <h2 className="text-xl font-semibold mb-4">Order Summary</h2>
+                        <h2 className="text-xl font-semibold mb-4 text-black">Order Summary</h2>
                         <div className="bg-gray-50 p-6 rounded-lg">
-                            <div className="flex justify-between items-center py-2 border-b">
+                            <div className="flex justify-between items-center py-2 border-b text-black">
                                 <span>Subtotal</span>
                                 <span>₹{(order.totalAmount / 1.08).toFixed(2)}</span>
                             </div>
-                            <div className="flex justify-between items-center py-2 border-b">
+                            <div className="flex justify-between items-center py-2 border-b text-black">
                                 <span>Tax</span>
                                 <span>₹{(order.totalAmount * 0.08 / 1.08).toFixed(2)}</span>
                             </div>
-                            <div className="flex justify-between items-center py-2 text-lg font-bold">
+                            <div className="flex justify-between items-center py-2 text-lg font-bold text-black">
                                 <span>Total</span>
                                 <span>₹{order.totalAmount.toFixed(2)}</span>
                             </div>
@@ -116,9 +117,9 @@ const Checkout = () => {
 
                     {/* Payment Form */}
                     <div className="lg:w-1/2">
-                        <h2 className="text-xl font-semibold mb-4">Payment Information</h2>
+                        <h2 className="text-xl font-semibold mb-4 text-black">Payment Information</h2>
                         <form onSubmit={handlePayment} className="space-y-4">
-                            <div className="border border-gray-300 p-4 rounded-lg">
+                            <div className="border border-gray-300 p-4 rounded-lg text-black">
                                 <CardElement options={{ style: { base: { fontSize: '16px' } } }} />
                             </div>
                             {paymentError && <div className="text-red-500 text-sm">{paymentError}</div>}
