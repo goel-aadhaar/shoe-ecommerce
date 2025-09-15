@@ -142,8 +142,7 @@ const CartPage = () => {
             {!loading && !error && cartItems.map(item => (
                 <div key={item._id} className="flex items-start py-8 border-b border-gray-200 last:border-b-0">
                     <div className="w-28 h-28 flex-shrink-0 bg-gray-100 rounded-lg overflow-hidden relative">
-                    console.log("Product " ,item?.productId);
-                    console.log("Product ImageSet ", item?.productId?.imageSet);
+                    {console.log("Product " , item?.productId)}
                     <img 
                         src={item?.productId?.imageSet?.thumbnail} 
                         alt={item?.productId?.name} 
