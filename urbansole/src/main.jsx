@@ -4,7 +4,6 @@ import './index.css'
 import App from './App.jsx'
 import { createBrowserRouter, RouterProvider } from "react-router-dom"; // Use react-router-dom
 import ErrorPage from './components/ErrorPage.jsx';
-import NewArrivalFullPage from './components/New-Arrival Section/newArrivalFullPage.jsx';
 import AboutUs from './components/FooterNav/AboutUs.jsx';
 import ContactUs from './components/FooterNav/ContactUs.jsx';
 import BrandsLogoPage from './components/FooterNav/BrandsFooter.jsx';
