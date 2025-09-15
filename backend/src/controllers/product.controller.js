@@ -101,6 +101,34 @@ export const getProductsByGender = asyncHandler(async (req, res) => {
 });
 
 
+export const getProductsByCategory = asyncHandler(async (req, res) => {
+  const { category, limit } = req.query;
+  console.log("Request for the get Product of category:", category);
+
+  const categoryName = category || "shoes";
+  const max = Number(limit) || 10;
+
+  if (!categoryName) {
+    return res.status(400).json(
+      new ApiResponse(400, "Category query parameter is required")
+    );
+  }
+
+  const products = await Product.find({ "category.name": categoryName })
+    .limit(max)
+    .populate("category")
+    .populate({
+      path: "imageSet",
+      select: "thumbnail hover"
+    });
+
+  res.status(200).json(
+    new ApiResponse(200, `Products in category '${categoryName}' fetched successfully`, products)
+  );
+});
+
+
+
 
 
 export const updateProduct = asyncHandler(async (req, res) => {
