@@ -25,31 +25,31 @@ import ShimmerShoeCard from './Shimmer_UIs/shoe_card_shimmer';
 //   );
 // };
 
-// const Pagination = ({ shoesPerPage, totalShoes, paginate, currentPage }) => {
-//   const pageNumbers = [];
-//   for (let i = 1; i <= Math.ceil(totalShoes / shoesPerPage); i++) {
-//     pageNumbers.push(i);
-//   }
+const Pagination = ({ shoesPerPage, totalShoes, paginate, currentPage }) => {
+  const pageNumbers = [];
+  for (let i = 1; i <= Math.ceil(totalShoes / shoesPerPage); i++) {
+    pageNumbers.push(i);
+  }
 
-//   if (pageNumbers.length <= 1) return null;
+  if (pageNumbers.length <= 1) return null;
 
-//   return (
-//     <nav className="flex justify-center my-8">
-//       <ul className="flex items-center space-x-2">
-//         {pageNumbers.map(number => (
-//           <li key={number}>
-//             <button
-//               onClick={() => paginate(number)}
-//               className={`px-4 py-2 border rounded ${currentPage === number ? 'bg-black text-white' : 'bg-white text-black'}`}
-//             >
-//               {number}
-//             </button>
-//           </li>
-//         ))}
-//       </ul>
-//     </nav>
-//   );
-// };
+  return (
+    <nav className="flex justify-center my-8">
+      <ul className="flex items-center space-x-2">
+        {pageNumbers.map(number => (
+          <li key={number}>
+            <button
+              onClick={() => paginate(number)}
+              className={`px-4 py-2 border rounded ${currentPage === number ? 'bg-black text-white' : 'bg-white text-black'}`}
+            >
+              {number}
+            </button>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  );
+};
 
 export default function AllShoePage() {
 
@@ -118,7 +118,7 @@ export default function AllShoePage() {
     );
     
   }
-  console.log("data in all shoe page ", shoesData);
+  // console.log("data in all shoe page ", shoesData);
   
 
   // if (error) {
@@ -192,10 +192,10 @@ export default function AllShoePage() {
   //   })()
   //   : { min: 599, max: 20000 };
 
-  // const indexOfLastShoe = currentPage * SHOES_PER_PAGE;
-  // const indexOfFirstShoe = indexOfLastShoe - SHOES_PER_PAGE;
-  // const currentShoes = filteredShoes.slice(indexOfFirstShoe, indexOfLastShoe);
-  const currentShoes = filteredShoes
+  const indexOfLastShoe = currentPage * SHOES_PER_PAGE;
+  const indexOfFirstShoe = indexOfLastShoe - SHOES_PER_PAGE;
+  const currentShoes = filteredShoes.slice(indexOfFirstShoe, indexOfLastShoe);
+  // const currentShoes = filteredShoes
   
   console.log("Current shoes -> ", currentShoes.length);
 
@@ -227,12 +227,12 @@ export default function AllShoePage() {
         )}
       </main>
 
-      {/* <Pagination
+      <Pagination
         shoesPerPage={SHOES_PER_PAGE}
         totalShoes={filteredShoes.length}
         paginate={setCurrentPage}
         currentPage={currentPage}
-      /> */}
+      />
     </div>
   );
 }
