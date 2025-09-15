@@ -4,8 +4,7 @@ import { Route } from 'react-router';
 import { Link, useParams } from 'react-router-dom';
 // import ShimmerShoeDetail from './Shimmer_UIs/shoe_detail_shimmerui';
 import { Shoe_Card } from './shoe_card';
-import Navbar from './Navbar';
-import Footer from './footer';
+import { useNavigate } from 'react-router';
 
 const CollapsibleItem = ({ title, isOpen, onClick, children, titleClassName }) => {
     return (
@@ -32,7 +31,6 @@ const CollapsibleItem = ({ title, isOpen, onClick, children, titleClassName }) =
 };
 
 
-// --- Data for the new sections ---
 const productInfoSections = [
     {
         key: 'about',
@@ -57,6 +55,7 @@ const ShoeDetail = () => {
     const [selectedSize, setSelectedSize] = useState('');
     const [openSections, setOpenSections] = useState({});
     const [openFaqIndex, setOpenFaqIndex] = useState(null);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [loading, setLoading] = useState(true);
     const [shoe, setShoe] = useState({
         name : '',
@@ -65,7 +64,28 @@ const ShoeDetail = () => {
         price: ''
     });
 
+    useEffect(() => {
+        const checkLoginStatus = async () => {
+            try {
+                const res = await axios.get(
+                    'https://api-shoe-ecommerce.onrender.com/api/v1/auth/check',
+                    { withCredentials: true }
+                );
+                if (res.data.data.isLoggedIn) {
+                    setIsLoggedIn(true);
+                } else {
+                    setIsLoggedIn(false);
+                }
+            } catch (error) {
+                setIsLoggedIn(false);
+            } 
+        };
+
+        checkLoginStatus();
+    }, []); 
+
     const { id } = useParams();
+    const navigate = useNavigate();
     
     useEffect(() => {
         const fetchShoes = async () => {
@@ -95,7 +115,6 @@ const ShoeDetail = () => {
             <p>Loading Shoe detail page....</p>
         );
     }
-
     
     if (!shoe) {
         return <div>Shoe not found.</div>;
@@ -105,38 +124,52 @@ const ShoeDetail = () => {
         setOpenSections(prev => ({ ...prev, [key]: !prev[key] }));
     };
 
+    
+
     const handleAddToCart = async () => {
+        
         if (!selectedSize) {
             alert('Please select a size.');
             return;
         }
-        alert(`Added ${shoe.name} (Size: ${selectedSize}) to cart!`);
+        if(isLoggedIn){
+            alert('Please Login before adding to cart.');
+            return;
+        }
+
+        try {
+            await axios.post(
+                "https://api-shoe-ecommerce.onrender.com/api/v1/cart", 
+                { productId : shoe._id }, 
+                { withCredentials: true }
+            );
+
+            alert(`Added ${shoe.name} (Size: ${selectedSize}) to cart!`);
+        }catch (error) {
+            console.error("Item not added in cart :", error);
+        }finally{
+            setLoading(false)
+        }
+        navigate('/cart')
     };
-
-    let images = []
-
-    images.push(shoe?.imageSet?.thumbnail , shoe?.imageSet?.hover)
-
-    shoe?.imageSet?.sides.forEach(img => {
-        images.push(img);
-    });
-
-    console.log("Shoe Details: ", shoe);
-    
-
-    console.log("All images in shoe deatil : ", images);
-
 
     if (!shoe) {
         return <div>Shoe not found.</div>;
     }
+
+    let images = []
+    images.push(shoe?.imageSet?.thumbnail , shoe?.imageSet?.hover)
+    shoe?.imageSet?.sides.forEach(img => {
+        images.push(img);
+    });
+    console.log("Shoe Details: ", shoe);
+    console.log("All images in shoe deatil : ", images);
 
     // for now putting same data....
     let relatedShoes = [shoe]
 
     return (
         <>
-            <Navbar />
             <div className="bg-white text-black min-h-screen">
                 <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-16 my-16">
                     <Link to={'/'}>
@@ -182,7 +215,9 @@ const ShoeDetail = () => {
                                     </div>
                                 </div>
                                 <div className="mt-6">
-                                    <button onClick={handleAddToCart} className="bg-black text-white font-bold py-3 rounded-lg hover:bg-gray-800 transition-colors duration-300 w-full">
+                                    <button 
+                                        onClick={handleAddToCart} 
+                                        className="bg-black text-white font-bold py-3 rounded-lg hover:bg-gray-800 transition-colors duration-300 w-full">
                                         ADD TO CART
                                     </button>
                                 </div>
@@ -267,7 +302,6 @@ const ShoeDetail = () => {
                     </div>
                 </div>
             </div>
-            <Footer />
         </>
     );
 };
