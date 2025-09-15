@@ -77,29 +77,29 @@ export default function AllShoePage() {
     }
   }, [queryType,attribute]);
 
-  // useEffect(() => {
-  //   const fetchShoes = async () => {
-  //     try {
-  //       console.log("cal from the all shoe page... ");
+  useEffect(() => {
+    const fetchShoes = async () => {
+      try {
+        console.log("cal from the all shoe page... ");
         
-  //       setLoading(true);
-  //       // const response = 
-  //       //   await axios.get("https://api-shoe-ecommerce.onrender.com/api/v1/products/filter/attribute",{
-  //       //     params: { attribute: attribute, limit: 16 }
-  //       // });
-  //       // setShoesData(response.data.data);
-  //       setError(null);
-  //     } catch (err) {
+        setLoading(true);
+        const response = 
+          await axios.get("https://api-shoe-ecommerce.onrender.com/api/v1/products/filter/attribute",{
+            params: { attribute: attribute, limit: 16 }
+        });
+        setShoesData(response.data.data);
+        setError(null);
+      } catch (err) {
 
-  //        console.error("Error fetching data:", err);
-  //       setError("Failed to fetch products. Please try again later.");
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   };
+         console.error("Error fetching data:", err);
+        setError("Failed to fetch products. Please try again later.");
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  //   fetchShoes();
-  // }, [attribute]);
+    fetchShoes();
+  }, [attribute]);
 
   if (loading || shoesData.length < 4) {
     const Arr = [0,0,0,0,0,0,0,0,0,0,0,0,0]
@@ -118,6 +118,8 @@ export default function AllShoePage() {
     );
     
   }
+  console.log("data in all shoe page ", shoesData);
+  
 
   // if (error) {
   //   return (
