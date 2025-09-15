@@ -17,6 +17,7 @@ import AdminPanelApp from './components/Admin/AdminPanel.jsx';
 import Home from './components/home-page/home-page';
 import LoginPage from './components/Registration/Login.jsx';
 import CartPage from './components/Cart/cart.jsx';
+import Checkout from './components/Checkout/checkout.jsx';
 
 const AppRouter = createBrowserRouter([
   {
@@ -71,6 +72,9 @@ const AppRouter = createBrowserRouter([
       {
         path: 'cart',
         element : <CartPage/>
+      },{
+        path: 'checkout',
+        element: <Checkout/>
       }
     ],
     errorElement: <ErrorPage />
