@@ -81,7 +81,7 @@ const AppRouter = createBrowserRouter([
         path: 'checkout/:orderId',
         element: (
                     <Elements stripe={stripePromise}>
-                        <CheckoutPage />
+                        <Checkout/>
                     </Elements>
                 ),
       }
