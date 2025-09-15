@@ -76,7 +76,6 @@ const CartPage = () => {
   const [error, setError] = useState(null);
   const [recommendations, setRecommendations] = useState([]);
   const [recommendationsLoading, setRecommendationsLoading] = useState(false);
-
   const [size_, setsize_] = useState(8);
 
   function getRandomSize() {
@@ -145,7 +144,7 @@ const CartPage = () => {
 
 
   const calculateSubtotal = () => {
-    return cartItems.reduce((acc, item) => acc + item.product.price * item.quantity, 0);
+    return cartItems.reduce((acc, item) => acc + item?.productId?.price * item?.quantity, 0);
   };
 
   const subtotal = calculateSubtotal();
