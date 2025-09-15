@@ -172,14 +172,14 @@ export default function AllShoePage() {
   //   }
   // });
 
-  // const sortBy = selectedFilters['Sort by'];
-  // if (sortBy) {
-  //   filteredShoes.sort((a, b) => {
-  //     if (sortBy === 'Price: Low to High') return a.price - b.price;
-  //     if (sortBy === 'Price: High to Low') return b.price - a.price;
-  //     return 0;
-  //   });
-  // }
+  const sortBy = selectedFilters['Sort by'];
+  if (sortBy) {
+    filteredShoes.sort((a, b) => {
+      if (sortBy === 'Price: Low to High') return a.price - b.price;
+      if (sortBy === 'Price: High to Low') return b.price - a.price;
+      return 0;
+    });
+  }
 
   const priceConfig = shoesData && shoesData.length > 0
     ? (() => {
