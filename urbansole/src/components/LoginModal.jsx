@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom'; // Correct import for Link
 import axios from 'axios';
 
 const CloseIcon = () => (
@@ -8,7 +8,7 @@ const CloseIcon = () => (
   </svg>
 );
 
-const LoginModal = ({ isOpen, onClose }) => {
+const LoginModal = ({ isOpen, onClose, onLoginSuccess }) => {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -18,7 +18,6 @@ const LoginModal = ({ isOpen, onClose }) => {
 
   if (!isOpen) return null;
 
-  // Handle form input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -27,7 +26,6 @@ const LoginModal = ({ isOpen, onClose }) => {
     }));
   };
 
-  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     setMessage('');
@@ -38,15 +36,18 @@ const LoginModal = ({ isOpen, onClose }) => {
         'https://api-shoe-ecommerce.onrender.com/api/v1/auth/login',
         formData,
         {
-          withCredentials: true, // ✅ important for cookies
+          withCredentials: true,
           headers: {
-            'Content-Type': 'application/json'
-          }
+            'Content-Type': 'application/json',
+          },
         }
       );
-      console.log(response)
-      setMessage('Login successful!');
-      // You might want to store the token here, e.g., localStorage.setItem('token', response.data.token);
+      if (response.status === 200) {
+        setMessage('Login successful!');
+        setTimeout(() => {
+          onLoginSuccess(); // Call the prop function on success
+        }, 1000); // Wait a second before closing to show the message
+      }
     } catch (error) {
       setMessage(error.response?.data?.message || 'Something went wrong. Please try again.');
     } finally {
@@ -124,23 +125,19 @@ const LoginModal = ({ isOpen, onClose }) => {
               >
                 {loading ? 'Logging In...' : 'Submit'}
               </button>
-              <Link
-                key = {'register'}
-                to = {'/register'}
-              >
+              <Link to="/register" onClick={onClose}>
                 <button
-                    type="button"
-                    className="w-full bg-black text-white font-bold py-3 px-4 rounded-md hover:bg-gray-800 transition-colors"
+                  type="button"
+                  className="w-full bg-black text-white font-bold py-3 px-4 rounded-md hover:bg-gray-800 transition-colors"
                 >
-                    New User? Register Here
+                  New User? Register Here
                 </button>
               </Link>
             </div>
           </form>
           <div className="text-center mt-4 text-xs text-gray-500">
             <p>
-              I accept that I have read & understood Gokwik's <a href="#" className="underline">Privacy Policy</a> and{' '}
-              <a href="#" className="underline">T&Cs</a>.
+              I accept that I have read & understood Gokwik's <a href="#" className="underline">Privacy Policy</a> and <a href="#" className="underline">T&Cs</a>.
             </p>
             <a href="#" className="mt-2 inline-block underline">
               Trouble logging in?

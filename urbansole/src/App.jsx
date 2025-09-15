@@ -1,19 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { AuthProvider } from './components/context/AuthProvider';
-import { useNavigate, Outlet } from 'react-router-dom'; // Import Outlet
+import { useNavigate, Outlet } from 'react-router-dom';
 import axios from 'axios';
 
 import Navbar from './components/Navbar';
 import LoginModal from './components/LoginModal';
 import Footer from './components/footer';
-import ShimmerHome from './components/Shimmer_UIs/home_shimmer'
+import ShimmerHome from './components/Shimmer_UIs/home_shimmer';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [message, setMessage] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [profileIconClicked, setProfileIconClicked] = useState(false);
 
   const navigate = useNavigate();
 
@@ -25,45 +23,47 @@ function App() {
           'https://api-shoe-ecommerce.onrender.com/api/v1/users/profile',
           { withCredentials: true }
         );
-
-        if (res.status == 200) {
+        if (res.status === 200) {
           setIsLoggedIn(true);
-          setMessage('You are currently logged in.');
         } else {
           setIsLoggedIn(false);
-          setMessage('You are not logged in.');
         }
       } catch (error) {
         setIsLoggedIn(false);
-        setMessage('You are not logged in.');
       } finally {
         setLoading(false);
       }
     };
 
     checkLoginStatus();
-  }, [profileIconClicked]);
+  }, []); // Run only once on component mount
 
-  const toggleModal = () => {
-    setProfileIconClicked(!profileIconClicked);
-    if (!isLoggedIn) {
-      setIsModalOpen(!isModalOpen);
-    } else {
+  const handleProfileClick = () => {
+    if (isLoggedIn) {
       navigate('/profile');
+    } else {
+      setIsModalOpen(true);
     }
   };
 
+  const handleLoginSuccess = () => {
+    setIsLoggedIn(true);
+    setIsModalOpen(false); // Close the modal
+    navigate('/profile'); // Navigate to the profile page
+  };
+
   if (loading) {
-    return (
-      <ShimmerHome />
-    );
+    return <ShimmerHome />;
   }
 
   return (
     <AuthProvider>
-      <Navbar onProfileClick={toggleModal} />
-      <LoginModal isOpen={isModalOpen} onClose={toggleModal} />
-      {/* The Outlet component will render the content of the child routes */}
+      <Navbar onProfileClick={handleProfileClick} />
+      <LoginModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onLoginSuccess={handleLoginSuccess}
+      />
       <Outlet />
       <Footer />
     </AuthProvider>
