@@ -3,12 +3,14 @@ import { ApiResponse } from "../utils/ApiResponse.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 
 export const getCart = asyncHandler(async (req, res) => {
+    console.log("Request for getCart");
+    
     let cart = await Cart.findOne({ userId: req.user.id });
     if (!cart) {
         cart = await Cart.create({ userId: req.user.id });
     }
     const items = await CartItem.find({ cartId: cart._id }).populate("productId");
-    res.status(201)
+    res.status(200)
     .json(
         new ApiResponse(
             200, 
@@ -19,6 +21,8 @@ export const getCart = asyncHandler(async (req, res) => {
 });
 
 export const addToCart = asyncHandler(async (req, res) => {
+    console.log('request for add to cart..');
+    
     let cart = await Cart.findOne({ userId: req.user.id });
     if (!cart) cart = await Cart.create({ userId: req.user.id });
 
@@ -30,10 +34,10 @@ export const addToCart = asyncHandler(async (req, res) => {
         item = await CartItem.create({
             cartId: cart._id,
             productId: req.body.productId,
-            quantity: req.body.quantity || 1,
+            quantity:  req.body.quantity || 1,
         });
     }
-    res.status(201)
+    res.status(200)
     .json(
         new ApiResponse(
             200,
@@ -44,8 +48,9 @@ export const addToCart = asyncHandler(async (req, res) => {
 });
 
 export const removeFromCart = asyncHandler(async (req, res) => {
+    console.log('request for removing from the cart.... ');
     await CartItem.findByIdAndDelete(req.params.id);
-    res.status(201)
+    res.status(200)
     .json(
         new ApiResponse(
             200,
