@@ -17,7 +17,7 @@ export default function Footer() {
             <li className="text-xl font-bold pb-3">INFORMATION</li>
             <li><Link to={'/about'} className="hover:text-red-500 text-sm text-white">ABOUT US</Link></li>
             <li><Link to={'/contact'} className="hover:text-red-500 text-sm text-white">CONTACT US</Link></li>
-            <li><a href="#" className="hover:text-red-500 text-sm text-white">RELEASES</a></li>
+            <li><Link to="/collections/new-arrival" className="hover:text-red-500 text-sm text-white">RELEASES</Link></li>
             <li><a href="#" className="hover:text-red-500 text-sm text-white">STORE LOCATOR</a></li>
             <li><Link to={"/brandsLogo"} className="hover:text-red-500 text-sm text-white">BRANDS</Link></li>
             <li><a href="#" className="hover:text-red-500 text-sm text-white">BLOGS</a></li>
