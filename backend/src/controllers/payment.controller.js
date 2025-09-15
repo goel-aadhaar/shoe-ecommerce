@@ -30,6 +30,12 @@ export const createStripePayment = asyncHandler(async (req, res) => {
 });
 
 export const confirmPayment = asyncHandler(async (req, res) => {
+import { Payment } from "../models/model-export.js";
+import { OrderStatusHistory, Order } from "../models/model-export.js";
+import { asyncHandler } from "../utils/asyncHandler.js";
+import { ApiResponse } from "../utils/ApiResponse.js";
+
+export const confirmPayment = asyncHandler(async (req, res) => {
     const { transactionId, status } = req.body;
 
     const payment = await Payment.findOneAndUpdate(
@@ -42,7 +48,17 @@ export const confirmPayment = asyncHandler(async (req, res) => {
         return res.status(404).json(new ApiResponse(404, "Payment not found"));
     }
 
+    if (status === "success") {
+        // Update order status
+        await Order.findByIdAndUpdate(payment.orderId, { status: "paid" });
+        await OrderStatusHistory.create({
+            orderId: payment.orderId,
+            status: "paid",
+        });
+    }
+
     res.status(200).json(
         new ApiResponse(200, "Payment updated successfully", payment)
     );
 });
+
