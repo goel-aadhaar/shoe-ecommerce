@@ -236,8 +236,8 @@ const ShoeDetail = () => {
                             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
                                 {relatedShoes.map(rshoe =>  
                                     <Link
-                                        key={rshoe.id}
-                                        to ={'/shoe/' + rshoe.id}
+                                        key={rshoe._id}
+                                        to ={'/shoe/' + rshoe._id}
                                     >
                                         <Shoe_Card 
                                             shoes={rshoe} 
