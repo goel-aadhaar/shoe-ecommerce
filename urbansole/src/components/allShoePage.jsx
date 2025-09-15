@@ -3,7 +3,8 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom'; // Import useParams
 import { Shoe_Card } from './shoe_card';
 import FilterBar from './filter';
-import ShimmerShoeDetail from './Shimmer_UIs/shoe_detail_shimmerui';
+import ShimmerShoeCard from './Shimmer_UIs/shoe_card_shimmer';
+
 
 // const Breadcrumb = ({ queryType }) => {
 //   let path = "Home";
@@ -100,8 +101,21 @@ export default function AllShoePage() {
   // }, [attribute]);
 
   if (loading || shoesData.length < 4) {
-    // return (<ShimmerShoeDetail />);
-    return (<p1>Kuchh to dikkat hai bhai... </p1>);
+    const Arr = [0,0,0,0,0,0,0,0,0,0,0,0,0]
+    return (
+      <>
+        <div className="w-full mx-auto px-24 py-12 bg-white">
+            <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-x-5 gap-y-7">
+                {Arr.map((index) => (
+                  <div Key={index}>
+                    <ShimmerShoeCard/>
+                  </div>
+                ))}
+            </div>
+        </div>
+      </>
+    );
+    
   }
 
   // if (error) {
