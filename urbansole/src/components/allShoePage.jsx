@@ -65,28 +65,28 @@ export default function AllShoePage() {
   const SHOES_PER_PAGE = 16;
 
   // Get the queryType from the URL params
-  const {queryType}  = useParams();
-
+  let {queryType}  = useParams();
+  
   console.log(queryType);
   
  
   useEffect(() => {
-    if (queryType === 'new-arrival') {
+    if (queryType.toLowerCase() === 'new-arrival') {
       setParam1('newArrival');
       setSufLink('attribute')
-    } else if(queryType === 'trending') {
+    } else if(queryType.toLowerCase() === 'trending') {
       setParam1('trending');
       setSufLink('attribute')
-    }else if(queryType === 'male') {
+    }else if(queryType.toLowerCase() === 'male') {
       setParam1('Male')
       setSufLink('gender')
-    }else if(queryType === 'female'){
+    }else if(queryType.toLowerCase() === 'female'){
       setParam1('Female')
       setSufLink('gender')
-    }else if(queryType === 'shoes'){
+    }else if(queryType.toLowerCase() === 'shoes'){
       setParam1('shoes')
       setSufLink('category')
-    }else if(queryType === 'Clogs'){
+    }else if(queryType.toLowerCase() === 'clogs'){
       setParam1('clogs')
       setSufLink('category')
     }
@@ -94,7 +94,7 @@ export default function AllShoePage() {
       setParam1(queryType)
       setSufLink('brand')
     }
-  }, [queryType, param1]);
+  }, [queryType]);
 
   useEffect(() => {
     const fetchShoes = async () => {
