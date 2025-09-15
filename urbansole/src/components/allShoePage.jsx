@@ -64,19 +64,18 @@ export default function AllShoePage() {
   const SHOES_PER_PAGE = 16;
 
   // Get the queryType from the URL params
-  const { query } = useParams();
-  console.log(query);
-  const queryType = query || 'trending';
+  const {queryType}  = useParams();
+
   console.log(queryType);
   
  
-  // useEffect(() => {
-  //   if (queryType === 'new-arrival') {
-  //     setAtribute('newArrival');
-  //   } else {
-  //     setAtribute('trending');
-  //   }
-  // }, [queryType,attribute]);
+  useEffect(() => {
+    if (queryType === 'new-arrival') {
+      setAtribute('newArrival');
+    } else {
+      setAtribute('trending');
+    }
+  }, [queryType,attribute]);
 
   // useEffect(() => {
   //   const fetchShoes = async () => {
