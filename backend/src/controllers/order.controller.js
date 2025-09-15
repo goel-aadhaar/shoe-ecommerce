@@ -1,6 +1,7 @@
 import { Order, OrderItem, OrderStatusHistory } from "../models/model-export.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { sendOrderEmail } from "../utils/email.js";
+import { ApiResponse } from "../utils/ApiResponse.js"; // This import was missing
 
 export const createOrder = asyncHandler(async (req, res) => {
     const { items, totalAmount } = req.body;
@@ -21,9 +22,15 @@ export const createOrder = asyncHandler(async (req, res) => {
         status: "pending",
     });
 
+    // Fetch the full product details for each item before sending the email
+    const populatedOrderItems = await OrderItem.find({ orderId: order._id }).populate({
+        path: 'productId',
+        select: 'name brand price' // Select the fields you need for the email
+    });
+
     const fullOrder = {
         _id: order._id,
-        items: orderItems,
+        items: populatedOrderItems,
         totalAmount,
     };
 
@@ -32,7 +39,7 @@ export const createOrder = asyncHandler(async (req, res) => {
     res.status(201).json(
         new ApiResponse(201, "Order created successfully", {
             order,
-            items: orderItems,
+            items: populatedOrderItems,
         })
     );
 });
