@@ -76,13 +76,20 @@ export default function AllShoePage() {
     } else if(queryType === 'trending') {
       setParam1('trending');
       setSufLink('attribute')
-    }else if(queryType === 'Male') {
+    }else if(queryType === 'male') {
       setParam1('Male')
       setSufLink('gender')
-    }else if(queryType === 'Female'){
+    }else if(queryType === 'female'){
       setParam1('Female')
       setSufLink('gender')
-    }else {
+    }else if(queryType === 'shoes'){
+      setParam1('shoes')
+      setSufLink('category')
+    }else if(queryType === 'clogs'){
+      setParam1('clogs')
+      setSufLink('category')
+    }
+    else {
       setParam1(queryType)
       setSufLink('brand')
     }
