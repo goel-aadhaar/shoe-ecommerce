@@ -16,10 +16,11 @@ const NewArrivalSection = () => {
     console.log("Fetching shoes data...");
     
     try {
-      const response = await axios.get("https://api-shoe-ecommerce.onrender.com/api/v1/products");
-      console.log("Fetched shoes data:", response);
-      console.log("Fetched shoes data:", response.data);
-      
+      const response = 
+        await axios.get("https://api-shoe-ecommerce.onrender.com/api/v1/products/filter/attribute",{
+          params: { attribute: "trending", limit: 9 }
+        });
+      console.log("Fetched shoes data inside trending section:", response?.data?.data);
       setShoes(response?.data?.data);
     } catch (error) {
       console.error("Error fetching shoes data:", error);
@@ -53,18 +54,10 @@ const NewArrivalSection = () => {
   }
 
   console.log("All shoes data:", data);
-  const newArrivalData = data.filter(product =>
-    product.attributes.includes("newArrival")
-  );
-
-  console.log(
-    "Filtered shoes data for category newArrival :", newArrivalData
-  );
+ 
+  const filteredData  = data.filter((item) => item.category.name === active);
   
-  const filteredData  = newArrivalData.filter((item) => item.category.name === active);
-  
-  console.log("Filtered shoes data after category filter:", filteredData);
-
+  console.log("Filtered shoes data after category filter:", filteredData.length);
 
   return (
     <div className="bg-white text-black">

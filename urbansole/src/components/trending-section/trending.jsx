@@ -15,8 +15,11 @@ const TrendingSection = () => {
     console.log("Fetching shoes data in trending...");
     
     try {
-      const response = await axios.get("https://api-shoe-ecommerce.onrender.com/api/v1/products");
-      setData(response?.data?.data);
+      const response = 
+        await axios.get("https://api-shoe-ecommerce.onrender.com/api/v1/products/filter/attribute",{
+          params: {attribute: "trending", limit: 9}
+        });
+        setData(response?.data?.data);
     } catch (error) {
       console.error("Error fetching shoes data in trending section:", error);
     }finally{
@@ -49,13 +52,9 @@ const TrendingSection = () => {
 
   console.log("All shoes data in trending:", data);
 
+  const filteredData  = data.filter((item) => item?.for === active);
 
-  const trendingData = data.filter(product =>
-    product.attributes.includes("trending")
-  );
-  const filteredData  = trendingData.filter((item) => item?.for === active);
-
-  console.log("Filtered data in trending section : " ,filteredData);
+  console.log("Filtered data in trending section : " ,filteredData.length);
   
 
   return (
