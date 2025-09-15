@@ -1,6 +1,5 @@
 
-import Footer from '../footer'
-import Navbar from '../Navbar'
+
 const ImageTextSection = ({ imageUrl, altText, heading, textContent, isReversed }) => {
     // Tailwind's flex-row-reverse utility for alternating layout
     const directionClass = isReversed ? 'md:flex-row-reverse' : 'md:flex-row';
@@ -45,14 +44,14 @@ function AboutUs() {
   ];
   return (
     <div className="bg-black min-h-screen text-gray-100 font-sans p-4 sm:p-8">
-        <Navbar/>
+
       {/* Main content container for the sections */}
       <main className='my-10'>
         {sections.map((section, index) => (
           <ImageTextSection key={index} {...section} />
         ))}
       </main>
-      <Footer/>
+
     </div>
   )
 }

@@ -1,6 +1,5 @@
 
-import Footer from '../footer'
-import Navbar from '../Navbar'
+
 
 const BrandsLogoPage = () => {
   const brands = [
@@ -23,7 +22,7 @@ const BrandsLogoPage = () => {
 
   return (
     <>
-    <Navbar/>
+
     <div className="flex flex-col items-center justify-center min-h-screen text-gray-100 bg-white p-8 my-10">
       {/* <h2 className="text-4xl font-extrabold text-center mb-8 tracking-wide text-transparent text-white">Brands</h2> */}
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 gap-3 max-w-6xl mx-auto my-2">
@@ -37,7 +36,7 @@ const BrandsLogoPage = () => {
         ))}
       </div>
     </div>
-    <Footer/>
+
     </>
   );
 };

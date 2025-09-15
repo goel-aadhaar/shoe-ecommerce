@@ -1,14 +1,11 @@
 
-import Footer from '../footer'
-import Navbar from '../Navbar'
-
 function ContactUs() {
   return (
     <>
-    <Navbar/>
+
     <div className="flex flex-col items-center justify-center min-h-screen text-black p-8 my-7">
     <div className="w-full max-w-4xl bg-black rounded-2xl shadow-xl p-8 md:p-12">
-      <h2 className="text-4xl font-extrabold text-center mb-8 tracking-wide text-transparent bg-clip-text bg-gradient-to-r text-white">Contact</h2>
+      <h2 className="text-4xl font-extrabold text-center mb-8 tracking-wide bg-clip-text bg-gradient-to-r text-white">Contact</h2>
       
       {/* Online Inquiries Section */}
       <div className="mb-8 text-white">
@@ -58,7 +55,7 @@ function ContactUs() {
       </div>
     </div>
   </div>
-  <Footer/>
+
   </>
     
   )

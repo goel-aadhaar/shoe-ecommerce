@@ -3,8 +3,7 @@ import axios from "axios";
 import ProductTable from "./ProductTable";
 import AddProductModal from "./AddProductModal";
 import UpdateProductModal from "./UpdateProductModal";
-import Navbar from "../Navbar";
-import Footer from "../footer";
+
 
 const dummyProducts = [
   {
@@ -219,7 +218,7 @@ const AdminPanelApp = () => {
 
   return (
     <>
-      <Navbar />
+
       <div className="flex mt-20 h-screen bg-gray-100 px-10 py-5 font-sans">
         <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} className="w-1/5" />
         <div className="w-4/5 flex flex-col pl-2">
@@ -248,7 +247,7 @@ const AdminPanelApp = () => {
           )}
         </div>
       </div>
-      <Footer/>
+
     </>
   );
 };
