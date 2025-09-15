@@ -1,9 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-import Navbar from "../Navbar";
-import Footer from "../footer";
-
 const Registration = () => {
   const [formData, setFormData] = useState({
     fullName: "",
@@ -60,7 +57,7 @@ const Registration = () => {
 
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-gray-100 to-white px-4 mt-5">
         <div className="flex flex-col md:flex-row bg-white rounded-xl shadow-xl overflow-hidden w-full max-w-5xl border border-gray-200">
           {/* Left Section - Offer + Shoes */}
@@ -142,7 +139,6 @@ const Registration = () => {
           </div>
         </div>
       </div>
-      <Footer />
     </>
   );
 };
