@@ -18,7 +18,7 @@ const NewArrivalSection = () => {
     try {
       const response = 
         await axios.get("https://api-shoe-ecommerce.onrender.com/api/v1/products/filter/attribute",{
-          params: { attribute: "trending", limit: 9 }
+          params: { attribute: "trending", limit: 16 }
         });
       console.log("Fetched shoes data inside trending section:", response?.data?.data);
       setShoes(response?.data?.data);
