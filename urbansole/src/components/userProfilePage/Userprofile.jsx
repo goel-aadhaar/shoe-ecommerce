@@ -32,7 +32,7 @@ const Section = ({ title, icon, children, sectionName, openSection, toggleSectio
 const ProfilePage = () => {
   const [openSection, setOpenSection] = useState(null);
   const [profile, setProfile] = useState(null);
-  const [isAdmin, setIsAdmin] = useState(true);
+  const [isAdmin, setIsAdmin] = useState(false);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
@@ -45,7 +45,6 @@ const ProfilePage = () => {
         });
         
         if (response?.status === 200 && response?.data?.data?.user) {
-          console.log(response?.data?.data);
           setProfile(response.data.data.user);
         } else {
           navigate('/login');
@@ -58,11 +57,13 @@ const ProfilePage = () => {
       }
     };
     fetchProfileData();
-  }, [navigate]);
+    setIsAdmin(profile?.role === 'admin')
+  }, [navigate, profile]);
 
   const toggleSection = (sectionName) => {
     setOpenSection(openSection === sectionName ? null : sectionName);
   };
+  
   
   const handleLogout = async () => {
     try {
