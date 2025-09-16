@@ -97,12 +97,12 @@ function GenderTabs({ active, setActive }) {
       <div className="flex mt-2 w-40">
         <div
           className={`h-1 w-1/2 transition-all duration-500 ${
-            active === "male" ? "bg-red-600" : "bg-gray-300"
+            active === "Male" ? "bg-red-600" : "bg-gray-300"
           }`}
         ></div>
         <div
           className={`h-1 w-1/2 transition-all duration-500 ${
-            active === "female" ? "bg-red-600" : "bg-gray-300"
+            active === "Female" ? "bg-red-600" : "bg-gray-300"
           }`}
         ></div>
       </div>
