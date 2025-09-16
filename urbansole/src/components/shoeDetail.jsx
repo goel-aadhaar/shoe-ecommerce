@@ -169,11 +169,11 @@ const ShoeDetail = () => {
     let relatedShoes = [shoe]
     const fetchRelatedShoe= async()=>{
         try{
-            await axios.post(
+            const response = await axios.get(
                 "https://api-shoe-ecommerce.onrender.com/api/v1/products/filter/related", 
-                { shoe?.for, shoe?.category.name, shoe?.price }
+                { gender : shoe?.for, category : shoe?.category.name, price : shoe?.price }
             );
-
+            relatedShoes = response?.data?.data;
         }catch (error){
             console.error("Item not added in cart :", error);
         }
