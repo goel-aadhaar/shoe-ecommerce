@@ -173,9 +173,11 @@ const ShoeDetail = () => {
                 "https://api-shoe-ecommerce.onrender.com/api/v1/products/filter/related", 
                 { gender : shoe?.for, category : shoe?.category.name, price : shoe?.price }
             );
+            console.log("related Shoes : ",response.data);
+            
             relatedShoes = response?.data?.data;
         }catch (error){
-            console.error("Item not added in cart :", error);
+            console.error("Erroe in fetching related Shoes:", error);
         }
     }
     fetchRelatedShoe();
