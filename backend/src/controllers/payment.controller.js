@@ -49,12 +49,6 @@ export const confirmPayment = asyncHandler(async (req, res) => {
             status: "paid",
         });
 
-        const userCart = await Cart.findOne({ userId: order.userId });
-
-        if (userCart) {
-            await CartItem.deleteMany({ cartId: userCart._id });
-            console.log(`Payment Done and Cart for user ${order.userId} cleared successfully.`);
-        }
     }
 
     res.status(200).json(
