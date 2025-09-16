@@ -13,7 +13,7 @@ dotenv.config();
 connectDB();
 
 const app = express();
-const alloowedOrigins = [
+const allowedOrigins = [
   "https://shoe-ecommerce-mu.vercel.app",
   "https://localhost:5137",
   "http://localhost:3000"
@@ -21,17 +21,15 @@ const alloowedOrigins = [
 
 app.use(
   cors({
-    // origin: ["https://shoe-ecommerce-mu.vercel.app","https://localhost:5137","http://localhost:3000"],
     origin: function(origin, callback){
-      // allow requests with no origin 
-      // (like mobile apps or curl requests) 
+
       if(!origin) return callback(null, true);
-      if(alloowedOrigins.indexOf(origin) === -1){
-        var msg = 'The CORS policy for this site does not allow access from the specified Origin.';
-        return callback(new Error(msg), false);
-      }else{
-        return callback(null, true);
+
+      if (!allowedOrigins.includes(origin)) {
+        return callback(new Error(`CORS blocked: ${origin}`), false);
       }
+
+      callback(null, true);
     },
     methods: "GET,POST,PUT,DELETE,PATCH",
     credentials: true,
