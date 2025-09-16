@@ -1,4 +1,4 @@
-import { Product, ProductImage, Review } from "../models/model-export.js";
+import { Product, ProductImage, Review, Category } from "../models/model-export.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 
@@ -79,30 +79,32 @@ export const getProductsByBrand = asyncHandler(async (req, res) => {
   );
 });
 
-
-export const getRelatedShoes = asyncHandler(async (req,res) => {
-  const {gender, category, price} = req.query;
-  console.log("request for related shoes");
+export const getRelatedShoes = asyncHandler(async (req, res) => {
+  const { gender, category, price } = req.query;
 
   const genderValue = gender || "Male";
   const pValue = price || 10000;
   const categoryName = category || "shoes";
 
 
-  const product = await Product.find({for : genderValue, price: { $gte: pValue-1000, $lte: pValue+1000 }})
-      .limit(6)
-      .populate({
-        path: "category",
-        match: { name: categoryName }, 
-      })
-      .populate("imageSet", "thumbnail hover"); 
-  
+  const categoryDoc = await Category.findOne({ name: categoryName });
+  if (!categoryDoc) {
+    return res.status(404).json(new ApiResponse(404, "Category not found", null));
+  }
+
+
+  const product = await Product.find({
+    for: genderValue,
+    price: { $gte: pValue - 1000, $lte: pValue + 1000 },
+    category: categoryDoc._id,
+  })
+    .limit(4)
+    .populate("imageSet", "thumbnail hover");
+
   res.status(200).json(
     new ApiResponse(200, "Shoes fetched successfully", product)
   );
-      
-})
-
+});
 export const getProductsByGender = asyncHandler(async (req, res) => {
   const { gender, limit } = req.query;
   console.log("Request for the get Product of gender:", gender);
@@ -126,7 +128,6 @@ export const getProductsByGender = asyncHandler(async (req, res) => {
 
 export const getProductsByCategory = asyncHandler(async (req, res) => {
   const { category, limit } = req.query;
-  console.log("Request for the get Product of category:", category);
 
   const categoryName = category || "shoes";
   const max = Number(limit) || 10;
@@ -137,12 +138,16 @@ export const getProductsByCategory = asyncHandler(async (req, res) => {
     );
   }
 
-  const products = await Product.find()
+  const categoryDoc = await Category.findOne({ name: categoryName });
+
+  if (!categoryDoc) {
+    return res.status(404).json(
+      new ApiResponse(404, `Category '${categoryName}' not found`, null)
+    );
+  }
+
+  const products = await Product.find({ category: categoryDoc._id })
     .limit(max)
-    .populate({
-      path : "category",
-      match : {name : categoryName}
-    })
     .populate({
       path: "imageSet",
       select: "thumbnail hover"
@@ -152,7 +157,6 @@ export const getProductsByCategory = asyncHandler(async (req, res) => {
     new ApiResponse(200, `Products in category '${categoryName}' fetched successfully`, products)
   );
 });
-
 
 
 
