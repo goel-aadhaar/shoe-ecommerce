@@ -84,12 +84,12 @@ export const getRelatedShoes = asyncHandler(async (req,res) => {
   const {gender, category, price} = req.query;
   console.log("request for related shoes");
 
-  const gValue = gender || "Male";
+  const genderValue = gender || "Male";
   const pValue = price || 10000;
   const categoryName = category || "shoes";
 
 
-  const product = await Product.find({for : genderValue, price: { $gte: minPrice, $lte: maxPrice }})
+  const product = await Product.find({for : genderValue, price: { $gte: pValue-1000, $lte: pValue+1000 }})
       .limit(6)
       .populate({
         path: "category",
