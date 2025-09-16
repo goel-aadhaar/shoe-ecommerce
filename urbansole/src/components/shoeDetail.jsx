@@ -167,6 +167,18 @@ const ShoeDetail = () => {
 
     // for now putting same data....
     let relatedShoes = [shoe]
+    const fetchRelatedShoe= async()=>{
+        try{
+            await axios.post(
+                "https://api-shoe-ecommerce.onrender.com/api/v1/products/filter/related", 
+                { shoe?.for, shoe?.category.name, shoe?.price }
+            );
+
+        }catch (error){
+            console.error("Item not added in cart :", error);
+        }
+    }
+    fetchRelatedShoe();
 
     return (
         <>
@@ -198,7 +210,7 @@ const ShoeDetail = () => {
                                 <h2 className="text-md font-bold uppercase text-gray-500 tracking-wider">{shoe?.brand}</h2>
                                 <h1 className="text-2xl font-bold mt-1 text-gray-900">{shoe?.name}</h1>
                                 <p className="text-gray-600 mt-1">{shoe?.color}</p>
-                                <p className="text-2xl font-semibold mt-4 text-gray-900">{shoe?.price}</p>
+                                <p className="text-2xl font-semibold mt-4 text-gray-900">₹ {shoe?.price}/-</p>
                                 
                                 <div className="mt-6">
                                     <div className="flex justify-between items-center">
