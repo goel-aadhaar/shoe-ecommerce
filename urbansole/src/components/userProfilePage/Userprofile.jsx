@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { User, Mail, Phone, ShoppingBag, Heart, Headphones, LogOut, ChevronDown, ChevronUp } from 'lucide-react';
+import { User, Mail, Phone, ShoppingBag, Heart, Headphones, LogOut, ChevronDown, ChevronUp, Shield } from 'lucide-react';
 import { useNavigate } from 'react-router';
 import { Link } from 'react-router';
 
