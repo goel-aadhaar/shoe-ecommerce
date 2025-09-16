@@ -127,8 +127,10 @@ export const getProductsByGender = asyncHandler(async (req, res) => {
 
 
 export const getProductsByCategory = asyncHandler(async (req, res) => {
-  const { category, limit } = req.query;
 
+  const { category, limit } = req.query;
+  console.log("request for :" , category , "brand shoes");
+  
   const categoryName = category || "shoes";
   const max = Number(limit) || 10;
 

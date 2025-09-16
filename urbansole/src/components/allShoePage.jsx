@@ -60,7 +60,7 @@ export default function AllShoePage() {
   const [error, setError] = useState(null);
   const [selectedFilters, setSelectedFilters] = useState({});
   const [sufLink, setSufLink] = useState('');
-  const [param1, setParam1]  = useState('trending');
+  const [param1, setParam1]  = useState({attribute : 'trending'});
   const [currentPage, setCurrentPage] = useState(1);
   const [queryType_, setqueryType] = useState('');
   const SHOES_PER_PAGE = 16;
@@ -80,27 +80,30 @@ export default function AllShoePage() {
   
  
   useEffect(() => {
+    console.log("querytype :" , queryType_);
+    
     if (queryType_.toLowerCase() === 'new-arrival') {
       setParam1({ attribute : 'newArrival'});
-      setSufLink('attribute')
+      setSufLink('attribute', limit : 18)
     } else if(queryType_.toLowerCase() === 'trending') {
-      setParam1({attribute :'trending'});
+      setParam1({attribute :'trending', limit : 18});
       setSufLink('attribute')
-    }else if(queryType_.toLowerCase() === 'male') {
-      setParam1({gender : 'Male'})
-      setSufLink('gender')
-    }else if(queryType_.toLowerCase() === 'female'){
-      setParam1({gender : 'Female'})
-      setSufLink('gender')
     }else if(queryType_.toLowerCase() === 'shoes'){
-      setParam1({category : 'shoes'})
+      setParam1({category : 'shoes', limit : 18})
       setSufLink('category')
     }else if(queryType_.toLowerCase() === 'clogs'){
-      setParam1({category : 'clogs'})
+      setParam1({category : 'clogs', limit : 18})
       setSufLink('category')
     }
+    else if(queryType_.toLowerCase() === 'male') {
+      setParam1({gender : 'Male', limit : 18})
+      setSufLink('gender')
+    }else if(queryType_.toLowerCase() === 'female'){
+      setParam1({gender : 'Female', limit : 18})
+      setSufLink('gender')
+    }
     else {
-      setParam1(queryType_)
+      setParam1({brand : queryType_.toLowerCase(), limit : 18})
       setSufLink('brand')
     }
   }, [queryType_]);
@@ -109,11 +112,12 @@ export default function AllShoePage() {
     const fetchShoes = async () => {
       try {
         console.log("cal from the all shoe page... ");
+        console.log();
         
         setLoading(true);
         const response = 
           await axios.get(`https://api-shoe-ecommerce.onrender.com/api/v1/products/filter/${sufLink}`,{
-            params: { param1, limit: 18 }
+            params: param1
         });
         setShoesData(response.data.data);
         setError(null);
