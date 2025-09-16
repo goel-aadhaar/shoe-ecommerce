@@ -21,12 +21,12 @@ const router = Router();
 // Products
 router.post("/", authMiddleware, adminMiddleware, createProduct);
 router.get("/", getProducts);
-router.get("/:id", getProductById);
 router.get("/filter/attribute", getProductsByAttribute);
 router.get("/filter/brand",  getProductsByBrand);
 router.get("/filter/gender", getProductsByGender);
 router.get("/filter/category", getProductsByCategory);
 router.get("/filter/related",  getRelatedShoes);
+router.get("/:id", getProductById);
 router.put("/:id", authMiddleware, adminMiddleware, updateProduct);
 router.delete("/:id", authMiddleware, adminMiddleware, deleteProduct);
 

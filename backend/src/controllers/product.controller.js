@@ -34,7 +34,7 @@ export const getProductById = asyncHandler(async (req, res) => {
 export const getProductsByAttribute = asyncHandler(async (req, res) => {
     
     const { attribute, limit } = req.query;
-    console.log("Request for the get Product of ", attribute);
+    console.log("Request for the get Product of attribute ", attribute);
     
     const attr = attribute || "trending";
     const max = Number(limit) || 10;
@@ -105,6 +105,7 @@ export const getRelatedShoes = asyncHandler(async (req, res) => {
     new ApiResponse(200, "Shoes fetched successfully", product)
   );
 });
+
 export const getProductsByGender = asyncHandler(async (req, res) => {
   const { gender, limit } = req.query;
   console.log("Request for the get Product of gender:", gender);
@@ -129,7 +130,7 @@ export const getProductsByGender = asyncHandler(async (req, res) => {
 export const getProductsByCategory = asyncHandler(async (req, res) => {
 
   const { category, limit } = req.query;
-  console.log("request for :" , category , "brand shoes");
+  console.log("request for :" , category , " shoes");
   
   const categoryName = category || "shoes";
   const max = Number(limit) || 10;
