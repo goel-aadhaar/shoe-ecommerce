@@ -24,7 +24,7 @@ const Checkout = () => {
                 const response = await axios.get(`${API_BASE_URL}/orders`,{setCredential : true});
                 setOrder(response.data.data);
                 const order_ = response.data.data
-                const total = order_[order_.length - 1];
+                const total = order_[order_.length - 1].totalAmount;
                 console.log("Inside Checkout: ", response.data.data);
                 console.log("Inside Checkout total Amount: ", total);
                 
