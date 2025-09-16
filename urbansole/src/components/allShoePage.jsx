@@ -81,22 +81,22 @@ export default function AllShoePage() {
  
   useEffect(() => {
     if (queryType_.toLowerCase() === 'new-arrival') {
-      setParam1('newArrival');
+      setParam1({ attribute : 'newArrival'});
       setSufLink('attribute')
     } else if(queryType_.toLowerCase() === 'trending') {
-      setParam1('trending');
+      setParam1({attribute :'trending'});
       setSufLink('attribute')
     }else if(queryType_.toLowerCase() === 'male') {
-      setParam1('Male')
+      setParam1({gender : 'Male'})
       setSufLink('gender')
     }else if(queryType_.toLowerCase() === 'female'){
-      setParam1('Female')
+      setParam1({gender : 'Female'})
       setSufLink('gender')
     }else if(queryType_.toLowerCase() === 'shoes'){
-      setParam1('shoes')
+      setParam1({category : 'shoes'})
       setSufLink('category')
     }else if(queryType_.toLowerCase() === 'clogs'){
-      setParam1('clogs')
+      setParam1({category : 'clogs'})
       setSufLink('category')
     }
     else {
