@@ -71,6 +71,9 @@ export const removeFromCart = asyncHandler(async (req, res) => {
 export const clearCart = asyncHandler(async (req, res) => {
     console.log("Request for clearCart for : ", req.user);
     console.log("Request for clearCart for the user with id : ", req.user.id);
+    if(!req.user){
+        return res.status(401).json(new ApiResponse(401 , "No user found", null));
+    }
 
     const cart = await Cart.findOne({ userId: req.user.id });
     if (!cart) {
