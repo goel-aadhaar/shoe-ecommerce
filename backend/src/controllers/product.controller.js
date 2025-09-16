@@ -80,6 +80,29 @@ export const getProductsByBrand = asyncHandler(async (req, res) => {
 });
 
 
+export const getRelatedShoes = asyncHandler(async (req,res) => {
+  const {gender, category, price} = req.query;
+  console.log("request for related shoes");
+
+  const gValue = gender || "Male";
+  const pValue = price || 10000;
+  const categoryName = category || "shoes";
+
+
+  const product = await Product.find({for : genderValue, price: { $gte: minPrice, $lte: maxPrice }})
+      .limit(6)
+      .populate({
+        path: "category",
+        match: { name: categoryName }, 
+      })
+      .populate("imageSet", "thumbnail hover"); 
+  
+  res.status(200).json(
+    new ApiResponse(200, "Shoes fetched successfully", product)
+  );
+      
+})
+
 export const getProductsByGender = asyncHandler(async (req, res) => {
   const { gender, limit } = req.query;
   console.log("Request for the get Product of gender:", gender);
@@ -114,9 +137,12 @@ export const getProductsByCategory = asyncHandler(async (req, res) => {
     );
   }
 
-  const products = await Product.find({ "category.name": categoryName })
+  const products = await Product.find()
     .limit(max)
-    .populate("category")
+    .populate({
+      path : "category",
+      match : {name : categoryName}
+    })
     .populate({
       path: "imageSet",
       select: "thumbnail hover"
