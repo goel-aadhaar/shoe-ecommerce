@@ -2,6 +2,7 @@ import { ApiResponse } from "../utils/ApiResponse.js";
 
 export const errorMiddleware = (err, req, res, next) => {
     console.error("❌ Error:", err);
+    console.error("❌ Error Stack:", err.stack);
 
     const statusCode = err.statusCode || 500;
     const allowedOrigins = [
