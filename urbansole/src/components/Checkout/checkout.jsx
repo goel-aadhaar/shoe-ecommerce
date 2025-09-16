@@ -36,6 +36,10 @@ const Checkout = () => {
         fetchOrder();
     }, [orderId]);
 
+
+
+
+
     const handlePayment = async (event) => {
         event.preventDefault();
 
@@ -77,8 +81,9 @@ const Checkout = () => {
                     status: 'success',
                 });
                 alert('Payment successful!');
+                await axios.delete(`${API_BASE_URL}/cart/clear`, {withCredentials : true})
+                console.log('cart clear Succesfull');
                 navigate('/');
-                // ab cart khali krna rhega........
             }
         } catch (err) {
             console.error(err);
