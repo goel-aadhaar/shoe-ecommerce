@@ -81,7 +81,7 @@ const Checkout = () => {
                     status: 'success',
                 });
                 alert('Payment successful!');
-                await axios.delete(`${API_BASE_URL}/cart/clear`, {withCredentials : true})
+                await axios.delete(`${API_BASE_URL}/cart/userCart/clear`, {withCredentials :true})
                 console.log('cart clear Succesfull');
                 navigate('/');
             }
