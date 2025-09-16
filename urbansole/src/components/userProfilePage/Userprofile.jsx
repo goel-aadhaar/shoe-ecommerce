@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { User, Mail, Phone, ShoppingBag, Heart, Headphones, LogOut, ChevronDown, ChevronUp } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
+import { Link } from 'react-router';
 
 // A more attractive, reusable section component with a subtle theme
 const Section = ({ title, icon, children, sectionName, openSection, toggleSection }) => (
