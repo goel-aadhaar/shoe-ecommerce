@@ -21,8 +21,9 @@ const Checkout = () => {
             try {
                 // In a real app, you would fetch the order details by orderId
             
-                // const response = await axios.get(`${API_BASE_URL}/orders/${orderId}`);
-                // setOrder(response.data.data);
+                const response = await axios.get(`${API_BASE_URL}/orders`,{setCredential : true});
+                setOrder(response.data.data);
+                console.log("Inside Checkout: ", response.data.data);
                 
                 // Mocking order details for demonstration
                 setOrder({ _id: orderId, totalAmount: 188.40 });
