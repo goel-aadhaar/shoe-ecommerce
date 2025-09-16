@@ -15,7 +15,7 @@ connectDB();
 const app = express();
 const allowedOrigins = [
   "https://shoe-ecommerce-mu.vercel.app",
-  "https://urbansole-pi.vercel.app/",
+  "https://urbansole-pi.vercel.app",
   "https://localhost:5137",
   "http://localhost:3000"
 ];
