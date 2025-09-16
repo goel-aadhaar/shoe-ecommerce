@@ -47,6 +47,7 @@ const ProfilePage = () => {
         
         if (response?.status === 200 && response?.data?.data?.user) {
           setProfile(response.data.data.user);
+          setIsAdmin(response?.data?.data?.user?.role === 'admin')
         } else {
           navigate('/login');
         }
@@ -58,9 +59,12 @@ const ProfilePage = () => {
       }
     };
     fetchProfileData();
-    setIsAdmin(profile?.role === 'admin')
+    
   }, [navigate]);
 
+  // useEffect(()=>{
+  //   setIsAdmin(profile?.role === 'admin')
+  // },[profile])
 
   useEffect(() => {
 
@@ -69,9 +73,7 @@ const ProfilePage = () => {
       try {
         const response = await axios.get('https://api-shoe-ecommerce.onrender.com/api/v1/orders', {
           withCredentials: true 
-        });
-        // console.log();
-        
+        });        
         setOrderHistory(response?.data?.data);
       } catch (error) {
         console.error('Failed to fetch profile data:', error);
