@@ -7,7 +7,7 @@ const Navbar = ({ onProfileClick }) => {
   const navLinks = [
     { navName: "New Arrival", to: '/collections/new-arrival' },
     { navName: "Trending", to: '/collections/trending' },
-    { navName: "Shoes", to: '/collections/shoe' },
+    { navName: "Shoes", to: '/collections/shoes' },
     { navName: "Clogs", to: '/collections/clogs' },
     { navName: "Brands", to: '/brandsLogo' },
   ];
