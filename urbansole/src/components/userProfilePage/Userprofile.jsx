@@ -67,9 +67,11 @@ const ProfilePage = () => {
     const fetchOrderHistory = async () => {
       setLoading(true);
       try {
-        const response = await axios.get('https://api-shoe-ecommerce.onrender.com/api/orders', {
+        const response = await axios.get('https://api-shoe-ecommerce.onrender.com/api/v1/orders', {
           withCredentials: true 
         });
+        // console.log();
+        
         setOrderHistory(response?.data?.data);
       } catch (error) {
         console.error('Failed to fetch profile data:', error);
@@ -78,9 +80,10 @@ const ProfilePage = () => {
       }
     };
     fetchOrderHistory();
-  }, [profile]);
-
-  console.log("Order history ", orderHistory);
+  }, []);
+  console.log("order history : " ,orderHistory);
+  
+  
   
 
   const toggleSection = (sectionName) => {
