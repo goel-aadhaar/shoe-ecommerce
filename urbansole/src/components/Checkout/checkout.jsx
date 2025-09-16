@@ -23,10 +23,13 @@ const Checkout = () => {
             
                 const response = await axios.get(`${API_BASE_URL}/orders`,{setCredential : true});
                 setOrder(response.data.data);
+                const order_ = response.data.data
+                const total = order_[order_.length - 1];
                 console.log("Inside Checkout: ", response.data.data);
+                console.log("Inside Checkout total Amount: ", total);
                 
                 // Mocking order details for demonstration
-                setOrder({ _id: orderId, totalAmount: 188.40 });
+                setOrder({ _id: orderId, totalAmount: total });
             } catch (err) {
                 setError('Failed to load order details.');
                 console.error(err);
@@ -98,7 +101,7 @@ const Checkout = () => {
     if (error) return <div className="text-center text-red-500 mt-16">{error}</div>;
 
     return (
-        <div className="bg-gray-100 min-h-screen p-8 mt-12 text-black">
+        <div className="bg-gray-100 min-h-screen items-center p-8 mt-12 text-black">
             <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-lg p-8">
                 <h1 className="text-3xl font-bold mb-6 text-black">Checkout</h1>
                 <div className="flex flex-col lg:flex-row gap-8">
