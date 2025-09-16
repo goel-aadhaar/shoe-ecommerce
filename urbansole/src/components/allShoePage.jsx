@@ -59,15 +59,13 @@ export default function AllShoePage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [selectedFilters, setSelectedFilters] = useState({});
-  const [sufLink, setSufLink] = useState('');
-  const [param1, setParam1]  = useState({attribute : 'trending'});
   const [currentPage, setCurrentPage] = useState(1);
   const [queryType_, setqueryType] = useState('');
   const SHOES_PER_PAGE = 16;
 
-  // Get the queryType_ from the URL params
+
   
-  const { queryType } = useParams();  // call hook at top level
+  const { queryType } = useParams(); 
 
   useEffect(() => {
     if (queryType) {
@@ -79,59 +77,64 @@ export default function AllShoePage() {
   console.log(queryType_);
   
  
-  useEffect(() => {
-    console.log("querytype :" , queryType_);
-    
-    if (queryType_.toLowerCase() === 'new-arrival') {
-      setParam1({ attribute : 'newArrival'});
-      setSufLink('attribute', limit : 18)
-    } else if(queryType_.toLowerCase() === 'trending') {
-      setParam1({attribute :'trending', limit : 18});
-      setSufLink('attribute')
-    }else if(queryType_.toLowerCase() === 'shoes'){
-      setParam1({category : 'shoes', limit : 18})
-      setSufLink('category')
-    }else if(queryType_.toLowerCase() === 'clogs'){
-      setParam1({category : 'clogs', limit : 18})
-      setSufLink('category')
-    }
-    else if(queryType_.toLowerCase() === 'male') {
-      setParam1({gender : 'Male', limit : 18})
-      setSufLink('gender')
-    }else if(queryType_.toLowerCase() === 'female'){
-      setParam1({gender : 'Female', limit : 18})
-      setSufLink('gender')
-    }
-    else {
-      setParam1({brand : queryType_.toLowerCase(), limit : 18})
-      setSufLink('brand')
-    }
-  }, [queryType_]);
+ useEffect(() => {
+  if (!queryType_) return;
 
-  useEffect(() => {
-    const fetchShoes = async () => {
-      try {
-        console.log("cal from the all shoe page... ");
-        console.log();
-        
-        setLoading(true);
-        const response = 
-          await axios.get(`https://api-shoe-ecommerce.onrender.com/api/v1/products/filter/${sufLink}`,{
-            params: param1
-        });
-        setShoesData(response.data.data);
-        setError(null);
-      } catch (err) {
+  const fetchShoes = async () => {
+    try {
+      setLoading(true);
 
-         console.error("Error fetching data:", err);
-        setError("Failed to fetch products. Please try again later.");
-      } finally {
-        setLoading(false);
+      let params = {};
+      let suffix = "";
+
+      switch (queryType_.toLowerCase()) {
+        case 'new-arrival':
+          params = { attribute: 'newArrival', limit: 18 };
+          suffix = 'attribute';
+          break;
+        case 'trending':
+          params = { attribute: 'trending', limit: 18 };
+          suffix = 'attribute';
+          break;
+        case 'shoes':
+          params = { category: 'shoes', limit: 18 };
+          suffix = 'category';
+          break;
+        case 'clogs':
+          params = { category: 'clogs', limit: 18 };
+          suffix = 'category';
+          break;
+        case 'male':
+          params = { gender: 'Male', limit: 18 };
+          suffix = 'gender';
+          break;
+        case 'female':
+          params = { gender: 'Female', limit: 18 };
+          suffix = 'gender';
+          break;
+        default:
+          params = { brand: queryType_.toLowerCase(), limit: 18 };
+          suffix = 'brand';
+          break;
       }
-    };
 
-    fetchShoes();
-  }, [param1,sufLink]);
+      const response = await axios.get(
+        `https://api-shoe-ecommerce.onrender.com/api/v1/products/filter/${suffix}`,
+        { params }
+      );
+
+      setShoesData(response.data.data);
+      setError(null);
+    } catch (err) {
+      console.error("Error fetching data:", err);
+      setError("Failed to fetch products. Please try again later.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  fetchShoes();
+}, [queryType_]);
 
   if (loading || shoesData.length < 4) {
     const Arr = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
@@ -139,7 +142,7 @@ export default function AllShoePage() {
       <>
         <div className="w-full mx-auto px-24 py-12 bg-white">
             <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-x-5 gap-y-7">
-                {Arr.map((index) => (
+                {Arr.map((_, index) => (
                   <div Key={index}>
                     <ShimmerShoeCard/>
                   </div>
