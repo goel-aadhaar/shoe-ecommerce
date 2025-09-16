@@ -88,8 +88,17 @@ const CartPage = () => {
         }
     };
 
+    const calculateSubtotal = () => {
+      return cartItems.reduce((acc, item) => acc + item?.productId?.price * item?.quantity, 0);
+    };
+
     const handleCheckout = async () => {
+      if(calculateSubtotal()  <= 99){
+        alert(`Please Add item to Proceed...`);
+        return;
+      }
       try {
+        setLoading(true);
         const items = cartItems.map(item => ({
           productId: item?.productId?._id,
           quantity: item?.quantity,
@@ -102,11 +111,10 @@ const CartPage = () => {
           items,
           totalAmount: total.toFixed(2),
         });
-
+        setLoading(false);
         const newOrder = response.data.data.order;
-        console.log("Order created successfully:", newOrder);
         
-        // Redirect to the new checkout page with the order ID
+        
         navigate(`/checkout/${newOrder._id}`);
         
       } catch (err) {
@@ -116,12 +124,10 @@ const CartPage = () => {
     };
 
 
-  const calculateSubtotal = () => {
-    return cartItems.reduce((acc, item) => acc + item?.productId?.price * item?.quantity, 0);
-  };
+ 
 
   const subtotal = calculateSubtotal();
-  const shipping = 50;
+  const shipping = 99;
   const tax = subtotal * 0.08;
   const total = subtotal + shipping + tax;
 
@@ -216,7 +222,7 @@ const CartPage = () => {
                 <span>TOTAL</span>
                 <span className="flex items-center space-x-2">
                   <span>₹{total.toFixed(2) || 0}</span>
-                 
+    
                 </span>
               </div>
             </div>
@@ -224,7 +230,7 @@ const CartPage = () => {
               <button 
                 onClick={handleCheckout}
                 className="mt-6 w-full bg-black text-white py-3 rounded-lg text-lg font-semibold hover:bg-gray-800 transition-colors">
-                CHECKOUT
+                { loading ? 'CHECKING OUT...' : 'CHECKOUT'}
               </button>
             
 
