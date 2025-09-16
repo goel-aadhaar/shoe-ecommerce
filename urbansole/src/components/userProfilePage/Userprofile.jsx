@@ -59,7 +59,7 @@ const ProfilePage = () => {
     };
     fetchProfileData();
     setIsAdmin(profile?.role === 'admin')
-  }, [navigate, profile]);
+  }, [navigate]);
 
 
   useEffect(() => {
@@ -81,7 +81,9 @@ const ProfilePage = () => {
     };
     fetchOrderHistory();
   }, []);
-  console.log("order history : " ,orderHistory);
+  useEffect(() => {
+    console.log("order history : " , orderHistory);
+  }, [orderHistory]);
   
   
   
