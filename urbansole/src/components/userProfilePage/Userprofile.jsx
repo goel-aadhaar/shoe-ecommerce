@@ -31,6 +31,7 @@ const Section = ({ title, icon, children, sectionName, openSection, toggleSectio
 const ProfilePage = () => {
   const [openSection, setOpenSection] = useState(null);
   const [profile, setProfile] = useState(null);
+  const [isAdmin, setIsAdmin] = useState(true);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
@@ -39,17 +40,16 @@ const ProfilePage = () => {
     const fetchProfileData = async () => {
       try {
         const response = await axios.get('https://api-shoe-ecommerce.onrender.com/api/v1/users/profile', {
-          withCredentials: true // Crucial to send the cookies
+          withCredentials: true 
         });
         
         if (response?.status === 200 && response?.data?.data?.user) {
+          console.log(response?.data?.data);
           setProfile(response.data.data.user);
         } else {
-          // If the backend doesn't return profile data, it means the user is not authenticated
           navigate('/login');
         }
       } catch (error) {
-        // A 401 or 403 error means the user is not authenticated
         console.error('Failed to fetch profile data:', error);
         navigate('/login');
       } finally {
@@ -83,12 +83,12 @@ const ProfilePage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 p-6 font-sans flex items-center justify-center">
+    <div className="min-h-screen bg-gray-50 mt-10 p-6 font-sans flex items-center justify-center">
       <div className="w-full max-w-xl mx-auto">
         {/* Profile Card Section */}
         <div className="bg-white p-8 my-4 rounded-3xl shadow-xl flex flex-col items-center border border-gray-100">
           <div className="relative w-28 h-28 rounded-full overflow-hidden mb-4 border-4 border-gray-200 shadow-md">
-            {/* CDN link for a placeholder profile picture */}
+
             <img 
               src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=1780&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
               alt="Profile"
@@ -124,6 +124,19 @@ const ProfilePage = () => {
             For any queries or assistance, please contact our support team. We're here to help!
           </p>
         </Section>
+
+        {isAdmin && (
+          <Link
+            key ={'admin_panel'}
+            to = {'/admin'}
+          >
+            <button
+              className="w-full bg-blue-600 text-white py-4 rounded-full font-bold text-lg mt-8 flex items-center justify-center space-x-2 shadow-lg hover:bg-blue-700 transition-colors duration-300 transform hover:scale-[1.01]">
+              <Shield size={20} className="text-white" />
+              <span>Admin Control Panel</span>
+            </button>
+          </Link>
+        )}
 
         {/* Logout Button */}
         <button 
