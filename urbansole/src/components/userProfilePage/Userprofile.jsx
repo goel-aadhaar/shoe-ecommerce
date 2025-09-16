@@ -34,6 +34,7 @@ const ProfilePage = () => {
   const [profile, setProfile] = useState(null);
   const [isAdmin, setIsAdmin] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [orderHistory, setOrderHistory] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -59,6 +60,28 @@ const ProfilePage = () => {
     fetchProfileData();
     setIsAdmin(profile?.role === 'admin')
   }, [navigate, profile]);
+
+
+  useEffect(() => {
+
+    const fetchOrderHistory = async () => {
+      setLoading(true);
+      try {
+        const response = await axios.get('https://api-shoe-ecommerce.onrender.com/api/orders', {
+          withCredentials: true 
+        });
+        setOrderHistory(response?.data?.data);
+      } catch (error) {
+        console.error('Failed to fetch profile data:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchOrderHistory();
+  }, [profile]);
+
+  console.log("Order history ", orderHistory);
+  
 
   const toggleSection = (sectionName) => {
     setOpenSection(openSection === sectionName ? null : sectionName);
@@ -114,6 +137,7 @@ const ProfilePage = () => {
 
         {/* Accordion Sections */}
         <Section title="My Orders" icon={<ShoppingBag className='text-gray-600' size={24} />} sectionName="orders" openSection={openSection} toggleSection={toggleSection}>
+          
           <p className="text-gray-500 text-sm">You haven't placed any orders yet. Start shopping now!</p>
         </Section>
 
