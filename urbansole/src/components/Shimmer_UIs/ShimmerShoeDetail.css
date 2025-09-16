@@ -1,0 +1,135 @@
+/* AdidasProductShimmer.css */
+
+/* Keyframes for the elegant shimmer animation */
+@keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+/* --- Main Layout --- */
+.shimmer-container {
+    padding: 6rem;
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
+.shimmer-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+@media (min-width: 1024px) {
+    .shimmer-layout {
+        flex-direction: row;
+    }
+}
+
+/* --- Image Section --- */
+.shimmer-image-section {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    width: 100%;
+}
+
+@media (min-width: 1024px) {
+    .shimmer-image-section {
+        grid-template-columns: repeat(2, 1fr);
+        width: 50%;
+    }
+}
+
+.shimmer-image-box {
+    background-color: #f5f5f5; /* Light, soft gray */
+    height: 250px;
+    border-radius: 8px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* --- Details Section --- */
+.shimmer-details-section {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    width: 100%;
+}
+
+@media (min-width: 1024px) {
+    .shimmer-details-section {
+        width: 50%;
+    }
+}
+
+/* Base styles for all text lines */
+.shimmer-text-line {
+    background-color: #e0e0e0; /* Slightly darker gray */
+    height: 1.25rem;
+    border-radius: 4px;
+    position: relative;
+    overflow: hidden;
+}
+
+.brand-name { width: 40%; }
+.product-title { width: 70%; height: 1.5rem; }
+.price { width: 25%; }
+.size-label { width: 30%; }
+
+/* --- Size Options --- */
+.shimmer-size-options {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.shimmer-size-box {
+    background-color: #e0e0e0;
+    height: 2.5rem;
+    width: 3rem;
+    border-radius: 4px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* --- Button and other elements --- */
+.shimmer-add-to-cart-btn {
+    background-color: #1a1a1a; /* Dark background to mimic the button */
+    height: 3.5rem;
+    width: 100%;
+    border-radius: 4px;
+    position: relative;
+    overflow: hidden;
+}
+
+.shimmer-delivery-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.delivery-label { width: 50%; }
+.delivery-text { width: 80%; }
+
+.shimmer-section-toggle {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.toggle-text { width: 60%; }
+
+/* --- The Shimmering Gradient Effect --- */
+.shimmer-gradient {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        to right,
+        rgba(248, 244, 244, 0) 0%,
+        rgba(255, 255, 255, 0.4) 50%,
+        rgba(192, 190, 190, 0) 100%
+    );
+    animation: shimmer 1.5s infinite;
+}

@@ -1,50 +1,57 @@
-import React from "react";
+// AdidasProductShimmer.jsx
+
+import React from 'react';
+import './ShimmerShoeDetail.css';
 
 const ShimmerShoeDetail = () => {
-  return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-6 animate-pulse">
-      {/* Left side - product images */}
-      <div className="grid grid-cols-2 gap-4">
-        <div className="bg-gray-200 rounded-xl h-72"></div>
-        <div className="bg-gray-200 rounded-xl h-72"></div>
-        <div className="bg-gray-200 rounded-xl h-72"></div>
-        <div className="bg-gray-200 rounded-xl h-72"></div>
-      </div>
+    return (
+        <div className="shimmer-container bg-white mt-10">
+            <div className="shimmer-layout">
+                {/* Left side: Image Grid */}
+                <div className="shimmer-image-section">
+                    <div className="shimmer-image-box">
+                        <div className="shimmer-gradient"></div>
+                    </div>
+                    <div className="shimmer-image-box">
+                        <div className="shimmer-gradient"></div>
+                    </div>
+                    <div className="shimmer-image-box">
+                        <div className="shimmer-gradient"></div>
+                    </div>
+                    <div className="shimmer-image-box">
+                        <div className="shimmer-gradient"></div>
+                    </div>
+                </div>
 
-      {/* Right side - product details */}
-      <div className="flex flex-col gap-4">
-        {/* Brand & Name */}
-        <div className="h-6 bg-gray-200 rounded w-40"></div>
-        <div className="h-8 bg-gray-200 rounded w-72"></div>
-        <div className="h-4 bg-gray-200 rounded w-52"></div>
-
-        {/* Price */}
-        <div className="h-6 bg-gray-200 rounded w-24"></div>
-
-        {/* Sizes */}
-        <div className="flex gap-2">
-          {[1, 2, 3, 4, 5].map((i) => (
-            <div key={i} className="h-10 w-10 bg-gray-200 rounded"></div>
-          ))}
+                {/* Right side: Details Section */}
+                <div className="shimmer-details-section">
+                    <div className="shimmer-text-line brand-name"></div>
+                    <div className="shimmer-text-line product-title"></div>
+                    <div className="shimmer-text-line price"></div>
+                    <div className="shimmer-text-line size-label"></div>
+                    <div className="shimmer-size-options">
+                        <div className="shimmer-size-box"></div>
+                        <div className="shimmer-size-box"></div>
+                        <div className="shimmer-size-box"></div>
+                        <div className="shimmer-size-box"></div>
+                        <div className="shimmer-size-box"></div>
+                        <div className="shimmer-size-box"></div>
+                    </div>
+                    
+                    <div className="shimmer-add-to-cart-btn"></div>
+                    
+                    <div className="shimmer-delivery-info">
+                        <div className="shimmer-text-line delivery-label"></div>
+                        <div className="shimmer-text-line delivery-text"></div>
+                    </div>
+                    
+                    <div className="shimmer-section-toggle">
+                        <div className="shimmer-text-line toggle-text"></div>
+                    </div>
+                </div>
+            </div>
         </div>
-
-        {/* Add to Cart button */}
-        <div className="h-12 bg-gray-300 rounded w-full"></div>
-
-        {/* Delivery Info */}
-        <div className="h-4 bg-gray-200 rounded w-48"></div>
-        <div className="h-4 bg-gray-200 rounded w-40"></div>
-
-        {/* About Product */}
-        <div className="h-5 bg-gray-200 rounded w-32"></div>
-        <div className="space-y-2">
-          <div className="h-3 bg-gray-200 rounded w-full"></div>
-          <div className="h-3 bg-gray-200 rounded w-5/6"></div>
-          <div className="h-3 bg-gray-200 rounded w-4/6"></div>
-        </div>
-      </div>
-    </div>
-  );
+    );
 };
 
 export default ShimmerShoeDetail;
