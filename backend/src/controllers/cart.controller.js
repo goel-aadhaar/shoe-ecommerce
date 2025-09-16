@@ -69,7 +69,8 @@ export const removeFromCart = asyncHandler(async (req, res) => {
 });
 
 export const clearCart = asyncHandler(async (req, res) => {
-    console.log("Request for clearCart");
+    console.log("Request for clearCart for : ", req.user);
+    console.log("Request for clearCart for the user with id : ", req.user.id);
 
     const cart = await Cart.findOne({ userId: req.user.id });
     if (!cart) {
