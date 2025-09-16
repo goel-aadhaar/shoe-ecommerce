@@ -4,6 +4,7 @@ import { Route } from 'react-router';
 import { Link, useParams } from 'react-router-dom';
 // import ShimmerShoeDetail from './Shimmer_UIs/shoe_detail_shimmerui';
 import { Shoe_Card } from './shoe_card';
+import ShimmerShoeDetail from './Shimmer_UIs/shoeDetailShimmer';
 import { useNavigate } from 'react-router';
 
 const CollapsibleItem = ({ title, isOpen, onClick, children, titleClassName }) => {
@@ -56,6 +57,7 @@ const ShoeDetail = () => {
     const [openSections, setOpenSections] = useState({});
     const [openFaqIndex, setOpenFaqIndex] = useState(null);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [relatedShoes, setRelatedShoes] = useState([])
     const [loading, setLoading] = useState(true);
     const [shoe, setShoe] = useState({
         name : '',
@@ -94,6 +96,7 @@ const ShoeDetail = () => {
             try {
                 const response = await axios.get(`https://api-shoe-ecommerce.onrender.com/api/v1/products/${id}`);
                 setShoe(response?.data?.data);
+                setRelatedShoes(response?.data?.data)
             }catch (error) {
                 console.error("Error fetching shoes data in shoe detail section:", error);
             }finally{
@@ -108,11 +111,33 @@ const ShoeDetail = () => {
         }
     }, [id]);
 
+    useEffect(() => {
+    const fetchRelatedShoe = async () => {
+        try {
+        const response = await axios.get(
+            "https://api-shoe-ecommerce.onrender.com/api/v1/products/filter/related",
+            {
+            params: {
+                gender: shoe?.for,
+                category: shoe?.category?.name,
+                price: shoe?.price,
+            },
+            }
+        );
+        console.log("related Shoes : ", response.data);
+        setRelatedShoes(response?.data?.data || []);
+        } catch (error) {
+        console.error("Error in fetching related Shoes:", error);
+        }
+    };
+
+    if (shoe?._id) fetchRelatedShoe();
+    }, [shoe, id]);
 
 
     if(loading){
         return(
-            <p>Loading Shoe detail page....</p>
+            <ShimmerShoeDetail/>
         );
     }
     
@@ -166,21 +191,9 @@ const ShoeDetail = () => {
     console.log("All images in shoe deatil : ", images);
 
     // for now putting same data....
-    let relatedShoes = [shoe]
-    const fetchRelatedShoe= async()=>{
-        try{
-            const response = await axios.get(
-                "https://api-shoe-ecommerce.onrender.com/api/v1/products/filter/related", 
-                { gender : shoe?.for, category : shoe?.category.name, price : shoe?.price }
-            );
-            console.log("related Shoes : ",response.data);
-            
-            relatedShoes = response?.data?.data;
-        }catch (error){
-            console.error("Erroe in fetching related Shoes:", error);
-        }
-    }
-    fetchRelatedShoe();
+    
+
+
 
     return (
         <>
