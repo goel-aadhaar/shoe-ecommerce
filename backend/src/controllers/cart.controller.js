@@ -67,3 +67,26 @@ export const removeFromCart = asyncHandler(async (req, res) => {
         )
     )
 });
+
+export const clearCart = asyncHandler(async (req, res) => {
+    console.log("Request for clearCart");
+
+    const cart = await Cart.findOne({ userId: req.user.id });
+    if (!cart) {
+        return res.status(404).json(
+            new ApiResponse(404, "Cart not found", null)
+        );
+    }
+
+    await CartItem.deleteMany({ cartId: cart._id });
+
+    res.status(200).json(
+        new ApiResponse(
+            200,
+            "Cart cleared successfully",
+            { cartId: cart._id }
+        )
+    );
+});
+
+
