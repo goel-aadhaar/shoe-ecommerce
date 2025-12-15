@@ -24,7 +24,7 @@ const Shoe_Card = ({ shoes }) => {
 
     const [currentImg, setCurrentImg] = useState(thumbnailImg);
 
-    const getOptimizedImage = (url, width = 268, height = 268) => {
+    const getOptimizedImage = (url, width = 268*2, height = 268*2) => {
       if (!url.includes("res.cloudinary.com")) return url;
       return url.replace(
         "/upload/",
@@ -42,8 +42,8 @@ const Shoe_Card = ({ shoes }) => {
       <>
         <div 
             className="overflow-hidden shadow-md hover:shadow-lg transition border border-slate-200 cursor-pointer"
-            onMouseEnter={() => hoverImg && setCurrentImg(hoverImg)}
-            onMouseLeave={() => setCurrentImg(thumbnailImg)}
+            onMouseEnter={() => hoverImg && setCurrentImg(getOptimizedImage(hoverImg))}
+            onMouseLeave={() => setCurrentImg(getOptimizedImage(thumbnailImg))}
         >
             <img 
                 src={getOptimizedImage(currentImg)} 
