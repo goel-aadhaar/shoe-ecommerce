@@ -4,6 +4,11 @@ import { useState } from 'react';
 import { createPortal } from "react-dom";
 import { forwardRef, useImperativeHandle, useRef } from "react";
 
+
+
+
+
+
 const Shoe_Card = ({ shoes }) => {
 
     const modalRef = useRef();
@@ -19,6 +24,14 @@ const Shoe_Card = ({ shoes }) => {
 
     const [currentImg, setCurrentImg] = useState(thumbnailImg);
 
+    const getOptimizedImage = (url, width = 268, height = 268) => {
+      if (!url.includes("res.cloudinary.com")) return url;
+      return url.replace(
+        "/upload/",
+        `/upload/f_auto,q_auto,w_${width},h_${height},c_fill/`
+      );
+    };
+
 
     const handleAddToCartClick = (e) => {
       e.stopPropagation();
@@ -33,7 +46,7 @@ const Shoe_Card = ({ shoes }) => {
             onMouseLeave={() => setCurrentImg(thumbnailImg)}
         >
             <img 
-                src={currentImg} 
+                src={getOptimizedImage(currentImg)} 
                 alt={`${brand} shoe`} 
                 className="aspect-square w-full object-cover bg-gray-100" 
             />
@@ -43,8 +56,8 @@ const Shoe_Card = ({ shoes }) => {
                     <span className="font-semibold">{brand}</span>
                     {/* 4. The button now uses the new handler */}
                     <button aria-label="Add to cart"
-                     onClick={handleAddToCartClick}
-                     >
+                    onClick={handleAddToCartClick}
+                    >
                         <BsPlusSquareFill size={20}/>
                     </button>
                 </div>
@@ -58,7 +71,7 @@ const Shoe_Card = ({ shoes }) => {
         <Shoe_Modal 
           shoe_name={name} 
           shoe_price={price} 
-          shoe_src={thumbnailImg} 
+          shoe_src={getOptimizedImage(thumbnailImg)} 
           ref={modalRef} 
         />
       </>
