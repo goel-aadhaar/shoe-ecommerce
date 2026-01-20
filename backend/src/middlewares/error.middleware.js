@@ -7,7 +7,9 @@ export const errorMiddleware = (err, req, res, next) => {
     const statusCode = err.statusCode || 500;
     const allowedOrigins = [
         "https://shoe-ecommerce-mu.vercel.app",
-        "https://urbansole-pi.vercel.app"
+        "https://urbansole-pi.vercel.app",
+        "http://localhost:5173",
+        "http://localhost:3000"
     ];
 
     const origin = req.headers.origin;
@@ -28,3 +30,4 @@ export const errorMiddleware = (err, req, res, next) => {
         )
     );
 };
+
