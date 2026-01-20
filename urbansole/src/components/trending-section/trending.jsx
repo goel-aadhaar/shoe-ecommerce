@@ -52,9 +52,7 @@ const TrendingSection = () => {
   
   return (
     <div className="bg-white text-black py-10">
-      
       <h1 className="text-center font-bold text-3xl mb-5 mr-10 pr-10">TRENDING</h1>
-
       <div className="flex items-center justify-between">
         <div></div>
         <GenderTabs active={active} setActive={setActive} />
