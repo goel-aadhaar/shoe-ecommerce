@@ -1,15 +1,108 @@
 import { Product, ProductImage, Review, Category } from "../models/model-export.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
-
+import { generateAndStoreEmbedding } from "../services/embedding.service.js";
+import { ProductDescription } from "../models/productDescription.model.js";
 // CRUD
 export const createProduct = asyncHandler(async (req, res) => {
-    console.log("Creating product with data:", req.body);
-    
     const product = await Product.create(req.body);
+
+    if (req.body.description) {
+        console.log("Triggering background embedding generation...");
+        generateAndStoreEmbedding(product._id, req.body.description).catch(err => {
+            console.error("Background embedding failed:", err);
+        });
+    }
 
     res.status(201).json(
         new ApiResponse(201, "Product created successfully", product)
+    );
+});
+
+
+
+export const getSimilarShoes = asyncHandler(async (req, res) => {
+    try{
+      const { shoe_id } = req.params;
+      const sourceDoc = await ProductDescription.findOne({ shoe_id: shoe_id });
+      console.log("shoe_id :: ", shoe_id);
+      
+      if (!sourceDoc) {
+        return res.status(404).json({ message: "Embedding not found for this product" });
+      }
+
+      // console.log("embedding :: ", sourceDoc);
+      
+      // STEP 2: Run Aggregation Pipeline on 'ProductDescription'
+    const recommendations = await ProductDescription.aggregate([
+      {
+        // A. Find similar IDs based on vector
+        "$vectorSearch": {
+          "index": "vector_index",       // Ensure this index exists on 'productDescriptions' collection
+          "path": "embedding_description",
+          "queryVector": sourceDoc.embedding_description,
+          "numCandidates": 50,
+          "limit": 6
+        }
+      },
+      {
+        // B. Exclude the current shoe itself
+        // Assuming 'id' in this collection matches the 'shoe_id'
+        "$match": { 
+          "shoe_id": { "$ne": sourceDoc.shoe_id } 
+        } 
+      },
+      {
+        // C. Limit to top 5 before doing the heavy lookup
+        "$limit": 5 
+      },
+      {
+        // D. JOIN with the main 'products' collection
+        "$lookup": {
+          "from": "products",       // The ACTUAL name of your main collection in MongoDB (usually lowercase plural)
+          "localField": "shoe_id",       // The field in 'productDescriptions' that links to the product
+          "foreignField": "_id",    // The field in 'products' to match against
+          "as": "fullProductInfo"   // The name of the array where data will land
+        }
+      },
+      {
+        // E. Unwrap the array created by $lookup
+        "$unwind": "$fullProductInfo"
+      },
+      {
+        // F. Format the final output
+        "$project": {
+          "_id": "$fullProductInfo._id",
+          "name": "$fullProductInfo.name",
+          "brand": "$fullProductInfo.brand",
+          "for": "$fullProductInfo.for",
+          "color": "$fullProductInfo.color",
+          "category": "$fullProductInfo.category",
+          "rating": "$fullProductInfo.rating",
+          "price": "$fullProductInfo.price",
+          "image": "$fullProductInfo.image",
+          "matchScore": { "$meta": "vectorSearchScore" } // Optional: see how good the match was
+        }
+      }
+    ]);
+    console.log("recommendation : ", recommendations);
+    
+    res.json(recommendations);
+    console.log("similar shoes given:  ");
+    
+    }catch(err){
+        console.error("Error fetching similar shoes:", err);
+        return res.status(500).json(new ApiResponse(500, "Internal server error", null));
+    }
+});
+
+
+export const getProductDescriptions = asyncHandler(async (req, res) => {
+    console.log("Fetching product descriptions from database...");
+    const descriptions = await ProductDescription.find();
+
+    res.status(200).json(
+        new ApiResponse(200, "Product descriptions fetched successfully", descriptions)
     );
 });
 
@@ -192,6 +285,9 @@ export const addProductImage = asyncHandler(async (req, res) => {
         new ApiResponse(201, "Product image added successfully", image)
     );
 });
+
+
+
 
 // Reviews
 export const addReview = asyncHandler(async (req, res) => {

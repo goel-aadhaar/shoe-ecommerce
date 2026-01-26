@@ -12,13 +12,16 @@ import {
     deleteProduct, 
     addProductImage, 
     addReview, 
-    getProductReviews
+    getProductReviews,
+    getProductDescriptions,
+    getSimilarShoes
 } from "../controllers/product.controller.js";
 import { authMiddleware, adminMiddleware } from "../middlewares/auth.middleware.js";
 
 const router = Router();
 
 // Products
+router.get("/productDescriptions", getProductDescriptions);
 router.post("/", authMiddleware, adminMiddleware, createProduct);
 router.get("/", getProducts);
 router.get("/filter/attribute", getProductsByAttribute);
@@ -26,9 +29,11 @@ router.get("/filter/brand",  getProductsByBrand);
 router.get("/filter/gender", getProductsByGender);
 router.get("/filter/category", getProductsByCategory);
 router.get("/filter/related",  getRelatedShoes);
+router.get('/recommend/:shoe_id', getSimilarShoes);
 router.get("/:id", getProductById);
 router.put("/:id", authMiddleware, adminMiddleware, updateProduct);
 router.delete("/:id", authMiddleware, adminMiddleware, deleteProduct);
+
 
 // Product images
 router.post("/images", authMiddleware, adminMiddleware, addProductImage);

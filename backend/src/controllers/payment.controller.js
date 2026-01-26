@@ -1,9 +1,10 @@
 import { Payment, OrderStatusHistory, Order } from "../models/model-export.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
-import { stripe } from "../utils/stripe.js"; // This import is used by createStripePayment
+import { getStripe } from "../utils/stripe.js"; // This import is used by createStripePayment
 
 export const createStripePayment = asyncHandler(async (req, res) => {
+    const stripe = getStripe();
     const { orderId, amount } = req.body;
 
     const paymentIntent = await stripe.paymentIntents.create({

@@ -9,6 +9,7 @@ import orderRoutes from "./order.routes.js";
 import paymentRoutes from "./payment.routes.js";
 import reviewRoutes from "./review.routes.js";
 import productImageRoutes from "./productImage.routes.js";
+import { getProductDescriptions } from "../controllers/product.controller.js";
 
 const router = Router();
 
@@ -21,4 +22,8 @@ router.use("/orders", orderRoutes);
 router.use("/payments", paymentRoutes);
 router.use("/reviews", reviewRoutes);
 router.use("/product-images", productImageRoutes);
+
+// Add route for productDescriptions
+// router.get("/productDescriptions", getProductDescriptions);
+
 export default router;
