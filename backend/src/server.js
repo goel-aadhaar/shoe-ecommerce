@@ -1,5 +1,8 @@
-import express from "express";
 import dotenv from "dotenv";
+
+dotenv.config();
+
+import express from "express";
 import connectDB from "./db/connectDB.js";
 import routes from "./routes/route-combiner.js";
 import { logger } from "./utils/logger.js";
@@ -7,8 +10,6 @@ import { notFoundMiddleware } from "./middlewares/notFound.middleware.js";
 import { errorMiddleware } from "./middlewares/error.middleware.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
-
-dotenv.config();
 
 connectDB();
 

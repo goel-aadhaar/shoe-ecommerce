@@ -1,0 +1,65 @@
+
+db['users'].aggregate([ 
+    {
+        $match :{
+            city : { $gt : 3}
+        } 
+    },
+    {
+        $group : 
+            {
+                _id : '$city',
+                count_users : { $sum : 1}
+            },
+    },
+    {
+        $limit : 5
+    }
+])
+
+
+
+
+db['users'].aggregate([ 
+    {
+        $lookup : 
+        {
+            from : 'city',
+            localField : 'city',
+            foreignField : 'city_id',
+            as : 'city_info'    // it woll come as [ {city_ data} ]
+        }
+    },
+    {
+        $unwind : '$city_info'  // to flatten  after that [{}] ---> {}
+    },
+    {
+        $project : {
+            full_name : 1,
+            _id : 0,
+            city_info : 1
+        }
+    }
+])
+
+
+db['users'].aggregate([ 
+    {
+        $lookup : 
+        {
+            from : 'city',
+            localField : 'city',
+            foreignField : 'city_id',
+            as : 'city_info'    // it woll come as [ {city_ data} ]
+        }
+    },
+    {
+        $project : {
+            full_name : 1,
+            _id : 0,
+            city_info : {
+                city_name:1
+            }
+        }
+    }
+])
