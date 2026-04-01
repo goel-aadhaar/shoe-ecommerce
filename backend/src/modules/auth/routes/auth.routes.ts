@@ -6,6 +6,7 @@ import {
     checkAuth,
     login,
     logout,
+    refreshToken,
     register,
 } from '../services/auth.service.js';
 import { loginSchema, registerSchema } from '../validators/auth.validators.js';
@@ -16,5 +17,6 @@ router.post('/register', validate(registerSchema), register);
 router.post('/login', validate(loginSchema), login);
 router.post('/logout', authMiddleware, logout);
 router.get('/check', authMiddleware, checkAuth);
+router.post('/refresh', refreshToken);
 
 export default router;

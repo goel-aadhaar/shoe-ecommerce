@@ -59,13 +59,12 @@ export const config: AppConfig = {
               },
           }
         : {}),
-    corsAllowedOrigins: [
-        'https://shoe-ecommerce-mu.vercel.app',
-        'https://urbansole-pi.vercel.app',
-        'https://localhost:5137',
-        'http://localhost:3000',
-        'http://localhost:5173',
-    ],
+    corsAllowedOrigins: (
+        process.env.CORS_ALLOWED_ORIGINS ??
+        'https://shoe-ecommerce-mu.vercel.app,https://urbansole-pi.vercel.app,http://localhost:3000,http://localhost:5173'
+    )
+        .split(',')
+        .map((s) => s.trim()),
     rateLimit: {
         windowMs: Number(process.env.RATE_LIMIT_WINDOW_MS ?? 15 * 60 * 1000),
         max: Number(process.env.RATE_LIMIT_MAX ?? 300),

@@ -1,10 +1,27 @@
 import bcrypt from 'bcrypt';
 import jsonwebtoken from 'jsonwebtoken';
-import mongoose, { Schema } from 'mongoose';
+import mongoose, { type Document, type Model, Schema } from 'mongoose';
 
 import { config } from '../../../config.js';
 
-const userSchema = new Schema(
+export interface IUser {
+    fullName: string;
+    email: string;
+    password: string;
+    role: 'customer' | 'admin';
+    refreshToken: string | null;
+}
+
+export interface IUserMethods {
+    isPasswordCorrect(password: string): Promise<boolean>;
+    generateAccessToken(): string;
+    generateRefreshToken(): string;
+}
+
+export type UserDocument = Document & IUser & IUserMethods;
+type UserModel = Model<IUser, object, IUserMethods>;
+
+const userSchema = new Schema<IUser, UserModel, IUserMethods>(
     {
         fullName: {
             type: String,
@@ -37,8 +54,8 @@ const userSchema = new Schema(
 );
 
 userSchema.pre('save', async function (next) {
-    if ((this as any).isModified('password')) {
-        (this as any).password = await bcrypt.hash((this as any).password, 10);
+    if (this.isModified('password')) {
+        this.password = await bcrypt.hash(this.password, 10);
         next();
     } else {
         return next();
@@ -46,27 +63,27 @@ userSchema.pre('save', async function (next) {
 });
 
 userSchema.methods.isPasswordCorrect = async function (password: string) {
-    return await bcrypt.compare(password, (this as any).password);
+    return await bcrypt.compare(password, this.password);
 };
 
 userSchema.methods.generateAccessToken = function () {
     return jsonwebtoken.sign(
         {
-            _id: (this as any)._id,
-            email: (this as any).email,
-            fullName: (this as any).fullName,
+            _id: this._id,
+            email: this.email,
+            fullName: this.fullName,
         },
-        config.accessTokenSecret as any,
-        { expiresIn: config.accessTokenExpiry as any } as any,
+        config.accessTokenSecret,
+        { expiresIn: (config.accessTokenExpiry ?? '1d') as string & jsonwebtoken.SignOptions['expiresIn'] },
     );
 };
 
 userSchema.methods.generateRefreshToken = function () {
     return jsonwebtoken.sign(
-        { _id: (this as any)._id },
-        config.refreshTokenSecret as any,
-        { expiresIn: config.refreshTokenExpiry as any } as any,
+        { _id: this._id },
+        config.refreshTokenSecret,
+        { expiresIn: (config.refreshTokenExpiry ?? '10d') as string & jsonwebtoken.SignOptions['expiresIn'] },
     );
 };
 
-export const User = mongoose.model('User', userSchema);
+export const User = mongoose.model<IUser, UserModel>('User', userSchema);

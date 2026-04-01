@@ -19,7 +19,7 @@ export const createProduct = asyncHandler(
 
         if (req.body?.description) {
             generateAndStoreEmbedding(
-                (product as any)._id,
+                String(product._id),
                 req.body.description,
             ).catch(() => undefined);
         }
@@ -34,57 +34,59 @@ export const createProduct = asyncHandler(
 
 export const getSimilarShoes = asyncHandler(
     async (req: Request, res: Response) => {
-        try {
-            const { shoe_id } = req.params;
-            const sourceDoc = await ProductDescription.findOne({ shoe_id });
-            if (!sourceDoc)
-                return res
-                    .status(404)
-                    .json({ message: 'Embedding not found for this product' });
-
-            const recommendations = await ProductDescription.aggregate([
-                {
-                    $vectorSearch: {
-                        index: 'vector_index',
-                        path: 'embedding_description',
-                        queryVector: (sourceDoc as any).embedding_description,
-                        numCandidates: 50,
-                        limit: 6,
-                    },
-                },
-                { $match: { shoe_id: { $ne: (sourceDoc as any).shoe_id } } },
-                { $limit: 5 },
-                {
-                    $lookup: {
-                        from: 'products',
-                        localField: 'shoe_id',
-                        foreignField: '_id',
-                        as: 'fullProductInfo',
-                    },
-                },
-                { $unwind: '$fullProductInfo' },
-                {
-                    $project: {
-                        _id: '$fullProductInfo._id',
-                        name: '$fullProductInfo.name',
-                        brand: '$fullProductInfo.brand',
-                        for: '$fullProductInfo.for',
-                        color: '$fullProductInfo.color',
-                        category: '$fullProductInfo.category',
-                        rating: '$fullProductInfo.rating',
-                        price: '$fullProductInfo.price',
-                        image: '$fullProductInfo.image',
-                        matchScore: { $meta: 'vectorSearchScore' },
-                    },
-                },
-            ]);
-
-            return res.json(recommendations);
-        } catch {
+        const { shoe_id } = req.params;
+        const sourceDoc = await ProductDescription.findOne({ shoe_id });
+        if (!sourceDoc)
             return res
-                .status(500)
-                .json(new ApiResponse(500, 'Internal server error', null));
-        }
+                .status(404)
+                .json(new ApiResponse(404, 'Embedding not found for this product', null));
+
+        const recommendations = await ProductDescription.aggregate([
+            {
+                $vectorSearch: {
+                    index: 'vector_index',
+                    path: 'embedding_description',
+                    queryVector: sourceDoc.embedding_description,
+                    numCandidates: 50,
+                    limit: 6,
+                },
+            },
+            { $match: { shoe_id: { $ne: sourceDoc.shoe_id } } },
+            { $limit: 5 },
+            {
+                $lookup: {
+                    from: 'products',
+                    localField: 'shoe_id',
+                    foreignField: '_id',
+                    as: 'fullProductInfo',
+                },
+            },
+            { $unwind: '$fullProductInfo' },
+            {
+                $project: {
+                    _id: '$fullProductInfo._id',
+                    name: '$fullProductInfo.name',
+                    brand: '$fullProductInfo.brand',
+                    for: '$fullProductInfo.for',
+                    color: '$fullProductInfo.color',
+                    category: '$fullProductInfo.category',
+                    rating: '$fullProductInfo.rating',
+                    price: '$fullProductInfo.price',
+                    image: '$fullProductInfo.image',
+                    matchScore: { $meta: 'vectorSearchScore' },
+                },
+            },
+        ]);
+
+        return res
+            .status(200)
+            .json(
+                new ApiResponse(
+                    200,
+                    'Similar shoes fetched successfully',
+                    recommendations,
+                ),
+            );
     },
 );
 
@@ -149,11 +151,10 @@ export const getProductById = asyncHandler(
 
 export const getProductsByAttribute = asyncHandler(
     async (req: Request, res: Response) => {
-        const { attribute, limit } = req.query as any;
-        const attr = attribute || 'trending';
-        const max = Number(limit) || 10;
+        const attribute = (req.query.attribute as string) || 'trending';
+        const max = Number(req.query.limit) || 10;
 
-        const products = await Product.find({ attributes: attr })
+        const products = await Product.find({ attributes: attribute })
             .limit(max)
             .populate('category')
             .populate({ path: 'imageSet', select: 'thumbnail hover' });
@@ -163,7 +164,7 @@ export const getProductsByAttribute = asyncHandler(
             .json(
                 new ApiResponse(
                     200,
-                    `Products with attribute '${attr}' fetched successfully`,
+                    `Products with attribute '${attribute}' fetched successfully`,
                     products,
                 ),
             );
@@ -172,11 +173,10 @@ export const getProductsByAttribute = asyncHandler(
 
 export const getProductsByBrand = asyncHandler(
     async (req: Request, res: Response) => {
-        const { brand, limit } = req.query as any;
-        const brandName = brand || 'Puma';
-        const max = Number(limit) || 10;
+        const brand = (req.query.brand as string) || 'Puma';
+        const max = Number(req.query.limit) || 10;
 
-        const products = await Product.find({ brand: brandName })
+        const products = await Product.find({ brand })
             .limit(max)
             .populate('category')
             .populate({ path: 'imageSet', select: 'thumbnail hover' });
@@ -186,7 +186,7 @@ export const getProductsByBrand = asyncHandler(
             .json(
                 new ApiResponse(
                     200,
-                    `Products with brand '${brandName}' fetched successfully`,
+                    `Products with brand '${brand}' fetched successfully`,
                     products,
                 ),
             );
@@ -195,10 +195,9 @@ export const getProductsByBrand = asyncHandler(
 
 export const getRelatedShoes = asyncHandler(
     async (req: Request, res: Response) => {
-        const { gender, category, price } = req.query as any;
-        const genderValue = gender || 'Male';
-        const pValue = price || 10000;
-        const categoryName = category || 'shoes';
+        const gender = (req.query.gender as string) || 'Male';
+        const price = Number(req.query.price) || 10000;
+        const categoryName = (req.query.category as string) || 'shoes';
 
         const categoryDoc = await Category.findOne({ name: categoryName });
         if (!categoryDoc)
@@ -207,9 +206,9 @@ export const getRelatedShoes = asyncHandler(
                 .json(new ApiResponse(404, 'Category not found', null));
 
         const product = await Product.find({
-            for: genderValue,
-            price: { $gte: pValue - 1000, $lte: pValue + 1000 },
-            category: (categoryDoc as any)._id,
+            for: gender,
+            price: { $gte: price - 1000, $lte: price + 1000 },
+            category: categoryDoc._id,
         })
             .limit(4)
             .populate('imageSet', 'thumbnail hover');
@@ -222,11 +221,10 @@ export const getRelatedShoes = asyncHandler(
 
 export const getProductsByGender = asyncHandler(
     async (req: Request, res: Response) => {
-        const { gender, limit } = req.query as any;
-        const genderValue = gender || 'Male';
-        const max = Number(limit) || 10;
+        const gender = (req.query.gender as string) || 'Male';
+        const max = Number(req.query.limit) || 10;
 
-        const products = await Product.find({ for: genderValue })
+        const products = await Product.find({ for: gender })
             .limit(max)
             .populate('category')
             .populate({ path: 'imageSet', select: 'thumbnail hover' });
@@ -236,7 +234,7 @@ export const getProductsByGender = asyncHandler(
             .json(
                 new ApiResponse(
                     200,
-                    `Products for gender '${genderValue}' fetched successfully`,
+                    `Products for gender '${gender}' fetched successfully`,
                     products,
                 ),
             );
@@ -245,9 +243,8 @@ export const getProductsByGender = asyncHandler(
 
 export const getProductsByCategory = asyncHandler(
     async (req: Request, res: Response) => {
-        const { category, limit } = req.query as any;
-        const categoryName = category || 'shoes';
-        const max = Number(limit) || 10;
+        const categoryName = (req.query.category as string) || 'shoes';
+        const max = Number(req.query.limit) || 10;
 
         const categoryDoc = await Category.findOne({ name: categoryName });
         if (!categoryDoc)
@@ -262,7 +259,7 @@ export const getProductsByCategory = asyncHandler(
                 );
 
         const products = await Product.find({
-            category: (categoryDoc as any)._id,
+            category: categoryDoc._id,
         })
             .limit(max)
             .populate({ path: 'imageSet', select: 'thumbnail hover' });
@@ -316,7 +313,7 @@ export const addProductImage = asyncHandler(
 
 export const addReview = asyncHandler(async (req: Request, res: Response) => {
     const review = await Review.create({
-        userId: (req as any).user?.id,
+        userId: req.user?._id,
         productId: req.body?.productId,
         rating: req.body?.rating,
         reviewText: req.body?.reviewText,
@@ -335,12 +332,12 @@ export const getProductReviews = asyncHandler(
         const avgRating =
             reviews.length > 0
                 ? (
-                      (reviews as any[]).reduce(
-                          (acc, r: any) => acc + r.rating,
+                      reviews.reduce(
+                          (acc, r) => acc + (r.rating ?? 0),
                           0,
                       ) / reviews.length
                   ).toFixed(1)
-                : 0;
+                : '0';
 
         return res.status(200).json(
             new ApiResponse(200, 'Product reviews fetched successfully', {

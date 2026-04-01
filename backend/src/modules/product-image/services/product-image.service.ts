@@ -9,14 +9,19 @@ import {
 } from '../../../shared/utils/pagination.util.js';
 import { ProductImage } from '../repositories/product-image.model.js';
 
-export const addProductImageById = async (req: Request, res: Response) => {
-    try {
+interface UploadedImages {
+    thumbnail?: string;
+    hover?: string;
+    sides?: string[];
+}
+
+export const addProductImageById = asyncHandler(
+    async (req: Request, res: Response) => {
         const { productId } = req.params;
-        const files = (req as any).files as Record<
-            string,
-            Array<{ buffer: Buffer }>
-        >;
-        const uploadedImages: any = {};
+        const files = req.files as
+            | Record<string, Express.Multer.File[]>
+            | undefined;
+        const uploadedImages: UploadedImages = {};
 
         if (files?.thumbnail?.[0]) {
             const result = await uploadToCloudinary(
@@ -51,17 +56,15 @@ export const addProductImageById = async (req: Request, res: Response) => {
             { new: true, upsert: true },
         );
 
-        res.status(200).json({
-            success: true,
-            message: 'Images uploaded & saved successfully!',
-            productImage,
-        });
-    } catch (error: any) {
-         
-        console.error('Upload error:', error);
-        res.status(500).json({ success: false, message: error?.message });
-    }
-};
+        res.status(200).json(
+            new ApiResponse(
+                200,
+                'Images uploaded & saved successfully',
+                productImage,
+            ),
+        );
+    },
+);
 
 export const getProductImage = asyncHandler(
     async (req: Request, res: Response) => {

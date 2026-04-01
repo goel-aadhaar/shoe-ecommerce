@@ -6,11 +6,11 @@ import { Cart } from '../repositories/cart.model.js';
 import { CartItem } from '../repositories/cart-item.model.js';
 
 export const getCart = asyncHandler(async (req: Request, res: Response) => {
-    const userId = (req as any).user?.id;
+    const userId = req.user?._id;
     let cart = await Cart.findOne({ userId });
     if (!cart) cart = await Cart.create({ userId });
 
-    const items = await CartItem.find({ cartId: (cart as any)._id }).populate({
+    const items = await CartItem.find({ cartId: cart._id }).populate({
         path: 'productId',
         populate: {
             path: 'imageSet',
@@ -27,21 +27,21 @@ export const getCart = asyncHandler(async (req: Request, res: Response) => {
 });
 
 export const addToCart = asyncHandler(async (req: Request, res: Response) => {
-    const userId = (req as any).user?.id;
+    const userId = req.user?._id;
     let cart = await Cart.findOne({ userId });
     if (!cart) cart = await Cart.create({ userId });
 
     let item = await CartItem.findOne({
-        cartId: (cart as any)._id,
+        cartId: cart._id,
         productId: req.body?.productId,
     });
 
     if (item) {
-        (item as any).quantity += req.body?.quantity || 1;
-        await (item as any).save();
+        item.quantity += req.body?.quantity || 1;
+        await item.save();
     } else {
         item = await CartItem.create({
-            cartId: (cart as any)._id,
+            cartId: cart._id,
             productId: req.body?.productId,
             quantity: req.body?.quantity || 1,
         });
@@ -62,7 +62,7 @@ export const removeFromCart = asyncHandler(
 );
 
 export const clearCart = asyncHandler(async (req: Request, res: Response) => {
-    const userId = (req as any).user?.id;
+    const userId = req.user?._id;
     const cart = await Cart.findOne({ userId });
     if (!cart) {
         return res
@@ -70,10 +70,10 @@ export const clearCart = asyncHandler(async (req: Request, res: Response) => {
             .json(new ApiResponse(404, 'Cart not found', null));
     }
 
-    await CartItem.deleteMany({ cartId: (cart as any)._id });
+    await CartItem.deleteMany({ cartId: cart._id });
     return res.status(200).json(
         new ApiResponse(200, 'Cart cleared successfully', {
-            cartId: (cart as any)._id,
+            cartId: cart._id,
         }),
     );
 });

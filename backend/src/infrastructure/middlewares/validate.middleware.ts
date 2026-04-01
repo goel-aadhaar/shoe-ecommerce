@@ -11,11 +11,13 @@ export const validate =
                 body: req.body,
                 query: req.query,
                 params: req.params,
-            }) as { body: unknown; query: unknown; params: unknown };
+            }) as { body?: unknown; query?: unknown; params?: unknown };
 
-            (req as any).body = parsed.body;
-            (req as any).query = parsed.query;
-            (req as any).params = parsed.params;
+            if (parsed.body !== undefined) req.body = parsed.body;
+            if (parsed.query !== undefined)
+                Object.assign(req.query, parsed.query);
+            if (parsed.params !== undefined)
+                Object.assign(req.params, parsed.params as Record<string, string>);
 
             next();
         } catch (err) {

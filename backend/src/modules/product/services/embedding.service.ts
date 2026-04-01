@@ -1,19 +1,19 @@
-import { GoogleGenerativeAI } from '@google/generative-ai';
+import { GoogleGenerativeAI, type GenerativeModel } from '@google/generative-ai';
 
 import { config } from '../../../config.js';
 import { ProductDescription } from '../repositories/product-description.model.js';
 
 let genAI: GoogleGenerativeAI | null = null;
-let model: any = null;
+let model: GenerativeModel | null = null;
 
 export async function generateAndStoreEmbedding(
-    shoeId: any,
+    shoeId: string,
     descriptionText: string,
 ) {
     if (!genAI) {
         if (!config.geminiApiKey) {
             throw new Error(
-                '❌ GEMINI_API_KEY is missing from environment variables!',
+                'GEMINI_API_KEY is missing from environment variables',
             );
         }
         genAI = new GoogleGenerativeAI(config.geminiApiKey);
@@ -21,7 +21,7 @@ export async function generateAndStoreEmbedding(
     }
 
     try {
-        const result = await model.embedContent(descriptionText);
+        const result = await model!.embedContent(descriptionText);
         const vector = result.embedding.values as number[];
 
         const savedDoc = await ProductDescription.findOneAndUpdate(
@@ -35,10 +35,10 @@ export async function generateAndStoreEmbedding(
         );
 
         return savedDoc;
-    } catch (error: any) {
-         
-        console.error('❌ Gemini Error:', error?.message);
-        if (String(error?.message).includes('429')) {
+    } catch (error: unknown) {
+        const message =
+            error instanceof Error ? error.message : String(error);
+        if (message.includes('429')) {
             await new Promise((r) => setTimeout(r, 10000));
         }
     }

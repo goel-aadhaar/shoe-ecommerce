@@ -12,29 +12,23 @@ import { Profile } from '../repositories/profile.model.js';
 import { User } from '../repositories/user.model.js';
 
 export const getProfile = asyncHandler(async (req: Request, res: Response) => {
-    try {
-        const userId = (req as any).user?.id;
-        const profile = await Profile.findOne({ userId });
-        const user = await User.findById((req as any).user?._id).select(
-            '-password',
-        );
+    const userId = req.user?._id;
+    const profile = await Profile.findOne({ userId });
+    const user = await User.findById(userId).select('-password');
 
-        if (!user) throw new ApiError(404, 'User not found');
+    if (!user) throw new ApiError(404, 'User not found');
 
-        res.status(200).json(
-            new ApiResponse(200, 'User fetched successfully', {
-                user,
-                profile,
-            }),
-        );
-    } catch {
-        throw new ApiError(500, 'Failed to fetch user');
-    }
+    res.status(200).json(
+        new ApiResponse(200, 'User fetched successfully', {
+            user,
+            profile,
+        }),
+    );
 });
 
 export const updateProfile = asyncHandler(
     async (req: Request, res: Response) => {
-        const userId = (req as any).user?.id;
+        const userId = req.user?._id;
         const profile = await Profile.findOneAndUpdate({ userId }, req.body, {
             new: true,
             upsert: true,
@@ -49,7 +43,7 @@ export const updateProfile = asyncHandler(
 export const addFavourite = asyncHandler(
     async (req: Request, res: Response) => {
         const fav = await Favourite.create({
-            userId: (req as any).user?.id,
+            userId: req.user?._id,
             productId: req.body?.productId,
         });
 
@@ -66,7 +60,7 @@ export const getFavourites = asyncHandler(
             { limit: 20, maxLimit: 100 },
         );
 
-        const filter = { userId: (req as any).user?.id };
+        const filter = { userId: req.user?._id };
         const [items, totalItems] = await Promise.all([
             Favourite.find(filter)
                 .sort({ createdAt: -1 })
@@ -88,7 +82,7 @@ export const getFavourites = asyncHandler(
 export const removeFavourite = asyncHandler(
     async (req: Request, res: Response) => {
         await Favourite.findOneAndDelete({
-            userId: (req as any).user?.id,
+            userId: req.user?._id,
             productId: req.params.id,
         });
 

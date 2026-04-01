@@ -15,7 +15,7 @@ export const getMyReviews = asyncHandler(
             { limit: 10, maxLimit: 50 },
         );
 
-        const filter = { userId: (req as any).user?.id };
+        const filter = { userId: req.user?._id };
 
         const [items, totalItems] = await Promise.all([
             Review.find(filter)
