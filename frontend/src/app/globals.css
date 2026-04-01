@@ -1,90 +1,75 @@
 @import "tailwindcss";
+@import "tw-animate-css";
 
-/* UrbanSole specific styles */
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+@custom-variant dark (&:is(.dark *));
 
-html {
-  scroll-behavior: smooth;
+@theme inline {
+  --color-brown-950: #1a1210;
+  --color-brown-900: #2c2320;
+  --color-brown-800: #3b2f2f;
+  --color-brown-700: #4e3c36;
+  --color-brown-600: #6b4c3f;
+  --color-brown-500: #8b6a52;
+  --color-brown-400: #a0522d;
+  --color-brown-300: #c4956a;
+  --color-brown-200: #dcc4a8;
+  --color-brown-100: #f0e6d8;
+  --color-brown-50: #f5f0e8;
+  --color-cream: #faf6f1;
+  --color-copper: #a0522d;
+  --color-sienna: #8b4513;
+
+  --font-serif: "Playfair Display", Georgia, serif;
+  --font-sans: "Inter", system-ui, sans-serif;
+
+  --color-background: var(--color-cream);
+  --color-foreground: var(--color-brown-900);
+  --color-card: #ffffff;
+  --color-card-foreground: var(--color-brown-900);
+  --color-primary: var(--color-brown-800);
+  --color-primary-foreground: var(--color-cream);
+  --color-secondary: var(--color-brown-100);
+  --color-secondary-foreground: var(--color-brown-800);
+  --color-accent: var(--color-copper);
+  --color-accent-foreground: #ffffff;
+  --color-muted: var(--color-brown-100);
+  --color-muted-foreground: var(--color-brown-600);
+  --color-border: var(--color-brown-200);
+  --color-ring: var(--color-copper);
+  --color-destructive: #b91c1c;
+  --color-destructive-foreground: #ffffff;
+  --radius: 0.375rem;
 }
 
 body {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-sans);
+  background-color: var(--color-cream);
+  color: var(--color-brown-900);
 }
 
-/* Custom scrollbar */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-serif);
+}
+
+::selection {
+  background-color: var(--color-brown-300);
+  color: var(--color-brown-950);
+}
+
+/* Scrollbar styling */
 ::-webkit-scrollbar {
   width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: var(--color-brown-100);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #888;
+  background: var(--color-brown-400);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #555;
-}
-
-/* shadcn/ui CSS variables */
-:root {
-  --background: 0 0% 100%;
-  --foreground: 222.2 84% 4.9%;
-  --card: 0 0% 100%;
-  --card-foreground: 222.2 84% 4.9%;
-  --popover: 0 0% 100%;
-  --popover-foreground: 222.2 84% 4.9%;
-  --primary: 222.2 47.4% 11.2%;
-  --primary-foreground: 210 40% 98%;
-  --secondary: 210 40% 96%;
-  --secondary-foreground: 222.2 47.4% 11.2%;
-  --muted: 210 40% 96%;
-  --muted-foreground: 215.4 16.3% 46.9%;
-  --accent: 210 40% 96%;
-  --accent-foreground: 222.2 47.4% 11.2%;
-  --destructive: 0 84.2% 60.2%;
-  --destructive-foreground: 210 40% 98%;
-  --border: 214.3 31.8% 91.4%;
-  --input: 214.3 31.8% 91.4%;
-  --ring: 222.2 84% 4.9%;
-  --radius: 0.5rem;
-}
-
-.dark {
-  --background: 222.2 84% 4.9%;
-  --foreground: 210 40% 98%;
-  --card: 222.2 84% 4.9%;
-  --card-foreground: 210 40% 98%;
-  --popover: 222.2 84% 4.9%;
-  --popover-foreground: 210 40% 98%;
-  --primary: 210 40% 98%;
-  --primary-foreground: 222.2 47.4% 11.2%;
-  --secondary: 217.2 32.6% 17.5%;
-  --secondary-foreground: 210 40% 98%;
-  --muted: 217.2 32.6% 17.5%;
-  --muted-foreground: 215 20.2% 65.1%;
-  --accent: 217.2 32.6% 17.5%;
-  --accent-foreground: 210 40% 98%;
-  --destructive: 0 62.8% 30.6%;
-  --destructive-foreground: 210 40% 98%;
-  --border: 217.2 32.6% 17.5%;
-  --input: 217.2 32.6% 17.5%;
-  --ring: 212.7 26.8% 83.9%;
-}
-
-@layer base {
-  * {
-    border-color: hsl(var(--border));
-  }
-  body {
-    background-color: hsl(var(--background));
-    color: hsl(var(--foreground));
-  }
+  background: var(--color-brown-600);
 }

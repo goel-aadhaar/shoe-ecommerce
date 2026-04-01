@@ -1,10 +1,9 @@
-import AppLayout from '@/components/layout/AppLayout';
-import LoginForm from '@/components/Registration/Login';
+import { LoginForm } from '@/components/features/auth/login-form';
 
 export default function LoginPage() {
   return (
-    <AppLayout>
+    <div className="flex min-h-[70vh] items-center justify-center px-4 py-12">
       <LoginForm />
-    </AppLayout>
+    </div>
   );
 }

@@ -1,10 +1,9 @@
-import AppLayout from '@/components/layout/AppLayout';
-import Registration from '@/components/Registration/Registration';
+import { RegisterForm } from '@/components/features/auth/register-form';
 
 export default function RegisterPage() {
   return (
-    <AppLayout>
-      <Registration />
-    </AppLayout>
+    <div className="flex min-h-[70vh] items-center justify-center px-4 py-12">
+      <RegisterForm />
+    </div>
   );
 }

@@ -1,86 +1,76 @@
-'use client';
+import Link from 'next/link';
 
-import React from "react";
-import { MessageCircle, Globe } from "lucide-react";
-import Link from "next/link";
+const QUICK_LINKS = [
+  { href: '/collections/all', label: 'All Collections' },
+  { href: '/collections/men', label: "Men's" },
+  { href: '/collections/women', label: "Women's" },
+  { href: '/brands', label: 'Brands' },
+];
 
-export default function Footer() {
+const SUPPORT_LINKS = [
+  { href: '/about', label: 'About Us' },
+  { href: '/contact', label: 'Contact' },
+  { href: '/support', label: 'Help Center' },
+];
+
+export function Footer() {
   return (
-    <footer className="w-full bg-black text-white pt-6 ps-5">
-      {/* Top Section */}
-      <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 px-6">
-        {/* Information */}
-        <ul className="text-left">
-          <li className="text-xl font-bold pb-3">INFORMATION</li>
-          <li><Link href={'/about'} className="hover:text-red-500 text-sm text-white">ABOUT US</Link></li>
-          <li><Link href={'/contact'} className="hover:text-red-500 text-sm text-white">CONTACT US</Link></li>
-          <li><Link href="/collections/new-arrival" className="hover:text-red-500 text-sm text-white">RELEASES</Link></li>
-          <li><a href="#" className="hover:text-red-500 text-sm text-white">STORE LOCATOR</a></li>
-          <li><Link href={"/brandsLogo"} className="hover:text-red-500 text-sm text-white">BRANDS</Link></li>
-          <li><a href="#" className="hover:text-red-500 text-sm text-white">BLOGS</a></li>
-        </ul>
+    <footer className="bg-brown-900 text-brown-200">
+      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
+          {/* Brand */}
+          <div>
+            <h3 className="font-serif text-2xl font-bold text-cream tracking-wider">
+              URBAN SOLE
+            </h3>
+            <p className="mt-3 text-sm leading-relaxed text-brown-300">
+              Timeless footwear, crafted with care. Every step tells a story
+              of quality and elegance.
+            </p>
+          </div>
 
-        {/* Important Links */}
-        <ul className="text-left">
-          <li className="text-xl font-bold pb-3">IMPORTANT LINKS</li>
-          <li><Link href={'/support'} className="hover:text-red-500 text-sm text-white">HELP CENTER</Link></li>
-          <li><a href="#" className="hover:text-red-500 text-sm text-white">FAQ</a></li>
-          <li><a href="#" className="hover:text-red-500 text-sm text-white">PRIVACY POLICY</a></li>
-          <li><Link href={'/admin'} className="hover:text-red-500 text-sm text-white">Admin</Link></li>
-          <li><a href="#" className="hover:text-red-500 text-sm text-white">RETURN & EXCHANGE</a></li>
-          <li><a href="#" className="hover:text-red-500 text-sm text-white">TERMS & CONDITIONS</a></li>
-          <li><a href="#" className="hover:text-red-500 text-sm text-white">ORDER & SHIPPING</a></li>
-        </ul>
+          {/* Quick Links */}
+          <div>
+            <h4 className="font-serif text-lg font-semibold text-cream">
+              Quick Links
+            </h4>
+            <ul className="mt-3 space-y-2">
+              {QUICK_LINKS.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="text-sm text-brown-300 hover:text-copper transition-colors"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
 
-        {/* Newsletter */}
-        <div className= 'text-left w-50'>
-          <p className="text-xl font-bold pb-2">NEWSLETTER</p>
-          <p className="text-left text-sm">GET TO KNOW MORE ABOUT TRENDS & STYLE</p>
-          <form>
-            <input
-              type="email"
-              placeholder="EMAIL"
-              className="w-full px-3 py-2 mb-1 rounded-md bg-white text-black placeholder-gray-500 outline-none"
-            />
-            <button
-              type="submit"
-              id="footerBtn"
-              className="bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-700 transition"
-            >
-              SUBSCRIBE
-            </button>
-          </form>
-
-          {/* Social Media */}
-          <div className="mt-1">
-            <p className="text-base font-bold">SOCIAL MEDIA</p>
-            <div className="text-left flex items-center mt-2 space-x-4">
-              <a
-                href="https://www.instagram.com/yourprofile"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-pink-500 text-xl"
-              >
-                <MessageCircle className="w-6 h-6 text-pink-600" />
-              </a>
-              <a
-                href="https://www.facebook.com/yourprofile"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-blue-500 text-xl"
-              >
-                <Globe className="w-6 h-6 text-blue-600" />
-              </a>
-            </div>
+          {/* Support */}
+          <div>
+            <h4 className="font-serif text-lg font-semibold text-cream">
+              Support
+            </h4>
+            <ul className="mt-3 space-y-2">
+              {SUPPORT_LINKS.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="text-sm text-brown-300 hover:text-copper transition-colors"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
-      </div>
 
-      {/* Bottom Section */}
-      <div className="mt-6 px-6">
-        <p className="text-sm">
-          POWERED BY <a href="#" className="hover:text-red-500">MARMETO</a>
-        </p>
+        <div className="mt-10 border-t border-brown-700 pt-6 text-center text-sm text-brown-500">
+          &copy; {new Date().getFullYear()} Urban Sole. All rights reserved.
+        </div>
       </div>
     </footer>
   );
