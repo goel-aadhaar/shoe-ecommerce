@@ -1,4 +1,5 @@
 import type { Request, Response } from 'express';
+import jwt from 'jsonwebtoken';
 
 import { config } from '../../../config.js';
 import { ApiError } from '../../../shared/errors/api-error.class.js';
@@ -6,7 +7,6 @@ import { ApiResponse } from '../../../shared/responses/api-response.builder.js';
 import { asyncHandler } from '../../../shared/utils/async-handler.util.js';
 import { getCookieOptions } from '../../../shared/utils/cookie.util.js';
 import { User, type UserDocument } from '../../user/repositories/user.model.js';
-import jwt from 'jsonwebtoken';
 
 const generateAccessAndRefreshTokens = async (userId: string) => {
     const user = (await User.findById(userId)) as UserDocument | null;

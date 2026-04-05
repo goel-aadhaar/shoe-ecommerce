@@ -15,7 +15,7 @@ export function CartItem({ item }: CartItemProps) {
   const { removeItem } = useCart();
   const product = item.productId as Product;
   const imageSet = product?.imageSet as ProductImage | null;
-  const thumbnail = imageSet?.thumbnail ?? DEFAULT_PLACEHOLDER;
+  const thumbnail = product?.thumbnail ?? imageSet?.thumbnail ?? DEFAULT_PLACEHOLDER;
 
   return (
     <div className="flex gap-4 rounded-lg border border-brown-200 bg-white p-4">

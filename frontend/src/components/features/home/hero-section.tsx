@@ -1,46 +1,81 @@
+'use client';
+
 import Link from 'next/link';
+import { ArrowRight, Star, Truck, ShieldCheck } from 'lucide-react';
 
 export function HeroSection() {
   return (
-    <section className="relative overflow-hidden bg-brown-900 py-24 sm:py-32">
-      {/* Decorative pattern */}
-      <div className="absolute inset-0 opacity-5">
-        <div
-          className="h-full w-full"
-          style={{
-            backgroundImage:
-              'radial-gradient(circle at 1px 1px, #faf6f1 1px, transparent 0)',
-            backgroundSize: '40px 40px',
-          }}
-        />
-      </div>
+    <section className="relative overflow-hidden bg-brown-900">
+      {/* Decorative background elements */}
+      <div className="absolute -right-20 -top-20 h-96 w-96 rounded-full bg-copper/5" />
+      <div className="absolute -bottom-32 -left-32 h-80 w-80 rounded-full bg-copper/5" />
+      <div className="absolute right-1/4 top-1/3 h-64 w-64 rounded-full bg-copper/3" />
 
-      <div className="relative mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8">
-        <p className="text-sm font-medium uppercase tracking-[0.3em] text-copper">
-          Established 2024
-        </p>
-        <h1 className="mt-4 font-serif text-4xl font-bold leading-tight text-cream sm:text-5xl lg:text-6xl">
-          Timeless Footwear,
-          <br />
-          <span className="text-brown-300">Modern Style</span>
-        </h1>
-        <p className="mx-auto mt-6 max-w-2xl text-lg text-brown-300">
-          Discover our curated collection of premium shoes — where classic
-          craftsmanship meets contemporary design.
-        </p>
-        <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
-          <Link
-            href="/collections/all"
-            className="rounded-md bg-copper px-8 py-3 text-sm font-semibold uppercase tracking-wider text-white shadow-lg transition hover:bg-sienna"
-          >
-            Shop Collection
-          </Link>
-          <Link
-            href="/collections/trending"
-            className="rounded-md border border-brown-500 px-8 py-3 text-sm font-semibold uppercase tracking-wider text-brown-200 transition hover:border-cream hover:text-cream"
-          >
-            Trending Now
-          </Link>
+      <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
+        <div className="flex flex-col items-center py-20 text-center lg:py-28">
+          <span className="inline-block rounded-full border border-copper/30 bg-copper/10 px-5 py-2 text-sm font-semibold uppercase tracking-widest text-copper">
+            Premium Collection 2025
+          </span>
+
+          <h1 className="mt-8 font-serif text-5xl font-bold leading-tight text-cream sm:text-6xl lg:text-7xl">
+            Walk in{' '}
+            <span className="text-copper">Confidence</span>
+          </h1>
+
+          <p className="mt-6 max-w-xl text-base leading-relaxed text-brown-300 sm:text-lg">
+            Discover handpicked footwear from the world&apos;s finest brands.
+            Premium quality, timeless style, delivered to your doorstep.
+          </p>
+
+          {/* CTA */}
+          <div className="mt-10 flex items-center gap-4">
+            <Link
+              href="/collections/all"
+              className="inline-flex items-center gap-2 rounded-lg bg-copper px-8 py-3.5 text-sm font-bold uppercase tracking-wider text-white transition-colors hover:bg-sienna"
+            >
+              Shop Now
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+            <Link
+              href="/brands"
+              className="inline-flex items-center rounded-lg border border-brown-600 px-8 py-3.5 text-sm font-bold uppercase tracking-wider text-brown-200 transition-colors hover:border-cream hover:text-cream"
+            >
+              Explore Brands
+            </Link>
+          </div>
+
+          {/* Stats */}
+          <div className="mt-16 flex items-center gap-10 sm:gap-16">
+            <div className="text-center">
+              <p className="font-serif text-4xl font-bold text-cream">30+</p>
+              <p className="mt-1 text-sm text-brown-400">Products</p>
+            </div>
+            <div className="h-12 w-px bg-brown-700" />
+            <div className="text-center">
+              <p className="font-serif text-4xl font-bold text-cream">8</p>
+              <p className="mt-1 text-sm text-brown-400">Top Brands</p>
+            </div>
+            <div className="h-12 w-px bg-brown-700" />
+            <div className="text-center">
+              <div className="flex items-center justify-center gap-1">
+                <Star className="h-5 w-5 fill-copper text-copper" />
+                <p className="font-serif text-4xl font-bold text-cream">4.5</p>
+              </div>
+              <p className="mt-1 text-sm text-brown-400">Avg Rating</p>
+            </div>
+          </div>
+
+          {/* Trust badges */}
+          <div className="mt-12 flex items-center gap-8 text-brown-400">
+            <div className="flex items-center gap-2">
+              <Truck className="h-4 w-4 text-copper" />
+              <span className="text-sm">Free Shipping</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <ShieldCheck className="h-4 w-4 text-copper" />
+              <span className="text-sm">100% Authentic</span>
+            </div>
+          </div>
         </div>
       </div>
     </section>

@@ -26,8 +26,11 @@ export function RegisterForm() {
       await register(fullName, email, password);
       toast.success('Account created successfully!');
       router.push('/');
-    } catch {
-      toast.error('Registration failed. Email may already be in use.');
+    } catch (err: unknown) {
+      const msg =
+        (err as { response?: { data?: { message?: string } } })?.response?.data
+          ?.message ?? 'Registration failed. Please try again.';
+      toast.error(msg);
     } finally {
       setLoading(false);
     }

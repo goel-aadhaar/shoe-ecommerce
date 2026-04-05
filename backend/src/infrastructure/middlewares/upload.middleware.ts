@@ -1,4 +1,4 @@
-import { v2 as cloudinary, type UploadApiResponse } from 'cloudinary';
+import { type UploadApiResponse,v2 as cloudinary } from 'cloudinary';
 import multer from 'multer';
 import streamifier from 'streamifier';
 

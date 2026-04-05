@@ -78,7 +78,7 @@ export function AdminDashboard() {
             </thead>
             <tbody className="divide-y divide-brown-100">
               {products.map((p) => {
-                const img = (p.imageSet as ProductImage)?.thumbnail ?? DEFAULT_PLACEHOLDER;
+                const img = p.thumbnail ?? (p.imageSet as ProductImage)?.thumbnail ?? DEFAULT_PLACEHOLDER;
                 return (
                   <tr key={p._id} className="hover:bg-brown-50">
                     <td className="py-3 pr-4">

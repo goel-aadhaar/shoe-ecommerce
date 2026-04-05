@@ -5,6 +5,7 @@ import {
     authMiddleware,
 } from '../../../infrastructure/middlewares/auth.middleware.js';
 import { validate } from '../../../infrastructure/middlewares/validate.middleware.js';
+import { createReviewSchema } from '../../review/validators/review.validators.js';
 import {
     addProductImage,
     addReview,
@@ -26,7 +27,6 @@ import {
     createProductSchema,
     updateProductSchema,
 } from '../validators/product.validators.js';
-import { createReviewSchema } from '../../review/validators/review.validators.js';
 
 const router = Router();
 

@@ -20,8 +20,11 @@ export function LoginForm() {
       await login(email, password);
       toast.success('Welcome back!');
       router.push('/');
-    } catch {
-      toast.error('Invalid email or password');
+    } catch (err: unknown) {
+      const msg =
+        (err as { response?: { data?: { message?: string } } })?.response?.data
+          ?.message ?? 'Invalid email or password';
+      toast.error(msg);
     } finally {
       setLoading(false);
     }

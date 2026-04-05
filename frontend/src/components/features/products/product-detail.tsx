@@ -8,7 +8,7 @@ import { useCart } from '@/hooks/use-cart';
 import { favouriteService } from '@/services/favourite.service';
 import { ProductImageGallery } from './product-image-gallery';
 import { SHOE_SIZES } from '@/constants';
-import type { Product, ProductImage } from '@/types';
+import type { Product } from '@/types';
 
 interface ProductDetailProps {
   product: Product;
@@ -19,8 +19,6 @@ export function ProductDetail({ product }: ProductDetailProps) {
   const { addItem } = useCart();
   const [selectedSize, setSelectedSize] = useState('');
   const [adding, setAdding] = useState(false);
-
-  const imageSet = (product.imageSet as ProductImage) ?? null;
 
   async function handleAddToCart() {
     if (!isAuthenticated) {
@@ -58,7 +56,7 @@ export function ProductDetail({ product }: ProductDetailProps) {
   return (
     <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
       <div className="grid gap-10 lg:grid-cols-2">
-        <ProductImageGallery imageSet={imageSet} productName={product.name} />
+        <ProductImageGallery product={product} />
 
         <div className="flex flex-col">
           <p className="text-sm font-medium uppercase tracking-wider text-brown-500">

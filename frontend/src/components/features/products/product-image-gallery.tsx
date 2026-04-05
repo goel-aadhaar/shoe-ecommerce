@@ -3,22 +3,27 @@
 import Image from 'next/image';
 import { useState } from 'react';
 import { DEFAULT_PLACEHOLDER } from '@/constants';
-import type { ProductImage } from '@/types';
+import type { Product, ProductImage } from '@/types';
 
 interface ProductImageGalleryProps {
-  imageSet: ProductImage | null;
-  productName: string;
+  product: Product;
 }
 
 export function ProductImageGallery({
-  imageSet,
-  productName,
+  product,
 }: ProductImageGalleryProps) {
-  const allImages = [
-    imageSet?.thumbnail ?? DEFAULT_PLACEHOLDER,
-    imageSet?.hover,
-    ...(imageSet?.sides ?? []),
-  ].filter(Boolean) as string[];
+  const imageSet = product.imageSet as ProductImage | null;
+
+  // Prefer inline images/thumbnail, fall back to imageSet ref
+  const allImages = product.images?.length
+    ? product.images
+    : [
+        imageSet?.thumbnail ?? DEFAULT_PLACEHOLDER,
+        imageSet?.hover,
+        ...(imageSet?.sides ?? []),
+      ].filter(Boolean) as string[];
+
+  const productName = product.name;
 
   const [selectedIndex, setSelectedIndex] = useState(0);
   const mainImage = allImages[selectedIndex] ?? DEFAULT_PLACEHOLDER;

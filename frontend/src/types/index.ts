@@ -9,10 +9,14 @@ export interface Product {
   stock: number;
   for: 'Male' | 'Female';
   color: string;
+  colors: string[];
+  sizes: string[];
   category: Category | string;
   rating: number;
   ratedBy: number;
   attributes: ProductAttribute[];
+  thumbnail: string | null;
+  images: string[];
   imageSet: ProductImage | string | null;
   createdAt: string;
   updatedAt: string;

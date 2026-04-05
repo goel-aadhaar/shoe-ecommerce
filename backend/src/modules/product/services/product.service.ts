@@ -3,18 +3,18 @@ import type { Request, Response } from 'express';
 import { ApiError } from '../../../shared/errors/api-error.class.js';
 import { ApiResponse } from '../../../shared/responses/api-response.builder.js';
 import { asyncHandler } from '../../../shared/utils/async-handler.util.js';
-import { Category } from '../../category/repositories/category.model.js';
-import { CartItem } from '../../cart/repositories/cart-item.model.js';
-import { Favourite } from '../../user/repositories/favourite.model.js';
-import { ProductImage } from '../../product-image/repositories/product-image.model.js';
-import { Review } from '../../review/repositories/review.model.js';
-import { Product } from '../repositories/product.model.js';
-import { ProductDescription } from '../repositories/product-description.model.js';
-import { generateAndStoreEmbedding } from './embedding.service.js';
 import {
     getPaginationMeta,
     getPaginationParams,
 } from '../../../shared/utils/pagination.util.js';
+import { CartItem } from '../../cart/repositories/cart-item.model.js';
+import { Category } from '../../category/repositories/category.model.js';
+import { ProductImage } from '../../product-image/repositories/product-image.model.js';
+import { Review } from '../../review/repositories/review.model.js';
+import { Favourite } from '../../user/repositories/favourite.model.js';
+import { Product } from '../repositories/product.model.js';
+import { ProductDescription } from '../repositories/product-description.model.js';
+import { generateAndStoreEmbedding } from './embedding.service.js';
 
 export const createProduct = asyncHandler(
     async (req: Request, res: Response) => {

@@ -1,4 +1,4 @@
-import { GoogleGenerativeAI, type GenerativeModel } from '@google/generative-ai';
+import { type GenerativeModel,GoogleGenerativeAI } from '@google/generative-ai';
 
 import { config } from '../../../config.js';
 import { ProductDescription } from '../repositories/product-description.model.js';
