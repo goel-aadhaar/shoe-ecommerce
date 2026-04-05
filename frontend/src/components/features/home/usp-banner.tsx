@@ -26,7 +26,7 @@ const USPS = [
 export function UspBanner() {
   return (
     <section className="border-y border-brown-200 bg-white py-10">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+      <div className="container-inner">
         <div className="grid grid-cols-2 gap-8 lg:grid-cols-4">
           {USPS.map((usp) => (
             <div

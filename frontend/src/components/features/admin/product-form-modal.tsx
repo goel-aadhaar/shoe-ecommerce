@@ -142,14 +142,14 @@ export function ProductFormModal({
             <button
               type="button"
               onClick={onClose}
-              className="rounded border border-brown-200 px-4 py-2 text-sm text-brown-700 hover:bg-brown-50"
+              className="btn-outline px-4 py-2 text-brown-700 hover:text-brown-900 border-brown-200 hover:bg-brown-50"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={saving}
-              className="rounded bg-brown-800 px-4 py-2 text-sm font-medium text-cream hover:bg-brown-900 disabled:opacity-50"
+              className="btn-primary px-4 py-2 disabled:opacity-50"
             >
               {saving ? 'Saving...' : isEdit ? 'Update' : 'Create'}
             </button>

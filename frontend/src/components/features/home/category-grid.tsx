@@ -59,8 +59,8 @@ export function CategoryGrid() {
   }, []);
 
   return (
-    <section className="bg-brown-50 py-16">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+    <section className="bg-brown-50 section-padding">
+      <div className="container-inner">
         <div className="text-center">
           <p className="text-sm font-bold uppercase tracking-widest text-copper">
             Browse

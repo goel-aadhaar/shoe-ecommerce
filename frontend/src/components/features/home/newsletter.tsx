@@ -15,12 +15,12 @@ export function Newsletter() {
   }
 
   return (
-    <section className="relative overflow-hidden bg-brown-900 py-16">
+    <section className="relative overflow-hidden bg-brown-900 section-padding">
       {/* Decorative circles */}
       <div className="absolute -left-32 -top-32 h-64 w-64 rounded-full bg-copper/5" />
       <div className="absolute -right-16 -bottom-16 h-48 w-48 rounded-full bg-copper/5" />
 
-      <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
+      <div className="relative container-inner">
         <div className="mx-auto max-w-2xl text-center">
           <p className="text-sm font-bold uppercase tracking-widest text-copper">
             Stay Updated

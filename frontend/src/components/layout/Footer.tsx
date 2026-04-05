@@ -16,7 +16,7 @@ const SUPPORT_LINKS = [
 export function Footer() {
   return (
     <footer className="bg-brown-900 text-brown-200">
-      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+      <div className="container-inner py-12">
         <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
           {/* Brand */}
           <div>

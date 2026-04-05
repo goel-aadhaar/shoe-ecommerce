@@ -5,6 +5,7 @@ import { useParams, useSearchParams } from 'next/navigation';
 import { productService } from '@/services/product.service';
 import { ProductGrid } from '@/components/features/products/product-grid';
 import { ProductFilters } from '@/components/features/products/product-filters';
+import { ProductCardSkeleton } from '@/components/common/skeleton';
 import type { Product, PaginationMeta } from '@/types';
 
 const TITLES: Record<string, string> = {
@@ -77,7 +78,7 @@ export default function CollectionsPage() {
         : TITLES[queryType] ?? 'Collection';
 
   return (
-    <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
+    <div className="container-inner py-8 lg:py-12">
       <h1 className="font-serif text-3xl font-bold text-brown-900">{title}</h1>
 
       <div className="mt-8 flex flex-col gap-8 lg:flex-row">
@@ -86,10 +87,7 @@ export default function CollectionsPage() {
           {loading ? (
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {Array.from({ length: 6 }).map((_, i) => (
-                <div
-                  key={i}
-                  className="aspect-square animate-pulse rounded-lg bg-brown-100"
-                />
+                <ProductCardSkeleton key={i} />
               ))}
             </div>
           ) : (

@@ -15,11 +15,41 @@ import {
   Shield,
 } from "lucide-react";
 
-const NAV_LINKS = [
-  { href: "/", label: "Home" },
-  { href: "/collections/all", label: "Collections" },
-  { href: "/collections/trending", label: "Trending" },
-  { href: "/brands", label: "Brands" },
+import { SearchBar } from "./search-bar";
+import { MegaMenu } from "./mega-menu";
+import { CartDrawer } from "@/components/features/cart/cart-drawer";
+
+const COLLECTIONS_MENU = [
+  {
+    title: "Categories",
+    links: [
+      { label: "All Sneakers", href: "/collections/all" },
+      { label: "Men's Collection", href: "/collections/men" },
+      { label: "Women's Collection", href: "/collections/women" },
+    ],
+  },
+  {
+    title: "Highlights",
+    links: [
+      { label: "Trending Now", href: "/collections/trending" },
+      { label: "New Arrivals", href: "/collections/newArrival" },
+      { label: "Best Sellers", href: "/collections/bestSeller" },
+      { label: "On Sale", href: "/collections/onSale" },
+    ],
+  },
+];
+
+const BRANDS_MENU = [
+  {
+    title: "Top Brands",
+    links: [
+      { label: "Nike", href: "/collections/brand?brand=Nike" },
+      { label: "Jordan", href: "/collections/brand?brand=Jordan" },
+      { label: "Adidas", href: "/collections/brand?brand=adidas Originals" },
+      { label: "Vans", href: "/collections/brand?brand=Vans" },
+      { label: "Converse", href: "/collections/brand?brand=Converse" },
+    ],
+  },
 ];
 
 export function Navbar() {
@@ -30,7 +60,7 @@ export function Navbar() {
 
   return (
     <header className="sticky top-0 z-50 bg-brown-900 text-cream shadow-lg">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="container-inner">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <Link
@@ -42,31 +72,44 @@ export function Navbar() {
 
           {/* Desktop nav */}
           <nav className="hidden md:flex items-center gap-8">
-            {NAV_LINKS.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="text-sm font-medium uppercase tracking-widest text-brown-200 hover:text-copper transition-colors"
-              >
-                {link.label}
-              </Link>
-            ))}
+            <Link
+              href="/"
+              className="py-4 text-sm font-medium uppercase tracking-widest text-brown-200 transition-colors hover:text-copper"
+            >
+              Home
+            </Link>
+            
+            <MegaMenu 
+              label="Collections" 
+              items={COLLECTIONS_MENU} 
+              featuredImage={{
+                src: "https://images.unsplash.com/photo-1552346154-21d32810baa3?auto=format&fit=crop&q=80&w=600",
+                alt: "New Arrivals Feature",
+                href: "/collections/newArrival",
+                label: "SPRING '25"
+              }} 
+            />
+
+            <MegaMenu 
+              label="Brands" 
+              items={BRANDS_MENU} 
+            />
+            
+            <Link
+              href="/contact"
+              className="py-4 text-sm font-medium uppercase tracking-widest text-brown-200 transition-colors hover:text-copper"
+            >
+              Contact
+            </Link>
           </nav>
 
           {/* Right side */}
           <div className="flex items-center gap-4">
+            {/* Search */}
+            <SearchBar />
+
             {/* Cart */}
-            <Link
-              href="/cart"
-              className="relative text-brown-200 hover:text-copper transition-colors"
-            >
-              <ShoppingBag className="h-5 w-5" />
-              {itemCount > 0 && (
-                <span className="absolute -right-2 -top-2 flex h-5 w-5 items-center justify-center rounded-full bg-copper text-[10px] font-bold text-white">
-                  {itemCount}
-                </span>
-              )}
-            </Link>
+            <CartDrawer />
 
             {/* User menu */}
             {isAuthenticated ? (
@@ -157,16 +200,10 @@ export function Navbar() {
         {/* Mobile nav */}
         {mobileOpen && (
           <nav className="border-t border-brown-700 py-4 md:hidden">
-            {NAV_LINKS.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                onClick={() => setMobileOpen(false)}
-                className="block py-2 text-sm uppercase tracking-widest text-brown-200 hover:text-copper"
-              >
-                {link.label}
-              </Link>
-            ))}
+            <Link href="/" onClick={() => setMobileOpen(false)} className="block py-2 text-sm uppercase tracking-widest text-brown-200 hover:text-copper">Home</Link>
+            <Link href="/collections/all" onClick={() => setMobileOpen(false)} className="block py-2 text-sm uppercase tracking-widest text-brown-200 hover:text-copper">Collections</Link>
+            <Link href="/collections/trending" onClick={() => setMobileOpen(false)} className="block py-2 text-sm uppercase tracking-widest text-brown-200 hover:text-copper">Trending</Link>
+            <Link href="/brands" onClick={() => setMobileOpen(false)} className="block py-2 text-sm uppercase tracking-widest text-brown-200 hover:text-copper">Brands</Link>
           </nav>
         )}
       </div>

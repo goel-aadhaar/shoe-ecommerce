@@ -97,7 +97,7 @@ export function CheckoutForm({ orderId, amount }: CheckoutFormProps) {
         <button
           onClick={handlePay}
           disabled={processing}
-          className="mt-6 w-full rounded-md bg-copper px-4 py-3 text-sm font-semibold text-white transition-colors hover:bg-sienna disabled:opacity-50"
+          className="btn-primary mt-6 w-full disabled:opacity-50"
         >
           {processing ? 'Processing...' : `Pay ₹${amount.toLocaleString('en-IN')}`}
         </button>

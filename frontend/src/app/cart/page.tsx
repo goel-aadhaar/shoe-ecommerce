@@ -29,7 +29,7 @@ export default function CartPage() {
         </p>
         <Link
           href="/collections/all"
-          className="mt-6 rounded-md bg-copper px-6 py-2.5 text-sm font-semibold text-white hover:bg-sienna transition-colors"
+          className="btn-primary mt-6 px-6 py-2.5"
         >
           Continue Shopping
         </Link>
@@ -38,7 +38,7 @@ export default function CartPage() {
   }
 
   return (
-    <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
+    <div className="container-inner py-8 lg:py-12">
       <h1 className="font-serif text-3xl font-bold text-brown-900">
         Shopping Cart
       </h1>

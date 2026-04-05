@@ -73,7 +73,7 @@ export function ProfileForm() {
       <button
         type="submit"
         disabled={saving}
-        className="rounded-md bg-brown-800 px-6 py-2.5 text-sm font-semibold text-cream transition-colors hover:bg-brown-900 disabled:opacity-50"
+        className="btn-primary px-6 py-2.5 disabled:opacity-50"
       >
         {saving ? 'Saving...' : 'Save Profile'}
       </button>

@@ -11,7 +11,7 @@ export function HeroSection() {
       <div className="absolute -bottom-32 -left-32 h-80 w-80 rounded-full bg-copper/5" />
       <div className="absolute right-1/4 top-1/3 h-64 w-64 rounded-full bg-copper/3" />
 
-      <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
+      <div className="relative container-inner">
         <div className="flex flex-col items-center py-20 text-center lg:py-28">
           <span className="inline-block rounded-full border border-copper/30 bg-copper/10 px-5 py-2 text-sm font-semibold uppercase tracking-widest text-copper">
             Premium Collection 2025
@@ -31,14 +31,14 @@ export function HeroSection() {
           <div className="mt-10 flex items-center gap-4">
             <Link
               href="/collections/all"
-              className="inline-flex items-center gap-2 rounded-lg bg-copper px-8 py-3.5 text-sm font-bold uppercase tracking-wider text-white transition-colors hover:bg-sienna"
+              className="btn-primary"
             >
               Shop Now
               <ArrowRight className="h-4 w-4" />
             </Link>
             <Link
               href="/brands"
-              className="inline-flex items-center rounded-lg border border-brown-600 px-8 py-3.5 text-sm font-bold uppercase tracking-wider text-brown-200 transition-colors hover:border-cream hover:text-cream"
+              className="btn-outline"
             >
               Explore Brands
             </Link>

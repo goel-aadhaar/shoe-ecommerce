@@ -61,7 +61,7 @@ export default function ShoeDetailPage() {
       <ProductDetail product={product} />
 
       {/* Reviews */}
-      <section className="mx-auto max-w-7xl px-4 pb-16 sm:px-6 lg:px-8">
+      <section className="container-inner pb-16">
         <div className="border-t border-brown-200 pt-10">
           <h2 className="font-serif text-2xl font-bold text-brown-900">
             Reviews ({reviews.length})
@@ -76,7 +76,7 @@ export default function ShoeDetailPage() {
 
       {/* Similar products */}
       {similar.length > 0 && (
-        <section className="mx-auto max-w-7xl px-4 pb-16 sm:px-6 lg:px-8">
+        <section className="container-inner pb-16">
           <h2 className="font-serif text-2xl font-bold text-brown-900">
             You Might Also Like
           </h2>

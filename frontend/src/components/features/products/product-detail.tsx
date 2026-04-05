@@ -7,6 +7,8 @@ import { useAuth } from '@/hooks/use-auth';
 import { useCart } from '@/hooks/use-cart';
 import { favouriteService } from '@/services/favourite.service';
 import { ProductImageGallery } from './product-image-gallery';
+import { VariantSelector } from '@/components/common/variant-selector';
+import { QuantityStepper } from '@/components/common/quantity-stepper';
 import { SHOE_SIZES } from '@/constants';
 import type { Product } from '@/types';
 
@@ -18,6 +20,7 @@ export function ProductDetail({ product }: ProductDetailProps) {
   const { isAuthenticated } = useAuth();
   const { addItem } = useCart();
   const [selectedSize, setSelectedSize] = useState('');
+  const [quantity, setQuantity] = useState(1);
   const [adding, setAdding] = useState(false);
 
   async function handleAddToCart() {
@@ -31,7 +34,7 @@ export function ProductDetail({ product }: ProductDetailProps) {
     }
     setAdding(true);
     try {
-      await addItem(product._id, 1, product.color, selectedSize);
+      await addItem(product._id, quantity, product.color, selectedSize);
       toast.success('Added to cart');
     } catch {
       toast.error('Failed to add to cart');
@@ -54,7 +57,7 @@ export function ProductDetail({ product }: ProductDetailProps) {
   }
 
   return (
-    <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
+    <div className="container-inner py-8 lg:py-12">
       <div className="grid gap-10 lg:grid-cols-2">
         <ProductImageGallery product={product} />
 
@@ -104,24 +107,22 @@ export function ProductDetail({ product }: ProductDetailProps) {
 
           {/* Size */}
           <div className="mt-6">
-            <span className="text-sm font-medium text-brown-600">
-              Select Size:
-            </span>
-            <div className="mt-2 flex flex-wrap gap-2">
-              {SHOE_SIZES.map((size) => (
-                <button
-                  key={size}
-                  onClick={() => setSelectedSize(size)}
-                  className={`rounded border px-4 py-2 text-sm font-medium transition-colors ${
-                    selectedSize === size
-                      ? 'border-copper bg-copper text-white'
-                      : 'border-brown-200 text-brown-700 hover:border-brown-400'
-                  }`}
-                >
-                  {size}
-                </button>
-              ))}
-            </div>
+            <VariantSelector 
+              label="Select Size" 
+              selectedVariant={selectedSize} 
+              onSelect={setSelectedSize}
+              variants={SHOE_SIZES.map(s => ({ id: s, label: s }))} 
+            />
+          </div>
+
+          {/* Quantity */}
+          <div className="mt-6">
+            <span className="text-sm font-medium text-brown-600 block mb-2">Quantity:</span>
+            <QuantityStepper 
+              quantity={quantity} 
+              onChange={setQuantity} 
+              max={product.stock} 
+            />
           </div>
 
           {/* Stock */}
@@ -141,14 +142,14 @@ export function ProductDetail({ product }: ProductDetailProps) {
             <button
               onClick={handleAddToCart}
               disabled={adding || product.stock === 0}
-              className="flex flex-1 items-center justify-center gap-2 rounded-md bg-brown-800 px-6 py-3 text-sm font-semibold text-cream transition-colors hover:bg-brown-900 disabled:opacity-50"
+              className="btn-primary flex flex-1 items-center justify-center gap-2 px-6 py-3 disabled:opacity-50"
             >
               <ShoppingBag className="h-4 w-4" />
               {adding ? 'Adding...' : 'Add to Cart'}
             </button>
             <button
               onClick={handleFavourite}
-              className="flex items-center justify-center rounded-md border-2 border-brown-200 px-4 py-3 text-brown-600 transition-colors hover:border-copper hover:text-copper"
+              className="btn-outline flex items-center justify-center px-4 py-3 hover:border-copper hover:text-copper"
             >
               <Heart className="h-5 w-5" />
             </button>

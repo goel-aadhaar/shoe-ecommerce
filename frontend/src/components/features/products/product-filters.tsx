@@ -2,10 +2,13 @@
 
 import { useRouter, useSearchParams } from 'next/navigation';
 import { BRANDS } from '@/constants';
+import { useState } from 'react';
+import { SlidersHorizontal, X } from 'lucide-react';
 
 export function ProductFilters() {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   const currentBrand = searchParams.get('brand') ?? '';
   const currentGender = searchParams.get('gender') ?? '';
@@ -19,12 +22,11 @@ export function ProductFilters() {
     }
     params.delete('page');
     router.push(`?${params.toString()}`);
+    setMobileOpen(false);
   }
 
-  return (
-    <aside className="w-full space-y-6 rounded-lg border border-brown-200 bg-white p-5 lg:w-64 lg:shrink-0">
-      <h3 className="font-serif text-lg font-bold text-brown-800">Filters</h3>
-
+  const FilterContent = () => (
+    <div className="space-y-6">
       {/* Gender */}
       <div>
         <h4 className="text-xs font-semibold uppercase tracking-wider text-brown-500">
@@ -78,6 +80,49 @@ export function ProductFilters() {
           ))}
         </div>
       </div>
-    </aside>
+    </div>
+  );
+
+  return (
+    <>
+      {/* Mobile Filter Toggle */}
+      <div className="mb-4 flex lg:hidden">
+        <button
+          onClick={() => setMobileOpen(true)}
+          className="flex w-full items-center justify-center gap-2 rounded-lg border border-brown-200 bg-white px-4 py-3 text-sm font-bold uppercase tracking-wider text-brown-800 shadow-sm transition-colors hover:bg-brown-50"
+        >
+          <SlidersHorizontal className="h-4 w-4" />
+          Filter Products
+        </button>
+      </div>
+
+      {/* Mobile Drawer */}
+      {mobileOpen && (
+        <div className="fixed inset-0 z-50 flex lg:hidden">
+          <div 
+            className="fixed inset-0 bg-black/50 transition-opacity"
+            onClick={() => setMobileOpen(false)}
+          />
+          <div className="relative ml-auto w-full max-w-xs bg-white p-6 shadow-xl transition-transform h-full overflow-y-auto">
+            <div className="flex items-center justify-between mb-6">
+              <h3 className="font-serif text-xl font-bold text-brown-900">Filters</h3>
+              <button 
+                onClick={() => setMobileOpen(false)}
+                className="text-brown-500 hover:text-brown-900"
+              >
+                <X className="h-6 w-6" />
+              </button>
+            </div>
+            <FilterContent />
+          </div>
+        </div>
+      )}
+
+      {/* Desktop Sidebar */}
+      <aside className="hidden lg:block w-full rounded-lg border border-brown-200 bg-white p-5 lg:w-64 lg:shrink-0">
+        <h3 className="mb-6 font-serif text-lg font-bold text-brown-800">Filters</h3>
+        <FilterContent />
+      </aside>
+    </>
   );
 }

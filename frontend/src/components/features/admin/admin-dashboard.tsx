@@ -50,7 +50,7 @@ export function AdminDashboard() {
             setEditProduct(null);
             setShowModal(true);
           }}
-          className="flex items-center gap-2 rounded-md bg-copper px-4 py-2 text-sm font-medium text-white hover:bg-sienna transition-colors"
+          className="btn-primary flex items-center gap-2 px-4 py-2"
         >
           <Plus className="h-4 w-4" /> Add Product
         </button>

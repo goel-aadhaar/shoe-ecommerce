@@ -6,6 +6,8 @@ import { useState } from 'react';
 import { Star } from 'lucide-react';
 import type { Product, ProductImage } from '@/types';
 import { DEFAULT_PLACEHOLDER } from '@/constants';
+import { Badge } from '@/components/common/badge';
+import { QuickView } from './quick-view';
 
 interface ProductCardProps {
   product: Product;
@@ -33,15 +35,16 @@ export function ProductCard({ product }: ProductCardProps) {
           className="object-cover transition-transform duration-500 group-hover:scale-105"
         />
         {product.attributes.includes('onSale') && (
-          <span className="absolute left-3 top-3 rounded bg-copper px-2.5 py-1 text-sm font-bold text-white">
-            SALE
-          </span>
+          <div className="absolute left-3 top-3">
+            <Badge variant="accent">SALE</Badge>
+          </div>
         )}
         {product.attributes.includes('newArrival') && (
-          <span className="absolute left-3 top-3 rounded bg-brown-800 px-2.5 py-1 text-sm font-bold text-cream">
-            NEW
-          </span>
+          <div className="absolute left-3 top-3">
+             <Badge variant="default">NEW</Badge>
+          </div>
         )}
+        <QuickView product={product} />
       </div>
 
       <div className="p-4">

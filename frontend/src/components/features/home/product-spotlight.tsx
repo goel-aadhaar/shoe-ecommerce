@@ -27,8 +27,8 @@ export function ProductSpotlight() {
   const allImages = product.images?.length ? product.images : [product.thumbnail ?? DEFAULT_PLACEHOLDER];
 
   return (
-    <section className="bg-brown-900 py-16">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+    <section className="bg-brown-900 section-padding">
+      <div className="container-inner">
         <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-16">
           {/* Images grid */}
           <div className="grid max-w-md grid-cols-2 gap-3 lg:max-w-none">
@@ -116,14 +116,14 @@ export function ProductSpotlight() {
             <div className="mt-10 flex items-center gap-4">
               <Link
                 href={`/shoe/${product._id}`}
-                className="inline-flex items-center gap-2 rounded-lg bg-copper px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-sienna"
+                className="btn-primary"
               >
                 <ShoppingBag className="h-4 w-4" />
                 View Product
               </Link>
               <Link
                 href="/collections/all"
-                className="inline-flex items-center gap-2 rounded-lg border border-brown-600 px-6 py-3 text-sm font-bold text-brown-300 transition-colors hover:border-cream hover:text-cream"
+                className="btn-outline"
               >
                 See All
                 <ArrowRight className="h-4 w-4" />

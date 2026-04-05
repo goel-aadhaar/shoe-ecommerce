@@ -71,8 +71,8 @@ export function FeaturedProducts({
 
   if (loading) {
     return (
-      <section className="py-16">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+      <section className="section-padding">
+        <div className="container-inner">
           <div className="h-8 w-48 animate-pulse rounded bg-brown-100" />
           <div className="mt-10 grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-4">
             {Array.from({ length: 4 }).map((_, i) => (
@@ -91,8 +91,8 @@ export function FeaturedProducts({
   if (products.length === 0) return null;
 
   return (
-    <section className="py-16">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+    <section className="section-padding">
+      <div className="container-inner">
         {/* Section header */}
         <div className="flex items-end justify-between">
           <div>

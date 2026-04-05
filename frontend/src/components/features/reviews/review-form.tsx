@@ -80,7 +80,7 @@ export function ReviewForm({ productId, onReviewAdded }: ReviewFormProps) {
       <button
         type="submit"
         disabled={submitting}
-        className="mt-3 rounded bg-brown-800 px-4 py-2 text-sm font-medium text-cream transition-colors hover:bg-brown-900 disabled:opacity-50"
+        className="btn-primary mt-3 px-4 py-2 disabled:opacity-50"
       >
         {submitting ? 'Submitting...' : 'Submit Review'}
       </button>

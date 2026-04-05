@@ -33,8 +33,8 @@ export function BrandShowcase() {
   }, []);
 
   return (
-    <section className="py-16">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+    <section className="section-padding">
+      <div className="container-inner">
         <div className="text-center">
           <p className="text-sm font-bold uppercase tracking-widest text-copper">
             Trusted By The Best
