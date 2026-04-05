@@ -29,7 +29,29 @@ export const getProfile = asyncHandler(async (req: Request, res: Response) => {
 export const updateProfile = asyncHandler(
     async (req: Request, res: Response) => {
         const userId = req.user?._id;
-        const profile = await Profile.findOneAndUpdate({ userId }, req.body, {
+
+        // Only allow known profile fields to prevent field injection
+        const {
+            fullname,
+            phone,
+            address,
+            city,
+            state,
+            country,
+            pincode,
+            profileImage,
+        } = req.body ?? {};
+        const updateData: Record<string, unknown> = {};
+        if (fullname !== undefined) updateData.fullname = fullname;
+        if (phone !== undefined) updateData.phone = phone;
+        if (address !== undefined) updateData.address = address;
+        if (city !== undefined) updateData.city = city;
+        if (state !== undefined) updateData.state = state;
+        if (country !== undefined) updateData.country = country;
+        if (pincode !== undefined) updateData.pincode = pincode;
+        if (profileImage !== undefined) updateData.profileImage = profileImage;
+
+        const profile = await Profile.findOneAndUpdate({ userId }, updateData, {
             new: true,
             upsert: true,
         });

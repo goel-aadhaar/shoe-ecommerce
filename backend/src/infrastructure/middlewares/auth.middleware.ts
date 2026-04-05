@@ -31,13 +31,11 @@ export const authMiddleware = asyncHandler(
 
             if (!user) throw new ApiError(401, 'Unauthorized, user not found');
 
-            (req as { user?: Request['user'] }).user = user as unknown as Request['user'];
+            (req as { user?: Request['user'] }).user =
+                user as unknown as Request['user'];
             next();
         } catch (error: unknown) {
-            if (
-                error instanceof Error &&
-                error.name === 'JsonWebTokenError'
-            ) {
+            if (error instanceof Error && error.name === 'JsonWebTokenError') {
                 return next(
                     new ApiError(401, 'Unauthorized, invalid token', [
                         error.message,
@@ -56,4 +54,34 @@ export const adminMiddleware = (
 ) => {
     if (req.user && req.user.role === 'admin') return next();
     next(new ApiError(403, 'Access denied, admin only'));
+};
+
+export const optionalAuthMiddleware = async (
+    req: Request,
+    _res: Response,
+    next: NextFunction,
+) => {
+    try {
+        const token =
+            req.cookies?.accessToken ||
+            req.header('Authorization')?.replace('Bearer ', '').trim();
+
+        if (!token) return next();
+
+        const decoded = jwt.verify(
+            token,
+            config.accessTokenSecret,
+        ) as JwtPayload;
+        const user = await User.findById(decoded._id).select(
+            '-password -refreshToken',
+        );
+
+        if (user) {
+            (req as { user?: Request['user'] }).user =
+                user as unknown as Request['user'];
+        }
+        next();
+    } catch {
+        next();
+    }
 };

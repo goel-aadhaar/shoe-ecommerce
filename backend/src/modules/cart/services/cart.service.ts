@@ -31,19 +31,25 @@ export const addToCart = asyncHandler(async (req: Request, res: Response) => {
     let cart = await Cart.findOne({ userId });
     if (!cart) cart = await Cart.create({ userId });
 
+    const { productId, quantity, selectedColor, selectedSize } = req.body ?? {};
+
     let item = await CartItem.findOne({
         cartId: cart._id,
-        productId: req.body?.productId,
+        productId,
+        selectedColor: selectedColor ?? null,
+        selectedSize: selectedSize ?? null,
     });
 
     if (item) {
-        item.quantity += req.body?.quantity || 1;
+        item.quantity += quantity || 1;
         await item.save();
     } else {
         item = await CartItem.create({
             cartId: cart._id,
-            productId: req.body?.productId,
-            quantity: req.body?.quantity || 1,
+            productId,
+            quantity: quantity || 1,
+            selectedColor,
+            selectedSize,
         });
     }
 
@@ -54,7 +60,25 @@ export const addToCart = asyncHandler(async (req: Request, res: Response) => {
 
 export const removeFromCart = asyncHandler(
     async (req: Request, res: Response) => {
-        await CartItem.findByIdAndDelete(req.params.id);
+        const cart = await Cart.findOne({ userId: req.user?._id });
+        if (!cart) {
+            return res
+                .status(404)
+                .json(new ApiResponse(404, 'Cart not found', null));
+        }
+
+        const item = await CartItem.findOneAndDelete({
+            _id: req.params.id,
+            cartId: cart._id,
+        });
+        if (!item) {
+            return res
+                .status(404)
+                .json(
+                    new ApiResponse(404, 'Item not found in your cart', null),
+                );
+        }
+
         return res
             .status(200)
             .json(new ApiResponse(200, 'Item Removed from the Cart', null));

@@ -1,8 +1,11 @@
 import type { Request, Response } from 'express';
 
+import { ApiError } from '../../../shared/errors/api-error.class.js';
 import { ApiResponse } from '../../../shared/responses/api-response.builder.js';
 import { asyncHandler } from '../../../shared/utils/async-handler.util.js';
 import { Category } from '../../category/repositories/category.model.js';
+import { CartItem } from '../../cart/repositories/cart-item.model.js';
+import { Favourite } from '../../user/repositories/favourite.model.js';
 import { ProductImage } from '../../product-image/repositories/product-image.model.js';
 import { Review } from '../../review/repositories/review.model.js';
 import { Product } from '../repositories/product.model.js';
@@ -39,7 +42,13 @@ export const getSimilarShoes = asyncHandler(
         if (!sourceDoc)
             return res
                 .status(404)
-                .json(new ApiResponse(404, 'Embedding not found for this product', null));
+                .json(
+                    new ApiResponse(
+                        404,
+                        'Embedding not found for this product',
+                        null,
+                    ),
+                );
 
         const recommendations = await ProductDescription.aggregate([
             {
@@ -141,6 +150,9 @@ export const getProductById = asyncHandler(
         const product = await Product.findById(req.params.id)
             .populate('category')
             .populate('imageSet');
+
+        if (!product) throw new ApiError(404, 'Product not found');
+
         return res
             .status(200)
             .json(
@@ -283,6 +295,9 @@ export const updateProduct = asyncHandler(
             req.body,
             { new: true },
         );
+
+        if (!product) throw new ApiError(404, 'Product not found');
+
         return res
             .status(200)
             .json(
@@ -293,7 +308,20 @@ export const updateProduct = asyncHandler(
 
 export const deleteProduct = asyncHandler(
     async (req: Request, res: Response) => {
-        await Product.findByIdAndDelete(req.params.id);
+        const productId = req.params.id;
+        const product = await Product.findByIdAndDelete(productId);
+
+        if (!product) throw new ApiError(404, 'Product not found');
+
+        // Cascade delete related documents (preserve OrderItems for history)
+        await Promise.all([
+            ProductImage.deleteMany({ productId }),
+            ProductDescription.deleteMany({ shoe_id: productId }),
+            Review.deleteMany({ productId }),
+            CartItem.deleteMany({ productId }),
+            Favourite.deleteMany({ productId }),
+        ]);
+
         return res
             .status(200)
             .json(new ApiResponse(200, 'Product deleted successfully', null));
@@ -332,10 +360,8 @@ export const getProductReviews = asyncHandler(
         const avgRating =
             reviews.length > 0
                 ? (
-                      reviews.reduce(
-                          (acc, r) => acc + (r.rating ?? 0),
-                          0,
-                      ) / reviews.length
+                      reviews.reduce((acc, r) => acc + (r.rating ?? 0), 0) /
+                      reviews.length
                   ).toFixed(1)
                 : '0';
 

@@ -16,7 +16,7 @@ export const createStripePayment = asyncHandler(
         try {
             const paymentIntent = await stripe.paymentIntents.create({
                 amount: amount * 100,
-                currency: 'usd',
+                currency: 'inr',
                 payment_method_types: ['card'],
             });
 
@@ -49,17 +49,22 @@ export const confirmPayment = asyncHandler(
     async (req: Request, res: Response) => {
         const { transactionId, status } = req.body ?? {};
 
-        const payment = await Payment.findOneAndUpdate(
-            { transactionId },
-            { paymentStatus: status },
-            { new: true },
-        );
+        const payment = await Payment.findOne({ transactionId });
 
         if (!payment) {
             return res
                 .status(404)
                 .json(new ApiResponse(404, 'Payment not found', null));
         }
+
+        // Verify the order belongs to the requesting user
+        const order = await Order.findById(payment.orderId);
+        if (!order || String(order.userId) !== String(req.user?._id)) {
+            throw new ApiError(403, 'Not authorized to confirm this payment');
+        }
+
+        payment.paymentStatus = status;
+        await payment.save();
 
         if (status === 'success') {
             await Order.findByIdAndUpdate(payment.orderId, {

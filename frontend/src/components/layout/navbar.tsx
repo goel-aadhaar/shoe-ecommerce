@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import { useAuth } from '@/hooks/use-auth';
-import { useCart } from '@/hooks/use-cart';
-import { useState } from 'react';
+import Link from "next/link";
+import { useAuth } from "@/hooks/use-auth";
+import { useCart } from "@/hooks/use-cart";
+import { useState } from "react";
 import {
   ShoppingBag,
   User,
@@ -13,13 +13,13 @@ import {
   Heart,
   Package,
   Shield,
-} from 'lucide-react';
+} from "lucide-react";
 
 const NAV_LINKS = [
-  { href: '/', label: 'Home' },
-  { href: '/collections/all', label: 'Collections' },
-  { href: '/collections/trending', label: 'Trending' },
-  { href: '/brands', label: 'Brands' },
+  { href: "/", label: "Home" },
+  { href: "/collections/all", label: "Collections" },
+  { href: "/collections/trending", label: "Trending" },
+  { href: "/brands", label: "Brands" },
 ];
 
 export function Navbar() {
@@ -77,7 +77,7 @@ export function Navbar() {
                 >
                   <User className="h-5 w-5" />
                   <span className="hidden sm:inline text-sm">
-                    {user?.fullName?.split(' ')[0]}
+                    {user?.fullName?.split(" ")[0]}
                   </span>
                 </button>
                 {userMenuOpen && (
@@ -108,7 +108,7 @@ export function Navbar() {
                       >
                         <Heart className="h-4 w-4" /> Favourites
                       </Link>
-                      {user?.role === 'admin' && (
+                      {user?.role === "admin" && (
                         <Link
                           href="/admin"
                           onClick={() => setUserMenuOpen(false)}
@@ -119,8 +119,8 @@ export function Navbar() {
                       )}
                       <hr className="my-1 border-brown-700" />
                       <button
-                        onClick={() => {
-                          logout();
+                        onClick={async () => {
+                          await logout();
                           setUserMenuOpen(false);
                         }}
                         className="flex w-full items-center gap-2 px-4 py-2 text-sm text-brown-300 hover:bg-brown-700 hover:text-red-400"

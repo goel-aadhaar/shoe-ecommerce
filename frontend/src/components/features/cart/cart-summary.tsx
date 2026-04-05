@@ -1,12 +1,12 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
-import { toast } from 'sonner';
-import { useAuth } from '@/hooks/use-auth';
-import { useCart } from '@/hooks/use-cart';
-import { orderService } from '@/services/order.service';
-import type { Product } from '@/types';
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
+import { useAuth } from "@/hooks/use-auth";
+import { useCart } from "@/hooks/use-cart";
+import { orderService } from "@/services/order.service";
+import type { Product } from "@/types";
 
 export function CartSummary() {
   const router = useRouter();
@@ -16,7 +16,7 @@ export function CartSummary() {
 
   async function handleCheckout() {
     if (!isAuthenticated) {
-      router.push('/login');
+      router.push("/login");
       return;
     }
     setCreating(true);
@@ -37,9 +37,9 @@ export function CartSummary() {
         totalAmount: total,
       });
 
-      router.push(`/checkout/${res.data.order._id}`);
+      router.push(`/checkout/${res.data.order._id}?amount=${total}`);
     } catch {
-      toast.error('Failed to create order');
+      toast.error("Failed to create order");
     } finally {
       setCreating(false);
     }
@@ -53,7 +53,7 @@ export function CartSummary() {
       <div className="mt-4 space-y-2 text-sm">
         <div className="flex justify-between text-brown-600">
           <span>Subtotal</span>
-          <span>&#8377;{total.toLocaleString('en-IN')}</span>
+          <span>&#8377;{total.toLocaleString("en-IN")}</span>
         </div>
         <div className="flex justify-between text-brown-600">
           <span>Shipping</span>
@@ -62,7 +62,7 @@ export function CartSummary() {
         <hr className="border-brown-200" />
         <div className="flex justify-between font-serif text-lg font-bold text-brown-900">
           <span>Total</span>
-          <span>&#8377;{total.toLocaleString('en-IN')}</span>
+          <span>&#8377;{total.toLocaleString("en-IN")}</span>
         </div>
       </div>
       <button
@@ -70,7 +70,7 @@ export function CartSummary() {
         disabled={items.length === 0 || creating}
         className="mt-6 w-full rounded-md bg-copper px-4 py-3 text-sm font-semibold text-white transition-colors hover:bg-sienna disabled:opacity-50"
       >
-        {creating ? 'Creating Order...' : 'Proceed to Checkout'}
+        {creating ? "Creating Order..." : "Proceed to Checkout"}
       </button>
     </div>
   );
