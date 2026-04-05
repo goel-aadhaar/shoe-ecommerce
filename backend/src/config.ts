@@ -61,7 +61,7 @@ export const config: AppConfig = {
         : {}),
     corsAllowedOrigins: (
         process.env.CORS_ALLOWED_ORIGINS ??
-        'https://shoe-ecommerce-mu.vercel.app,https://urbansole-pi.vercel.app,http://localhost:3000,http://localhost:5173'
+        'https://shoe-ecommerce-five.vercel.app'
     )
         .split(',')
         .map((s) => s.trim()),
