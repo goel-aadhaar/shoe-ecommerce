@@ -1,5 +1,5 @@
 export const API_BASE_URL =
-  process.env.NEXT_PUBLIC_API_URL ?? '/api/v1';
+  process.env.NEXT_PUBLIC_API_URL || 'https://api-shoe-ecommerce.onrender.com/api/v1';
 
 export const SHOE_SIZES = ['6', '7', '8', '9', '10', '11', '12'] as const;
 
