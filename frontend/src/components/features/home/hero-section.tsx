@@ -1,81 +1,123 @@
 'use client';
 
 import Link from 'next/link';
-import { ArrowRight, Star, Truck, ShieldCheck } from 'lucide-react';
+import { ArrowRight, Star } from 'lucide-react';
+
+const STATS = [
+  { value: '30+', label: 'Silhouettes' },
+  { value: '08', label: 'Hyped Brands' },
+  { value: '4.5', label: 'Avg Rating', star: true },
+];
 
 export function HeroSection() {
   return (
-    <section className="relative overflow-hidden bg-brown-900">
-      {/* Decorative background elements */}
-      <div className="absolute -right-20 -top-20 h-96 w-96 rounded-full bg-copper/5" />
-      <div className="absolute -bottom-32 -left-32 h-80 w-80 rounded-full bg-copper/5" />
-      <div className="absolute right-1/4 top-1/3 h-64 w-64 rounded-full bg-copper/3" />
+    <section className="relative overflow-hidden bg-ink text-bone">
+      {/* Hairline grid */}
+      <div
+        className="pointer-events-none absolute inset-0 opacity-[0.06]"
+        style={{
+          backgroundImage:
+            'linear-gradient(var(--color-bone) 1px, transparent 1px), linear-gradient(90deg, var(--color-bone) 1px, transparent 1px)',
+          backgroundSize: '7rem 7rem',
+        }}
+        aria-hidden
+      />
+      {/* Ghost word */}
+      <span
+        className="pointer-events-none absolute -right-10 bottom-[-3rem] select-none font-serif text-[34vw] leading-none text-bone/[0.03] sm:bottom-[-6rem]"
+        aria-hidden
+      >
+        SOLE
+      </span>
+      {/* Cobalt corner wash */}
+      <div className="pointer-events-none absolute -left-40 -top-40 h-[28rem] w-[28rem] rounded-full bg-cobalt/20 blur-[120px]" />
 
       <div className="relative container-inner">
-        <div className="flex flex-col items-center py-20 text-center lg:py-28">
-          <span className="inline-block rounded-full border border-copper/30 bg-copper/10 px-5 py-2 text-sm font-semibold uppercase tracking-widest text-copper">
-            Premium Collection 2025
-          </span>
-
-          <h1 className="mt-8 font-serif text-5xl font-bold leading-tight text-cream sm:text-6xl lg:text-7xl">
-            Walk in{' '}
-            <span className="text-copper">Confidence</span>
-          </h1>
-
-          <p className="mt-6 max-w-xl text-base leading-relaxed text-brown-300 sm:text-lg">
-            Discover handpicked footwear from the world&apos;s finest brands.
-            Premium quality, timeless style, delivered to your doorstep.
-          </p>
-
-          {/* CTA */}
-          <div className="mt-10 flex items-center gap-4">
-            <Link
-              href="/collections/all"
-              className="btn-primary"
-            >
-              Shop Now
-              <ArrowRight className="h-4 w-4" />
-            </Link>
-            <Link
-              href="/brands"
-              className="btn-outline"
-            >
-              Explore Brands
-            </Link>
+        <div className="grid gap-10 py-20 lg:grid-cols-12 lg:gap-8 lg:py-28">
+          {/* Left rail */}
+          <div className="flex items-start gap-4 lg:col-span-1">
+            <span className="reveal reveal-1 hidden font-mono text-[11px] uppercase tracking-[0.3em] text-bone/40 [writing-mode:vertical-rl] lg:block">
+              Drop 01 — SS&apos;25
+            </span>
           </div>
 
-          {/* Stats */}
-          <div className="mt-16 flex items-center gap-10 sm:gap-16">
-            <div className="text-center">
-              <p className="font-serif text-4xl font-bold text-cream">30+</p>
-              <p className="mt-1 text-sm text-brown-400">Products</p>
+          {/* Headline */}
+          <div className="lg:col-span-8">
+            <p className="reveal reveal-1 section-tag text-volt">
+              Premium Collection 2025
+            </p>
+
+            <h1 className="mt-6 font-serif text-[clamp(3.5rem,12vw,11rem)] leading-[0.82]">
+              <span className="reveal reveal-2 block">Walk In</span>
+              <span className="reveal reveal-3 block text-cobalt">
+                Confidence
+                <span className="ml-2 inline-block h-[0.15em] w-[0.15em] translate-y-[-0.1em] bg-volt align-baseline" />
+              </span>
+            </h1>
+
+            <p className="reveal reveal-4 mt-8 max-w-md font-sans text-base leading-relaxed text-bone/60">
+              Handpicked footwear from the world&apos;s loudest brands.
+              Authentic only. Built for the street, engineered to be seen.
+            </p>
+
+            {/* CTA */}
+            <div className="reveal reveal-5 mt-10 flex flex-wrap items-center gap-4">
+              <Link href="/collections/all" className="btn-primary">
+                Shop The Drop
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+              <Link href="/brands" className="btn-outline on-dark">
+                Explore Brands
+              </Link>
             </div>
-            <div className="h-12 w-px bg-brown-700" />
-            <div className="text-center">
-              <p className="font-serif text-4xl font-bold text-cream">8</p>
-              <p className="mt-1 text-sm text-brown-400">Top Brands</p>
-            </div>
-            <div className="h-12 w-px bg-brown-700" />
-            <div className="text-center">
-              <div className="flex items-center justify-center gap-1">
-                <Star className="h-5 w-5 fill-copper text-copper" />
-                <p className="font-serif text-4xl font-bold text-cream">4.5</p>
+          </div>
+
+          {/* Stats column */}
+          <div className="reveal reveal-6 flex flex-row gap-10 lg:col-span-3 lg:flex-col lg:items-end lg:gap-12 lg:border-l lg:border-bone/10 lg:pl-8">
+            {STATS.map((s) => (
+              <div key={s.label} className="lg:text-right">
+                <div className="flex items-center gap-1.5 lg:justify-end">
+                  {s.star && (
+                    <Star className="h-6 w-6 fill-volt text-volt" />
+                  )}
+                  <p className="font-serif text-5xl leading-none text-bone sm:text-6xl">
+                    {s.value}
+                  </p>
+                </div>
+                <p className="mt-2 font-mono text-[11px] uppercase tracking-[0.22em] text-bone/40">
+                  {s.label}
+                </p>
               </div>
-              <p className="mt-1 text-sm text-brown-400">Avg Rating</p>
-            </div>
+            ))}
           </div>
+        </div>
+      </div>
 
-          {/* Trust badges */}
-          <div className="mt-12 flex items-center gap-8 text-brown-400">
-            <div className="flex items-center gap-2">
-              <Truck className="h-4 w-4 text-copper" />
-              <span className="text-sm">Free Shipping</span>
+      {/* Bottom marquee */}
+      <div className="border-t border-bone/10">
+        <div className="marquee py-4">
+          {[0, 1].map((dup) => (
+            <div className="marquee__track" key={dup} aria-hidden={dup === 1}>
+              {[
+                'NIKE',
+                'JORDAN',
+                'ADIDAS',
+                'NEW BALANCE',
+                'PUMA',
+                'CONVERSE',
+                'VANS',
+                'CROCS',
+              ].map((b) => (
+                <span
+                  key={`${dup}-${b}`}
+                  className="flex items-center gap-8 px-8 font-serif text-3xl uppercase text-bone/30 transition-colors hover:text-volt sm:text-4xl"
+                >
+                  {b}
+                  <span className="inline-block h-2 w-2 shrink-0 bg-cobalt" />
+                </span>
+              ))}
             </div>
-            <div className="flex items-center gap-2">
-              <ShieldCheck className="h-4 w-4 text-copper" />
-              <span className="text-sm">100% Authentic</span>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
     </section>

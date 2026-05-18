@@ -25,58 +25,69 @@ export function ProductFilters() {
     setMobileOpen(false);
   }
 
+  const Row = ({
+    active,
+    onClick,
+    children,
+  }: {
+    active: boolean;
+    onClick: () => void;
+    children: React.ReactNode;
+  }) => (
+    <button
+      onClick={onClick}
+      className={`flex w-full items-center gap-3 border-l-2 px-3 py-2 text-left font-mono text-xs uppercase tracking-[0.12em] transition-all ${
+        active
+          ? 'border-cobalt bg-ink text-bone'
+          : 'border-transparent text-ink/60 hover:border-ink/30 hover:text-ink'
+      }`}
+    >
+      <span
+        className={`h-1.5 w-1.5 ${active ? 'bg-volt' : 'bg-ink/20'}`}
+        aria-hidden
+      />
+      {children}
+    </button>
+  );
+
   const FilterContent = () => (
-    <div className="space-y-6">
-      {/* Gender */}
+    <div className="space-y-8">
       <div>
-        <h4 className="text-xs font-semibold uppercase tracking-wider text-brown-500">
+        <h4 className="font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-ink/40">
           Gender
         </h4>
-        <div className="mt-2 flex flex-col gap-1.5">
+        <div className="mt-3 flex flex-col gap-0.5">
           {['', 'Male', 'Female'].map((g) => (
-            <button
+            <Row
               key={g}
+              active={currentGender === g}
               onClick={() => updateFilter('gender', g)}
-              className={`rounded px-3 py-1.5 text-left text-sm transition-colors ${
-                currentGender === g
-                  ? 'bg-brown-800 text-cream'
-                  : 'text-brown-700 hover:bg-brown-50'
-              }`}
             >
               {g || 'All'}
-            </button>
+            </Row>
           ))}
         </div>
       </div>
 
-      {/* Brands */}
       <div>
-        <h4 className="text-xs font-semibold uppercase tracking-wider text-brown-500">
+        <h4 className="font-mono text-[10px] font-bold uppercase tracking-[0.3em] text-ink/40">
           Brand
         </h4>
-        <div className="mt-2 flex flex-col gap-1.5 max-h-48 overflow-y-auto">
-          <button
+        <div className="mt-3 flex max-h-60 flex-col gap-0.5 overflow-y-auto">
+          <Row
+            active={!currentBrand}
             onClick={() => updateFilter('brand', '')}
-            className={`rounded px-3 py-1.5 text-left text-sm transition-colors ${
-              !currentBrand
-                ? 'bg-brown-800 text-cream'
-                : 'text-brown-700 hover:bg-brown-50'
-            }`}
           >
             All Brands
-          </button>
+          </Row>
           {BRANDS.map((b) => (
-            <button
+            <Row
               key={b}
+              active={currentBrand === b}
               onClick={() => updateFilter('brand', b)}
-              className={`rounded px-3 py-1.5 text-left text-sm transition-colors ${
-                currentBrand === b
-                  ? 'bg-brown-800 text-cream'
-                  : 'text-brown-700 hover:bg-brown-50'
-              }`}
             >
               {b}
-            </button>
+            </Row>
           ))}
         </div>
       </div>
@@ -85,30 +96,32 @@ export function ProductFilters() {
 
   return (
     <>
-      {/* Mobile Filter Toggle */}
-      <div className="mb-4 flex lg:hidden">
+      {/* Mobile toggle */}
+      <div className="mb-2 flex lg:hidden">
         <button
           onClick={() => setMobileOpen(true)}
-          className="flex w-full items-center justify-center gap-2 rounded-lg border border-brown-200 bg-white px-4 py-3 text-sm font-bold uppercase tracking-wider text-brown-800 shadow-sm transition-colors hover:bg-brown-50"
+          className="flex w-full items-center justify-center gap-2 border border-ink/20 px-4 py-3.5 font-mono text-xs font-bold uppercase tracking-[0.2em] text-ink transition-colors hover:bg-ink hover:text-bone"
         >
           <SlidersHorizontal className="h-4 w-4" />
           Filter Products
         </button>
       </div>
 
-      {/* Mobile Drawer */}
+      {/* Mobile drawer */}
       {mobileOpen && (
         <div className="fixed inset-0 z-50 flex lg:hidden">
-          <div 
-            className="fixed inset-0 bg-black/50 transition-opacity"
+          <div
+            className="fixed inset-0 bg-ink/70 backdrop-blur-sm"
             onClick={() => setMobileOpen(false)}
           />
-          <div className="relative ml-auto w-full max-w-xs bg-white p-6 shadow-xl transition-transform h-full overflow-y-auto">
-            <div className="flex items-center justify-between mb-6">
-              <h3 className="font-serif text-xl font-bold text-brown-900">Filters</h3>
-              <button 
+          <div className="relative ml-auto h-full w-full max-w-xs overflow-y-auto bg-bone p-6">
+            <div className="mb-8 flex items-center justify-between border-b border-ink/15 pb-4">
+              <h3 className="font-serif text-3xl uppercase text-ink">
+                Filters
+              </h3>
+              <button
                 onClick={() => setMobileOpen(false)}
-                className="text-brown-500 hover:text-brown-900"
+                className="text-ink/50 transition-colors hover:text-cobalt"
               >
                 <X className="h-6 w-6" />
               </button>
@@ -118,10 +131,14 @@ export function ProductFilters() {
         </div>
       )}
 
-      {/* Desktop Sidebar */}
-      <aside className="hidden lg:block w-full rounded-lg border border-brown-200 bg-white p-5 lg:w-64 lg:shrink-0">
-        <h3 className="mb-6 font-serif text-lg font-bold text-brown-800">Filters</h3>
-        <FilterContent />
+      {/* Desktop sidebar */}
+      <aside className="hidden w-full shrink-0 lg:block lg:w-60">
+        <div className="sticky top-28 border border-ink/15 bg-paper p-6">
+          <h3 className="mb-6 border-b border-ink/15 pb-4 font-serif text-2xl uppercase text-ink">
+            Filters
+          </h3>
+          <FilterContent />
+        </div>
       </aside>
     </>
   );

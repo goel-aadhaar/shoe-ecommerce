@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
+import { ArrowRight } from 'lucide-react';
 import { useAuth } from '@/hooks/use-auth';
 
 export function RegisterForm() {
@@ -36,83 +37,86 @@ export function RegisterForm() {
     }
   }
 
+  const inputCls =
+    'mt-2 w-full border border-ink/20 bg-bone px-4 py-3 font-mono text-sm text-ink placeholder:text-ink/30 focus:border-cobalt focus:outline-none transition-colors';
+  const labelCls =
+    'font-mono text-[10px] font-bold uppercase tracking-[0.25em] text-ink/50';
+
   return (
-    <div className="mx-auto max-w-md">
-      <div className="rounded-lg border-2 border-brown-200 bg-white p-8 shadow-sm">
-        <h1 className="text-center font-serif text-3xl font-bold text-brown-900">
-          Create Account
+    <div className="mx-auto w-full max-w-md">
+      <div className="border border-ink/20 bg-paper p-8 sm:p-10">
+        <p className="section-tag text-ink/50">New Member</p>
+        <h1 className="mt-4 font-serif text-5xl uppercase leading-[0.85] text-ink">
+          Create
+          <br />
+          <span className="text-cobalt">Account</span>
         </h1>
-        <p className="mt-2 text-center text-sm text-brown-500">
-          Join the Urban Sole family
+        <p className="mt-3 font-sans text-sm text-ink/50">
+          Join the Urban Sole club.
         </p>
 
-        <form onSubmit={handleSubmit} className="mt-8 space-y-4">
+        <form onSubmit={handleSubmit} className="mt-8 space-y-5">
           <div>
-            <label className="text-sm font-medium text-brown-700">
-              Full Name
-            </label>
+            <label className={labelCls}>Full Name</label>
             <input
               type="text"
               value={fullName}
               onChange={(e) => setFullName(e.target.value)}
               required
-              className="mt-1 w-full rounded border border-brown-200 bg-cream px-3 py-2.5 text-sm text-brown-800 placeholder:text-brown-400 focus:border-copper focus:outline-none"
+              className={inputCls}
               placeholder="John Doe"
             />
           </div>
           <div>
-            <label className="text-sm font-medium text-brown-700">Email</label>
+            <label className={labelCls}>Email</label>
             <input
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              className="mt-1 w-full rounded border border-brown-200 bg-cream px-3 py-2.5 text-sm text-brown-800 placeholder:text-brown-400 focus:border-copper focus:outline-none"
+              className={inputCls}
               placeholder="you@example.com"
             />
           </div>
           <div>
-            <label className="text-sm font-medium text-brown-700">
-              Password
-            </label>
+            <label className={labelCls}>Password</label>
             <input
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
               minLength={6}
-              className="mt-1 w-full rounded border border-brown-200 bg-cream px-3 py-2.5 text-sm text-brown-800 placeholder:text-brown-400 focus:border-copper focus:outline-none"
+              className={inputCls}
               placeholder="Min 6 characters"
             />
           </div>
           <div>
-            <label className="text-sm font-medium text-brown-700">
-              Confirm Password
-            </label>
+            <label className={labelCls}>Confirm Password</label>
             <input
               type="password"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
               required
               minLength={6}
-              className="mt-1 w-full rounded border border-brown-200 bg-cream px-3 py-2.5 text-sm text-brown-800 placeholder:text-brown-400 focus:border-copper focus:outline-none"
+              className={inputCls}
               placeholder="Re-enter password"
             />
           </div>
           <button
             type="submit"
             disabled={loading}
-            className="btn-primary w-full py-2.5 disabled:opacity-50"
+            className="btn-primary w-full disabled:opacity-50"
           >
-            {loading ? 'Creating account...' : 'Create Account'}
+            {loading ? 'Creating Account…' : 'Create Account'}
+            {!loading && <ArrowRight className="h-4 w-4" />}
           </button>
         </form>
 
-        <p className="mt-6 text-center text-sm text-brown-500">
-          Already have an account?{' '}
+        <p className="mt-8 border-t border-ink/15 pt-6 text-center font-mono text-xs uppercase tracking-[0.15em] text-ink/50">
+          Already a member?{' '}
           <Link
             href="/login"
-            className="font-medium text-copper hover:text-sienna"
+            className="font-bold text-cobalt hover:text-ink"
           >
             Sign in
           </Link>

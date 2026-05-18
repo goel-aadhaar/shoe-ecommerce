@@ -3,199 +3,366 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/*
+  ─────────────────────────────────────────────────────────────
+  URBAN SOLE — "Kinetic Editorial Streetwear"
+  Ink + Bone + electric Cobalt, with a Volt-lime spark.
+  Anton (display) · Hanken Grotesk (body) · Space Mono (data)
+  Existing token names are remapped so the whole app inherits
+  the new system; redesigned surfaces add editorial structure.
+  ─────────────────────────────────────────────────────────────
+*/
+
 @theme inline {
-  --color-brown-950: #1a1210;
-  --color-brown-900: #2c2320;
-  --color-brown-800: #3b2f2f;
-  --color-brown-700: #4e3c36;
-  --color-brown-600: #6b4c3f;
-  --color-brown-500: #8b6a52;
-  --color-brown-400: #a0522d;
-  --color-brown-300: #c4956a;
-  --color-brown-200: #dcc4a8;
-  --color-brown-100: #f0e6d8;
-  --color-brown-50: #f5f0e8;
-  --color-cream: #faf6f1;
-  --color-copper: #a0522d;
-  --color-sienna: #8b4513;
+  /* Raw palette */
+  --color-ink: #0b0b0b;
+  --color-ink-soft: #141210;
+  --color-carbon: #1c1916;
+  --color-bone: #ece7da;
+  --color-bone-deep: #e1dac9;
+  --color-paper: #ffffff;
+  --color-cobalt: #1a14ff;
+  --color-cobalt-deep: #110bcc;
+  --color-volt: #d8ff00;
 
-  --font-serif: "Playfair Display", Georgia, serif;
-  --font-sans: "Inter", system-ui, sans-serif;
+  /* ── Legacy token remap (keeps untouched pages on-brand) ── */
+  --color-brown-950: #000000;
+  --color-brown-900: #0b0b0b;
+  --color-brown-800: #161310;
+  --color-brown-700: #262119;
+  --color-brown-600: #3a342a;
+  --color-brown-500: #6f6757;
+  --color-brown-400: #8a8170;
+  --color-brown-300: #a89f8b;
+  --color-brown-200: #cdc6b3;
+  --color-brown-100: #e1dac9;
+  --color-brown-50: #f2eee3;
+  --color-cream: #ece7da;
+  --color-copper: #1a14ff;
+  --color-sienna: #110bcc;
 
-  --color-background: var(--color-cream);
-  --color-foreground: var(--color-brown-900);
-  --color-card: #ffffff;
-  --color-card-foreground: var(--color-brown-900);
-  --color-primary: var(--color-brown-800);
-  --color-primary-foreground: var(--color-cream);
-  --color-secondary: var(--color-brown-100);
-  --color-secondary-foreground: var(--color-brown-800);
-  --color-accent: var(--color-copper);
+  --font-serif: "Anton", "Arial Narrow", sans-serif;
+  --font-sans: "Hanken Grotesk", system-ui, sans-serif;
+  --font-mono: "Space Mono", ui-monospace, monospace;
+
+  --color-background: var(--color-bone);
+  --color-foreground: var(--color-ink);
+  --color-card: var(--color-paper);
+  --color-card-foreground: var(--color-ink);
+  --color-primary: var(--color-ink);
+  --color-primary-foreground: var(--color-bone);
+  --color-secondary: var(--color-bone-deep);
+  --color-secondary-foreground: var(--color-ink);
+  --color-accent: var(--color-cobalt);
   --color-accent-foreground: #ffffff;
-  --color-muted: var(--color-brown-100);
-  --color-muted-foreground: var(--color-brown-600);
-  --color-border: var(--color-brown-200);
-  --color-ring: var(--color-copper);
-  --color-destructive: #b91c1c;
+  --color-muted: var(--color-bone-deep);
+  --color-muted-foreground: #6f6757;
+  --color-border: #cdc6b3;
+  --color-ring: var(--color-cobalt);
+  --color-destructive: #d92b1c;
   --color-destructive-foreground: #ffffff;
-  --radius: 0.375rem;
+  --radius: 0rem;
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
 body {
   font-family: var(--font-sans);
-  background-color: var(--color-cream);
-  color: var(--color-brown-900);
+  background-color: var(--color-bone);
+  color: var(--color-ink);
+  font-feature-settings: "ss01", "cv01";
 }
 
+/* Anton is a display face — give it editorial proportions everywhere */
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-serif);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  line-height: 0.92;
+  text-transform: uppercase;
 }
 
 ::selection {
-  background-color: var(--color-brown-300);
-  color: var(--color-brown-950);
+  background-color: var(--color-volt);
+  color: var(--color-ink);
 }
 
-/* Scrollbar styling */
+a, button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ─── Scrollbar ─── */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 11px;
+  height: 11px;
 }
-
 ::-webkit-scrollbar-track {
-  background: var(--color-brown-100);
+  background: var(--color-ink);
 }
-
 ::-webkit-scrollbar-thumb {
-  background: var(--color-brown-400);
-  border-radius: 4px;
+  background: var(--color-cobalt);
+  border: 3px solid var(--color-ink);
 }
-
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-brown-600);
+  background: var(--color-volt);
 }
 
-/* Product slider nav arrows */
-.product-slider-btn {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: white;
-  border: 1px solid var(--color-brown-200);
-  color: var(--color-brown-700);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.2s;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-}
-.product-slider-btn:hover {
-  background: var(--color-copper);
-  color: white;
-  border-color: var(--color-copper);
-}
-.product-slider-btn.swiper-button-disabled {
-  opacity: 0.3;
-  cursor: default;
-}
-.product-slider-btn.swiper-button-disabled:hover {
-  background: white;
-  color: var(--color-brown-700);
-  border-color: var(--color-brown-200);
+/* ─── Film grain + atmosphere overlay ─── */
+.grain-layer {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  opacity: 0.05;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 220 220' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
-/* Testimonial bullets */
-.testimonial-bullet {
-  display: inline-block;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--color-brown-200);
-  margin: 0 4px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-.testimonial-bullet-active {
-  width: 24px;
-  border-radius: 4px;
-  background: var(--color-copper);
-}
-
-/* ─── Layout Utilities ─── */
+/* ─── Layout ─── */
 .container-inner {
   margin-left: auto;
   margin-right: auto;
   width: 100%;
-  max-width: 80rem;
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
+  max-width: 90rem;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
 }
-
 @media (min-width: 640px) {
-  .container-inner {
-    padding-left: 2.5rem;
-    padding-right: 2.5rem;
-  }
+  .container-inner { padding-left: 2rem; padding-right: 2rem; }
 }
-
 @media (min-width: 1024px) {
-  .container-inner {
-    padding-left: 4rem;
-    padding-right: 4rem;
-  }
+  .container-inner { padding-left: 3.5rem; padding-right: 3.5rem; }
 }
 
 .section-padding {
-  padding-top: 3rem;
-  padding-bottom: 3rem;
+  padding-top: 4.5rem;
+  padding-bottom: 4.5rem;
 }
-
 @media (min-width: 1024px) {
-  .section-padding {
-    padding-top: 5rem;
-    padding-bottom: 5rem;
-  }
+  .section-padding { padding-top: 7rem; padding-bottom: 7rem; }
 }
 
-/* ─── Button Utilities ─── */
+/* ─── Editorial helpers ─── */
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.28em;
+}
+
+.display {
+  font-family: var(--font-serif);
+  text-transform: uppercase;
+  line-height: 0.86;
+  letter-spacing: -0.015em;
+}
+
+.display-outline {
+  -webkit-text-stroke: 1.5px currentColor;
+  color: transparent;
+}
+
+.index-num {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+}
+
+.rule {
+  height: 1px;
+  background: currentColor;
+  opacity: 0.18;
+}
+
+.section-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+}
+.section-tag::before {
+  content: "";
+  width: 0.5rem;
+  height: 0.5rem;
+  background: var(--color-cobalt);
+  display: inline-block;
+}
+
+/* ─── Buttons ─── */
 .btn-primary {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
-  border-radius: 0.5rem;
-  background-color: var(--color-copper);
-  padding: 0.875rem 2rem;
-  font-size: 0.875rem;
+  gap: 0.6rem;
+  background-color: var(--color-cobalt);
+  padding: 1.05rem 2.25rem;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.14em;
   color: #fff;
-  transition: background-color 0.2s;
+  border: 1px solid var(--color-cobalt);
+  position: relative;
+  transition: transform 0.18s ease, background-color 0.18s ease,
+    color 0.18s ease, box-shadow 0.18s ease;
 }
-
 .btn-primary:hover {
-  background-color: var(--color-sienna);
+  background-color: var(--color-volt);
+  border-color: var(--color-volt);
+  color: var(--color-ink);
+  box-shadow: 6px 6px 0 0 var(--color-ink);
+  transform: translate(-3px, -3px);
 }
 
 .btn-outline {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
-  border-radius: 0.5rem;
-  border: 1px solid var(--color-brown-600);
-  padding: 0.875rem 2rem;
-  font-size: 0.875rem;
+  gap: 0.6rem;
+  border: 1px solid currentColor;
+  padding: 1.05rem 2.25rem;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: var(--color-brown-200);
-  transition: all 0.2s;
+  letter-spacing: 0.14em;
+  color: var(--color-ink);
+  background: transparent;
+  transition: background-color 0.18s ease, color 0.18s ease,
+    box-shadow 0.18s ease, transform 0.18s ease;
 }
-
 .btn-outline:hover {
-  border-color: var(--color-cream);
-  color: var(--color-cream);
+  box-shadow: 5px 5px 0 0 currentColor;
+  transform: translate(-2px, -2px);
+}
+/* On dark surfaces */
+.btn-outline.on-dark {
+  color: var(--color-bone);
+}
+.btn-outline.on-dark:hover {
+  background-color: var(--color-bone);
+  color: var(--color-ink);
+  box-shadow: none;
+  transform: translate(-2px, -2px);
 }
 
+/* ─── Slider nav arrows ─── */
+.product-slider-btn {
+  width: 46px;
+  height: 46px;
+  background: transparent;
+  border: 1px solid var(--color-ink);
+  color: var(--color-ink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.18s;
+}
+.product-slider-btn:hover {
+  background: var(--color-cobalt);
+  color: #fff;
+  border-color: var(--color-cobalt);
+}
+.product-slider-btn.swiper-button-disabled {
+  opacity: 0.25;
+  cursor: default;
+}
+.product-slider-btn.swiper-button-disabled:hover {
+  background: transparent;
+  color: var(--color-ink);
+  border-color: var(--color-ink);
+}
+
+/* ─── Testimonial bullets ─── */
+.testimonial-bullet {
+  display: inline-block;
+  width: 26px;
+  height: 3px;
+  background: rgba(11, 11, 11, 0.18);
+  margin: 0 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.testimonial-bullet-active {
+  background: var(--color-cobalt);
+}
+
+/* ─── Marquee ─── */
+.marquee {
+  display: flex;
+  overflow: hidden;
+  user-select: none;
+}
+.marquee__track {
+  display: flex;
+  flex-shrink: 0;
+  gap: 0;
+  min-width: 100%;
+  animation: marquee-scroll 38s linear infinite;
+}
+.marquee--reverse .marquee__track {
+  animation-direction: reverse;
+}
+.marquee:hover .marquee__track {
+  animation-play-state: paused;
+}
+@keyframes marquee-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-100%); }
+}
+
+/* ─── Load reveals ─── */
+@keyframes rise {
+  from { opacity: 0; transform: translateY(28px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes wipe-in {
+  from { clip-path: inset(0 100% 0 0); }
+  to { clip-path: inset(0 0 0 0); }
+}
+.reveal {
+  opacity: 0;
+  animation: rise 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+.reveal-1 { animation-delay: 0.05s; }
+.reveal-2 { animation-delay: 0.15s; }
+.reveal-3 { animation-delay: 0.25s; }
+.reveal-4 { animation-delay: 0.35s; }
+.reveal-5 { animation-delay: 0.45s; }
+.reveal-6 { animation-delay: 0.55s; }
+
+/* ─── Scroll reveal (IntersectionObserver toggles .in-view) ─── */
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(34px);
+  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+.scroll-reveal.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal, .scroll-reveal { opacity: 1; transform: none; animation: none; }
+  .marquee__track { animation: none; }
+}
+
+/* ─── Media hover (product cards) ─── */
+.media-zoom {
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.group:hover .media-zoom {
+  transform: scale(1.06);
+}

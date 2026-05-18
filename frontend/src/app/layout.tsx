@@ -1,27 +1,36 @@
 import type { Metadata } from 'next';
-import { Playfair_Display, Inter } from 'next/font/google';
+import { Anton, Hanken_Grotesk, Space_Mono } from 'next/font/google';
 import { Providers } from '@/providers/providers';
 import { Navbar } from '@/components/layout/navbar';
 import { Breadcrumbs } from '@/components/layout/breadcrumbs';
 import { Footer } from '@/components/layout/Footer';
+import { ScrollReveal } from '@/components/common/scroll-reveal';
 import './globals.css';
 
-const playfair = Playfair_Display({
+const anton = Anton({
   subsets: ['latin'],
+  weight: '400',
   variable: '--font-serif',
   display: 'swap',
 });
 
-const inter = Inter({
+const hanken = Hanken_Grotesk({
   subsets: ['latin'],
   variable: '--font-sans',
   display: 'swap',
 });
 
+const spaceMono = Space_Mono({
+  subsets: ['latin'],
+  weight: ['400', '700'],
+  variable: '--font-mono',
+  display: 'swap',
+});
+
 export const metadata: Metadata = {
-  title: 'Urban Sole — Premium Footwear',
+  title: 'URBAN SOLE — Footwear, Engineered Loud',
   description:
-    'Discover timeless, premium footwear at Urban Sole. Shoes crafted for style and comfort.',
+    'A curated arsenal of premium sneakers. Hyped silhouettes, authentic only, shipped fast. Step louder.',
 };
 
 export default function RootLayout({
@@ -30,9 +39,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${playfair.variable} ${inter.variable}`}>
-      <body className="min-h-screen flex flex-col bg-cream font-sans text-brown-900 antialiased">
+    <html
+      lang="en"
+      className={`${anton.variable} ${hanken.variable} ${spaceMono.variable}`}
+    >
+      <body className="min-h-screen flex flex-col bg-bone font-sans text-ink antialiased">
+        <div className="grain-layer" aria-hidden />
         <Providers>
+          <ScrollReveal />
           <Navbar />
           <Breadcrumbs />
           <main className="flex-1">{children}</main>

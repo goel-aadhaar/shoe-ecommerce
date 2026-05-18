@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Send } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { toast } from 'sonner';
 
 export function Newsletter() {
@@ -15,48 +15,55 @@ export function Newsletter() {
   }
 
   return (
-    <section className="relative overflow-hidden bg-brown-900 section-padding">
-      {/* Decorative circles */}
-      <div className="absolute -left-32 -top-32 h-64 w-64 rounded-full bg-copper/5" />
-      <div className="absolute -right-16 -bottom-16 h-48 w-48 rounded-full bg-copper/5" />
+    <section className="relative overflow-hidden bg-cobalt text-white section-padding">
+      {/* Ghost word */}
+      <span
+        className="pointer-events-none absolute -bottom-10 left-1/2 -translate-x-1/2 select-none font-serif text-[24vw] leading-none text-white/[0.07]"
+        aria-hidden
+      >
+        CLUB
+      </span>
 
       <div className="relative container-inner">
-        <div className="mx-auto max-w-2xl text-center">
-          <p className="text-sm font-bold uppercase tracking-widest text-copper">
+        <div className="mx-auto max-w-3xl text-center">
+          <p className="font-mono text-[11px] font-bold uppercase tracking-[0.3em] text-volt">
             Stay Updated
           </p>
-          <h2 className="mt-2 font-serif text-3xl font-bold text-cream">
-            Join the Urban Sole Club
+          <h2 className="mt-5 font-serif text-[clamp(2.75rem,8vw,7rem)] leading-[0.85]">
+            Join The
+            <br />
+            Urban Sole Club
           </h2>
-          <p className="mt-4 text-base text-brown-300">
-            Get early access to new drops, exclusive deals, and style
-            inspiration delivered to your inbox.
+          <p className="mx-auto mt-6 max-w-md font-sans text-sm leading-relaxed text-white/70">
+            Early access to new drops, exclusive deals, and the loudest style
+            intel — straight to your inbox.
           </p>
 
           <form
             onSubmit={handleSubmit}
-            className="mt-8 flex flex-col gap-3 sm:flex-row sm:gap-0"
+            className="mx-auto mt-10 flex max-w-xl flex-col gap-3 sm:flex-row sm:gap-0"
           >
             <input
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="Enter your email"
+              placeholder="your@email.com"
               required
               suppressHydrationWarning
-              className="flex-1 rounded-lg border border-brown-700 bg-brown-800 px-5 py-3.5 text-base text-cream placeholder:text-brown-500 focus:border-copper focus:outline-none sm:rounded-r-none"
+              className="flex-1 border border-white/30 bg-transparent px-5 py-4 font-mono text-sm uppercase tracking-wider text-white placeholder:text-white/40 focus:border-volt focus:outline-none"
             />
             <button
               type="submit"
               suppressHydrationWarning
-              className="flex items-center justify-center gap-2 rounded-lg bg-copper px-8 py-3.5 text-sm font-bold uppercase tracking-wider text-white transition-colors hover:bg-sienna sm:rounded-l-none"
+              className="group flex items-center justify-center gap-2 bg-volt px-8 py-4 font-mono text-xs font-bold uppercase tracking-[0.2em] text-ink transition-colors hover:bg-white"
             >
-              Subscribe <Send className="h-4 w-4" />
+              Subscribe
+              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </button>
           </form>
 
-          <p className="mt-4 text-sm text-brown-500">
-            No spam, unsubscribe anytime. We respect your privacy.
+          <p className="mt-5 font-mono text-[10px] uppercase tracking-[0.2em] text-white/50">
+            No spam. Unsubscribe anytime.
           </p>
         </div>
       </div>

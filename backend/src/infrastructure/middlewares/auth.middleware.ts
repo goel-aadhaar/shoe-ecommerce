@@ -35,11 +35,19 @@ export const authMiddleware = asyncHandler(
                 user as unknown as Request['user'];
             next();
         } catch (error: unknown) {
-            if (error instanceof Error && error.name === 'JsonWebTokenError') {
+            // TokenExpiredError / NotBeforeError both extend JsonWebTokenError.
+            // Map all of them to 401 so the client can trigger token refresh
+            // instead of receiving a 500.
+            if (error instanceof jwt.JsonWebTokenError) {
+                const expired = error instanceof jwt.TokenExpiredError;
                 return next(
-                    new ApiError(401, 'Unauthorized, invalid token', [
-                        error.message,
-                    ]),
+                    new ApiError(
+                        401,
+                        expired
+                            ? 'Unauthorized, token expired'
+                            : 'Unauthorized, invalid token',
+                        [error.message],
+                    ),
                 );
             }
             next(error);

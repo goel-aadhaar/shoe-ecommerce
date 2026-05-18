@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
 import type { Swiper as SwiperType } from 'swiper';
@@ -57,7 +57,11 @@ export function FeaturedProducts({
     fetcher
       .then((res) => {
         const data = res.data;
-        setProducts(Array.isArray(data) ? data : (data as { items: Product[] }).items ?? []);
+        setProducts(
+          Array.isArray(data)
+            ? data
+            : (data as { items: Product[] }).items ?? []
+        );
       })
       .catch(() => setProducts([]))
       .finally(() => setLoading(false));
@@ -73,13 +77,13 @@ export function FeaturedProducts({
     return (
       <section className="section-padding">
         <div className="container-inner">
-          <div className="h-8 w-48 animate-pulse rounded bg-brown-100" />
-          <div className="mt-10 grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-4">
+          <div className="h-10 w-64 animate-pulse bg-bone-deep" />
+          <div className="mt-12 grid grid-cols-2 gap-px bg-ink/10 sm:grid-cols-3 lg:grid-cols-4">
             {Array.from({ length: 4 }).map((_, i) => (
-              <div key={i} className="space-y-3">
-                <div className="aspect-square animate-pulse rounded-xl bg-brown-100" />
-                <div className="h-4 w-2/3 animate-pulse rounded bg-brown-100" />
-                <div className="h-4 w-1/3 animate-pulse rounded bg-brown-100" />
+              <div key={i} className="bg-paper p-4">
+                <div className="aspect-square animate-pulse bg-bone-deep" />
+                <div className="mt-4 h-3 w-1/2 animate-pulse bg-bone-deep" />
+                <div className="mt-3 h-5 w-2/3 animate-pulse bg-bone-deep" />
               </div>
             ))}
           </div>
@@ -91,22 +95,19 @@ export function FeaturedProducts({
   if (products.length === 0) return null;
 
   return (
-    <section className="section-padding">
+    <section className="scroll-reveal section-padding">
       <div className="container-inner">
         {/* Section header */}
-        <div className="flex items-end justify-between">
+        <div className="flex flex-wrap items-end justify-between gap-6 border-b border-ink/15 pb-7">
           <div>
             {subtitle && (
-              <p className="text-sm font-bold uppercase tracking-widest text-copper">
-                {subtitle}
-              </p>
+              <p className="section-tag text-ink/60">{subtitle}</p>
             )}
-            <h2 className="mt-2 font-serif text-3xl font-bold text-brown-900">
+            <h2 className="mt-4 font-serif text-[clamp(2.5rem,7vw,6rem)] leading-[0.85] text-ink">
               {title}
             </h2>
-            <div className="mt-3 h-0.5 w-12 rounded-full bg-copper" />
           </div>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-6">
             <div className="hidden items-center gap-2 sm:flex">
               <button
                 onClick={() => swiperRef.current?.slidePrev()}
@@ -114,7 +115,7 @@ export function FeaturedProducts({
                 className="product-slider-btn"
                 aria-label="Previous"
               >
-                <ChevronLeft className="h-5 w-5" />
+                <ArrowLeft className="h-5 w-5" />
               </button>
               <button
                 onClick={() => swiperRef.current?.slideNext()}
@@ -122,14 +123,15 @@ export function FeaturedProducts({
                 className="product-slider-btn"
                 aria-label="Next"
               >
-                <ChevronRight className="h-5 w-5" />
+                <ArrowRight className="h-5 w-5" />
               </button>
             </div>
             <Link
               href={viewAllHref}
-              className="text-sm font-bold text-copper transition-colors hover:text-sienna"
+              className="group flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-[0.2em] text-ink transition-colors hover:text-cobalt"
             >
-              View All &rarr;
+              View All
+              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </Link>
           </div>
         </div>
@@ -138,14 +140,17 @@ export function FeaturedProducts({
         <div className="mt-10">
           <Swiper
             modules={[Navigation]}
-            onSwiper={(s) => { swiperRef.current = s; updateNav(); }}
+            onSwiper={(s) => {
+              swiperRef.current = s;
+              updateNav();
+            }}
             onSlideChange={updateNav}
-            spaceBetween={20}
-            slidesPerView={1.4}
+            spaceBetween={16}
+            slidesPerView={1.3}
             breakpoints={{
-              480: { slidesPerView: 2.2, spaceBetween: 20 },
-              768: { slidesPerView: 3, spaceBetween: 24 },
-              1024: { slidesPerView: 4, spaceBetween: 24 },
+              480: { slidesPerView: 2.1, spaceBetween: 16 },
+              768: { slidesPerView: 3, spaceBetween: 16 },
+              1024: { slidesPerView: 4, spaceBetween: 16 },
             }}
           >
             {products.map((p) => (

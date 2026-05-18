@@ -3,27 +3,12 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   reactCompiler: true,
   images: {
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'res.cloudinary.com',
-        port: '',
-        pathname: '/**',
-      },
-      {
-        protocol: 'https',
-        hostname: 'www.superkicks.in',
-        port: '',
-        pathname: '/**',
-      },
-      {
-        protocol: 'https',
-        hostname: 'placehold.co',
-        port: '',
-        pathname: '/**',
-      },
-    ],
+    // Catalog images come from arbitrary external hosts (superkicks, cloudinary,
+    // unsplash, etc.). Allow any https source so next/image never silently
+    // fails to render a product photo.
+    remotePatterns: [{ protocol: 'https', hostname: '**' }],
     minimumCacheTTL: 60 * 60 * 24 * 30,
+    formats: ['image/avif', 'image/webp'],
   },
   async rewrites() {
     return [
@@ -49,7 +34,11 @@ const nextConfig: NextConfig = {
   compress: true,
   experimental: {
     optimizeCss: true,
-    optimizePackageImports: ['lucide-react'],
+    optimizePackageImports: [
+      'lucide-react',
+      '@phosphor-icons/react',
+      'react-icons',
+    ],
   },
   poweredByHeader: false,
 };

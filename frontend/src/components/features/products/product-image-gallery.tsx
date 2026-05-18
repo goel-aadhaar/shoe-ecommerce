@@ -10,25 +10,22 @@ interface ProductImageGalleryProps {
   product: Product;
 }
 
-export function ProductImageGallery({
-  product,
-}: ProductImageGalleryProps) {
+export function ProductImageGallery({ product }: ProductImageGalleryProps) {
   const imageSet = product.imageSet as ProductImage | null;
 
-  // Prefer inline images/thumbnail, fall back to imageSet ref
   const allImages = product.images?.length
     ? product.images
-    : [
+    : ([
         imageSet?.thumbnail ?? DEFAULT_PLACEHOLDER,
         imageSet?.hover,
         ...(imageSet?.sides ?? []),
-      ].filter(Boolean) as string[];
+      ].filter(Boolean) as string[]);
 
   const productName = product.name;
 
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
-  
+
   const mainImage = allImages[selectedIndex] ?? DEFAULT_PLACEHOLDER;
 
   function handleNext() {
@@ -40,43 +37,47 @@ export function ProductImageGallery({
   }
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-3">
       {/* Main image */}
-      <div className="group relative aspect-square overflow-hidden rounded-lg border border-brown-200 bg-white">
+      <div className="group relative aspect-square overflow-hidden border border-ink/15 bg-bone">
         <Image
           src={mainImage}
           alt={productName}
           fill
           sizes="(max-width: 768px) 100vw, 50vw"
-          className="object-cover transition-transform duration-500 group-hover:scale-105"
+          className="object-cover transition-transform duration-700 group-hover:scale-105"
           priority
         />
+        <span className="absolute left-0 top-4 bg-ink px-3 py-1.5 font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-bone">
+          {product.brand}
+        </span>
         <button
           onClick={() => setIsLightboxOpen(true)}
-          className="absolute bottom-4 right-4 rounded-full bg-white/80 p-2 text-brown-900 opacity-0 shadow-sm backdrop-blur transition-all hover:bg-copper hover:text-white group-hover:opacity-100"
+          className="absolute bottom-4 right-4 flex h-10 w-10 items-center justify-center bg-ink text-bone opacity-0 transition-all hover:bg-cobalt group-hover:opacity-100"
+          aria-label="Expand image"
         >
-          <Maximize2 className="h-5 w-5" />
+          <Maximize2 className="h-4 w-4" />
         </button>
       </div>
 
       {/* Thumbnails */}
       {allImages.length > 1 && (
-        <div className="flex gap-3 overflow-x-auto pb-2">
+        <div className="flex gap-2 overflow-x-auto pb-1">
           {allImages.map((src, i) => (
             <button
               key={i}
               onClick={() => setSelectedIndex(i)}
-              className={`relative h-16 w-16 shrink-0 overflow-hidden rounded border-2 transition-all ${
+              className={`relative h-20 w-20 shrink-0 overflow-hidden border transition-all ${
                 i === selectedIndex
-                  ? 'border-copper'
-                  : 'border-brown-200 opacity-70 hover:opacity-100'
+                  ? 'border-cobalt'
+                  : 'border-ink/15 opacity-60 hover:opacity-100'
               }`}
             >
               <Image
                 src={src}
                 alt={`${productName} view ${i + 1}`}
                 fill
-                sizes="64px"
+                sizes="80px"
                 className="object-cover"
               />
             </button>
@@ -84,28 +85,37 @@ export function ProductImageGallery({
         </div>
       )}
 
-      {/* Lightbox Modal */}
+      {/* Lightbox */}
       {isLightboxOpen && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 p-4">
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-ink/95 p-4">
           <button
             onClick={() => setIsLightboxOpen(false)}
-            className="absolute right-6 top-6 text-white/70 hover:text-white"
+            className="absolute right-6 top-6 text-bone/60 transition-colors hover:text-volt"
+            aria-label="Close"
           >
             <X className="h-8 w-8" />
           </button>
 
           {allImages.length > 1 && (
             <>
-              <button onClick={handlePrev} className="absolute left-4 p-4 text-white/70 hover:text-white">
+              <button
+                onClick={handlePrev}
+                className="absolute left-4 p-4 text-bone/60 transition-colors hover:text-volt"
+                aria-label="Previous"
+              >
                 <ChevronLeft className="h-10 w-10" />
               </button>
-              <button onClick={handleNext} className="absolute right-4 p-4 text-white/70 hover:text-white">
+              <button
+                onClick={handleNext}
+                className="absolute right-4 p-4 text-bone/60 transition-colors hover:text-volt"
+                aria-label="Next"
+              >
                 <ChevronRight className="h-10 w-10" />
               </button>
             </>
           )}
 
-          <div className="relative h-[80vh] w-full max-w-5xl">
+          <div className="relative h-[82vh] w-full max-w-5xl">
             <Image
               src={mainImage}
               alt={productName}

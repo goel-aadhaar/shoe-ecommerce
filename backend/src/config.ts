@@ -11,6 +11,7 @@ export type AppConfig = {
     accessTokenExpiry?: string;
     refreshTokenExpiry?: string;
     stripeSecretKey?: string;
+    stripeWebhookSecret?: string;
     geminiApiKey?: string;
     cloudinary?: {
         cloudName: string;
@@ -44,6 +45,9 @@ export const config: AppConfig = {
         : {}),
     ...(process.env.STRIPE_SECRET_KEY
         ? { stripeSecretKey: process.env.STRIPE_SECRET_KEY }
+        : {}),
+    ...(process.env.STRIPE_WEBHOOK_SECRET
+        ? { stripeWebhookSecret: process.env.STRIPE_WEBHOOK_SECRET }
         : {}),
     ...(process.env.GEMINI_API_KEY
         ? { geminiApiKey: process.env.GEMINI_API_KEY }

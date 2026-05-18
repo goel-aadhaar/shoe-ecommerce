@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
+import { ArrowRight } from "lucide-react";
 import { useAuth } from "@/hooks/use-auth";
 import { useCart } from "@/hooks/use-cart";
 import { orderService } from "@/services/order.service";
@@ -46,32 +47,36 @@ export function CartSummary() {
   }
 
   return (
-    <div className="rounded-lg border border-brown-200 bg-white p-6">
-      <h3 className="font-serif text-lg font-bold text-brown-800">
-        Order Summary
-      </h3>
-      <div className="mt-4 space-y-2 text-sm">
-        <div className="flex justify-between text-brown-600">
+    <div className="sticky top-28 border border-ink/20 bg-ink p-7 text-bone">
+      <h3 className="font-serif text-3xl uppercase">Order Summary</h3>
+      <div className="mt-6 space-y-3 font-mono text-xs uppercase tracking-[0.12em]">
+        <div className="flex justify-between text-bone/60">
           <span>Subtotal</span>
-          <span>&#8377;{total.toLocaleString("en-IN")}</span>
+          <span>₹{total.toLocaleString("en-IN")}</span>
         </div>
-        <div className="flex justify-between text-brown-600">
+        <div className="flex justify-between text-bone/60">
           <span>Shipping</span>
-          <span className="text-green-700">Free</span>
+          <span className="text-volt">Free</span>
         </div>
-        <hr className="border-brown-200" />
-        <div className="flex justify-between font-serif text-lg font-bold text-brown-900">
-          <span>Total</span>
-          <span>&#8377;{total.toLocaleString("en-IN")}</span>
+        <div className="my-3 h-px bg-bone/15" />
+        <div className="flex items-end justify-between">
+          <span className="font-serif text-2xl uppercase text-bone">Total</span>
+          <span className="font-serif text-2xl text-volt">
+            ₹{total.toLocaleString("en-IN")}
+          </span>
         </div>
       </div>
       <button
         onClick={handleCheckout}
         disabled={items.length === 0 || creating}
-        className="btn-primary mt-6 w-full disabled:opacity-50"
+        className="btn-primary mt-7 w-full disabled:opacity-50"
       >
-        {creating ? "Creating Order..." : "Proceed to Checkout"}
+        {creating ? "Creating Order…" : "Checkout"}
+        {!creating && <ArrowRight className="h-4 w-4" />}
       </button>
+      <p className="mt-4 text-center font-mono text-[10px] uppercase tracking-[0.2em] text-bone/30">
+        Secure Payment · Authentic Only
+      </p>
     </div>
   );
 }

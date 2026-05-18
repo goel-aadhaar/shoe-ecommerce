@@ -22,13 +22,17 @@ interface OrderItemInput {
 }
 
 export const createOrder = asyncHandler(async (req: Request, res: Response) => {
-    const { items, totalAmount } = req.body ?? {};
+    const { items } = req.body ?? {};
     const session = await mongoose.startSession();
 
     try {
         session.startTransaction();
 
-        // Validate stock
+        // Prices and the order total are computed server-side from the
+        // database — never trusted from the client.
+        const pricedItems: (OrderItemInput & { price: number })[] = [];
+        let computedTotal = 0;
+
         for (const item of (items ?? []) as OrderItemInput[]) {
             const product = await Product.findById(item.productId).session(
                 session,
@@ -39,29 +43,44 @@ export const createOrder = asyncHandler(async (req: Request, res: Response) => {
                     `Product ${item.productId} not found`,
                 );
             }
-            if (product.stock < item.quantity) {
+
+            // Atomically decrement stock only if enough is available.
+            // Guards against oversell under concurrent checkouts.
+            const updated = await Product.updateOne(
+                { _id: item.productId, stock: { $gte: item.quantity } },
+                { $inc: { stock: -item.quantity } },
+                { session },
+            );
+            if (updated.modifiedCount !== 1) {
                 throw new ApiError(
                     400,
                     `Insufficient stock for ${product.name}`,
                 );
             }
+
+            const price = product.price;
+            computedTotal += price * item.quantity;
+            pricedItems.push({ ...item, price });
         }
 
         const orders = await Order.create(
-            [{ userId: req.user?._id, totalAmount }],
+            [{ userId: req.user?._id, totalAmount: computedTotal }],
             { session },
         );
         const order = orders[0]!;
 
-        // Create order items and decrement stock
-        for (const item of (items ?? []) as OrderItemInput[]) {
+        for (const item of pricedItems) {
             await OrderItem.create(
-                [{ ...item, orderId: order._id }],
-                { session },
-            );
-            await Product.findByIdAndUpdate(
-                item.productId,
-                { $inc: { stock: -item.quantity } },
+                [
+                    {
+                        orderId: order._id,
+                        productId: item.productId,
+                        quantity: item.quantity,
+                        price: item.price,
+                        selectedColor: item.selectedColor,
+                        selectedSize: item.selectedSize,
+                    },
+                ],
                 { session },
             );
         }

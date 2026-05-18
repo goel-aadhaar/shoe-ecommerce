@@ -4,7 +4,7 @@ const USPS = [
   {
     icon: Truck,
     title: 'Free Shipping',
-    description: 'On orders above Rs. 2,999',
+    description: 'On orders above ₹2,999',
   },
   {
     icon: ShieldCheck,
@@ -25,22 +25,28 @@ const USPS = [
 
 export function UspBanner() {
   return (
-    <section className="border-y border-brown-200 bg-white py-10">
+    <section className="border-b border-ink/10 bg-bone">
       <div className="container-inner">
-        <div className="grid grid-cols-2 gap-8 lg:grid-cols-4">
-          {USPS.map((usp) => (
+        <div className="grid grid-cols-1 divide-y divide-ink/10 sm:grid-cols-2 sm:divide-y-0 lg:grid-cols-4">
+          {USPS.map((usp, i) => (
             <div
               key={usp.title}
-              className="group flex items-start gap-4"
+              className="group flex items-start gap-5 py-8 sm:px-7 lg:border-l lg:border-ink/10 lg:first:border-l-0 lg:first:pl-0"
             >
-              <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-copper/10 transition-colors group-hover:bg-copper/20">
-                <usp.icon className="h-6 w-6 text-copper" />
-              </div>
+              <span className="index-num shrink-0 pt-1 text-sm text-cobalt">
+                {String(i + 1).padStart(2, '0')}
+              </span>
               <div>
-                <h3 className="text-base font-bold text-brown-800">
+                <usp.icon
+                  className="h-6 w-6 text-ink transition-colors group-hover:text-cobalt"
+                  strokeWidth={1.5}
+                />
+                <h3 className="mt-4 font-serif text-2xl uppercase leading-none text-ink">
                   {usp.title}
                 </h3>
-                <p className="mt-1 text-sm text-brown-500">{usp.description}</p>
+                <p className="mt-2 font-mono text-[11px] uppercase tracking-[0.15em] text-ink/50">
+                  {usp.description}
+                </p>
               </div>
             </div>
           ))}

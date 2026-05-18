@@ -34,7 +34,9 @@ export default function CollectionsPage() {
 
   useEffect(() => {
     setLoading(true);
-    let req: Promise<{ data: Product[] | { items: Product[]; pagination: PaginationMeta } }>;
+    let req: Promise<{
+      data: Product[] | { items: Product[]; pagination: PaginationMeta };
+    }>;
 
     if (brand) {
       req = productService.getByBrand(brand, 50);
@@ -52,7 +54,6 @@ export default function CollectionsPage() {
       const b = searchParams.get('brand') ?? 'Nike';
       req = productService.getByBrand(b, 50);
     } else {
-      // attribute-based: trending, newArrival, bestSeller, onSale
       req = productService.getByAttribute(queryType, 50);
     }
 
@@ -70,23 +71,35 @@ export default function CollectionsPage() {
       .finally(() => setLoading(false));
   }, [queryType, page, brand, gender, searchParams]);
 
-  const title =
-    brand
-      ? brand
-      : gender
-        ? `${gender === 'Male' ? "Men's" : "Women's"} Collection`
-        : TITLES[queryType] ?? 'Collection';
+  const title = brand
+    ? brand
+    : gender
+      ? `${gender === 'Male' ? "Men's" : "Women's"} Collection`
+      : TITLES[queryType] ?? 'Collection';
 
   return (
-    <div className="container-inner py-8 lg:py-12">
-      <h1 className="font-serif text-3xl font-bold text-brown-900">{title}</h1>
+    <div className="container-inner py-12 lg:py-16">
+      {/* Header */}
+      <div className="flex flex-wrap items-end justify-between gap-4 border-b border-ink/15 pb-7">
+        <div>
+          <p className="section-tag text-ink/60">Catalog</p>
+          <h1 className="mt-4 font-serif text-[clamp(2.5rem,7vw,6rem)] leading-[0.85] text-ink">
+            {title}
+          </h1>
+        </div>
+        {!loading && (
+          <p className="font-mono text-xs uppercase tracking-[0.2em] text-ink/40">
+            {products.length} {products.length === 1 ? 'Pair' : 'Pairs'}
+          </p>
+        )}
+      </div>
 
-      <div className="mt-8 flex flex-col gap-8 lg:flex-row">
+      <div className="mt-10 flex flex-col gap-10 lg:flex-row">
         <ProductFilters />
         <div className="flex-1">
           {loading ? (
-            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {Array.from({ length: 6 }).map((_, i) => (
+            <div className="grid grid-cols-1 gap-px bg-ink/10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+              {Array.from({ length: 8 }).map((_, i) => (
                 <ProductCardSkeleton key={i} />
               ))}
             </div>
@@ -94,20 +107,23 @@ export default function CollectionsPage() {
             <>
               <ProductGrid products={products} />
               {pagination && pagination.totalPages > 1 && (
-                <div className="mt-10 flex justify-center gap-2">
+                <div className="mt-12 flex flex-wrap justify-center gap-2">
                   {Array.from({ length: pagination.totalPages }).map((_, i) => {
                     const p = i + 1;
+                    const active = p === pagination.page;
                     return (
                       <a
                         key={p}
-                        href={`?page=${p}${brand ? `&brand=${brand}` : ''}${gender ? `&gender=${gender}` : ''}`}
-                        className={`rounded px-3 py-1.5 text-sm font-medium transition-colors ${
-                          p === pagination.page
-                            ? 'bg-brown-800 text-cream'
-                            : 'border border-brown-200 text-brown-700 hover:bg-brown-50'
+                        href={`?page=${p}${brand ? `&brand=${brand}` : ''}${
+                          gender ? `&gender=${gender}` : ''
+                        }`}
+                        className={`flex h-11 w-11 items-center justify-center border font-mono text-sm font-bold transition-colors ${
+                          active
+                            ? 'border-cobalt bg-cobalt text-white'
+                            : 'border-ink/20 text-ink hover:border-ink hover:bg-ink hover:text-bone'
                         }`}
                       >
-                        {p}
+                        {String(p).padStart(2, '0')}
                       </a>
                     );
                   })}

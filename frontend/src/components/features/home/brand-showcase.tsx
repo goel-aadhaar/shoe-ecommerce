@@ -25,7 +25,8 @@ export function BrandShowcase() {
         .getByBrand(brand, 1)
         .then((res) => {
           const products = res.data as Product[];
-          const img = products[0]?.thumbnail ?? products[0]?.images?.[0] ?? null;
+          const img =
+            products[0]?.thumbnail ?? products[0]?.images?.[0] ?? null;
           if (img) setBrandImages((prev) => ({ ...prev, [brand]: img }));
         })
         .catch(() => {});
@@ -33,46 +34,51 @@ export function BrandShowcase() {
   }, []);
 
   return (
-    <section className="section-padding">
+    <section className="scroll-reveal bg-bone section-padding">
       <div className="container-inner">
-        <div className="text-center">
-          <p className="text-sm font-bold uppercase tracking-widest text-copper">
-            Trusted By The Best
-          </p>
-          <h2 className="mt-2 font-serif text-3xl font-bold text-brown-900">
-            Shop by Brand
-          </h2>
+        <div className="flex flex-wrap items-end justify-between gap-6 border-b border-ink/15 pb-7">
+          <div>
+            <p className="section-tag text-ink/60">Trusted By The Best</p>
+            <h2 className="mt-4 font-serif text-[clamp(2.5rem,7vw,6rem)] leading-[0.85] text-ink">
+              The Roster
+            </h2>
+          </div>
         </div>
 
-        <div className="mt-10 grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7">
-          {BRANDS.map((brand) => {
+        <div className="mt-2 border-b border-ink/15">
+          {BRANDS.map((brand, i) => {
             const img = brandImages[brand];
             return (
               <Link
                 key={brand}
                 href={`/collections/brand?brand=${encodeURIComponent(brand)}`}
-                className="group flex flex-col items-center gap-4 rounded-2xl border border-brown-200 bg-white p-5 transition-all hover:border-copper hover:shadow-md"
+                className="group relative flex items-center justify-between border-t border-ink/15 py-6 transition-colors hover:bg-ink"
               >
-                <div className="relative h-20 w-20 overflow-hidden rounded-xl bg-brown-50">
-                  {img ? (
-                    <Image
-                      src={img}
-                      alt={brand}
-                      fill
-                      sizes="80px"
-                      className="object-cover transition-transform duration-500 group-hover:scale-110"
-                    />
-                  ) : (
-                    <div className="flex h-full w-full items-center justify-center bg-brown-100">
-                      <span className="font-serif text-xl font-bold text-brown-300">
-                        {brand[0]}
-                      </span>
-                    </div>
-                  )}
+                <div className="flex items-center gap-6 sm:gap-10">
+                  <span className="index-num text-sm text-ink/40 transition-colors group-hover:text-volt">
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+                  <h3 className="font-serif text-4xl uppercase leading-none text-ink transition-colors group-hover:text-bone sm:text-6xl">
+                    {brand}
+                  </h3>
                 </div>
-                <span className="text-sm font-bold uppercase tracking-wider text-brown-600 transition-colors group-hover:text-copper">
-                  {brand}
-                </span>
+
+                <div className="flex items-center gap-6">
+                  <div className="relative hidden h-20 w-28 overflow-hidden bg-bone-deep opacity-0 transition-opacity duration-300 group-hover:opacity-100 sm:block">
+                    {img && (
+                      <Image
+                        src={img}
+                        alt={brand}
+                        fill
+                        sizes="112px"
+                        className="object-cover grayscale transition-all duration-500 group-hover:scale-110 group-hover:grayscale-0"
+                      />
+                    )}
+                  </div>
+                  <span className="font-mono text-xs font-bold uppercase tracking-[0.2em] text-ink/40 transition-colors group-hover:text-volt">
+                    Shop →
+                  </span>
+                </div>
               </Link>
             );
           })}

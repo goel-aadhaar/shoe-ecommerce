@@ -9,7 +9,9 @@ import { config } from './config.js';
 import { logger } from './infrastructure/logger/logger.js';
 import { errorMiddleware } from './infrastructure/middlewares/error.middleware.js';
 import { notFoundMiddleware } from './infrastructure/middlewares/notFound.middleware.js';
+import { stripeWebhook } from './modules/payment/services/payment.service.js';
 import apiRouter from './routes.js';
+import { ApiError } from './shared/errors/api-error.class.js';
 import { swaggerRouter } from './swagger/swagger.router.js';
 
 const app = express();
@@ -36,7 +38,10 @@ app.use(
         origin: function (origin, callback) {
             if (!origin) return callback(null, true);
             if (!allowedOrigins.includes(origin)) {
-                return callback(new Error(`CORS blocked: ${origin}`), false);
+                return callback(
+                    new ApiError(403, `CORS blocked: ${origin}`),
+                    false,
+                );
             }
             callback(null, true);
         },
@@ -46,7 +51,15 @@ app.use(
     }),
 );
 
-app.use(express.json());
+// Stripe webhook needs the raw, unparsed body for signature verification,
+// so it is mounted BEFORE express.json().
+app.post(
+    '/api/v1/payments/webhook',
+    express.raw({ type: 'application/json' }),
+    stripeWebhook,
+);
+
+app.use(express.json({ limit: '1mb' }));
 app.use(logger);
 app.use(cookieParser());
 

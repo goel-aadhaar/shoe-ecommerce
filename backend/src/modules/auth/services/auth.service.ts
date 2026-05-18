@@ -1,3 +1,5 @@
+import { createHash } from 'node:crypto';
+
 import type { Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
 
@@ -5,8 +7,15 @@ import { config } from '../../../config.js';
 import { ApiError } from '../../../shared/errors/api-error.class.js';
 import { ApiResponse } from '../../../shared/responses/api-response.builder.js';
 import { asyncHandler } from '../../../shared/utils/async-handler.util.js';
-import { getCookieOptions } from '../../../shared/utils/cookie.util.js';
+import {
+    ACCESS_COOKIE_MAX_AGE,
+    getCookieOptions,
+} from '../../../shared/utils/cookie.util.js';
 import { User, type UserDocument } from '../../user/repositories/user.model.js';
+
+// Refresh tokens are stored hashed; a leaked DB cannot replay them.
+const hashToken = (token: string) =>
+    createHash('sha256').update(token).digest('hex');
 
 const generateAccessAndRefreshTokens = async (userId: string) => {
     const user = (await User.findById(userId)) as UserDocument | null;
@@ -20,7 +29,7 @@ const generateAccessAndRefreshTokens = async (userId: string) => {
     const accessToken = user.generateAccessToken();
     const refreshToken = user.generateRefreshToken();
 
-    user.refreshToken = refreshToken;
+    user.refreshToken = hashToken(refreshToken);
     await user.save({ validateBeforeSave: false });
     return { accessToken, refreshToken };
 };
@@ -60,10 +69,13 @@ export const login = asyncHandler(async (req: Request, res: Response) => {
     if (!email) throw new ApiError(400, 'Email is required');
 
     const user = (await User.findOne({ email })) as UserDocument | null;
-    if (!user) throw new ApiError(404, 'User does not exist');
+    // Generic message for both cases — avoids leaking which emails exist.
+    if (!user) throw new ApiError(401, 'Invalid email or password');
 
     const isPasswordValid = await user.isPasswordCorrect(password);
-    if (!isPasswordValid) throw new ApiError(401, 'Invalid User credentials');
+    if (!isPasswordValid) {
+        throw new ApiError(401, 'Invalid email or password');
+    }
 
     const { accessToken, refreshToken } = await generateAccessAndRefreshTokens(
         String(user._id),
@@ -73,12 +85,14 @@ export const login = asyncHandler(async (req: Request, res: Response) => {
         '-password -refreshToken',
     );
 
-    const options = getCookieOptions();
-
     return res
         .status(200)
-        .cookie('accessToken', accessToken, options)
-        .cookie('refreshToken', refreshToken, options)
+        .cookie(
+            'accessToken',
+            accessToken,
+            getCookieOptions(ACCESS_COOKIE_MAX_AGE),
+        )
+        .cookie('refreshToken', refreshToken, getCookieOptions())
         .json(
             new ApiResponse(200, 'User logged In Successfully', {
                 user: loggedInUser,
@@ -129,29 +143,36 @@ export const refreshToken = asyncHandler(
             throw new ApiError(401, 'Refresh token is required');
         }
 
-        const decoded = jwt.verify(
-            incomingRefreshToken,
-            config.refreshTokenSecret,
-        ) as { _id: string };
+        let decoded: { _id: string };
+        try {
+            decoded = jwt.verify(
+                incomingRefreshToken,
+                config.refreshTokenSecret,
+            ) as { _id: string };
+        } catch {
+            throw new ApiError(401, 'Invalid or expired refresh token');
+        }
 
         const user = (await User.findById(decoded._id)) as UserDocument | null;
         if (!user) {
             throw new ApiError(401, 'Invalid refresh token');
         }
 
-        if (user.refreshToken !== incomingRefreshToken) {
+        if (user.refreshToken !== hashToken(incomingRefreshToken)) {
             throw new ApiError(401, 'Refresh token is expired or used');
         }
 
         const { accessToken, refreshToken: newRefreshToken } =
             await generateAccessAndRefreshTokens(String(user._id));
 
-        const options = getCookieOptions();
-
         return res
             .status(200)
-            .cookie('accessToken', accessToken, options)
-            .cookie('refreshToken', newRefreshToken, options)
+            .cookie(
+                'accessToken',
+                accessToken,
+                getCookieOptions(ACCESS_COOKIE_MAX_AGE),
+            )
+            .cookie('refreshToken', newRefreshToken, getCookieOptions())
             .json(
                 new ApiResponse(200, 'Tokens refreshed successfully', {
                     accessToken,

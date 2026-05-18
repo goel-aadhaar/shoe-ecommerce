@@ -20,10 +20,10 @@ export function QuickView({ product }: QuickViewProps) {
           e.stopPropagation();
           setIsOpen(true);
         }}
-        className="absolute bottom-4 left-1/2 -translate-x-1/2 translate-y-4 rounded-full bg-white/90 p-3 text-brown-900 opacity-0 shadow-lg backdrop-blur-sm transition-all hover:bg-copper hover:text-white group-hover:translate-y-0 group-hover:opacity-100 z-10"
+        className="absolute bottom-4 left-1/2 z-10 flex -translate-x-1/2 translate-y-4 items-center gap-2 bg-ink px-4 py-2.5 font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-bone opacity-0 backdrop-blur-sm transition-all hover:bg-cobalt hover:text-white group-hover:translate-y-0 group-hover:opacity-100"
         title="Quick View"
       >
-        <Search className="h-5 w-5" />
+        <Search className="h-4 w-4" /> Quick View
       </button>
 
       {isOpen && (

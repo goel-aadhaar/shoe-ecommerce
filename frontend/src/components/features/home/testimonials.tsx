@@ -2,7 +2,7 @@
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination } from 'swiper/modules';
-import { Star, Quote } from 'lucide-react';
+import { Star } from 'lucide-react';
 
 import 'swiper/css';
 import 'swiper/css/pagination';
@@ -47,15 +47,18 @@ const TESTIMONIALS = [
 
 export function Testimonials() {
   return (
-    <section className="bg-brown-50 section-padding">
+    <section className="scroll-reveal bg-bone section-padding">
       <div className="container-inner">
-        <div className="text-center">
-          <p className="text-sm font-bold uppercase tracking-widest text-copper">
-            What People Say
+        <div className="flex flex-wrap items-end justify-between gap-6 border-b border-ink/15 pb-7">
+          <div>
+            <p className="section-tag text-ink/60">What People Say</p>
+            <h2 className="mt-4 font-serif text-[clamp(2.5rem,7vw,6rem)] leading-[0.85] text-ink">
+              On The Record
+            </h2>
+          </div>
+          <p className="hidden font-mono text-xs uppercase tracking-[0.2em] text-ink/40 sm:block">
+            {TESTIMONIALS.length} Verified Buyers
           </p>
-          <h2 className="mt-2 font-serif text-3xl font-bold text-brown-900">
-            Customer Stories
-          </h2>
         </div>
 
         <div className="mt-10">
@@ -67,52 +70,58 @@ export function Testimonials() {
               bulletClass: 'testimonial-bullet',
               bulletActiveClass: 'testimonial-bullet-active',
             }}
-            spaceBetween={24}
+            spaceBetween={0}
             slidesPerView={1}
             breakpoints={{
               640: { slidesPerView: 2 },
               1024: { slidesPerView: 3 },
             }}
             loop
-            className="pb-14"
+            className="pb-16"
           >
             {TESTIMONIALS.map((t, idx) => (
-              <SwiperSlide key={idx}>
-                <div className="h-full rounded-2xl border border-brown-200 bg-white p-8 shadow-sm transition-shadow hover:shadow-md">
-                  <Quote className="h-8 w-8 text-brown-200" />
-
-                  {/* Stars */}
-                  <div className="mt-4 flex gap-0.5">
-                    {Array.from({ length: 5 }).map((_, i) => (
-                      <Star
-                        key={i}
-                        className={`h-4 w-4 ${
-                          i < t.rating
-                            ? 'fill-copper text-copper'
-                            : 'text-brown-200'
-                        }`}
-                      />
-                    ))}
+              <SwiperSlide key={idx} className="!h-auto">
+                <div className="flex h-full flex-col border border-ink/15 bg-paper p-8 transition-colors hover:border-ink sm:-ml-px">
+                  <div className="flex items-start justify-between">
+                    <span className="font-serif text-7xl leading-[0.6] text-cobalt">
+                      &ldquo;
+                    </span>
+                    <div className="flex gap-0.5">
+                      {Array.from({ length: 5 }).map((_, i) => (
+                        <Star
+                          key={i}
+                          className={`h-3.5 w-3.5 ${
+                            i < t.rating
+                              ? 'fill-ink text-ink'
+                              : 'text-ink/15'
+                          }`}
+                        />
+                      ))}
+                    </div>
                   </div>
 
-                  <p className="mt-4 text-base leading-relaxed text-brown-600">
-                    &ldquo;{t.text}&rdquo;
+                  <p className="mt-4 flex-1 font-sans text-base leading-relaxed text-ink/75">
+                    {t.text}
                   </p>
 
-                  <span className="mt-4 inline-block rounded-full bg-brown-50 px-3 py-1 text-sm font-medium text-brown-500">
+                  <p className="mt-6 font-mono text-[10px] uppercase tracking-[0.2em] text-cobalt">
                     {t.product}
-                  </span>
+                  </p>
 
-                  {/* Author */}
-                  <div className="mt-6 flex items-center gap-3">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-full bg-copper/10 font-serif text-sm font-bold text-copper">
-                      {t.name.split(' ').map((n) => n[0]).join('')}
-                    </div>
+                  <div className="mt-5 flex items-center gap-4 border-t border-ink/15 pt-5">
+                    <span className="flex h-11 w-11 items-center justify-center bg-ink font-mono text-xs font-bold text-bone">
+                      {t.name
+                        .split(' ')
+                        .map((n) => n[0])
+                        .join('')}
+                    </span>
                     <div>
-                      <p className="text-base font-bold text-brown-800">
+                      <p className="font-serif text-lg uppercase leading-none text-ink">
                         {t.name}
                       </p>
-                      <p className="text-sm text-brown-400">{t.location}</p>
+                      <p className="mt-1 font-mono text-[10px] uppercase tracking-[0.2em] text-ink/40">
+                        {t.location}
+                      </p>
                     </div>
                   </div>
                 </div>

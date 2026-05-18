@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
-import { ArrowRight } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
 import { productService } from '@/services/product.service';
 import type { Product } from '@/types';
 
@@ -13,28 +13,24 @@ const CATEGORIES = [
     href: '/collections/shoes',
     fetchType: 'category' as const,
     fetchKey: 'shoes',
-    color: 'from-brown-900 to-brown-800',
   },
   {
     name: 'Crocs & Clogs',
     href: '/collections/clogs',
     fetchType: 'category' as const,
     fetchKey: 'crocs',
-    color: 'from-brown-800 to-brown-700',
   },
   {
-    name: "Men's Collection",
+    name: "Men's",
     href: '/collections/men',
     fetchType: 'gender' as const,
     fetchKey: 'male',
-    color: 'from-brown-950 to-brown-900',
   },
   {
-    name: "Women's Collection",
+    name: "Women's",
     href: '/collections/women',
     fetchType: 'gender' as const,
     fetchKey: 'female',
-    color: 'from-sienna to-copper',
   },
 ];
 
@@ -51,7 +47,8 @@ export function CategoryGrid() {
       fetcher
         .then((res) => {
           const products = res.data as Product[];
-          const img = products[0]?.thumbnail ?? products[0]?.images?.[0] ?? null;
+          const img =
+            products[0]?.thumbnail ?? products[0]?.images?.[0] ?? null;
           if (img) setImages((prev) => ({ ...prev, [cat.fetchKey]: img }));
         })
         .catch(() => {});
@@ -59,50 +56,53 @@ export function CategoryGrid() {
   }, []);
 
   return (
-    <section className="bg-brown-50 section-padding">
+    <section className="scroll-reveal bg-ink text-bone section-padding">
       <div className="container-inner">
-        <div className="text-center">
-          <p className="text-sm font-bold uppercase tracking-widest text-copper">
-            Browse
+        <div className="flex flex-wrap items-end justify-between gap-6 border-b border-bone/15 pb-7">
+          <div>
+            <p className="section-tag text-bone/50">Browse</p>
+            <h2 className="mt-4 font-serif text-[clamp(2.5rem,7vw,6rem)] leading-[0.85] text-bone">
+              Shop By <span className="text-cobalt">Category</span>
+            </h2>
+          </div>
+          <p className="hidden max-w-xs font-mono text-[11px] uppercase leading-relaxed tracking-[0.15em] text-bone/40 sm:block">
+            Four ways in. Pick a lane and go loud.
           </p>
-          <h2 className="mt-2 font-serif text-3xl font-bold text-brown-900">
-            Shop by Category
-          </h2>
         </div>
 
-        <div className="mt-10 grid grid-cols-2 gap-5 lg:grid-cols-4">
-          {CATEGORIES.map((cat) => {
+        <div className="mt-10 grid grid-cols-2 gap-px bg-bone/15 lg:grid-cols-4">
+          {CATEGORIES.map((cat, i) => {
             const img = images[cat.fetchKey];
             return (
               <Link
                 key={cat.name}
                 href={cat.href}
-                className="group relative flex flex-col overflow-hidden rounded-2xl bg-brown-800"
+                className="group relative flex aspect-[3/4] flex-col overflow-hidden bg-ink"
               >
-                {/* Image */}
-                <div className="relative aspect-[3/4] w-full overflow-hidden">
-                  {img ? (
-                    <Image
-                      src={img}
-                      alt={cat.name}
-                      fill
-                      sizes="(max-width: 768px) 50vw, 25vw"
-                      className="object-cover transition-transform duration-700 group-hover:scale-110"
-                    />
-                  ) : (
-                    <div className={`h-full w-full bg-gradient-to-br ${cat.color}`} />
-                  )}
-                  <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-brown-950/90 to-transparent" />
-                </div>
+                {img ? (
+                  <Image
+                    src={img}
+                    alt={cat.name}
+                    fill
+                    sizes="(max-width: 768px) 50vw, 25vw"
+                    className="object-cover opacity-50 grayscale transition-all duration-700 group-hover:scale-105 group-hover:opacity-70 group-hover:grayscale-0"
+                  />
+                ) : (
+                  <div className="absolute inset-0 bg-carbon" />
+                )}
+                <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/30 to-transparent" />
 
-                {/* Label */}
-                <div className="absolute inset-x-0 bottom-0 p-5">
-                  <h3 className="font-serif text-xl font-bold text-cream">
+                <span className="absolute left-4 top-4 index-num text-sm text-volt">
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+
+                <div className="absolute inset-x-0 bottom-0 flex items-end justify-between p-5">
+                  <h3 className="font-serif text-3xl uppercase leading-none text-bone sm:text-4xl">
                     {cat.name}
                   </h3>
-                  <div className="mt-2 flex items-center gap-1.5 text-sm font-bold text-copper opacity-0 translate-y-1 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0">
-                    Browse <ArrowRight className="h-4 w-4" />
-                  </div>
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center bg-bone text-ink transition-colors duration-300 group-hover:bg-volt">
+                    <ArrowUpRight className="h-5 w-5" />
+                  </span>
                 </div>
               </Link>
             );
