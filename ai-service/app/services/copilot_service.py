@@ -17,6 +17,7 @@ from app.core.logging import get_logger
 from app.llm.client import LLMClient
 from app.llm.prompts import COPILOT_SYSTEM, COPILOT_TOOLS, EXTRACT_SYSTEM, EXTRACT_TOOL
 from app.repositories.mongo import MongoRepository
+from app.repositories.order_repo import OrderRepository
 from app.repositories.redis_repo import RedisRepository
 from app.schemas.chat import ChatRequest, ChatResponse, ExtractedFilters, ExtractFiltersRequest
 from app.schemas.common import ScoredProduct
@@ -24,6 +25,7 @@ from app.schemas.content import CompareRequest
 from app.schemas.recommend import HomeSection, RecommendRequest
 from app.schemas.search import SearchFilters, SemanticSearchRequest
 from app.services.content_service import ContentService
+from app.services.rag_service import RagService
 from app.services.recommender_service import RecommenderService
 from app.services.search_service import SearchService
 
@@ -49,6 +51,8 @@ class CopilotService:
         redis: RedisRepository,
         settings: Settings,
         mongo: MongoRepository | None = None,
+        orders: OrderRepository | None = None,
+        rag: RagService | None = None,
     ) -> None:
         self._llm = llm
         self._search = search
@@ -57,6 +61,8 @@ class CopilotService:
         self._redis = redis
         self._settings = settings
         self._mongo = mongo
+        self._orders = orders
+        self._rag = rag
 
     # ------------------------------------------------------------------ chat
     async def chat(self, req: ChatRequest) -> ChatResponse:
@@ -240,6 +246,58 @@ class CopilotService:
                 )
             )
             return _tool_products(resp.items), resp.items, {}
+
+        # --- Account-scoped tools -------------------------------------------
+        # `user_id` comes from the verified session on the BFF. It is never read
+        # from the model's arguments, so the LLM cannot widen its own access.
+        if name in ("get_my_orders", "get_order_details"):
+            if not user_id:
+                return {
+                    "signedIn": False,
+                    "note": ("The shopper is not signed in, so no order information is "
+                             "available. Ask them to sign in — do not guess."),
+                }, [], {}
+            if self._orders is None:
+                return {"error": "Order lookup is unavailable."}, [], {}
+
+            if name == "get_my_orders":
+                orders = await self._orders.list_orders(user_id, int(args.get("limit", 5)))
+                return {
+                    "signedIn": True,
+                    "orderCount": len(orders),
+                    "orders": orders,
+                    "note": ("These are the shopper's real orders. Do not invent tracking "
+                             "numbers or delivery dates beyond what is shown."),
+                }, [], {}
+
+            order_id = str(args.get("orderId") or "").strip()
+            detail = await self._orders.get_order(user_id, order_id)
+            if not detail:
+                return {
+                    "found": False,
+                    "note": ("No such order on this shopper's account. Do not speculate; "
+                             "offer to list their recent orders instead."),
+                }, [], {}
+            return {"found": True, "order": detail}, [], {}
+
+        if name == "answer_from_policy":
+            question = str(args.get("question") or "").strip()
+            if not question or self._rag is None:
+                return {"error": "No policy question provided."}, [], {}
+            try:
+                from app.schemas.content import AskRequest
+
+                answer = await self._rag.ask(AskRequest(question=question))
+                return {
+                    "answer": answer.answer,
+                    "grounded": answer.grounded,
+                    "sources": [c.title for c in answer.citations if c.title],
+                    "note": ("Official policy text. Quote these timelines exactly; do not "
+                             "round or embellish them."),
+                }, [], {}
+            except Exception as exc:  # noqa: BLE001
+                logger.warning("policy_lookup_failed", extra={"err": str(exc)})
+                return {"error": "Policy lookup unavailable."}, [], {}
 
         if name == "compare_products":
             ids = [str(i) for i in (args.get("productIds") or []) if i][:5]

@@ -18,6 +18,7 @@ from app.llm.client import LLMClient
 from app.ml.artifacts import ArtifactStore
 from app.repositories.catalog_repo import CatalogRepository
 from app.repositories.mongo import MongoRepository
+from app.repositories.order_repo import OrderRepository
 from app.repositories.qdrant_repo import QdrantRepository
 from app.repositories.redis_repo import RedisRepository
 from app.services.analytics_service import AnalyticsService
@@ -39,6 +40,7 @@ class Container:
     redis: RedisRepository = field(init=False)
     qdrant: QdrantRepository = field(init=False)
     catalog: CatalogRepository = field(init=False)
+    orders: OrderRepository = field(init=False)
     embedder: Embedder = field(init=False)
     llm: LLMClient = field(init=False)
     artifact_store: ArtifactStore = field(init=False)
@@ -67,10 +69,12 @@ class Container:
             self.artifact_store, s,
         )
         self.content = ContentService(self.catalog, self.llm, self.mongo, self.artifact_store, s)
-        self.copilot = CopilotService(
-            self.llm, self.search, self.recommender, self.content, self.redis, s, self.mongo,
-        )
         self.rag = RagService(self.embedder, self.qdrant, self.llm, self.redis, s)
+        self.orders = OrderRepository(self.mongo)
+        self.copilot = CopilotService(
+            self.llm, self.search, self.recommender, self.content, self.redis, s,
+            self.mongo, self.orders, self.rag,
+        )
         self.analytics = AnalyticsService(self.mongo, self.catalog, self.artifact_store, s)
 
     async def startup(self) -> None:

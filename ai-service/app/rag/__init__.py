@@ -72,6 +72,91 @@ GLOBAL_DOCS: list[dict] = [
         ),
     },
     {
+        "source": "policy",
+        "title": "Refund Policy and Timelines",
+        "body": (
+            "Refunds are issued to the original payment method. Once we receive and "
+            "inspect a returned item, the refund is initiated within 2 business days. "
+            "After initiation, the money typically appears in 5-7 business days for "
+            "cards and UPI, and up to 10 business days for net banking. If you paid by "
+            "card, the refund goes back to that same card; we cannot redirect a refund "
+            "to a different account. If an order is cancelled before dispatch, the full "
+            "amount including shipping is refunded. If it is returned after delivery, "
+            "the product price is refunded and the original shipping fee is not."
+        ),
+    },
+    {
+        "source": "policy",
+        "title": "Order Status Explained",
+        "body": (
+            "Pending means the order is placed but payment is not yet confirmed. Paid "
+            "means payment succeeded and the order is being packed. Shipped means it has "
+            "left our warehouse and tracking is active. Delivered means the courier has "
+            "handed it over. Cancelled means the order will not be fulfilled; any money "
+            "already captured is refunded automatically. Orders can be cancelled by you "
+            "at any time before they are marked Shipped, from the My Orders page."
+        ),
+    },
+    {
+        "source": "policy",
+        "title": "Payment Methods and Failed Payments",
+        "body": (
+            "We accept Visa, Mastercard, RuPay and American Express cards, UPI, net "
+            "banking, and popular wallets, processed securely through Stripe. We never "
+            "store your full card number. Cash on delivery is not currently available. "
+            "If a payment fails, no money is captured and the order stays in Pending; "
+            "you can retry from the My Orders page. If your bank shows a debit for a "
+            "failed payment, it is a temporary authorisation hold and is released "
+            "automatically within 5-7 business days. EMI is available on select cards "
+            "for orders above 5,000 rupees."
+        ),
+    },
+    {
+        "source": "faq",
+        "title": "Tracking a Delivery",
+        "body": (
+            "Once an order is marked Shipped, a tracking link is emailed to you and is "
+            "also visible on the My Orders page. Standard delivery takes 3-5 business "
+            "days and express takes 1-2 business days to most metro pin codes. Delivery "
+            "estimates exclude Sundays and public holidays. If tracking has not updated "
+            "for more than 48 hours, contact support and we will raise it with the "
+            "courier."
+        ),
+    },
+    {
+        "source": "faq",
+        "title": "Exchanges and Wrong Size",
+        "body": (
+            "We do not process direct exchanges. To change size or colour, return the "
+            "original item for a refund and place a new order — this is faster than an "
+            "exchange and avoids the new size selling out while your return is in "
+            "transit. Return pickup is free for size issues. The item must be unworn, "
+            "with tags attached and in its original box."
+        ),
+    },
+    {
+        "source": "faq",
+        "title": "Damaged, Wrong or Missing Items",
+        "body": (
+            "If an item arrives damaged, is the wrong product, or is missing from the "
+            "parcel, report it within 48 hours of delivery through the My Orders page "
+            "with photographs. We arrange a free pickup and issue a full refund or send "
+            "a replacement at no cost. This is separate from the standard 30-day return "
+            "window and is not affected by whether the item has been worn."
+        ),
+    },
+    {
+        "source": "policy",
+        "title": "Invoices, GST and Order Changes",
+        "body": (
+            "A GST invoice is emailed when an order is dispatched and can be downloaded "
+            "from the My Orders page at any time. Delivery addresses can be changed only "
+            "while an order is Pending or Paid — once Shipped, the address is locked with "
+            "the courier. Items cannot be added to an existing order; place a separate "
+            "order instead."
+        ),
+    },
+    {
         "source": "faq",
         "title": "Contacting Support",
         "body": (

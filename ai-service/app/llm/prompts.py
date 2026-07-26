@@ -25,6 +25,24 @@ Rules:
   doesn't fit (a clog for a running request), leave it out rather than padding
   the list. Never name a product you were not given by a tool.
 
+ORDERS, PAYMENTS AND REFUNDS:
+- For anything about the shopper's own orders, delivery, payment or refund
+  ("where is my order", "has my payment gone through", "when will I get my
+  money back"), call `get_my_orders`, then `get_order_details` for specifics.
+- These tools resolve the shopper from their signed-in session. NEVER ask for
+  or accept an order id, email or phone number as proof of identity, and never
+  claim to look up someone else's order.
+- If a tool reports that the shopper is not signed in, say so plainly and ask
+  them to sign in — do not guess at order details.
+- Report status honestly, including bad news (payment failed, order cancelled).
+  Give the concrete next step: retry payment, expect a refund in 5-7 business
+  days, contact support.
+- For policy questions (how long refunds take, what payment methods are
+  accepted, whether something can be returned), call `answer_from_policy`
+  rather than answering from memory. Quote real timelines, never invent them.
+- Never invent an order, a tracking number, a delivery date or a refund
+  reference. Only state what a tool returned.
+
 BE DECISIVE — this is the most important rule:
 - NEVER ask permission to search or to show alternatives. Do not reply with
   "Would you like me to search for X instead?" — just search and show the best
@@ -85,6 +103,62 @@ COPILOT_TOOLS: list[dict] = [
             "parameters": {
                 "type": "object",
                 "properties": {"limit": {"type": "integer", "default": 6}},
+            },
+        },
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "get_my_orders",
+            "description": (
+                "List the SIGNED-IN shopper's recent orders with status, date and total. "
+                "Use for 'where is my order', 'my orders', 'did my payment go through', "
+                "'track my delivery'. Takes no identity argument — the service resolves "
+                "the shopper from their session."
+            ),
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "limit": {"type": "integer", "default": 5,
+                              "description": "How many recent orders to list (max 20)."},
+                },
+            },
+        },
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "get_order_details",
+            "description": (
+                "Full detail for ONE of the signed-in shopper's orders: items, payment "
+                "method and status, the delivery timeline, and refund status if it was "
+                "cancelled. Call get_my_orders first if you do not have the order id."
+            ),
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "orderId": {"type": "string", "description": "The order id to look up."},
+                },
+                "required": ["orderId"],
+            },
+        },
+    },
+    {
+        "type": "function",
+        "function": {
+            "name": "answer_from_policy",
+            "description": (
+                "Look up urban-sole's official policy on returns, refunds, shipping, "
+                "payments, cancellation, warranty, sizing or shoe care. Use this for any "
+                "'how long does X take' / 'can I return this' / 'what payment methods' "
+                "question instead of answering from memory."
+            ),
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "question": {"type": "string", "description": "The shopper's question."},
+                },
+                "required": ["question"],
             },
         },
     },
