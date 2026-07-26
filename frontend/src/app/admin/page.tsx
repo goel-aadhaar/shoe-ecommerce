@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/hooks/use-auth';
 import { AdminDashboard } from '@/components/features/admin/admin-dashboard';
+import { AiAnalyticsDashboard } from '@/components/features/admin/ai-analytics-dashboard';
 
 export default function AdminPage() {
   const router = useRouter();
@@ -28,7 +29,12 @@ export default function AdminPage() {
       <h1 className="font-serif text-3xl font-bold text-brown-900">
         Admin Dashboard
       </h1>
+      {/* AI intelligence metrics — funnel, CTR, top products, search behaviour */}
       <div className="mt-8">
+        <AiAnalyticsDashboard />
+      </div>
+
+      <div className="mt-16">
         <AdminDashboard />
       </div>
     </div>
