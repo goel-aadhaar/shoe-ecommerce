@@ -13,6 +13,8 @@ export type AppConfig = {
     stripeSecretKey?: string;
     stripeWebhookSecret?: string;
     geminiApiKey?: string;
+    aiServiceUrl: string;
+    aiServiceToken: string;
     cloudinary?: {
         cloudName: string;
         apiKey: string;
@@ -52,6 +54,8 @@ export const config: AppConfig = {
     ...(process.env.GEMINI_API_KEY
         ? { geminiApiKey: process.env.GEMINI_API_KEY }
         : {}),
+    aiServiceUrl: process.env.AI_SERVICE_URL ?? 'http://localhost:8000',
+    aiServiceToken: process.env.AI_SERVICE_TOKEN ?? '',
     ...(process.env.CLOUDINARY_CLOUD_NAME &&
     process.env.CLOUDINARY_API_KEY &&
     process.env.CLOUDINARY_API_SECRET
