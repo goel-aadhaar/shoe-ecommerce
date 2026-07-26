@@ -17,7 +17,9 @@ services:
       - "80:80"
       - "443:443"
     volumes:
-      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+      # Swap to nginx.http-only.conf for the first boot / before TLS exists:
+      #   NGINX_CONF=./nginx/nginx.http-only.conf docker compose ... up -d
+      - ${NGINX_CONF:-./nginx/nginx.conf}:/etc/nginx/conf.d/default.conf:ro
       - ./nginx/certbot/conf:/etc/letsencrypt:ro
       - ./nginx/certbot/www:/var/www/certbot:ro
     depends_on:
