@@ -114,10 +114,52 @@ REVIEW_BANK: dict[str, dict[str, list[str]]] = {
         "pos": [
             "Arrived in two days, well packaged, genuine product with tags intact.",
             "Fast delivery and the box arrived undamaged.",
+            "Ordered Friday, had them by Sunday. Packaging was spotless.",
         ],
         "neg": [
             "Delivery took over a week longer than promised.",
             "Box arrived crushed, though the shoes themselves were fine.",
+            "Tracking sat on 'shipped' for four days with no updates.",
+        ],
+    },
+    "grip": {
+        "pos": [
+            "Grip is excellent, no slipping even on wet tiles.",
+            "Traction on the outsole is genuinely good on loose gravel.",
+            "Held up fine on a damp morning walk, no skidding at all.",
+        ],
+        "neg": [
+            "The sole is slippery on smooth wet surfaces — nearly went down once.",
+            "Tread wears smooth quickly, grip drops off after a couple of months.",
+        ],
+    },
+    "weight": {
+        "pos": [
+            "Surprisingly light for how substantial they look.",
+            "Barely notice them on long days, they feel almost weightless.",
+        ],
+        "neg": [
+            "Heavier than I expected. Noticeable by the end of a long day.",
+            "Chunky and a bit clumsy if you're used to minimal shoes.",
+        ],
+    },
+    "breathability": {
+        "pos": [
+            "Mesh upper keeps my feet cool even in peak summer.",
+            "No sweating or odour after full days of wear.",
+        ],
+        "neg": [
+            "Gets warm quickly — not ideal for Indian summers.",
+            "Very little airflow, my feet were damp after an hour.",
+        ],
+    },
+    "authenticity": {
+        "pos": [
+            "100% genuine, box and tags all correct. No doubts at all.",
+            "Verified against the brand's site — completely authentic.",
+        ],
+        "neg": [
+            "Stitching looked slightly off compared to my previous pair.",
         ],
     },
 }
@@ -210,7 +252,8 @@ def main() -> None:
     random.seed(args.seed)
     client = MongoClient(args.mongo_uri)
     db = client[args.db]
-    collections = ("users", "events", "orders", "orderitems", "reviews", "orderstatushistories")
+    collections = ("users", "events", "orders", "orderitems", "reviews",
+                   "orderstatushistories", "payments")
 
     if args.reset or args.reset_only:
         for col in collections:
@@ -238,9 +281,10 @@ def main() -> None:
         partners = [q for q in ids if q != pid]
         complements[pid] = random.sample(partners, k=min(3, len(partners)))
 
-    counts = {k: 0 for k in ("users", "events", "orders", "orderitems", "reviews")}
+    counts = {k: 0 for k in ("users", "events", "orders", "orderitems", "reviews",
+                         "payments", "statushistory")}
     buf: dict[str, list] = {k: [] for k in ("events", "orders", "orderitems", "reviews",
-                                            "orderstatushistories")}
+                                            "orderstatushistories", "payments")}
     reviewed: set[tuple[str, str]] = set()
 
     def flush(col: str, force: bool = False) -> None:
@@ -334,9 +378,49 @@ def main() -> None:
                     "createdAt": order_ts, "updatedAt": order_ts, **SYNTH,
                 }).inserted_id
                 counts["orders"] += 1
-                buf["orderstatushistories"].append(InsertOne({
-                    "orderId": order_id, "status": status, "changedAt": order_ts, **SYNTH,
+
+                # A real progression, not a single row — "where is my order"
+                # needs a timeline the copilot can actually narrate.
+                progression = {
+                    "pending":   ["pending"],
+                    "paid":      ["pending", "paid"],
+                    "shipped":   ["pending", "paid", "shipped"],
+                    "delivered": ["pending", "paid", "shipped", "delivered"],
+                    "cancelled": ["pending", "paid", "cancelled"],
+                }[status]
+                step_ts = order_ts
+                for i, st in enumerate(progression):
+                    buf["orderstatushistories"].append(InsertOne({
+                        "orderId": order_id, "status": st, "changedAt": step_ts, **SYNTH,
+                    }))
+                    counts["statushistory"] += 1
+                    # pending->paid is minutes; later stages are days apart.
+                    step_ts = step_ts + dt.timedelta(
+                        minutes=random.uniform(2, 20) if i == 0
+                        else random.uniform(900, 2600)
+                    )
+
+                # Payment record. Pending orders never captured; cancelled ones
+                # captured then refunded; everything else succeeded.
+                pay_status = "pending" if status == "pending" else "success"
+                if status == "pending" and random.random() < 0.45:
+                    pay_status = "failed"
+                buf["payments"].append(InsertOne({
+                    "orderId": order_id,
+                    "amount": total,
+                    "paymentMethod": random.choices(
+                        ["stripe", "upi", "card", "netbanking", "wallet"],
+                        weights=[30, 34, 22, 8, 6],
+                    )[0],
+                    "paymentStatus": pay_status,
+                    "transactionId": "pi_" + "".join(
+                        random.choices("abcdefghijklmnopqrstuvwxyz0123456789", k=24)
+                    ),
+                    "createdAt": order_ts + dt.timedelta(minutes=random.uniform(1, 6)),
+                    "updatedAt": order_ts + dt.timedelta(minutes=random.uniform(6, 12)),
+                    **SYNTH,
                 }))
+                counts["payments"] += 1
 
                 for b in basket:
                     bid = str(b["_id"])
@@ -360,7 +444,7 @@ def main() -> None:
 
                     # Reviews only from delivered orders, and only once per (user, product).
                     key = (bid, uid)
-                    if status == "delivered" and key not in reviewed and random.random() < 0.55:
+                    if status == "delivered" and key not in reviewed and random.random() < 0.80:
                         reviewed.add(key)
                         rating = random.choices([5, 4, 3, 2, 1], weights=[42, 29, 15, 9, 5])[0]
                         buf["reviews"].append(InsertOne({
