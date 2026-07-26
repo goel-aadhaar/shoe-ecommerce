@@ -1,0 +1,144 @@
+# ==========================================================================
+# urban-sole — production stack (single DigitalOcean Droplet)
+#
+#   docker compose -f docker-compose.prod.yml --env-file .env.production up -d --build
+#
+# Only NGINX publishes ports. Every other service is reachable exclusively on
+# the internal Docker network, so the AI service, Qdrant and Redis are not
+# exposed to the internet even if the firewall is misconfigured.
+# ==========================================================================
+name: urban-sole
+
+services:
+  nginx:
+    image: nginx:1.27-alpine
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./nginx/certbot/conf:/etc/letsencrypt:ro
+      - ./nginx/certbot/www:/var/www/certbot:ro
+    depends_on:
+      - frontend
+      - backend
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        # Same-origin: the browser calls https://<domain>/api/v1 and NGINX
+        # routes it to the backend, so there is no cross-origin request at all.
+        NEXT_PUBLIC_API_URL: ${PUBLIC_ORIGIN}/api/v1
+    restart: unless-stopped
+    expose:
+      - "3000"
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    expose:
+      - "5000"
+    environment:
+      NODE_ENV: production
+      PORT: 5000
+      MONGODB_URI: ${MONGODB_URI}
+      ACCESS_TOKEN_SECRET: ${ACCESS_TOKEN_SECRET}
+      REFRESH_TOKEN_SECRET: ${REFRESH_TOKEN_SECRET}
+      ACCESS_TOKEN_EXPIRY: ${ACCESS_TOKEN_EXPIRY:-1d}
+      REFRESH_TOKEN_EXPIRY: ${REFRESH_TOKEN_EXPIRY:-10d}
+      CORS_ALLOWED_ORIGINS: ${PUBLIC_ORIGIN}
+      STRIPE_SECRET_KEY: ${STRIPE_SECRET_KEY}
+      STRIPE_WEBHOOK_SECRET: ${STRIPE_WEBHOOK_SECRET}
+      CLOUDINARY_CLOUD_NAME: ${CLOUDINARY_CLOUD_NAME}
+      CLOUDINARY_API_KEY: ${CLOUDINARY_API_KEY}
+      CLOUDINARY_API_SECRET: ${CLOUDINARY_API_SECRET}
+      # Internal service name — never a public URL.
+      AI_SERVICE_URL: http://ai-service:8000
+      AI_SERVICE_TOKEN: ${SERVICE_TOKEN}
+    depends_on:
+      - ai-service
+
+  ai-service:
+    build:
+      context: ./ai-service
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    # No `ports:` — internal only. This is the single most important line here.
+    expose:
+      - "8000"
+    environment: &ai_env
+      ENVIRONMENT: production
+      DEBUG: "false"
+      LOG_LEVEL: INFO
+      SERVICE_TOKEN: ${SERVICE_TOKEN}
+      MONGO_URI: ${MONGODB_URI}
+      MONGO_DB: ${MONGO_DB}
+      QDRANT_URL: http://qdrant:6333
+      REDIS_URL: redis://redis:6379/0
+      CELERY_BROKER_URL: redis://redis:6379/1
+      CELERY_RESULT_BACKEND: redis://redis:6379/2
+      LLM_GATEWAY_BASE_URL: ${LLM_GATEWAY_BASE_URL}
+      LLM_GATEWAY_API_KEY: ${LLM_GATEWAY_API_KEY}
+      LLM_CHAT_MODEL: ${LLM_CHAT_MODEL:-MiniMax-M2.5}
+      LLM_HIGHSPEED_MODEL: ${LLM_HIGHSPEED_MODEL:-MiniMax-M2.5-highspeed}
+      EMBEDDINGS_PROVIDER: sbert
+      EMBEDDINGS_MODEL: sentence-transformers/all-MiniLM-L6-v2
+      # Shared with the worker; the worker trains the model, this reads it.
+      ARTIFACTS_DIR: /artifacts
+    volumes:
+      - ai_artifacts:/artifacts
+    depends_on:
+      - qdrant
+      - redis
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 60s
+
+  # Always-on Celery worker. Costs ~500 MB of resident memory to sit idle
+  # between nightly jobs, so on a small Droplet prefer the cron approach in
+  # DEPLOYMENT.md ("Low-budget deployment") and leave this profile disabled.
+  #
+  #   enable with: docker compose -f docker-compose.prod.yml --profile worker up -d
+  worker:
+    profiles: ["worker"]
+    build:
+      context: ./ai-service
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    environment: *ai_env
+    volumes:
+      - ai_artifacts:/artifacts
+    command: ["celery", "-A", "app.workers.celery_app.celery", "worker", "--beat", "--loglevel=info", "--concurrency=1"]
+    depends_on:
+      - redis
+      - qdrant
+
+  qdrant:
+    image: qdrant/qdrant:v1.12.4
+    restart: unless-stopped
+    expose:
+      - "6333"
+    volumes:
+      - qdrant_data:/qdrant/storage
+
+  redis:
+    image: redis:7.4-alpine
+    restart: unless-stopped
+    command: ["redis-server", "--appendonly", "yes", "--maxmemory", "512mb", "--maxmemory-policy", "allkeys-lru"]
+    expose:
+      - "6379"
+    volumes:
+      - redis_data:/data
+
+volumes:
+  qdrant_data:
+  redis_data:
+  ai_artifacts:

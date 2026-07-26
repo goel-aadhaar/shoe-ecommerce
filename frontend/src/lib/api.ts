@@ -62,8 +62,9 @@ export async function apiGet<T>(
 export async function apiPost<T>(
   url: string,
   data?: unknown,
+  options?: { timeout?: number },
 ): Promise<ApiResponse<T>> {
-  const res = await api.post<ApiResponse<T>>(url, data);
+  const res = await api.post<ApiResponse<T>>(url, data, options);
   return res.data;
 }
 

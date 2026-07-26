@@ -5,6 +5,7 @@ import { Navbar } from '@/components/layout/navbar';
 import { Breadcrumbs } from '@/components/layout/breadcrumbs';
 import { Footer } from '@/components/layout/Footer';
 import { ScrollReveal } from '@/components/common/scroll-reveal';
+import { CopilotWidget } from '@/components/features/copilot/copilot-widget';
 import './globals.css';
 
 const anton = Anton({
@@ -51,6 +52,7 @@ export default function RootLayout({
           <Breadcrumbs />
           <main className="flex-1">{children}</main>
           <Footer />
+          <CopilotWidget />
         </Providers>
       </body>
     </html>

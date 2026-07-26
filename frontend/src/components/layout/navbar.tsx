@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { useAuth } from "@/hooks/use-auth";
-import { useCart } from "@/hooks/use-cart";
 import { useState } from "react";
 import {
   User,
@@ -60,14 +59,8 @@ const TICKER = [
   "STEP LOUDER",
 ];
 
-const NAV_LINKS = [
-  { label: "Index", href: "/" },
-  { label: "Contact", href: "/contact" },
-];
-
 export function Navbar() {
   const { user, isAuthenticated, logout } = useAuth();
-  const { itemCount } = useCart();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
 

@@ -156,3 +156,146 @@ export interface PaginatedData<T> {
   items: T[];
   pagination: PaginationMeta;
 }
+
+// AI / semantic search
+export interface SearchFilters {
+  category?: string;
+  brand?: string;
+  colour?: string;
+  gender?: 'Male' | 'Female';
+  minPrice?: number;
+  maxPrice?: number;
+  inStock?: boolean;
+}
+
+// A product enriched by the AI service with its semantic relevance score and
+// a human-readable "why this matched" note.
+export type SearchProduct = Product & {
+  _score?: number;
+  _reason?: string | null;
+};
+
+export interface SemanticSearchResponse {
+  query: string;
+  count: number;
+  results: SearchProduct[];
+}
+
+export interface HomeSectionBlock {
+  section: string;
+  title: string;
+  items: SearchProduct[];
+}
+
+export interface PersonalizedHome {
+  sections: HomeSectionBlock[];
+}
+
+export interface BundlesData {
+  productId: string;
+  complements: SearchProduct[];
+}
+
+export type BehaviourEventType =
+  | 'view'
+  | 'click'
+  | 'add_to_cart'
+  | 'purchase'
+  | 'search';
+
+export interface BehaviourEvent {
+  type: BehaviourEventType;
+  productId?: string;
+  query?: string;
+  sessionId?: string;
+  metadata?: Record<string, unknown>;
+}
+
+// Conversational copilot
+export interface ChatTurnResponse {
+  reply: string;
+  products: SearchProduct[];
+  why: string[];
+  followUp: string | null;
+  sessionId: string;
+}
+
+export interface ExtractedFiltersResponse {
+  category?: string;
+  brand?: string;
+  colour?: string;
+  gender?: 'Male' | 'Female';
+  minPrice?: number;
+  maxPrice?: number;
+  size?: string;
+  keywords: string[];
+}
+
+export interface AskCitation {
+  source: string;
+  title: string | null;
+  productId: string | null;
+}
+
+export interface AskResponse {
+  answer: string;
+  citations: AskCitation[];
+  grounded: boolean;
+}
+
+export interface ComparisonFacet {
+  productId: string;
+  pros: string[];
+  cons: string[];
+  comfort?: string;
+  durability?: string;
+  valueForMoney?: string;
+  bestFor?: string;
+}
+
+export interface ComparisonResponse {
+  products: SearchProduct[];
+  facets: ComparisonFacet[];
+  recommendation: string;
+}
+
+export interface ReviewSummary {
+  productId: string;
+  lovedFeatures: string[];
+  commonComplaints: string[];
+  overallSentiment: string;
+  shouldYouBuy: string;
+  reviewsAnalyzed: number;
+}
+
+// Analytics dashboard
+export interface AnalyticsSummary {
+  windowDays: number;
+  generatedAt: string;
+  modelVersion: string | null;
+  engagement: {
+    events: number;
+    uniqueUsers: number;
+    uniqueSessions: number;
+  };
+  rates: {
+    ctr: number;
+    cartRate: number;
+    conversionRate: number;
+  };
+  funnel: Array<{ stage: string; count: number }>;
+  topProducts: Array<{
+    productId: string;
+    name: string | null;
+    brand: string | null;
+    thumbnail: string | null;
+    price: number | null;
+    score: number;
+    views: number;
+    carts: number;
+    purchases: number;
+  }>;
+  topSearches: Array<{ query: string; count: number }>;
+  daily: Array<{ day: string; total: number; counts: Record<string, number> }>;
+  copilot: { sessions: number; messages: number };
+}

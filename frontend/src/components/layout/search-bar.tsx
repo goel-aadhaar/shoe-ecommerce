@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import { Search, X, Loader2 } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { productService } from '@/services/product.service';
+import { aiService } from '@/services/ai.service';
 import type { Product } from '@/types';
 
 export function SearchBar() {
@@ -36,19 +36,12 @@ export function SearchBar() {
     const timer = setTimeout(async () => {
       setLoading(true);
       try {
-        // Fetch a large batch since there's no native text search API yet
-        // In real app, this should be a ?search=query parameter
-        const res = await productService.getAll(1, 100);
-        const allProducts = Array.isArray(res.data) ? res.data : res.data.items;
-        
-        const filtered = allProducts.filter((p) => 
-          p.name.toLowerCase().includes(query.toLowerCase()) || 
-          p.brand.toLowerCase().includes(query.toLowerCase())
-        );
-        
-        setResults(filtered.slice(0, 5)); // Show top 5 autocomplete results
+        // Semantic search via the AI service (understands meaning, not just keywords).
+        const res = await aiService.semanticSearch(query, { limit: 5 });
+        setResults(res.data.results);
       } catch (e) {
         console.error(e);
+        setResults([]);
       } finally {
         setLoading(false);
       }
@@ -61,8 +54,7 @@ export function SearchBar() {
     e.preventDefault();
     if (query.trim()) {
       setIsOpen(false);
-      // In absence of search page, redirect to all collections
-      router.push(`/collections/all`);
+      router.push(`/search?q=${encodeURIComponent(query.trim())}`);
     }
   }
 

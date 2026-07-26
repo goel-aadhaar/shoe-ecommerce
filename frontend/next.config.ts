@@ -2,6 +2,8 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   reactCompiler: true,
+  // Emit a self-contained server bundle for the Docker runtime stage.
+  output: 'standalone',
   images: {
     // Catalog images come from arbitrary external hosts (superkicks, cloudinary,
     // unsplash, etc.). Allow any https source so next/image never silently

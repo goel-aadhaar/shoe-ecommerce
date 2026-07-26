@@ -1,5 +1,6 @@
 import { Router } from 'express';
 
+import aiRoutes from './modules/ai/routes/ai.routes.js';
 import authRoutes from './modules/auth/routes/auth.routes.js';
 import cartRoutes from './modules/cart/routes/cart.routes.js';
 import categoryRoutes from './modules/category/routes/category.routes.js';
@@ -21,5 +22,6 @@ router.use('/orders', orderRoutes);
 router.use('/payments', paymentRoutes);
 router.use('/reviews', reviewRoutes);
 router.use('/product-images', productImageRoutes);
+router.use('/ai', aiRoutes);
 
 export default router;

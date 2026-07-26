@@ -1,11 +1,12 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Star, ShoppingBag, Heart } from 'lucide-react';
 import { toast } from 'sonner';
 import { useAuth } from '@/hooks/use-auth';
 import { useCart } from '@/hooks/use-cart';
 import { favouriteService } from '@/services/favourite.service';
+import { aiService } from '@/services/ai.service';
 import { ProductImageGallery } from './product-image-gallery';
 import { VariantSelector } from '@/components/common/variant-selector';
 import { QuantityStepper } from '@/components/common/quantity-stepper';
@@ -23,6 +24,11 @@ export function ProductDetail({ product }: ProductDetailProps) {
   const [quantity, setQuantity] = useState(1);
   const [adding, setAdding] = useState(false);
 
+  // Track a product view — feeds the recommendation engine.
+  useEffect(() => {
+    aiService.trackEvent({ type: 'view', productId: product._id });
+  }, [product._id]);
+
   async function handleAddToCart() {
     if (!isAuthenticated) {
       toast.error('Please sign in to add to cart');
@@ -35,6 +41,7 @@ export function ProductDetail({ product }: ProductDetailProps) {
     setAdding(true);
     try {
       await addItem(product._id, quantity, product.color, selectedSize);
+      aiService.trackEvent({ type: 'add_to_cart', productId: product._id });
       toast.success('Added to cart');
     } catch {
       toast.error('Failed to add to cart');

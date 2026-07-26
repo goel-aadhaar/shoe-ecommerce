@@ -6,3 +6,7 @@ build/
 .cache/
 
 .vscode/
+
+# stray local artifacts
+cookies.txt
+*.cookies

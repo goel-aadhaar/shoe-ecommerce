@@ -1,0 +1,22 @@
+# --- Core AI service (importable without heavy ML/torch deps) ---
+fastapi==0.115.6
+uvicorn[standard]==0.34.0
+gunicorn==23.0.0
+pydantic==2.10.4
+pydantic-settings==2.7.1
+httpx==0.28.1
+tenacity==9.0.0
+orjson==3.10.13
+
+# Data stores
+motor==3.6.0
+pymongo==4.9.2
+qdrant-client==1.12.1
+redis==5.2.1
+
+# Background jobs
+celery==5.4.0
+
+# Testing
+pytest==8.3.4
+pytest-asyncio==0.25.0

@@ -1,5 +1,6 @@
 import { HeroSection } from '@/components/features/home/hero-section';
 import { UspBanner } from '@/components/features/home/usp-banner';
+import { AiRecommendations } from '@/components/features/home/ai-recommendations';
 import { FeaturedProducts } from '@/components/features/home/featured-products';
 import { CategoryGrid } from '@/components/features/home/category-grid';
 import { BrandShowcase } from '@/components/features/home/brand-showcase';
@@ -12,6 +13,9 @@ export default function HomePage() {
     <>
       <HeroSection />
       <UspBanner />
+
+      {/* Personalized AI rails — recommended, trending, recently viewed, ... */}
+      <AiRecommendations />
 
       <FeaturedProducts
         title="Latest Drops"

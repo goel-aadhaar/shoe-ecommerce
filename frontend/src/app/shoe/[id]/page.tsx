@@ -4,6 +4,9 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import { productService } from '@/services/product.service';
 import { ProductDetail } from '@/components/features/products/product-detail';
+import { FrequentlyBoughtTogether } from '@/components/features/products/frequently-bought-together';
+import { AiReviewSummary } from '@/components/features/products/ai-review-summary';
+import { AiAskShoe } from '@/components/features/products/ai-ask-shoe';
 import { ProductGrid } from '@/components/features/products/product-grid';
 import { ReviewList } from '@/components/features/reviews/review-list';
 import { ReviewForm } from '@/components/features/reviews/review-form';
@@ -64,6 +67,17 @@ export default function ShoeDetailPage() {
   return (
     <>
       <ProductDetail product={product} />
+
+      <div className="container-inner">
+        {/* AI: RAG question answer */}
+        <AiAskShoe productId={product._id} />
+
+        {/* AI: review digest */}
+        <AiReviewSummary productId={product._id} />
+      </div>
+
+      {/* AI: frequently bought together (association rules) */}
+      <FrequentlyBoughtTogether productId={product._id} />
 
       {/* Reviews */}
       <section className="container-inner pb-20">

@@ -1,0 +1,22 @@
+# Secrets — never commit
+.env
+.env.*
+!.env.*.example
+
+# Deployment artifacts
+nginx/certbot/
+
+# Dependencies / build output
+node_modules/
+.next/
+dist/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+artifacts/
+
+# OS
+.DS_Store
+Thumbs.db
