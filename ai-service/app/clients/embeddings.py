@@ -82,12 +82,70 @@ class SbertEmbedder(_BaseEmbedder):
         return arr.tolist()
 
 
+class RemoteEmbedder(_BaseEmbedder):
+    """Embeddings over an OpenAI-compatible ``/embeddings`` HTTP endpoint.
+
+    Exists so the service can run without torch. That matters on hosts with a
+    hard image-size cap — the local stack (torch, transformers, scipy) measures
+    ~870 MB installed, which exceeds Heroku's 500 MB slug limit outright, and it
+    is also the single largest memory consumer on a small VM.
+
+    Works with any provider exposing the OpenAI embeddings shape (OpenAI, Jina,
+    Together, a local TEI server, ...).
+    """
+
+    def __init__(self, base_url: str, api_key: str, model: str, dim: int, timeout: int = 30) -> None:
+        self.base_url = base_url.rstrip("/")
+        self.api_key = api_key
+        self.model = model
+        self.dim = dim
+        self._timeout = timeout
+
+    def embed(self, texts: list[str]) -> list[list[float]]:
+        import httpx  # already a core dependency
+
+        try:
+            resp = httpx.post(
+                f"{self.base_url}/embeddings",
+                headers={
+                    "Authorization": f"Bearer {self.api_key}",
+                    "Content-Type": "application/json",
+                },
+                json={"model": self.model, "input": texts},
+                timeout=self._timeout,
+            )
+            resp.raise_for_status()
+            payload = resp.json()
+        except Exception as exc:  # noqa: BLE001
+            # Never take the whole request down over embeddings; degrade to the
+            # deterministic embedder so search returns something rather than 500.
+            logger.error("remote_embeddings_failed", extra={"err": str(exc)})
+            return HashEmbedder(dim=self.dim).embed(texts)
+
+        rows = sorted(payload.get("data", []), key=lambda d: d.get("index", 0))
+        vectors = [r["embedding"] for r in rows]
+        if vectors:
+            self.dim = len(vectors[0])
+        return vectors
+
+
 def build_embedder(settings: Settings) -> Embedder:
     provider = settings.embeddings_provider
     if provider == "hash":
         return HashEmbedder(dim=settings.embeddings_dim)
     if provider == "sbert":
         return SbertEmbedder(model_name=settings.embeddings_model, dim=settings.embeddings_dim)
-    # "gateway" not yet available on this LLM gateway — fall back safely.
+    if provider == "remote":
+        base = settings.embeddings_base_url or settings.llm_gateway_base_url
+        key = settings.embeddings_api_key or settings.llm_gateway_api_key
+        if base and key:
+            logger.info("using_remote_embeddings", extra={"model": settings.embeddings_model})
+            return RemoteEmbedder(
+                base_url=base, api_key=key,
+                model=settings.embeddings_model, dim=settings.embeddings_dim,
+            )
+        logger.warning("remote_embeddings_unconfigured_fallback_hash")
+        return HashEmbedder(dim=settings.embeddings_dim)
+
     logger.warning("embeddings_provider_unavailable_fallback_hash", extra={"provider": provider})
     return HashEmbedder(dim=settings.embeddings_dim)

@@ -57,9 +57,15 @@ class Settings(BaseSettings):
     llm_temperature: float = 0.3
 
     # --- Embeddings ---
-    embeddings_provider: Literal["sbert", "gateway", "hash"] = "sbert"
+    # "sbert" = local torch model (best quality, ~870 MB of deps)
+    # "remote" = OpenAI-compatible /embeddings endpoint (no torch; required on
+    #            hosts with an image-size cap such as Heroku)
+    # "hash"   = deterministic stand-in for dev/CI only
+    embeddings_provider: Literal["sbert", "remote", "gateway", "hash"] = "sbert"
     embeddings_model: str = "sentence-transformers/all-MiniLM-L6-v2"
     embeddings_dim: int = 384
+    embeddings_base_url: str | None = None   # defaults to the LLM gateway
+    embeddings_api_key: str | None = None    # defaults to the LLM gateway key
 
     # --- Celery ---
     celery_broker_url: str = "redis://localhost:6379/1"
