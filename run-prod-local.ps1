@@ -87,14 +87,22 @@ foreach ($proj in $OwnedProjects) {
     }
 }
 
-# Any container publishing our public port that we do NOT own is a real
-# conflict -- report it rather than killing someone else's work.
-$blocking = docker ps --format '{{.Names}}|{{.Ports}}|{{.Label "com.docker.compose.project"}}' 2>$null |
-    Where-Object { $_ -match ":$PublicPort->" }
-foreach ($row in $blocking) {
-    $name, $ports, $proj = $row -split '\|'
-    if ($OwnedProjects -notcontains $proj) {
-        Die "Container '$name' (project '$proj') is using port $PublicPort. Stop it yourself: docker stop $name"
+# Any container still publishing our public port after the cleanup above is one
+# we do NOT own -- report it rather than killing someone else's work.
+#
+# NOTE: deliberately no quoted Go-template arguments here. PowerShell strips the
+# inner double quotes from something like '{{.Label "com.docker.compose.project"}}'
+# before Docker sees it, and Go then parses `com` as an undefined function.
+# Using --filter keeps every argument quote-free.
+$ownedNames = @()
+foreach ($proj in $OwnedProjects) {
+    $ownedNames += @(docker ps -a --filter "label=com.docker.compose.project=$proj" --format '{{.Names}}' 2>$null)
+}
+$onPublicPort = @(docker ps --filter "publish=$PublicPort" --format '{{.Names}}' 2>$null) |
+    Where-Object { $_ -and $_.Trim() }
+foreach ($name in $onPublicPort) {
+    if ($ownedNames -notcontains $name) {
+        Die "Container '$name' is using port $PublicPort. Stop it yourself first: docker stop $name"
     }
 }
 
