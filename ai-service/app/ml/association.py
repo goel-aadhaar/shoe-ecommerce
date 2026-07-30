@@ -71,7 +71,17 @@ def mine_association_rules(
     if freq.empty:
         return _cooccurrence(baskets, top_per_item)
 
-    rules_df = association_rules(freq, metric="lift", min_threshold=min_lift)
+    # mlxtend changed this signature between releases: 0.23.x requires
+    # `num_itemsets` positionally, 0.25.x gives it a default. Detect rather than
+    # pin, so the same code runs against whichever version is installed.
+    import inspect
+
+    kwargs: dict = {"metric": "lift", "min_threshold": min_lift}
+    params = inspect.signature(association_rules).parameters
+    if "num_itemsets" in params and params["num_itemsets"].default is inspect.Parameter.empty:
+        kwargs["num_itemsets"] = len(baskets)
+
+    rules_df = association_rules(freq, **kwargs)
     # Keep single-item antecedents for fast per-product lookup.
     rules_df = rules_df[rules_df["antecedents"].apply(len) == 1]
     if rules_df.empty:

@@ -82,7 +82,11 @@ Step 2 "Freeing this project's containers and ports"
 foreach ($proj in $OwnedProjects) {
     $ids = @(docker ps -aq --filter "label=com.docker.compose.project=$proj" 2>$null)
     if ($ids.Count -gt 0) {
-        docker rm -f @ids 2>&1 | Out-Null
+        # 'docker rm' reports progress on stderr; see the note in the data-setup
+        # step for why that is fatal under $ErrorActionPreference='Stop'.
+        $prevEap = $ErrorActionPreference
+        $ErrorActionPreference = 'Continue'
+        try { docker rm -f @ids 2>$null | Out-Null } finally { $ErrorActionPreference = $prevEap }
         Ok "removed $($ids.Count) container(s) from project '$proj'"
     }
 }
@@ -182,16 +186,49 @@ if ($aiReady) {
 # --------------------------------------------------------------- data setup
 if (-not $SkipData) {
     Step 5 "One-time data setup (idempotent -- safe to re-run)"
+
+    # A named volume created before the image declared ownership of /artifacts
+    # is root-owned, so the unprivileged runtime user cannot write the trained
+    # model there. Fixing it here repairs volumes created by earlier builds;
+    # fresh ones inherit correct ownership from the image.
+    $prevEap = $ErrorActionPreference
+    $ErrorActionPreference = 'Continue'
+    try {
+        docker compose @composeArgs run --rm --user root --no-deps --entrypoint sh ai-service `
+            -c "chown -R app:app /artifacts" 2>$null | Out-Null
+    } finally { $ErrorActionPreference = $prevEap }
+    Ok "artifacts volume is writable by the service user"
+
     foreach ($job in @(
         @{ n = 'index_catalog';    d = 'embedding the catalog into Qdrant' },
         @{ n = 'ingest_knowledge'; d = 'building the RAG knowledge base' },
         @{ n = 'train_models';     d = 'training CF + association rules' }
     )) {
         Write-Host "    -> $($job.d)..." -ForegroundColor DarkGray
-        docker compose @composeArgs exec -T ai-service python -m "scripts.$($job.n)" 2>&1 |
-            Select-Object -Last 1 | ForEach-Object { Write-Host "       $_" -ForegroundColor DarkGray }
-        if ($LASTEXITCODE -ne 0) { Warn "$($job.n) failed -- the app still runs, that feature will be degraded" }
-        else { Ok $job.n }
+
+        # These scripts write progress to stderr (sentence-transformers batch
+        # bars, our own JSON logs). Under $ErrorActionPreference='Stop',
+        # PowerShell 5.1 turns every native stderr line into a TERMINATING
+        # error, so a perfectly successful run aborts the script. Relax the
+        # preference across the call and judge success by exit code instead.
+        # Note also: no 2>&1 here -- merging streams is what wraps stderr in
+        # ErrorRecords in the first place.
+        $prevEap = $ErrorActionPreference
+        $ErrorActionPreference = 'Continue'
+        try {
+            $out = docker compose @composeArgs exec -T ai-service python -m "scripts.$($job.n)"
+            $code = $LASTEXITCODE
+        } finally {
+            $ErrorActionPreference = $prevEap
+        }
+
+        if ($code -ne 0) {
+            Warn "$($job.n) failed (exit $code) -- the app still runs, that feature will be degraded"
+        } else {
+            $last = ($out | Where-Object { $_ -and "$_".Trim() } | Select-Object -Last 1)
+            if ($last) { Write-Host "       $last" -ForegroundColor DarkGray }
+            Ok $job.n
+        }
     }
 } else {
     Step 5 "Skipping data setup (-SkipData)"

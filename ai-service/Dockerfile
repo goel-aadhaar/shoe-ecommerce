@@ -23,7 +23,12 @@ RUN pip install --upgrade pip \
 COPY app ./app
 COPY scripts ./scripts
 
-RUN chown -R app:app /app
+# Create the artifacts directory in the IMAGE, owned by the runtime user.
+# A named volume mounted here inherits the image's ownership when it is first
+# created; without this it is created root-owned and the unprivileged `app`
+# user cannot write the trained model:
+#   PermissionError: [Errno 13] Permission denied: '/artifacts/recmodel-*.pkl'
+RUN mkdir -p /artifacts && chown -R app:app /artifacts /app
 USER app
 
 # Pre-download the embedding model into the image. Otherwise the first shopper
