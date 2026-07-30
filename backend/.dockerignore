@@ -1,0 +1,34 @@
+# Everything here is either rebuilt inside the image or must never reach it.
+# `npm ci` reinstalls node_modules and `tsc` regenerates dist, so shipping them
+# as build context only slows the build down.
+
+node_modules
+dist
+build
+
+# Secrets: config is supplied at runtime via the environment.
+.env
+.env.*
+!.env.example
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+.git
+.gitignore
+README.md
+Dockerfile
+.dockerignore
+
+.vscode
+.idea
+.DS_Store
+Thumbs.db
+
+coverage
+*.tsbuildinfo
+
+# Local scratch files that are not part of the image
+cookies.txt
+public/uploads

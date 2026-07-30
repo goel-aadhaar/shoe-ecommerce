@@ -1,19 +1,32 @@
-# --- Heavy ML / embedding deps (pulled in the Docker image; optional for local core dev) ---
-# Installed on top of requirements.txt. Kept separate so the core service and the
-# test suite stay importable without downloading torch.
+# --- Heavy ML / embedding deps (training path only) ---
+# Installed on top of requirements.txt. Kept separate so the serving image and
+# the test suite stay importable without downloading torch: the API loads a
+# precomputed artifact and needs none of this at request time.
 
 numpy==1.26.4
 pandas==2.2.3
 scikit-learn==1.5.2
 scipy==1.13.1
 
-# Embeddings (Phase 2)
+# Embeddings
 sentence-transformers==3.3.1
 
-# Collaborative filtering (Phase 3)
-lightfm==1.17
-implicit==0.7.2
-scikit-surprise==1.1.4
-
-# Association-rule mining / bundles (Phase 3)
+# Association-rule mining / bundles (FP-Growth)
 mlxtend==0.23.3
+
+# NOTE ON WHAT IS DELIBERATELY ABSENT
+#
+# lightfm, implicit and scikit-surprise were listed here early on as intended
+# collaborative-filtering backends, but the implementation uses item-item cosine
+# similarity from scikit-learn instead (see app/ml/collaborative.py for why), so
+# none of them is imported anywhere in the codebase.
+#
+# They are removed rather than left unused because they are not free:
+#   * lightfm 1.17 (last released 2020) fails to build against modern
+#     setuptools -- its setup.py assumes __builtins__ is a module, and pip's
+#     isolated build environment gives it a dict, so the image build dies with
+#     "AttributeError: 'dict' object has no attribute '__LIGHTFM_SETUP__'"
+#   * all three compile from source, adding minutes to every build
+#
+# If matrix factorisation is adopted later, LightFM slots in behind the existing
+# ItemCF interface -- add it back then, on a version that still builds.
